@@ -5,6 +5,10 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../controllers/auth.controller');
 const config = require('../controllers/config.controller');
+
+//auth
+const authenticated = require('../middleware/auth.middleware');
+
 // const tour = require('../controllers/tour.controller');
 // const schedule = require('../controllers/schedule.controller');
 // const image = require('../controllers/image.controller');
@@ -19,7 +23,6 @@ const config = require('../controllers/config.controller');
 // const timeline = require('../controllers/timeline.controller');
 // const service = require('../controllers/service.controller');
 //authencation
-// const authenticated = require('../middleware/auth.middleware');
 //passport
 // const passport = require('passport');
 //report
@@ -34,11 +37,11 @@ router.post('/forgotPasswordStep1', auth.forgotPasswordStep1);
 router.post('/forgotPasswordStep2', auth.forgotPasswordStep2);
 
 // for config
-// router.get('/config', config.read);
-// router.get('/configs', config.listAll);
-// router.post('/config', config.create);
-// router.put('/config', authenticated, config.update);
-// router.delete('/config', authenticated, config.delete);
+router.get('/config', config.read);
+router.get('/configs', config.listAll);
+router.post('/config', config.create);
+router.put('/config', authenticated, config.update);
+router.delete('/config', authenticated, config.delete);
 
 // //for tour
 // router.get('/tour', tour.read);
