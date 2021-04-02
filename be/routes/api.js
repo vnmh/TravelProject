@@ -9,11 +9,13 @@ const config = require('../controllers/config.controller');
 //auth
 const authenticated = require('../middleware/auth.middleware');
 
-// const tour = require('../controllers/tour.controller');
-// const schedule = require('../controllers/schedule.controller');
-// const image = require('../controllers/image.controller');
+//tour
+const tour = require('../controllers/tour.controller');
+
+const schedule = require('../controllers/schedule.controller');
+const image = require('../controllers/image.controller');
 // const order = require('../controllers/order.controller');
-// const account = require('../controllers/account.controller');
+const account = require('../controllers/account.controller');
 // const notification = require('../controllers/notification.controller');
 // const noticeTo = require('../controllers/noticeTo.controller');
 // const evaluate = require('../controllers/evaluate.controller');
@@ -21,7 +23,7 @@ const authenticated = require('../middleware/auth.middleware');
 // const favorite = require('../controllers/favorite.controller');
 // const tag = require('../controllers/tag.controller');
 // const timeline = require('../controllers/timeline.controller');
-// const service = require('../controllers/service.controller');
+const service = require('../controllers/service.controller');
 //authencation
 //passport
 // const passport = require('passport');
@@ -43,21 +45,21 @@ router.post('/config', config.create);
 router.put('/config', authenticated, config.update);
 router.delete('/config', authenticated, config.delete);
 
-// //for tour
-// router.get('/tour', tour.read);
-// router.get('/tours', tour.listAll);
-// router.post('/tours/search', tour.listTourSearch);
-// router.post('/tour', authenticated, tour.create); //sẽ tạo luôn một schedule tương ứng với idTour mới tạo
-// router.patch('/tour', authenticated, tour.update);
-// router.patch('/tour/tags-and-services', authenticated, tour.putTagsAndServices);
-// router.delete('/tour', authenticated, tour.delete);
+//for tour
+router.get('/tour', tour.read);
+router.get('/tours', tour.listAll);
+router.post('/tours/search', tour.listTourSearch);
+router.post('/tour', authenticated, tour.create); //sẽ tạo luôn một schedule tương ứng với idTour mới tạo
+router.patch('/tour', authenticated, tour.update);
+router.patch('/tour/tags-and-services', authenticated, tour.putTagsAndServices);
+router.delete('/tour', authenticated, tour.delete);
 
-// //for schedule
-// router.get('/schedule', schedule.read);
-// router.get('/schedules', schedule.listAll);
-// router.post('/schedule', authenticated, schedule.create);
-// router.patch('/schedule', authenticated, schedule.update);
-// router.delete('/schedule', authenticated, schedule.delete);
+//for schedule
+router.get('/schedule', schedule.read);
+router.get('/schedules', schedule.listAll);
+router.post('/schedule', authenticated, schedule.create);
+router.patch('/schedule', authenticated, schedule.update);
+router.delete('/schedule', authenticated, schedule.delete);
 
 // //for img
 // router.get('/imagesTour', image.listAllImageTour);
@@ -69,21 +71,21 @@ router.delete('/config', authenticated, config.delete);
 // router.post('/avatar', image.avatar);
 // router.post('/upload', image.upload);
 
-// //for account
-// router.get('/account', authenticated, account.read);
-// router.get('/accountWithEmail', authenticated, account.readByEmail);
-
-// router.get('/accounts', authenticated, account.listAll);
-// router.post('/account', authenticated, account.create);
-// router.patch('/account', authenticated, account.update);
-// router.delete('/account', authenticated, account.delete);
+//for account
+router.get('/account', authenticated, account.read);
+router.get('/accountWithEmail', authenticated, account.readByEmail);
+router.get('/accounts', authenticated, account.listAll);
+router.post('/account', authenticated, account.create);
+router.patch('/account', authenticated, account.update);
+router.delete('/account', authenticated, account.delete);
 
 // //for payment
 // router.post('/getLinkMoMo', order.getLinkMoMo);
 // router.post('/getLinkPayment', order.getLinkPayment);
 // router.post('/resultPayment', order.resultPayment);
 // router.post('/cancelPayment', order.cancelPayment);
-// //for order`
+
+// //for order
 // router.get('/order', order.read);
 // router.get('/orderWithEmail', order.readByEmail);
 // router.get('/orders', order.listAll);
@@ -151,13 +153,13 @@ router.delete('/config', authenticated, config.delete);
 // router.put('/timeline', authenticated, timeline.update);
 // router.delete('/timeline', authenticated, timeline.delete);
 
-// //for service
-// router.get('/service', service.read);
-// router.get('/services', authenticated, service.listAll);
-// router.post('/service/search', authenticated, service.listServiceSearch);
-// router.post('/service', authenticated, service.create);
-// router.put('/service', authenticated, service.update);
-// router.delete('/service', authenticated, service.delete);
+//for service
+router.get('/service', service.read);
+router.get('/services', authenticated, service.listAll);
+router.post('/service/search', authenticated, service.listServiceSearch);
+router.post('/service', authenticated, service.create);
+router.put('/service', authenticated, service.update);
+router.delete('/service', authenticated, service.delete);
 
 router.get('/env', config.env);
 router.get('/envs', config.envs);

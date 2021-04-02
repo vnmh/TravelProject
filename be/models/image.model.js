@@ -11,7 +11,7 @@ const Image = function (image) {
   this.idTour = image.idTour;
 };
 
-const databaseLocal = configg.database;
+const databaseLocal = config.database;
 const databaseProduction =
   process.env.NODE_ENV === "production"
     ? process.env.JAWSDB_DATABASE
