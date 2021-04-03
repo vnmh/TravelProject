@@ -5,7 +5,7 @@ import { withFormik } from "formik";
 import { withRouter } from "react-router-dom";
 
 import { authActions } from "~/state/ducks/authUser";
-import { MASTER_DATA_DASHBOARD, SETUP_PROFILE_PATH } from "~/configs/routesConfig";
+import { DASHBOARD, SETUP_PROFILE_PATH } from "~/configs/routesConfig";
 
 import { passwordValidate, phoneOrEmailValidate } from "~/views/utilities/validation/input";
 import { getBool } from "~/views/utilities/helpers/utilObject";
@@ -39,7 +39,7 @@ export default compose(
                if (getBool(res, "isSkipProfile", false) === false) {
                   history.push(SETUP_PROFILE_PATH);
                } else {
-                  history.push(MASTER_DATA_DASHBOARD);
+                  history.push(DASHBOARD);
                }
             })
             .catch((err) => {

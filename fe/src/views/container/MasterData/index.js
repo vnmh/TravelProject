@@ -69,7 +69,7 @@ let menuArray = {
    overview: {
       icon: <DashboardOutlined />,
       name: strings.SIDEBAR_MENU_DASHBOARD,
-      path: PATH.MASTER_DATA_DASHBOARD
+      path: PATH.DASHBOARD
    },
    categories: {
       icon: <FolderOpenOutlined />,
@@ -119,7 +119,7 @@ class MasterData extends React.Component {
 
    renderContent = () => {
       switch (this.props.match.path) {
-         case PATH.MASTER_DATA_DASHBOARD:
+         case PATH.DASHBOARD:
             return <Overview />;
          case PATH.MASTER_DATA_CATEGORY:
             return <Category />;

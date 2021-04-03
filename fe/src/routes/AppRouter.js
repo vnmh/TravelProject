@@ -11,7 +11,7 @@ const AppRouter = (props) => {
 
             <AuthorizedRoute path={PATH.DASHBOARD_PATH} />
 
-            <Redirect to={PATH.MASTER_DATA_DASHBOARD} />
+            <Redirect to={PATH.DASHBOARD} />
          </Switch>
       </Router>
    );

@@ -15,8 +15,8 @@ const reducer = produce((draft, { type, payload }) => {
          return;
       case types.LOGIN_SUCCESS:
       case types.GET_USER_SUCCESS:
-         if (payload.res.id_token) {
-            addAuthoz(payload.res.id_token, payload.res.user);
+         if (payload.res.token) {
+            addAuthoz(payload.res.token, payload.res.user);
          }
          draft.isAuthenticated = true;
          draft.user = { ...draft.user, ...payload.res };

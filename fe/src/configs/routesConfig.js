@@ -15,11 +15,7 @@ export const DASHBOARD_PATH = "/dashboard";
 /**
  * DEFAULT PATH
  */
-export const APP_DEFAULT_PATH = DASHBOARD_PATH;
 
-/**
- * MASTER DATA PATH
- */
-export const MASTER_DATA_PATH = "/master";
-export const MASTER_DATA_DASHBOARD = "/dashboard";
-export const MASTER_DATA_PRODUCT_VIEW = "/master/products/:id";
+export const DASHBOARD = "/dashboard";
+
+export const APP_DEFAULT_PATH = DASHBOARD_PATH;
