@@ -5,7 +5,10 @@ import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import { message } from "antd";
 import MyCKEditor from "~/views/container/commons/MyCKEditor";
-
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from "pure-react-carousel";
+import "pure-react-carousel/dist/react-carousel.es.css";
+import Sliders from "./slide";
+import Header from "../Header";
 const ContainerStyled = styled.div``;
 
 function Overview(props) {
@@ -22,11 +25,166 @@ function Overview(props) {
    }, []);
    return (
       <ContainerStyled>
-         Tính năng đang được mockup
-         <MyCKEditor />
-         {data.map((o) => {
-            return <p>{o?.titleTour} </p>;
-         })}
+         <Header />
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This
+         is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard page
+         This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is dashboard
+         page This is dashboard page This is dashboard page This is dashboard page This is dashboard page This is
+         dashboard page This is dashboard page This is dashboard page This is dashboard page
       </ContainerStyled>
    );
 }

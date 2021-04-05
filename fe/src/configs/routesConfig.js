@@ -10,12 +10,12 @@ export const SETUP_PROFILE_PATH = "/setup-profile";
 /**
  *     DASHBOARD
  */
-export const DASHBOARD_PATH = "/dashboard";
 
 /**
  * DEFAULT PATH
  */
 
 export const DASHBOARD = "/dashboard";
+export const HOME_PAGE = "/homepage";
 
-export const APP_DEFAULT_PATH = DASHBOARD_PATH;
+export const APP_DEFAULT_PATH = DASHBOARD;

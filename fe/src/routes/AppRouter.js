@@ -3,13 +3,17 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-d
 import * as PATH from "~/configs/routesConfig";
 import AuthorizedRoute from "./AuthorizedRoute";
 import Login from "~/views/container/AuthPage";
+import Homepage from "~/views/container/Homepage";
 const AppRouter = (props) => {
    return (
       <Router>
          <Switch>
+            {/* Trang nào (Routing) KHÔNG cần phải đăng nhập mới vào được thì dùng Route */}
             <Route path={PATH.LOGIN_PATH} exact component={() => <Login />} />
+            <Route path={PATH.HOME_PAGE} exact component={() => <Homepage />} />
 
-            <AuthorizedRoute path={PATH.DASHBOARD_PATH} />
+            {/* Trang nào (Routing) cần phải đăng nhập mới vào được thì dùng AuthorizedRoute */}
+            <AuthorizedRoute path={PATH.DASHBOARD} />
 
             <Redirect to={PATH.DASHBOARD} />
          </Switch>
