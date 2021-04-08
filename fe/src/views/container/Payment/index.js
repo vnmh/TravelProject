@@ -5,32 +5,32 @@ import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import { message } from "antd";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import Header from "../../Header";
-import Footer from "../../Footer";
-import ImpListTour from "./ImpListTour";
-import TopBarTour from "../TopBarTour";
+import Header from "../Header";
+import Footer from "../Footer";
+import TopBarTour from "../Tour/TopBarTour";
+import ImpPayment from "./ImpPayment";
 
-const ListTourStyled = styled.div``;
+const PaymentStyled = styled.div``;
 
-function ListTour(props) {
-   const [listTour, setListTour] = useState([]);
+function Payment(props) {
+   const [payment, setPayment] = useState([]);
    useEffect(() => {
       props
          .getTours()
          .then(({ res }) => {
-            setListTour(_.get(res, undefined, []));
+            setPayment(_.get(res, undefined, []));
          })
          .catch((err) => {
             message.error("Lỗi load dữ liệu tour rồi nha");
          });
    }, []);
    return (
-      <ListTourStyled>
+      <PaymentStyled>
          <Header />
          <TopBarTour />
-         <ImpListTour />
+         <ImpPayment />
          <Footer />
-      </ListTourStyled>
+      </PaymentStyled>
    );
 }
 
@@ -41,4 +41,4 @@ export default connect(
    {
       getTours: appApisActions.getTours
    }
-)(ListTour);
+)(Payment);

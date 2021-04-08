@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import _ from "lodash";
 import { connect } from "react-redux";
@@ -31,7 +32,7 @@ function TopBarTour(props) {
                         <div className='breadcrumb-list text-right'>
                            <ul className='list-items'>
                               <li>
-                                 <a href='index.html'>Home</a>
+                                 <Link to='/homepage'>Home</Link>
                               </li>
                               <li>Tour</li>
                               <li>Tour List</li>

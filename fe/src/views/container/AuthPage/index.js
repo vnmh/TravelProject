@@ -51,11 +51,11 @@ const Login = (props) => {
       console.log("Failed:", errorInfo);
    };
 
-   useEffect(() => {
-      if (props.user) {
-         props.history.push(PATH.HOME_PAGE);
-      }
-   }, [props.user]);
+   // useEffect(() => {
+   //    if (props.user) {
+   //       props.history.push(PATH.HOME_PAGE);
+   //    }
+   // }, [props.user]);
 
    return (
       <WrapLoginPage className='d-flex justify-content-center align-items-center'>
