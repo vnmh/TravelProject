@@ -5,26 +5,32 @@ import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import { message } from "antd";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import Header from "../Header";
-const ContainerStyled = styled.div``;
+import Header from "../../Header";
+import Footer from "../../Footer";
+import TopBarTour from "../TopBarTour";
+import ImpTourList from "./ImpTourList";
 
-function Overview(props) {
-   const [data, setData] = useState([]);
+const TourListStyled = styled.div``;
+
+function TourList(props) {
+   const [tourList, setTourList] = useState([]);
    useEffect(() => {
       props
          .getTours()
          .then(({ res }) => {
-            setData(_.get(res, undefined, []));
+            setTourList(_.get(res, undefined, []));
          })
          .catch((err) => {
             message.error("Lỗi load dữ liệu tour rồi nha");
          });
    }, []);
    return (
-      <ContainerStyled>
+      <TourListStyled>
          <Header />
-         This is dashboard page
-      </ContainerStyled>
+         <TopBarTour />
+         <ImpTourList />
+         <Footer />
+      </TourListStyled>
    );
 }
 
@@ -35,4 +41,4 @@ export default connect(
    {
       getTours: appApisActions.getTours
    }
-)(Overview);
+)(TourList);

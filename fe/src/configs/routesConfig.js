@@ -16,5 +16,13 @@ export const APP_DEFAULT_PATH = HOME_PAGE;
 /**
  * TOUR PATHS
  */
-export const LIST_TOUR = "/list-tour";
+export const TOUR_LIST = "/tour-list";
+export const TOUR_GRID = "/tour-grid";
 export const TOUR_DETAIL = "/tour-detail";
+export const TOUR_BOOKING = "/tour-booking";
+
+/**
+ * PAYMENT PATHS
+ */
+export const PAYMENT_RECEIVED = "/payment-received";
+
