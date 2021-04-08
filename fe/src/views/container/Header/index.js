@@ -3,10 +3,8 @@ import { Link, withRouter } from "react-router-dom";
 import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
 
-import { Form, Input, Button, Checkbox, message } from "antd";
 import { authActions } from "~/state/ducks/authUser";
 import * as PATH from "~/configs/routesConfig";
-import { useScroll } from "react-use";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 
@@ -40,31 +38,17 @@ const HeaderTop = (props) => {
                            <div className='main-menu-content pr-0 ml-0'>
                               <nav>
                                  <ul>
-                                    <li>
-                                       <Link to='#'>
-                                          Home <i className='la la-angle-down' />
-                                       </Link>
-                                       <ul className='dropdown-menu-item'>
-                                          <li>
-                                             <Link to='#'>Home - main</Link>
-                                          </li>
-                                          <li>
-                                             <Link to='index7.html'>
-                                                Home - City Tour <span className='badge bg-2 text-white'>New</span>
-                                             </Link>
-                                          </li>
-                                       </ul>
-                                    </li>
+                                    
                                     <li>
                                        <Link to='#'>
                                           Tour <i className='la la-angle-down' />
                                        </Link>
                                        <ul className='dropdown-menu-item'>
                                           <li>
-                                             <Link to='tour-fullwidth.html'>Tour Full width</Link>
+                                             <Link to='/list-tour'>Tour List</Link>
                                           </li>
                                           <li>
-                                             <Link to='tour-grid.html'>Tour Grid</Link>
+                                             <Link to='/tour-detail'>Tour Detail</Link>
                                           </li>
                                        </ul>
                                     </li>

@@ -6,6 +6,7 @@ import { ToastProvider } from "react-toast-notifications";
 import AppRouter from "./routes";
 import { LocaleWrapper } from "./views/container/commons";
 import store, { persistor } from "./state/store";
+
 class App extends React.Component {
    async componentDidMount() {
       [

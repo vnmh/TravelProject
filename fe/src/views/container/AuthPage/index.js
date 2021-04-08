@@ -40,7 +40,7 @@ const Login = (props) => {
       props
          .login(body)
          .then((res) => {
-            props.history.push(PATH.DASHBOARD);
+            props.history.push(PATH.HOME_PAGE);
          })
          .catch((err) => {
             message.error("Tài khoản hoặc mật khẩu không chính xác!");
@@ -53,7 +53,7 @@ const Login = (props) => {
 
    useEffect(() => {
       if (props.user) {
-         props.history.push(PATH.DASHBOARD);
+         props.history.push(PATH.HOME_PAGE);
       }
    }, [props.user]);
 

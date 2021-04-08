@@ -1,21 +1,23 @@
 import React, { useEffect } from "react";
+import { Dropdown } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
 
-import { Form, Input, Button, Checkbox, message } from "antd";
+import { DatePicker } from "antd";
 import { authActions } from "~/state/ducks/authUser";
-import * as PATH from "~/configs/routesConfig";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 
-const WrapLoginPage = styled.div`
+const ImpHomePageStyled = styled.div`
    height: 100vh;
 `;
 
-const SearchTourSection = (props) => {
+const { RangePicker } = DatePicker;
+
+const ImpHomePage = (props) => {
    return (
-      <WrapLoginPage>
+      <ImpHomePageStyled>
          <section className='hero-wrapper hero-wrapper7'>
             <div className='hero-box'>
                <div id='fullscreen-slide-contain'>
@@ -64,12 +66,7 @@ const SearchTourSection = (props) => {
                                        <label className='label-text'>When</label>
                                        <div className='form-group'>
                                           <span className='la la-calendar form-icon' />
-                                          <input
-                                             className='date-range form-control'
-                                             type='text'
-                                             name='daterange'
-                                             readOnly
-                                          />
+                                          <RangePicker />
                                        </div>
                                     </div>
                                  </div>
@@ -78,13 +75,8 @@ const SearchTourSection = (props) => {
                                     <div className='input-box'>
                                        <label className='label-text'>Guests</label>
                                        <div className='form-group'>
-                                          <div className='dropdown dropdown-contain gty-container'>
-                                             <a
-                                                className='dropdown-toggle dropdown-btn'
-                                                href='#'
-                                                role='button'
-                                                data-toggle='dropdown'
-                                                aria-expanded='false'>
+                                          <Dropdown>
+                                             <Dropdown.Toggle variant='transparent' id='dropdown-basic'>
                                                 <span className='adult' data-text='Adult' data-text-multi='Adults'>
                                                    0 Adult
                                                 </span>
@@ -92,9 +84,10 @@ const SearchTourSection = (props) => {
                                                 <span className='children' data-text='Child' data-text-multi='Children'>
                                                    0 Children
                                                 </span>
-                                             </a>
-                                             <div className='dropdown-menu dropdown-menu-wrap'>
-                                                <div className='dropdown-item'>
+                                             </Dropdown.Toggle>
+
+                                             <Dropdown.Menu>
+                                                <Dropdown.Item href='#/action-1'>
                                                    <div className='qty-box d-flex align-items-center justify-content-between'>
                                                       <label>Adults</label>
                                                       <div className='qtyBtn d-flex align-items-center'>
@@ -107,8 +100,8 @@ const SearchTourSection = (props) => {
                                                          </div>
                                                       </div>
                                                    </div>
-                                                </div>
-                                                <div className='dropdown-item'>
+                                                </Dropdown.Item>
+                                                <Dropdown.Item href='#/action-2'>
                                                    <div className='qty-box d-flex align-items-center justify-content-between'>
                                                       <label>Children</label>
                                                       <div className='qtyBtn d-flex align-items-center'>
@@ -121,9 +114,9 @@ const SearchTourSection = (props) => {
                                                          </div>
                                                       </div>
                                                    </div>
-                                                </div>
-                                             </div>
-                                          </div>
+                                                </Dropdown.Item>
+                                             </Dropdown.Menu>
+                                          </Dropdown>
                                           {/* end dropdown */}
                                        </div>
                                     </div>
@@ -175,7 +168,7 @@ const SearchTourSection = (props) => {
             </div>
          </section>
          {/* end hero-wrapper */}
-      </WrapLoginPage>
+      </ImpHomePageStyled>
    );
 };
 
@@ -189,5 +182,5 @@ export default compose(
          login: authActions.login
       }
    ),
-   withRouter //để push(nhảy qua trang khác) là chủ yếu,
-)(SearchTourSection);
+   withRouter //để push(nhảy qua trang khác) là chủ yếu
+)(ImpHomePage);
