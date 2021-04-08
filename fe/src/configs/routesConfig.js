@@ -7,15 +7,14 @@ export const RECOVERY_CHANGE_PASSWORD_PATH = "/account-recovery/change-password"
 export const REGISTER_PATH = "/register";
 export const REGISTER_COMPLETED_PATH = "/register/completed";
 export const SETUP_PROFILE_PATH = "/setup-profile";
-/**
- *     DASHBOARD
- */
 
-/**
- * DEFAULT PATH
- */
 
-export const DASHBOARD = "/dashboard";
+// export const HOME_PAGE = "/homepage";
 export const HOME_PAGE = "/homepage";
+export const APP_DEFAULT_PATH = HOME_PAGE;
 
-export const APP_DEFAULT_PATH = DASHBOARD;
+/**
+ * TOUR PATHS
+ */
+export const LIST_TOUR = "/list-tour";
+export const TOUR_DETAIL = "/tour-detail";
