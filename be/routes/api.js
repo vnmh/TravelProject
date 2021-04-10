@@ -61,15 +61,15 @@ router.post('/schedule', authenticated, schedule.create);
 router.patch('/schedule', authenticated, schedule.update);
 router.delete('/schedule', authenticated, schedule.delete);
 
-// //for img
-// router.get('/imagesTour', image.listAllImageTour);
-// router.get('/imagesPost', image.listAllImagePost);
-// router.get('/imagesConfig', image.listAllImageConfig);
-// router.get('/image', image.listAllImageTourById);
-// router.delete('/image', authenticated, image.delete);
-// router.post('/image', image.create);
-// router.post('/avatar', image.avatar);
-// router.post('/upload', image.upload);
+//for img
+router.get('/imagesTour', image.listAllImageTour);
+router.get('/imagesPost', image.listAllImagePost);
+router.get('/imagesConfig', image.listAllImageConfig);
+router.get('/image', image.listAllImageTourById);
+router.delete('/image', authenticated, image.delete);
+router.post('/image', image.create);
+router.post('/avatar', image.avatar);
+router.post('/upload', image.upload);
 
 //for account
 router.get('/account', authenticated, account.read);
