@@ -4,27 +4,48 @@ import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
 
 import { authActions } from "~/state/ducks/authUser";
+import { Carousel } from "antd";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 
-const SliderHomePageStyled = styled.div``;
+const SliderHomePageStyled = styled.div`
+   position: relative;
+   img {
+      object-fit: cover;
+      max-width: 100%;
+      mask-height: 450px !important;
+   }
+   .mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: rgb(170, 170, 170, 0.5);
+      width: 100%;
+      height: 450px;
+   }
+`;
+const contentStyle = {
+   height: "160px",
+   // width: '100px',
+   color: "#fff",
+   lineHeight: "160px",
+   textAlign: "center",
+   background: "#364d79"
+};
 
 const SliderHomePage = (props) => {
    return (
       <SliderHomePageStyled>
-         <div id='fullscreen-slide-contain'>
-            <ul className='slides-container'>
-               <li>
-                  <img src='images/hero-bg2.jpg' alt='' />
-               </li>
-               {/* <li>
-                        <img src='images/hero--bg2.jpg' alt='' />
-                     </li>
-                     <li>
-                        <img src='images/hero--bg3.jpg' alt='' />
-                     </li> */}
-            </ul>
-         </div>
+         <Carousel autoplay id='fullscreen-slide-contain'>
+            <img src='images/bg-1.jpg' alt='' />
+
+            <img src='images/bg-1.jpg' alt='' />
+
+            <img src='images/bg-1.jpg' alt='' />
+
+            <img src='images/bg-1.jpg' alt='' />
+         </Carousel>
+         {/* <div className='mask'></div> */}
       </SliderHomePageStyled>
    );
 };

@@ -16,9 +16,17 @@ import BlogHomePage from "./BlogHomePage";
 
 const ImpHomePageStyled = styled.div`
    height: 100vh;
+   .container-search-tour{
+      position: relative;
+   }
+   .search-tour{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+   }
 `;
 
-const { RangePicker } = DatePicker;
 
 const ImpHomePage = (props) => {
    return (
@@ -26,11 +34,12 @@ const ImpHomePage = (props) => {
          {/* ================================
             START HERO-WRAPPER AREA
          ================================= */}
-         <section className='hero-wrapper hero-wrapper7'>
-            <div className='hero-box'>
+         <section className='hero-wrapper container-search-tour'>
                <SliderHomePage />
+               <div className='search-tour'>
                <SearchTour />
-            </div>
+               </div>
+               
          </section>
          {/* end hero-wrapper */}
          {/* ================================
