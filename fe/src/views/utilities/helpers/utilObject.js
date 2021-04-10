@@ -1,4 +1,5 @@
 import _ from "lodash";
+import { API_URL } from "~/configs";
 
 const getString = (obj, propertyPath = undefined, defaultValue = undefined) => {
    try {
@@ -208,6 +209,11 @@ const removeSignThenLowerCaseString = (value) => {
       .replace(/[^a-zA-Z0-9 ]/g, " ")
       .toLocaleLowerCase()
       .trim();
+};
+
+export const firstImage = (strImages = "", width) => {
+   let imgUrls = _.first(strImages.split("|"));
+   return `${API_URL}${_.isNumber(width) ? `${width}/` : ""}${imgUrls}`;
 };
 
 export {

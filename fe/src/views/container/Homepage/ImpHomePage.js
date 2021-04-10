@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import { compose, lifecycle } from "recompose";
+import { compose } from "recompose";
 import { connect } from "react-redux";
 
 import { DatePicker } from "antd";

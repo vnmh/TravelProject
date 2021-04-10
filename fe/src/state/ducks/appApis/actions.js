@@ -8,3 +8,6 @@ export const getTour = (idTour) => apiAction("get")(types.COMMON, "/tour/" + idT
 export const postTour = (body) => apiAction("post")(types.COMMON, "/tour", body, true);
 export const putTour = (body) => apiAction("put")(types.COMMON, "/tour", body, true);
 export const deleteTour = (body) => apiAction("delete")(types.COMMON, "/tour", body, true);
+
+//IMAGE
+export const getAllImagesTour = (params) => apiAction("get")(types.COMMON, "/imagesTour" + parseObjToQuery(params), {}, true);

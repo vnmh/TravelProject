@@ -1,10 +1,10 @@
 import numeral from "numeral";
 
-const currencyFormat = (number) => {
+const currencyFormat = (number, unit = "đ") => {
    if (typeof number === "number") {
       var myNumeral = numeral(number);
       numeral.defaultFormat("0,0");
-      return myNumeral.format() + " đ";
+      return myNumeral.format() + unit;
    }
    return "";
 };
