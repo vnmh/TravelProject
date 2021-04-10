@@ -148,7 +148,7 @@ const HeaderTop = (props) => {
                               <Button
                                  className='theme-btn theme-btn-small theme-btn-transparent mr-1'
                                  onClick={() => setSmShow(true)}>
-                                 Sign Up
+                                 Đăng ký
                               </Button>
                               {/* <a
                                  href='#'
@@ -158,7 +158,7 @@ const HeaderTop = (props) => {
                                  Login
                               </a> */}
                               <Button className='theme-btn theme-btn-small' onClick={() => setLgShow(true)}>
-                                 Login
+                                 Đăng nhập
                               </Button>
                            </div>
                            {/* end nav-btn */}
@@ -180,9 +180,9 @@ const HeaderTop = (props) => {
                   <Modal.Header className='modal-header' closeButton>
                      <div>
                         <h5 className='modal-title title' id='exampleModalLongTitle2'>
-                           Login
+                           Đăng nhập
                         </h5>
-                        <p className='font-size-14'>Hello! Welcome to your account</p>
+                        {/* <p className='font-size-14'>Hello! Welcome to your account</p> */}
                      </div>
                      {/* <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true" className="la la-close" />
@@ -192,20 +192,20 @@ const HeaderTop = (props) => {
                      <div className='contact-form-action'>
                         <Form method='post'>
                            <div className='input-box'>
-                              <Modal.Title className='label-text'>Username</Modal.Title>
+                              <Modal.Title className='label-text'>Tên đăng nhập</Modal.Title>
                               <div className='form-group'>
                                  <span className='la la-user form-icon' />
                                  <input
                                     className='form-control'
                                     type='text'
                                     name='text'
-                                    placeholder='Type your username'
+                                    placeholder='Nhập tên đăng nhập của bạn'
                                  />
                               </div>
                            </div>
                            {/* end input-box */}
                            <div className='input-box'>
-                              <Modal.Title className='label-text'>Password</Modal.Title>
+                              <Modal.Title className='label-text'>Mật khẩu</Modal.Title>
                               <div className='form-group mb-2'>
                                  <span className='la la-lock form-icon' />
                                  <input
@@ -218,21 +218,21 @@ const HeaderTop = (props) => {
                               <div className='d-flex align-items-center justify-content-between'>
                                  <div className='custom-checkbox mb-0'>
                                     <input type='checkbox' id='rememberchb' />
-                                    <label htmlFor='rememberchb'>Remember me</label>
+                                    <label htmlFor='rememberchb'>Nhớ mật khẩu</label>
                                  </div>
                                  <p className='forgot-password'>
-                                    <a href='recover.html'>Forgot Password?</a>
+                                    <a href='recover.html'>Quên mật khẩu?</a>
                                  </p>
                               </div>
                            </div>
                            {/* end input-box */}
                            <div className='btn-box pt-3 pb-4'>
                               <Button type='button' className='theme-btn w-100'>
-                                 Login Account
+                                 Đăng nhập
                               </Button>
                            </div>
                            <div className='action-box text-center'>
-                              <p className='font-size-14'>Or Login Using</p>
+                              <p className='font-size-14'>Hoặc</p>
                               <ul className='social-profile py-3'>
                                  <li>
                                     <a href='#' className='bg-5 text-white'>
