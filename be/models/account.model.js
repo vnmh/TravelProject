@@ -124,7 +124,7 @@ Account.getByIdFacebook = function(idFacebook) {
       .query(
         "SELECT * FROM " +
           databaseProduction +
-          ".accounts  WHERE idFacebook= ?  AND statusAction <> 'deleted';",
+          ".accounts  WHERE idFacebook= ? AND statusAction <> 'deleted';",
         [idFacebook]
       )
       .then(rows => resolve(rows[0]))
@@ -139,7 +139,7 @@ Account.updateById = function(updateAccount) {
       .query(
         "UPDATE " +
           databaseProduction +
-          ".accounts SET  ?  WHERE (idAccount= ?);",
+          ".accounts SET ? WHERE (idAccount= ?);",
         [updateAccount, updateAccount.idAccount]
       )
       .then(rows => resolve(rows))
