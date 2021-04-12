@@ -5,18 +5,16 @@ import { connect } from "react-redux";
 
 import { authActions } from "~/state/ducks/authUser";
 import * as PATH from "~/configs/routesConfig";
-import { Button, Modal } from "react-bootstrap";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
-import Form from "antd/lib/form/Form";
+
+import { Button } from "antd";
+import LoginModal from "~/views/container/Header/LoginModal";
 
 const HeaderTopStyled = styled.div``;
 
-const HeaderTop = (props) => {
-   // const scrollRef = React.useRef(null);
-   // const { x, y } = useScroll(scrollRef);
-   const [smShow, setSmShow] = useState(false);
-   const [lgShow, setLgShow] = useState(false);
+const HeaderTop = () => {
+   const [isModalVisibleLogin, setIsModalVisibleLogin] = useState(false);
 
    return (
       <HeaderTopStyled>
@@ -138,26 +136,12 @@ const HeaderTop = (props) => {
                            </div>
                            {/* end main-menu-content */}
                            <div className='nav-btn'>
-                              {/* <a
-                                 href='#'
-                                 className='theme-btn theme-btn-small theme-btn-transparent mr-1'
-                                 data-toggle='modal'
-                                 data-target='#signupPopupForm'>
-                                 Sign Up
-                              </a> */}
-                              <Button
+                              {/* <Button
                                  className='theme-btn theme-btn-small theme-btn-transparent mr-1'
                                  onClick={() => setSmShow(true)}>
                                  Đăng ký
-                              </Button>
-                              {/* <a
-                                 href='#'
-                                 className='theme-btn theme-btn-small'
-                                 data-toggle='modal'
-                                 data-target='#loginPopupForm'>
-                                 Login
-                              </a> */}
-                              <Button className='theme-btn theme-btn-small' onClick={() => setLgShow(true)}>
+                              </Button> */}
+                              <Button type='primary' onClick={() => setIsModalVisibleLogin(true)}>
                                  Đăng nhập
                               </Button>
                            </div>
@@ -173,203 +157,12 @@ const HeaderTop = (props) => {
             </div>
             {/* end header-menu-wrapper */}
 
-            <Modal className='modal-popup' show={lgShow} onHide={() => setLgShow(false)}>
-               {/* <div className="modal fade" role="dialog" aria-hidden="true"> */}
-               {/* <div className="modal-dialog modal-dialog-centered" role="document"> */}
-               <div className='modal-content'>
-                  <Modal.Header className='modal-header' closeButton>
-                     <div>
-                        <h5 className='modal-title title' id='exampleModalLongTitle2'>
-                           Đăng nhập
-                        </h5>
-                        {/* <p className='font-size-14'>Hello! Welcome to your account</p> */}
-                     </div>
-                     {/* <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true" className="la la-close" />
-               </button> */}
-                  </Modal.Header>
-                  <Modal.Body className='modal-body'>
-                     <div className='contact-form-action'>
-                        <Form method='post'>
-                           <div className='input-box'>
-                              <Modal.Title className='label-text'>Tên đăng nhập</Modal.Title>
-                              <div className='form-group'>
-                                 <span className='la la-user form-icon' />
-                                 <input
-                                    className='form-control'
-                                    type='text'
-                                    name='text'
-                                    placeholder='Nhập tên đăng nhập của bạn'
-                                 />
-                              </div>
-                           </div>
-                           {/* end input-box */}
-                           <div className='input-box'>
-                              <Modal.Title className='label-text'>Mật khẩu</Modal.Title>
-                              <div className='form-group mb-2'>
-                                 <span className='la la-lock form-icon' />
-                                 <input
-                                    className='form-control'
-                                    type='text'
-                                    name='text'
-                                    placeholder='Type your password'
-                                 />
-                              </div>
-                              <div className='d-flex align-items-center justify-content-between'>
-                                 <div className='custom-checkbox mb-0'>
-                                    <input type='checkbox' id='rememberchb' />
-                                    <label htmlFor='rememberchb'>Nhớ mật khẩu</label>
-                                 </div>
-                                 <p className='forgot-password'>
-                                    <a href='recover.html'>Quên mật khẩu?</a>
-                                 </p>
-                              </div>
-                           </div>
-                           {/* end input-box */}
-                           <div className='btn-box pt-3 pb-4'>
-                              <Button type='button' className='theme-btn w-100'>
-                                 Đăng nhập
-                              </Button>
-                           </div>
-                           <div className='action-box text-center'>
-                              <p className='font-size-14'>Hoặc</p>
-                              <ul className='social-profile py-3'>
-                                 <li>
-                                    <a href='#' className='bg-5 text-white'>
-                                       <i className='lab la-facebook-f' />
-                                    </a>
-                                 </li>
-                                 <li>
-                                    <a href='#' className='bg-6 text-white'>
-                                       <i className='lab la-twitter' />
-                                    </a>
-                                 </li>
-                                 <li>
-                                    <a href='#' className='bg-7 text-white'>
-                                       <i className='lab la-instagram' />
-                                    </a>
-                                 </li>
-                                 <li>
-                                    <a href='#' className='bg-5 text-white'>
-                                       <i className='lab la-linkedin-in' />
-                                    </a>
-                                 </li>
-                              </ul>
-                           </div>
-                        </Form>
-                     </div>
-                     {/* end contact-form-action */}
-                  </Modal.Body>
-               </div>
-               {/* </div> */}
-               {/* </div> */}
-            </Modal>
-            {/* end modal-popup */}
+            {/* Login modal */}
+            <LoginModal onCancel={() => setIsModalVisibleLogin(false)} isModalVisible={isModalVisibleLogin} />
+            {/* Login modal */}
 
-            <Modal className='modal-popup' show={smShow} onHide={() => setSmShow(false)}>
-               {/* <div className="modal fade" id="signupPopupForm" tabIndex={-1} role="dialog" aria-hidden="true">
-               <div className="modal-dialog modal-dialog-centered" role="document"> */}
-               <div className='modal-content'>
-                  <Modal.Header className='modal-header' closeButton>
-                     <div>
-                        <h5 className='modal-title title' id='exampleModalLongTitle'>
-                           Sign Up
-                        </h5>
-                        <p className='font-size-14'>Hello! Welcome Create a New Account</p>
-                     </div>
-                     {/* <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                     <span aria-hidden="true" className="la la-close" />
-                     </button> */}
-                  </Modal.Header>
-                  <Modal.Body className='modal-body'>
-                     <div className='contact-form-action'>
-                        <Form method='post'>
-                           <div className='input-box'>
-                              <Modal.Title className='label-text'>Username</Modal.Title>
-                              <div className='form-group'>
-                                 <span className='la la-user form-icon' />
-                                 <input
-                                    className='form-control'
-                                    type='text'
-                                    name='text'
-                                    placeholder='Type your username'
-                                 />
-                              </div>
-                           </div>
-                           {/* end input-box */}
-                           <div className='input-box'>
-                              <Modal.Title className='label-text'>Email Address</Modal.Title>
-                              <div className='form-group'>
-                                 <span className='la la-envelope form-icon' />
-                                 <input
-                                    className='form-control'
-                                    type='text'
-                                    name='text'
-                                    placeholder='Type your email'
-                                 />
-                              </div>
-                           </div>
-                           {/* end input-box */}
-                           <div className='input-box'>
-                              <Modal.Title className='label-text'>Password</Modal.Title>
-                              <div className='form-group'>
-                                 <span className='la la-lock form-icon' />
-                                 <input className='form-control' type='text' name='text' placeholder='Type password' />
-                              </div>
-                           </div>
-                           {/* end input-box */}
-                           <div className='input-box'>
-                              <Modal.Title className='label-text'>Repeat Password</Modal.Title>
-                              <div className='form-group'>
-                                 <span className='la la-lock form-icon' />
-                                 <input
-                                    className='form-control'
-                                    type='text'
-                                    name='text'
-                                    placeholder='Type again password'
-                                 />
-                              </div>
-                           </div>
-                           {/* end input-box */}
-                           <div className='btn-box pt-3 pb-4'>
-                              <Button type='button' className='theme-btn w-100'>
-                                 Register Account
-                              </Button>
-                           </div>
-                           <div className='action-box text-center'>
-                              <p className='font-size-14'>Or Sign up Using</p>
-                              <ul className='social-profile py-3'>
-                                 <li>
-                                    <a href='#' className='bg-5 text-white'>
-                                       <i className='lab la-facebook-f' />
-                                    </a>
-                                 </li>
-                                 <li>
-                                    <a href='#' className='bg-6 text-white'>
-                                       <i className='lab la-twitter' />
-                                    </a>
-                                 </li>
-                                 <li>
-                                    <a href='#' className='bg-7 text-white'>
-                                       <i className='lab la-instagram' />
-                                    </a>
-                                 </li>
-                                 <li>
-                                    <a href='#' className='bg-5 text-white'>
-                                       <i className='lab la-linkedin-in' />
-                                    </a>
-                                 </li>
-                              </ul>
-                           </div>
-                        </Form>
-                     </div>
-                     {/* end contact-form-action */}
-                  </Modal.Body>
-               </div>
-               {/* </div>
-               </div> */}
-            </Modal>
-            {/* end modal-popup */}
+            {/* Register modal */}
+            {/* Register modal */}
          </header>
       </HeaderTopStyled>
    );
@@ -378,7 +171,9 @@ const HeaderTop = (props) => {
 export default compose(
    connect(
       (state) => ({
-         user: state["authUser"].user
+         user: state["authUser"].user,
+         isAuthenticated: state["authUser"].isAuthenticated
+         // có thể check user?.role === ROLE.administrator && isAuthenticated => dashboard admin , không thì redirect tới homepage
       }),
       {
          // postLogin: appApisActions.postLogin
