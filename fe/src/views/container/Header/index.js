@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { compose } from "recompose";
+import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
-import { Form, Input, Button, Checkbox, Modal } from "antd";
 
 import { authActions } from "~/state/ducks/authUser";
 import * as PATH from "~/configs/routesConfig";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
-import LoginModal from "./LoginModal";
+
+import { Button } from "antd";
+import LoginModal from "~/views/container/Header/LoginModal";
 
 const HeaderTopStyled = styled.div``;
 
-const HeaderTop = (props) => {
+const HeaderTop = () => {
    const [isModalVisibleLogin, setIsModalVisibleLogin] = useState(false);
 
    return (
@@ -135,6 +136,11 @@ const HeaderTop = (props) => {
                            </div>
                            {/* end main-menu-content */}
                            <div className='nav-btn'>
+                              {/* <Button
+                                 className='theme-btn theme-btn-small theme-btn-transparent mr-1'
+                                 onClick={() => setSmShow(true)}>
+                                 Đăng ký
+                              </Button> */}
                               <Button type='primary' onClick={() => setIsModalVisibleLogin(true)}>
                                  Đăng nhập
                               </Button>
@@ -151,12 +157,12 @@ const HeaderTop = (props) => {
             </div>
             {/* end header-menu-wrapper */}
 
-            {/* Login Modal */}
+            {/* Login modal */}
             <LoginModal onCancel={() => setIsModalVisibleLogin(false)} isModalVisible={isModalVisibleLogin} />
-            {/* Login Modal */}
+            {/* Login modal */}
 
-            {/* Register Modal */}
-            {/* Register Modal */}
+            {/* Register modal */}
+            {/* Register modal */}
          </header>
       </HeaderTopStyled>
    );
@@ -165,7 +171,9 @@ const HeaderTop = (props) => {
 export default compose(
    connect(
       (state) => ({
-         user: state["authUser"].user
+         user: state["authUser"].user,
+         isAuthenticated: state["authUser"].isAuthenticated
+         // có thể check user?.role === ROLE.administrator && isAuthenticated => dashboard admin , không thì redirect tới homepage
       }),
       {
          // postLogin: appApisActions.postLogin
