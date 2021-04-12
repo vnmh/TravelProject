@@ -19,9 +19,9 @@ exports.login = (req, res, next) => {
       .then((account) => {
          if (!account) {
             const error = new Error();
-            error.statusCode = 200;
+            error.statusCode = 500;
             error.message = 'User of this email could not found!!!';
-            res.status(200).json(error);
+            res.status(500).json(error);
             throw error;
          }
          // if (!account.verify) {
@@ -37,9 +37,9 @@ exports.login = (req, res, next) => {
       .then((isEqual) => {
          if (!isEqual) {
             const error = new Error();
-            error.statusCode = 200;
+            error.statusCode = 500;
             error.message = 'Wrong password!';
-            res.status(200).json(error);
+            res.status(500).json(error);
             throw error;
          }
          const token = jwt.sign(
