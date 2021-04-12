@@ -96,7 +96,7 @@ Account.getByEmailAndRole = function(email, role) {
       .query(
         "SELECT * FROM " +
           databaseProduction +
-          ".accounts  WHERE email= ? AND role= ? AND statusAction <> 'deleted';",
+          ".accounts  WHERE email= ? AND statusAction <> 'deleted';",
         [email, role]
       )
       .then(rows => resolve(rows[0]))
