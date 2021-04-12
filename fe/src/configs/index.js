@@ -25,3 +25,8 @@ export const API_CODE = {
 };
 
 export const JWT = "jwt_" + API_URL;
+
+export const ROLES = {
+   administrator: "administrator",
+   user: "user"
+};
