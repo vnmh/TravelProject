@@ -4,149 +4,106 @@ import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
 
 import { authActions } from "~/state/ducks/authUser";
-
+import { Form, Input, DatePicker, Select, Slider, Switch, Typography, Button } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+import _ from "lodash";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
+import UtilDate from "~/views/utilities/helpers/UtilDate";
+import * as PATH from "~/configs/routesConfig"
+import { parseObjToQuery } from "~/views/utilities/helpers";
+const { RangePicker } = DatePicker;
+const { Option } = Select;
 
 const SearchTourPageStyled = styled.div`
    height: 100vh;
 `;
+const layout = {
+   labelCol: { span: 24 },
+   wrapperCol: { span: 24 }
+};
+const tailLayout = {
+   wrapperCol: { offset: 24, span: 24 }
+};
 
 const SearchTour = (props) => {
+   const onFinish = (values) => {
+      //Chuyển dữ liệu thành query
+      const from = UtilDate.toDateLocal(_.head(values.days));
+      const to = UtilDate.toDateLocal(_.last(values.days));
+      const params = {
+         destination: values.destination,
+         from,
+         to,
+         price: values.price
+      };
+      
+      //sau đó chuyển sang trang danh sách tour
+      props.history.push(PATH.TOUR_LIST + parseObjToQuery(params))
+   };
+
    return (
-      <SearchTourPageStyled>
-         {/* End background slider */}
-         <div className='container'>
-            <div className='row'>
-               <div className='col-lg-12'>
-                  <div className='hero-content pb-5 text-center'>
-                     <div className='section-heading'>
-                        <h2 className='sec__title font-size-70 pb-3'>Are You Ready...</h2>
-                        <p className='sec__desc font-size-30 font-weight-medium'>To explore new things?</p>
-                     </div>
-                  </div>
-                  {/* end hero-content */}
-                  <div className='search-fields-container'>
-                     <div className='contact-form-action'>
-                        <form action='#' className='row'>
-                           <div className='col-lg-3 pr-0'>
-                              <div className='input-box'>
-                                 <label className='label-text'>Destination</label>
-                                 <div className='form-group'>
-                                    <span className='la la-map-marker form-icon' />
-                                    <input className='form-control' type='text' placeholder='Where are you going?' />
-                                 </div>
-                              </div>
-                           </div>
-                           {/* end col-lg-3 */}
-                           <div className='col-lg-3 pr-0'>
-                              <div className='input-box'>
-                                 <label className='label-text'>When</label>
-                                 <div className='form-group'>
-                                    <span className='la la-calendar form-icon' />
-                                    <input className='date-range form-control' type='text' name='daterange' readOnly />
-                                 </div>
-                              </div>
-                           </div>
-                           {/* end col-lg-3 */}
-                           <div className='col-lg-3 pr-0'>
-                              <div className='input-box'>
-                                 <label className='label-text'>Guests</label>
-                                 <div className='form-group'>
-                                    <div className='dropdown dropdown-contain gty-container'>
-                                       <a
-                                          className='dropdown-toggle dropdown-btn'
-                                          href='#'
-                                          role='button'
-                                          data-toggle='dropdown'
-                                          aria-expanded='false'>
-                                          <span className='adult' data-text='Adult' data-text-multi='Adults'>
-                                             0 Adult
-                                          </span>
-                                          -
-                                          <span className='children' data-text='Child' data-text-multi='Children'>
-                                             0 Children
-                                          </span>
-                                       </a>
-                                       <div className='dropdown-menu dropdown-menu-wrap'>
-                                          <div className='dropdown-item'>
-                                             <div className='qty-box d-flex align-items-center justify-content-between'>
-                                                <label>Adults</label>
-                                                <div className='qtyBtn d-flex align-items-center'>
-                                                   <div className='qtyDec'>
-                                                      <i className='la la-minus' />
-                                                   </div>
-                                                   <input type='text' name='adult_number' defaultValue={0} />
-                                                   <div className='qtyInc'>
-                                                      <i className='la la-plus' />
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <div className='dropdown-item'>
-                                             <div className='qty-box d-flex align-items-center justify-content-between'>
-                                                <label>Children</label>
-                                                <div className='qtyBtn d-flex align-items-center'>
-                                                   <div className='qtyDec'>
-                                                      <i className='la la-minus' />
-                                                   </div>
-                                                   <input type='text' name='child_number' defaultValue={0} />
-                                                   <div className='qtyInc'>
-                                                      <i className='la la-plus' />
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    {/* end dropdown */}
-                                 </div>
-                              </div>
-                           </div>
-                           {/* end col-lg-3 */}
-                           <div className='col-lg-3'>
-                              <div className='input-box'>
-                                 <label className='label-text'>Price</label>
-                                 <div className='form-group'>
-                                    <div className='dropdown dropdown-contain'>
-                                       <a
-                                          className='dropdown-toggle dropdown-btn'
-                                          href='#'
-                                          role='button'
-                                          data-toggle='dropdown'
-                                          aria-expanded='false'>
-                                          <div className='price-slider-amount'>
-                                             <input type='text' id='amount' className='amounts py-0' readOnly />
-                                          </div>
-                                          {/* end price-slider-amount */}
-                                       </a>
-                                       <div className='dropdown-menu dropdown-menu-wrap py-4'>
-                                          <div className='dropdown-item py-0'>
-                                             <label className='filter__label mb-2'>Filter Price</label>
-                                             <div id='slider-range' />
-                                             {/* end slider-range */}
-                                          </div>
-                                       </div>
-                                    </div>
-                                    {/* end panel-dropdown */}
-                                 </div>
-                              </div>
-                           </div>
-                           {/* end col-lg-3 */}
-                        </form>
-                        <div className='btn-box pt-2'>
-                           <a href='activity-search-result.html' className='theme-btn'>
-                              Search Now
-                           </a>
-                        </div>
-                     </div>
+      <div className='container'>
+         <div className='row'>
+            <div className='col-lg-12'>
+               <div className='hero-content pb-5 text-center'>
+                  <div className='section-heading'>
+                     <h2 className='sec__title font-size-50 pb-3 pt-5'>Are You Ready...</h2>
+                     <p className='sec__desc font-size-30 font-weight-medium'>To explore new things?</p>
                   </div>
                </div>
-               {/* end col-lg-12 */}
+               {/* end hero-content */}
+               <div className='search-fields-container'>
+                  <div className='contact-form-action'>
+                     <Form name='basic' className='row' {...layout} onFinish={onFinish}>
+                        <div className='col-lg-4'>
+                           <Form.Item
+                              name='destination'
+                              className='input-box'
+                              label={<label className='label-text'>Điểm đến</label>}>
+                              <Input size='large' type='text' placeholder='Bạn muốn đi đâu?' width='100%' />
+                           </Form.Item>
+                        </div>
+                        {/* end col-lg-4 */}
+                        <div className='col-lg-4'>
+                           <Form.Item
+                              rules={[
+                                 {
+                                    required: true,
+                                    message: "Vui lòng chọn thời gian!"
+                                 }
+                              ]}
+                              name='days'
+                              className='input-box'
+                              label={<label className='label-text'>Thời gian</label>}>
+                              <RangePicker size='large' style={{ width: "100%" }} />
+                           </Form.Item>
+                        </div>
+
+                        {/* end col-lg-4 */}
+                        <div className='col-lg-4'>
+                           <Form.Item
+                              name='price'
+                              className='input-box'
+                              label={<label className='label-text'>Giá</label>}>
+                              <Select size='large' placeholder='Search to Select' style={{ width: "100%" }}>
+                                 <Option value={1000000}>0 - 1000000</Option>
+                              </Select>
+                           </Form.Item>
+                        </div>
+                        {/* end col-lg-3 */}
+                        <div className='d-flex justify-content-end w-100 col-12'>
+                           <Button type='primary' size='large' className='btn-box pt-2' htmlType='submit'>
+                              Tìm kiếm
+                           </Button>
+                        </div>
+                     </Form>
+                  </div>
+               </div>
             </div>
-            {/* end row */}
+            {/* end col-lg-12 */}
          </div>
-         {/* end container */}
-      </SearchTourPageStyled>
+         {/* end row */}
+      </div>
    );
 };
 
