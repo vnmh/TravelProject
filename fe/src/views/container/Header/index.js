@@ -10,11 +10,13 @@ import styled from "styled-components"; // Dùng để ghi đè style bên trong
 
 import { Button } from "antd";
 import LoginModal from "~/views/container/Header/LoginModal";
+import RegisterModal from "./RegisterModal";
 
 const HeaderTopStyled = styled.div``;
 
 const HeaderTop = () => {
    const [isModalVisibleLogin, setIsModalVisibleLogin] = useState(false);
+   const [isModalVisibleRegister, setIsModalVisibleRegister] = useState(false);
 
    return (
       <HeaderTopStyled>
@@ -136,11 +138,9 @@ const HeaderTop = () => {
                            </div>
                            {/* end main-menu-content */}
                            <div className='nav-btn'>
-                              {/* <Button
-                                 className='theme-btn theme-btn-small theme-btn-transparent mr-1'
-                                 onClick={() => setSmShow(true)}>
+                              <Button type='primary' onClick={() => setIsModalVisibleRegister(true)}>
                                  Đăng ký
-                              </Button> */}
+                              </Button>
                               <Button type='primary' onClick={() => setIsModalVisibleLogin(true)}>
                                  Đăng nhập
                               </Button>
@@ -157,12 +157,13 @@ const HeaderTop = () => {
             </div>
             {/* end header-menu-wrapper */}
 
+            {/* Register modal */}
+            <RegisterModal onCancel={() => setIsModalVisibleRegister(false)} isModalVisible={isModalVisibleRegister} />
+            {/* Register modal */}
+
             {/* Login modal */}
             <LoginModal onCancel={() => setIsModalVisibleLogin(false)} isModalVisible={isModalVisibleLogin} />
             {/* Login modal */}
-
-            {/* Register modal */}
-            {/* Register modal */}
          </header>
       </HeaderTopStyled>
    );

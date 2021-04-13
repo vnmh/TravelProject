@@ -2,58 +2,53 @@ import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import { connect } from "react-redux";
-import { Form, Input, Button, Checkbox, Modal, message } from "antd";
-
-import { authActions } from "~/state/ducks/authUser";
-import { ROLES } from "~/configs/index";
+import { Form, Input, Button, Modal, message } from "antd";
 import * as PATH from "~/configs/routesConfig";
 
-import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
+import { authActions } from "~/state/ducks/authUser";
 
-const LoginModalStyled = styled(Modal)``;
+import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
+import { ROLES } from "~/configs";
+
+const RegisterModalStyled = styled(Modal)``;
 
 const layout = {
    labelCol: { span: 24 },
    wrapperCol: { span: 24 }
 };
 
-const LoginModal = (props) => {
+const RegisterModal = (props) => {
+   const [form] = Form.useForm();
    const onFinish = (values) => {
-      console.log("hiendev ~ file: LoginModal.js ~ line 22 ~ onFinish ~ values", values);
+      console.log("hiendev ~ file: RegisterModal.js ~ line 22 ~ onFinish ~ values", values);
       // đã validate dữ liệu - map, check dữ liệu
       const body = {
          ...values,
-         role: ROLES.administrator // tạm thời hard code để đăng nhập (sau khi sửa API thì không cần trường này nữa)
+         role: ROLES.user
       };
-      // gọi API login
+      // gọi API register
       props
-         .login(body)
+         .register(body)
          .then(({ res }) => {
+            console.log("hiendev ~ file: RegisterModal.js ~ line 30 ~ .then ~ res", res)
             // ! DO API nên phải check lỗi ở đây
             // Nếu mà trong res có statusCode === 200 và message thì show message
-            if (
-               // Dấu hỏi có nghĩa là nếu res là undefined thì nó sẽ không truy cập tiếp nữa
-               // để không báo lỗi khi có một phần tử undefined (ngoài phần tử cuối)
-               res?.statusCode === 200 &&
-               res?.message
-            )
-               message.error(res?.message);
+            if (res?.statusCode === 200 && res?.message) message.error(res?.message);
             // thông báo và redirect qua trang cần thiết theo điều kiện nhất định:
             else {
                // ! Lưu thông tin người dùng lại
                // Lưu ở redux with persisgate (professional) đã làm khi gọi API (redux with type: LOGIN_SUCCESS)
-               // xuống dòng 138 để biết cách lấy thông tin từ redux
 
                // admin => dashboard của admin
-               message.success("Đăng nhập thành công!");
-               if (res?.role === ROLES.administrator) {
-                  props.history.push(PATH.TOUR_LIST);
+               message.success("Đăng ký thành công!");
+               if (res?.role === ROLES.user) {
+                  props.history.push(PATH.TOUR_GRID);
                }
                // user => (no redirect)
             }
          })
          .catch((err) => {
-            console.log("hiendev ~ file: LoginModal.js ~ line 56 ~ onFinish ~ err", err);
+            console.log("hiendev ~ file: RegisterModal.js ~ line 53 ~ onFinish ~ err", err);
             if (err?.message) message.error(err?.message);
             // ! Do API luôn trả về 200 nếu thực hiện thành công (request và nhận được response)
             // // check type error and show message
@@ -66,20 +61,24 @@ const LoginModal = (props) => {
    };
 
    return (
-      <LoginModalStyled
+      <RegisterModalStyled
          onCancel={props.onCancel} // Dấu X bên phải được click
-         title='Đăng nhập'
+         title='Đăng ký'
          visible={props.isModalVisible} // ẩn hay hiện là do component parent quyết định
          footer={[]} // ẩn 2 button Cancel and OK (default là Modal của ant luôn có 2 nút này)
       >
-         <Form
-            {...layout}
-            name='login'
-            initialValues={{
-               remember: true
-            }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}>
+         <Form {...layout} form={form} name='register' onFinish={onFinish} onFinishFailed={onFinishFailed}>
+            <Form.Item
+               label='Tên tài khoản'
+               name='username'
+               rules={[
+                  {
+                     required: true,
+                     message: "Hãy nhập tên tài khoản của bạn!"
+                  }
+               ]}>
+               <Input size='large' />
+            </Form.Item>
             <Form.Item
                label='Email'
                name='email'
@@ -95,7 +94,6 @@ const LoginModal = (props) => {
                ]}>
                <Input size='large' />
             </Form.Item>
-
             <Form.Item
                label='Mật khẩu'
                name='password'
@@ -108,18 +106,34 @@ const LoginModal = (props) => {
                ]}>
                <Input.Password size='large' />
             </Form.Item>
-
-            <Form.Item name='remember' valuePropName='checked'>
-               <Checkbox>Nhớ mật khẩu</Checkbox>
+            <Form.Item
+               label='Nhập lại mật khẩu'
+               name='confirm password'
+               dependencies={["password"]}
+               hasFeedback
+               rules={[
+                  {
+                     required: true,
+                     message: "Hãy nhập lại mật khẩu của bạn!"
+                  },
+                  ({ getFieldValue }) => ({
+                     validator(_, value) {
+                        if (!value || getFieldValue("password") === value) {
+                           return Promise.resolve();
+                        }
+                        return Promise.reject(new Error("Hai mật khẩu đã nhập không trùng khớp!"));
+                     }
+                  })
+               ]}>
+               <Input.Password />
             </Form.Item>
-
             <Form.Item>
                <Button size='large' style={{ width: "100%" }} type='primary' htmlType='submit'>
-                  Đăng nhập
+                  Đăng ký
                </Button>
             </Form.Item>
          </Form>
-      </LoginModalStyled>
+      </RegisterModalStyled>
    );
 };
 
@@ -129,9 +143,9 @@ export default compose(
          user: state["authUser"].user
       }),
       {
-         // postLogin: appApisActions.postLogin
-         login: authActions.login
+         // postRegister: appApisActions.postRegister
+         register: authActions.register
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,
-)(LoginModal);
+)(RegisterModal);
