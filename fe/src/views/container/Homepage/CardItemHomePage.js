@@ -12,7 +12,7 @@ import { appApisActions } from "~/state/ducks/appApis";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { Tooltip, Typography } from "antd";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
-import { LeftCircleOutlined, LeftOutlined, RightCircleOutlined } from "@ant-design/icons";
+import { LeftCircleOutlined, RightCircleOutlined } from "@ant-design/icons";
 
 const CarouselProviderWrapper = styled(CarouselProvider)`
    position: relative;
@@ -93,9 +93,11 @@ const CardItemHomePage = (props) => {
                         <div className='card-body'>
                            <h3 className='card-title mb-0'>
                               <Tooltip title={item.titleTour}>
-                                 <Typography.Paragraph className='text_link' ellipsis={{ rows: 2 }} to='/tour-detail'>
-                                    {item.titleTour}
-                                 </Typography.Paragraph>
+                                 <Link to='/tour-detail'>
+                                    <Typography.Paragraph className='text_link' ellipsis={{ rows: 2 }}>
+                                       {item.titleTour}
+                                    </Typography.Paragraph>
+                                 </Link>
                               </Tooltip>
                            </h3>
                            <div className='card-rating'>
@@ -117,8 +119,12 @@ const CardItemHomePage = (props) => {
                );
             })}
          </Slider>
-         <ButtonBack className='arrow-left'><LeftCircleOutlined style={{fontSize: 40, color: '#595959'}} /></ButtonBack>
-         <ButtonNext className='arrow-right'><RightCircleOutlined style={{fontSize: 40, color: '#595959'}} /></ButtonNext>
+         <ButtonBack className='arrow-left'>
+            <LeftCircleOutlined style={{ fontSize: 40, color: "#595959" }} />
+         </ButtonBack>
+         <ButtonNext className='arrow-right'>
+            <RightCircleOutlined style={{ fontSize: 40, color: "#595959" }} />
+         </ButtonNext>
       </CarouselProviderWrapper>
    );
 };
@@ -129,7 +135,6 @@ export default compose(
          user: state["authUser"].user
       }),
       {
-         // postLogin: appApisActions.postLogin
          getTours: appApisActions.getTours,
          getAllImagesTour: appApisActions.getAllImagesTour
       }
