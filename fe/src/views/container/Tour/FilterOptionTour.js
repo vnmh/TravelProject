@@ -4,10 +4,17 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import { Select } from "antd";
+
+const { Option } = Select;
 
 const FilterOptionTourStyled = styled.div``;
 
 function FilterOptionTour(props) {
+   const handleChange = (value) => {
+      props.setSortType(value);
+      console.log(`selected ${value}`);
+   };
    return (
       <FilterOptionTourStyled>
          <div className='filter-bar d-flex align-items-center justify-content-between'>
@@ -186,13 +193,13 @@ function FilterOptionTour(props) {
             </div>
             {/* end filter-bar-filter */}
             <div className='select-contain'>
-               <select className='select-contain-select'>
-                  <option value={1}>Short by default</option>
-                  <option value={2}>New Tour</option>
-                  <option value={3}>Price: low to high</option>
-                  <option value={4}>Price: high to low</option>
-                  <option value={5}>A to Z</option>
-               </select>
+               <Select defaultValue='Mặc định' style={{ width: 200 }} onChange={handleChange}>
+                  <Option value='filter-default'>Mặc định</Option>
+                  <Option value='new-tour'>Tour mới</Option>
+                  <Option value='price-low-to-high'>Giá: thấp đến cao</Option>
+                  <Option value='price-high-to-low'>Giá: cao đến thấp</Option>
+                  <Option value='a-to-z'>A đến Z</Option>
+               </Select>
             </div>
             {/* end select-contain */}
          </div>

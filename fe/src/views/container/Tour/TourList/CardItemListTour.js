@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import _ from "lodash";
+import _, { overArgs } from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import { Tooltip, Typography } from "antd";
-import { firstImage } from "~/views/utilities/helpers/utilObject";
+import { firstImage, removeVietnameseTones } from "~/views/utilities/helpers/utilObject";
+import { currencyFormat } from "~/views/utilities/helpers/currency";
+import { TYPE_TOUR } from "~/configs/const";
 
 const CardItemListTourStyled = styled.div``;
 
 const CardItemListTour = (props) => {
    const [tours, setTours] = useState([]);
+   const [toursDefault, setToursDefault] = useState([]);
    const [images, setImages] = useState([]);
 
    useEffect(() => {
@@ -29,6 +32,7 @@ const CardItemListTour = (props) => {
                      };
                   });
                   setTours(tourWithImage);
+                  setToursDefault(tourWithImage);
                })
                .catch((err) => {
                   console.log("hiendev ~ file: CardItemListTour.js ~ line 34 ~ .then ~ err", err);
@@ -39,6 +43,62 @@ const CardItemListTour = (props) => {
          });
    }, []);
 
+   useEffect(() => {
+      switch (props.sortType) {
+         case "price-low-to-high":
+            setTours(_.orderBy(tours, ["price"], ["asc"]));
+            break;
+         case "price-high-to-low":
+            setTours(_.orderBy(tours, ["price"], ["desc"]));
+            break;
+         case "filter-default":
+            setTours(toursDefault);
+            break;
+         case "new-tour":
+            setTours(_.orderBy(tours, ["dateEdited"], ["asc"]));
+            break;
+         case "a-to-z":
+            setTours(_.orderBy(tours, ["titleTour"], ["asc"]));
+            break;
+         default:
+            break;
+      }
+   }, [props.sortType]);
+
+   useEffect(() => {
+      let toursTemp = Array.from(toursDefault);
+      if (props.searchTour?.destination) {
+         toursTemp = toursTemp.filter((o) => {
+            return _.lowerCase(removeVietnameseTones(o.address)).includes(
+               _.lowerCase(removeVietnameseTones(props.searchTour?.destination))
+            );
+         });
+      }
+      // if (props.searchTour?.from) {
+      //    toursTemp = _.filter(tours, (o) => {
+      //       return true;
+      //    });
+      // }
+      // if (props.searchTour?.to) {
+      //    toursTemp = _.filter(tours, (o) => {
+      //       return true;
+      //    });
+      // }
+      if (props.searchTour?.type && props.searchTour?.type !== "all") {
+         toursTemp = toursTemp.filter((o) => {
+               return o.type === props.searchTour.type;
+            })
+      }
+
+      if (
+         !props.searchTour?.destination &&
+         !props.searchTour?.from &&
+         !props.searchTour?.to &&
+         (props.searchTour?.type === "all" || !props.searchTour?.type)
+      )
+         toursTemp = Array.from(toursDefault);
+      setTours(toursTemp); //tours
+   }, [props.timeSubmit]);
    return (
       <CardItemListTourStyled>
          {tours.map((item, index) => {
@@ -73,7 +133,8 @@ const CardItemListTour = (props) => {
                            </Link>
                         </Tooltip>
                      </h3>
-                     <p className='card-meta'>124 E Huron St, New york</p>
+                     <p className='card-meta'>{item.address}</p>
+                     <p className='card-meta'>Loại tour: {TYPE_TOUR[item.type] || ""}</p>
                      <div className='card-rating'>
                         <span className='badge text-white'>4.4/5</span>
                         <span className='review__text'>Average</span>
@@ -81,12 +142,12 @@ const CardItemListTour = (props) => {
                      </div>
                      <div className='card-price d-flex align-items-center justify-content-between'>
                         <p>
-                           <span className='price__from'>From</span>
-                           <span className='price__num'>$124.00</span>
+                           <span className='price__from'>From </span>
+                           <span className='price__num'>{currencyFormat(item.price)}</span>
                         </p>
                         <span className='tour-hour'>
                            <i className='la la-clock-o mr-1' />
-                           Full day
+                           {item.vocationTime} ngày
                         </span>
                      </div>
                   </div>

@@ -18,6 +18,10 @@ import InfoTour from "../InfoTour";
 const ImpTourListStyled = styled.div``;
 
 function ImpTourList(props) {
+   const [sortType, setSortType] = useState()
+   const [searchTour, setSearchTour] = useState()
+   const [timeSubmit, setTimeSubmit] = useState()
+   
    return (
       <ImpTourListStyled>
          {/* ================================
@@ -29,7 +33,7 @@ function ImpTourList(props) {
                   <div className='col-lg-12'>
                      <div className='filter-wrap margin-bottom-30px'>
                         <FilterTopTour />
-                        <FilterOptionTour />
+                        <FilterOptionTour setSortType={setSortType}/>
                      </div>
                      {/* end filter-wrap */}
                   </div>
@@ -40,7 +44,7 @@ function ImpTourList(props) {
                <div className='row'>
                   <div className='col-lg-4'>
                      <div className='sidebar mt-0'>
-                        <SearchListTour />
+                        <SearchListTour setSearchTour={setSearchTour} setTimeSubmit={setTimeSubmit}/>
                         <hr></hr>
                         <FilterByPrice />
                         <hr></hr>
@@ -57,7 +61,7 @@ function ImpTourList(props) {
                   </div>
                   {/* end col-lg-4 */}
                   <div className='col-lg-8'>
-                     <CardItemListTour />
+                     <CardItemListTour sortType={sortType} searchTour={searchTour} timeSubmit={timeSubmit}/>
                   </div>
                   {/* end col-lg-8 */}
                </div>
