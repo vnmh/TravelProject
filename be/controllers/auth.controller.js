@@ -177,25 +177,25 @@ exports.register = (req, res, next) => {
                newAccount.password = passwordHash;
                //Ta tiến hành gửi mail ở đây cho người dùng vừa nhập
                // Compose email
-               const html = `Hi there,
-                        <br/>
-                        Thank you for registering!
-                        <br/><br/>
-                        We are Trùm Tour:
-                        <br/><br/>
-                        Please verify your email by typing the following token:
-                        On the following page:
-                        <a href="${process.env.FRONT_END}verify?ddSWuQzP8x2cHckmKxiK=${jwt.sign(
-                  verifyToken,
-                  'ithoangtansecurity'
-               )}&QZmWYU22y2zb2qZg8clJ=${jwt.sign(newAccount.email, 'ithoangtansecurity')}">${
-                  process.env.FRONT_END
-               }verify?${jwt.sign('verifyToken', 'ithoangtansecurity')}=${jwt.sign(
-                  verifyToken,
-                  'ithoangtansecurity'
-               )}</a>
-                        <br/><br/>
-                        Have a pleasant day.`;
+               // const html = `Hi there,
+               //          <br/>
+               //          Thank you for registering!
+               //          <br/><br/>
+               //          We are Trùm Tour:
+               //          <br/><br/>
+               //          Please verify your email by typing the following token:
+               //          On the following page:
+               //          <a href="${process.env.FRONT_END}verify?ddSWuQzP8x2cHckmKxiK=${jwt.sign(
+               //    verifyToken,
+               //    'ithoangtansecurity'
+               // )}&QZmWYU22y2zb2qZg8clJ=${jwt.sign(newAccount.email, 'ithoangtansecurity')}">${
+               //    process.env.FRONT_END
+               // }verify?${jwt.sign('verifyToken', 'ithoangtansecurity')}=${jwt.sign(
+               //    verifyToken,
+               //    'ithoangtansecurity'
+               // )}</a>
+               //          <br/><br/>
+               //          Have a pleasant day.`;
                // //micro service mailgun(sever mail support)
                // await mailer.sendEmail(
                //   "app156076672@heroku.com",
@@ -204,12 +204,12 @@ exports.register = (req, res, next) => {
                //   html
                // );
                //micro service gmail
-               await mailerGmail.sendEmail(
-                  process.env.MY_GMAIL,
-                  newAccount.email,
-                  'Vui lòng xác thực email của bạn!',
-                  html
-               );
+               // await mailerGmail.sendEmail(
+               //    process.env.MY_GMAIL,
+               //    newAccount.email,
+               //    'Vui lòng xác thực email của bạn!',
+               //    html
+               // );
                return Accounts.create(newAccount);
             })
             .then((result) => {
