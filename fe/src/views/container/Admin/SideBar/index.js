@@ -62,7 +62,7 @@ const SideBar = () => {
                         <span className='side-menu-icon toggle-menu-icon'>
                            <i className='la la-angle-down' />
                         </span>
-                        <a href='/admin-tour'>
+                        <a href='/admin-tour-list'>
                            <i className='la la-list mr-2 text-color-4' />
                            Tour
                         </a>
