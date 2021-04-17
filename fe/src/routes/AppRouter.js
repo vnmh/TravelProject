@@ -9,7 +9,11 @@ import TourList from "~/views/container/Tour/TourList";
 import TourGrid from "~/views/container/Tour/TourGrid";
 import Payment from "~/views/container/Payment";
 import PaymentReceived from "~/views/container/Payment/PaymentReceived";
-
+import DashBoard from "~/views/container/Admin/DashBoardAdmin";
+import BookingAdminPage from "~/views/container/Admin/BookingAdmin";
+import TourAdminPage from "~/views/container/Admin/TourAdmin";
+import ReviewAdminPage from "~/views/container/Admin/ReviewAdmin";
+import ProfileAdminPage from "~/views/container/Admin/ProfileAdmin";
 
 const AppRouter = (props) => {
    return (
@@ -28,6 +32,12 @@ const AppRouter = (props) => {
             <AuthorizedRoute path={PATH.HOME_PAGE} />
             <AuthorizedRoute path={PATH.TOUR_BOOKING} />
             <AuthorizedRoute path={PATH.PAYMENT_RECEIVED} />
+
+            <Route path={PATH.ADMIN_DASHBOARD} exact component={() => <DashBoard />} />
+            <Route path={PATH.ADMIN_BOOKING} exact component={() => <BookingAdminPage />} />
+            <Route path={PATH.ADMIN_TOUR_LIST} exact component={() => <TourAdminPage />} />
+            <Route path={PATH.ADMIN_REVIEW} exact component={() => <ReviewAdminPage />} />
+            <Route path={PATH.ADMIN_PROFILE} exact component={() => <ProfileAdminPage />} />
 
             <Redirect to={PATH.HOME_PAGE} />
          </Switch>
