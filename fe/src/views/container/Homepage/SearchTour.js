@@ -9,7 +9,7 @@ import { UserOutlined } from "@ant-design/icons";
 import _ from "lodash";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import UtilDate from "~/views/utilities/helpers/UtilDate";
-import * as PATH from "~/configs/routesConfig"
+import * as PATH from "~/configs/routesConfig";
 import { parseObjToQuery } from "~/views/utilities/helpers";
 const { RangePicker } = DatePicker;
 const { Option } = Select;
