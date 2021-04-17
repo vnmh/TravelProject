@@ -47,10 +47,12 @@ const LoginModal = (props) => {
                // admin => dashboard của admin
                message.success("Đăng nhập thành công!");
                if (res?.role === ROLES.administrator) {
-                  props.history.push(PATH.TOUR_LIST);
+                  props.history.push(PATH.ADMIN_DASHBOARD);
                }
                // user => (no redirect)
+             
             }
+            props.onCancel();
          })
          .catch((err) => {
             console.log("hiendev ~ file: LoginModal.js ~ line 56 ~ onFinish ~ err", err);

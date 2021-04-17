@@ -15,9 +15,9 @@ const TourAdminStyled = styled.div``;
 const TourAdmin = () => {
    return (
       <TourAdminStyled>
-             <div class='dashboard-content-wrap'>
-                  <TourBreadAdminPage />
-             <div class="dashboard-main-content">
+         <div class='dashboard-content-wrap'>
+            <TourBreadAdminPage />
+            <div class='dashboard-main-content'>
                <div class='container-fluid'>
                   <TourListAdminPage />
                </div>
