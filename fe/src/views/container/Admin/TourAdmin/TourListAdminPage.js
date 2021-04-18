@@ -9,12 +9,12 @@ import { Table, Tag, Space, Button, Image } from "antd";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
-import TourTableListAdminPage from "./TourTableListAdminPage"
+import TourTableListAdminPage from "./TourTableListAdminPage";
 
 const TourListAdminPageStyled = styled.div``;
 
 const TourListAdminPage = (props) => {
-  
+   const [isCreateTour, setIsCreateTour] = useState(false);
    return (
       <TourListAdminPageStyled>
          <div>
@@ -23,11 +23,18 @@ const TourListAdminPage = (props) => {
                   <div className='form-box'>
                      <div className='form-title-wrap'>
                         <h3 className='title'>Travel Agent Lists</h3>
+                        <Button
+                           type='primary'
+                           onClick={() => {
+                              setIsCreateTour(true);
+                           }}>
+                           Thêm
+                        </Button>
                         <p className='font-size-14'>Showing 1 to 8 of 20 entries</p>
                      </div>
                      <div className='form-content'>
                         <div className='table-form table-responsive'>
-                           <TourTableListAdminPage />
+                           <TourTableListAdminPage isCreateTour={isCreateTour} setIsCreateTour={setIsCreateTour}/>
                         </div>
                      </div>
                   </div>

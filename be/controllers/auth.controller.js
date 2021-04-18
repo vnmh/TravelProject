@@ -61,6 +61,7 @@ exports.login = (req, res, next) => {
          res.cookie('token', token, options) // options is optional
             .json({
                token: token,
+               idAccount: loadAccount.idAccount,
                name: loadAccount.name,
                role: loadAccount.role,
                avatar: loadAccount.avatar

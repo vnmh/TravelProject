@@ -10,7 +10,7 @@ import { Table, Tag, Space, Button, Image } from "antd";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
-import EditTourAdmin from "./EditTourAdmin";
+import CRUDTourAdmin from "./CRUDTourAdmin";
 
 const TourTableListAdminPageStyled = styled.div``;
 
@@ -125,8 +125,10 @@ const TourTableListAdminPage = (props) => {
 
    return (
       <TourTableListAdminPageStyled>
-         {currentEdit && <EditTourAdmin setCurrentEdit={setCurrentEdit} currentEdit={currentEdit} />}
-         {!currentEdit && (
+         {(currentEdit || props.isCreateTour) && (
+            <CRUDTourAdmin setCurrentEdit={setCurrentEdit} currentEdit={currentEdit} setIsCreateTour={props.setIsCreateTour}/>
+         )}
+         {(!currentEdit && !props.isCreateTour) && (
             <Table columns={columns} dataSource={tours} scroll={{ scrollToFirstRowOnChange: true, x: 1200 }} />
          )}
       </TourTableListAdminPageStyled>
