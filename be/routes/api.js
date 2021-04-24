@@ -14,15 +14,15 @@ const tour = require('../controllers/tour.controller');
 
 const schedule = require('../controllers/schedule.controller');
 const image = require('../controllers/image.controller');
-// const order = require('../controllers/order.controller');
+const order = require('../controllers/order.controller');
 const account = require('../controllers/account.controller');
 // const notification = require('../controllers/notification.controller');
 // const noticeTo = require('../controllers/noticeTo.controller');
-// const evaluate = require('../controllers/evaluate.controller');
+const evaluate = require('../controllers/evaluate.controller');
 // const post = require('../controllers/post.controller');
 // const favorite = require('../controllers/favorite.controller');
 // const tag = require('../controllers/tag.controller');
-// const timeline = require('../controllers/timeline.controller');
+const timeline = require('../controllers/timeline.controller');
 const service = require('../controllers/service.controller');
 //authencation
 //passport
@@ -86,13 +86,13 @@ router.delete('/account', authenticated, account.delete);
 // router.post('/cancelPayment', order.cancelPayment);
 
 // //for order
-// router.get('/order', order.read);
-// router.get('/orderWithEmail', order.readByEmail);
-// router.get('/orders', order.listAll);
-// router.post('/order', order.create);
-// router.patch('/order', order.update);
-// router.patch('/orderUpdateStatus', order.updateStatus);
-// router.delete('/order', authenticated, order.delete);
+router.get('/order', order.read);
+router.get('/orderWithEmail', order.readByEmail);
+router.get('/orders', order.listAll);
+router.post('/order', order.create);
+router.patch('/order', order.update);
+router.patch('/orderUpdateStatus', order.updateStatus);
+router.delete('/order', authenticated, order.delete);
 
 // //favorites
 // router.get('/favoritesWithEmail', favorite.readByEmail);
@@ -112,11 +112,11 @@ router.delete('/account', authenticated, account.delete);
 // router.delete('/noticeTo', authenticated, noticeTo.delete);
 
 // //for evaluate
-// router.get('/evaluate', evaluate.read);
-// router.get('/evaluate/bytour', evaluate.readByIdTour);
-// router.post('/evaluate', authenticated, evaluate.create);
-// router.put('/evaluate', authenticated, evaluate.update);
-// router.delete('/evaluate', authenticated, evaluate.delete);
+router.get('/evaluate', evaluate.read);
+router.get('/evaluate/bytour', evaluate.readByIdTour);
+router.post('/evaluate', authenticated, evaluate.create);
+router.put('/evaluate', authenticated, evaluate.update);
+router.delete('/evaluate', authenticated, evaluate.delete);
 
 // //for post
 // router.get('/post', post.read);
@@ -146,12 +146,12 @@ router.delete('/account', authenticated, account.delete);
 // router.delete('/tag', authenticated, tag.delete);
 
 // //for timeline
-// router.get('/timeline', timeline.read);
-// router.get('/timelines', authenticated, timeline.listAll);
-// router.post('/timeline/search', authenticated, timeline.listTimelineSearch);
-// router.post('/timeline', authenticated, timeline.create);
-// router.put('/timeline', authenticated, timeline.update);
-// router.delete('/timeline', authenticated, timeline.delete);
+router.get('/timeline', timeline.read);
+router.get('/timelines', authenticated, timeline.listAll);
+router.post('/timeline/search', authenticated, timeline.listTimelineSearch);
+router.post('/timeline', authenticated, timeline.create);
+router.put('/timeline', authenticated, timeline.update);
+router.delete('/timeline', authenticated, timeline.delete);
 
 //for service
 router.get('/service', service.read);
