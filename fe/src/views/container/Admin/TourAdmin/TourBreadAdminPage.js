@@ -30,11 +30,11 @@ const TourBreadAdminPage = () => {
                         <ul className='list-items'>
                            <li>
                               <a href='index.html' className='text-white'>
-                                 Home
+                                 Trang chủ
                               </a>
                            </li>
                            <li>Dashboard</li>
-                           <li>Travel Agents</li>
+                           <li>Tour</li>
                         </ul>
                      </div>
                      {/* end breadcrumb-list */}

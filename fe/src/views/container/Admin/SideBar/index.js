@@ -26,35 +26,35 @@ const SideBar = () => {
                      </div>
                      <div className='author-bio'>
                         <h4 className='author__title'>Royel travel agency</h4>
-                        <span className='author__meta'>Welcome to Admin Panel</span>
+                        <span className='author__meta'>Welcome to Admin Page</span>
                      </div>
                   </div>
                </div>
                <div className='sidebar-menu-wrap'>
                   <ul className='sidebar-menu toggle-menu list-items'>
                      <li>
-                        <a href='admin-dashboard'>
+                        <Link to='/admin-dashboard'>
                            <i className='la la-dashboard mr-2 text-color' />
                            Dashboard
-                        </a>
+                        </Link>
                      </li>
                      <li>
-                        <a href='admin-booking'>
+                        <Link to='admin-booking'>
                            <i className='la la-shopping-cart mr-2 text-color-2' />
                            Booking
-                        </a>
+                        </Link>
                      </li>
                      <li>
                         <span className='side-menu-icon toggle-menu-icon'>
                            <i className='la la-angle-down' />
                         </span>
-                        <a href='admin-dashboard-orders.html'>
+                        <Link to='admin-dashboard-orders.html'>
                            <i className='la la-list mr-2 text-color-3' />
                            Orders
-                        </a>
+                        </Link>
                         <ul className='toggle-drop-menu'>
                            <li>
-                              <a href='admin-dashboard-orders-details.html'>Order Details</a>
+                              <Link to='admin-dashboard-orders-details.html'>Order Details</Link>
                            </li>
                         </ul>
                      </li>
@@ -62,98 +62,51 @@ const SideBar = () => {
                         <span className='side-menu-icon toggle-menu-icon'>
                            <i className='la la-angle-down' />
                         </span>
-                        <a href='/admin-tour-list'>
+                        <Link to='/admin-tour-list'>
                            <i className='la la-list mr-2 text-color-4' />
                            Tour
-                        </a>
+                        </Link>
                         <ul className='toggle-drop-menu'>
                            <li>
-                              <a href='admin-dashboard-traveler-detail.html'>Traveller Details</a>
+                              <Link to='admin-dashboard-traveler-detail.html'>Traveller Details</Link>
                            </li>
                         </ul>
                      </li>
                      <li>
-                        <a href='admin-dashboard-visa.html'>
-                           <i className='la la-plane mr-2 text-color-5' />
-                           Visa Application
-                        </a>
-                     </li>
-                     <li>
-                        <a href='admin-dashboard-reviews.html'>
+                        <Link to='admin-dashboard-reviews.html'>
                            <i className='la la-star mr-2 text-color-6' />
                            Reviews
-                        </a>
+                        </Link>
                      </li>
                      <li>
-                        <a href='admin-dashboard-wishlist.html'>
+                        <Link to='admin-dashboard-wishlist.html'>
                            <i className='la la-heart mr-2 text-color-7' />
                            Wishlist
-                        </a>
+                        </Link>
                      </li>
-                     <li className='page-active'>
-                        <a href='admin-dashboard-travel-agents.html'>
+                     <li>
+                        <Link to='admin-dashboard-travel-agents.html'>
                            <i className='la la-text-width mr-2' />
                            Travel Agents
-                        </a>
+                        </Link>
                      </li>
                      <li>
-                        <span className='side-menu-icon toggle-menu-icon'>
-                           <i className='la la-angle-down' />
-                        </span>
-                        <a href='#'>
-                           <i className='la la-area-chart mr-2 text-color-8' />
-                           Finance
-                        </a>
-                        <ul className='toggle-drop-menu'>
-                           <li>
-                              <a href='admin-invoice.html'>Invoice</a>
-                           </li>
-                           <li>
-                              <a href='admin-payments.html'>Payments</a>
-                           </li>
-                           <li>
-                              <a href='admin-currency-list.html'>Currency List</a>
-                           </li>
-                           <li>
-                              <a href='admin-dashboard-subscribers.html'>Subscribers</a>
-                           </li>
-                        </ul>
-                     </li>
-                     <li>
-                        <span className='side-menu-icon toggle-menu-icon'>
-                           <i className='la la-angle-down' />
-                        </span>
-                        <a href='#'>
-                           <i className='la la-map-signs mr-2 text-color-9' />
-                           Locations
-                        </a>
-                        <ul className='toggle-drop-menu'>
-                           <li>
-                              <a href='admin-countries.html'>Countries</a>
-                           </li>
-                           <li>
-                              <a href='admin-airlines.html'>Airlines</a>
-                           </li>
-                        </ul>
-                     </li>
-                     <li>
-                        <a href='admin-dashboard-settings.html'>
+                        <Link to='admin-dashboard-settings.html'>
                            <i className='la la-cog mr-2 text-color-10' />
                            Settings
-                        </a>
+                        </Link>
                      </li>
                      <li>
-                        <a href='index.html'>
+                        <Link to='index.html'>
                            <i className='la la-power-off mr-2 text-color-11' />
                            Logout
-                        </a>
+                        </Link>
                      </li>
                   </ul>
                </div>
                {/* end sidebar-menu-wrap */}
             </div>
          </div>
-         {/* end sidebar-nav */}
       </SideBarStyled>
    );
 };

@@ -54,7 +54,7 @@ const ImpHomePage = (props) => {
                   <div className='col-lg-12'>
                      <div className='section-heading'>
                         <h2 className='sec__title curve-shape padding-bottom-30px' data-text='curvs'>
-                           Popular tour in the month
+                           Tour nổi bật
                         </h2>
                      </div>
                      {/* end section-heading */}
@@ -131,7 +131,7 @@ const ImpHomePage = (props) => {
                   <div className='col-lg-12'>
                      <div className='section-heading'>
                         <h2 className='sec__title curve-shape padding-bottom-30px' data-text='curvs'>
-                           Recent Articles
+                           Blog
                         </h2>
                      </div>
                      {/* end section-heading */}

@@ -21,7 +21,22 @@ const TourTableListAdminPage = (props) => {
          dataIndex: "images",
          key: "images",
          render: (images, record) => {
-            return (
+            return (images || []).length > 0 ? (
+               <Image.PreviewGroup>
+                  {(images || []).map((image, index) => {
+                     return (
+                        <Image
+                           width={100}
+                           style={{ display: index !== 0 ? "none" : "unset" }}
+                           src={
+                              _.get(image, "url") ? firstImage(_.get(image, "url", "")) : "images/destination-img7.jpg"
+                           }
+                           alt='Destination-img'
+                        />
+                     );
+                  })}
+               </Image.PreviewGroup>
+            ) : (
                <Image
                   width={100}
                   src={
@@ -93,6 +108,13 @@ const TourTableListAdminPage = (props) => {
          width: 130
       }
    ];
+   const handleChangeTable = (pagination, filters, sorter, extra) => {
+      props.setPagination({
+         ...props.pagination,
+         page: pagination?.current,
+         size: pagination?.pageSize
+      });
+   };
 
    const [tours, setTours] = useState([]);
    useEffect(() => {
@@ -110,6 +132,11 @@ const TourTableListAdminPage = (props) => {
                         })
                      };
                   });
+                  // props.setPagination({
+                  //    page: 1,
+                  //    size: 10,
+                  //    total: tourWithImage.length
+                  // });
                   setTours(tourWithImage);
                })
                .catch((err) => {
@@ -129,7 +156,7 @@ const TourTableListAdminPage = (props) => {
             <CRUDTourAdmin setCurrentEdit={setCurrentEdit} currentEdit={currentEdit} setIsCreateTour={props.setIsCreateTour}/>
          )}
          {(!currentEdit && !props.isCreateTour) && (
-            <Table columns={columns} dataSource={tours} scroll={{ scrollToFirstRowOnChange: true, x: 1200 }} />
+            <Table onChange={handleChangeTable} columns={columns} dataSource={tours} scroll={{ scrollToFirstRowOnChange: true, x: 1200 }} />
          )}
       </TourTableListAdminPageStyled>
    );

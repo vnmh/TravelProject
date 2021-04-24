@@ -15,6 +15,7 @@ const TourListAdminPageStyled = styled.div``;
 
 const TourListAdminPage = (props) => {
    const [isCreateTour, setIsCreateTour] = useState(false);
+   const [pagination, setPagination] = useState({ page: 1, size: 0, total: 0 });
    return (
       <TourListAdminPageStyled>
          <div>
@@ -22,7 +23,7 @@ const TourListAdminPage = (props) => {
                <div className='col-lg-12'>
                   <div className='form-box'>
                      <div className='form-title-wrap'>
-                        <h3 className='title'>Travel Agent Lists</h3>
+                        <h3 className='title'>Danh sách tour</h3>
                         <Button
                            type='primary'
                            onClick={() => {
@@ -30,11 +31,14 @@ const TourListAdminPage = (props) => {
                            }}>
                            Thêm
                         </Button>
-                        <p className='font-size-14'>Showing 1 to 8 of 20 entries</p>
+                        <p className='font-size-14'>
+                           Showing {pagination.page} to {Math.ceil(pagination.total / pagination.size)} of{" "}
+                           {pagination.total} entries
+                        </p>
                      </div>
                      <div className='form-content'>
                         <div className='table-form table-responsive'>
-                           <TourTableListAdminPage isCreateTour={isCreateTour} setIsCreateTour={setIsCreateTour}/>
+                           <TourTableListAdminPage isCreateTour={isCreateTour} setIsCreateTour={setIsCreateTour} pagination={pagination}/>
                         </div>
                      </div>
                   </div>
