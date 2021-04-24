@@ -47,8 +47,8 @@ const SearchTour = (props) => {
             <div className='col-lg-12'>
                <div className='hero-content pb-5 text-center'>
                   <div className='section-heading'>
-                     <h2 className='sec__title font-size-50 pb-3 pt-5'>Are You Ready...</h2>
-                     <p className='sec__desc font-size-30 font-weight-medium'>To explore new things?</p>
+                     <h2 className='sec__title font-size-50 pb-3 pt-5'>Du lịch theo phong cách riêng</h2>
+                     <p className='sec__desc font-size-25 font-weight-medium'>Trải nghiệm trọn vẹn - Giá cả phải chăng</p>
                   </div>
                </div>
                {/* end hero-content */}

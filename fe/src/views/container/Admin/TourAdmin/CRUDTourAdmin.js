@@ -8,16 +8,17 @@ import * as PATH from "~/configs/routesConfig";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, Checkbox, Row } from "antd";
 
 const CRUDTourAdminStyled = styled.div``;
 
 const layout = {
-   labelCol: { span: 24 },
-   wrapperCol: { span: 24 }
+   // labelCol: { span: 24 },
+   // wrapperCol: { span: 24 }
 };
 
 const CRUDTourAdmin = (props) => {
+   
    const onFinish = (values) => {
       //Nếu currentEdit thì gọi API update, không thì gọi API create
       if (props.currentEdit) {
@@ -82,8 +83,21 @@ const CRUDTourAdmin = (props) => {
             initialValues={{
                ...props.currentEdit
             }}
+            name='horizontal_login'
+            layout='inline'
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}>
+            <Form.Item
+               label='Tên Tour'
+               name='titleTour'
+               rules={[
+                  {
+                     required: true,
+                     message: "Hãy nhập tên tour!"
+                  }
+               ]}>
+               <Input />
+            </Form.Item>
             <Form.Item
                label='Tên Tour'
                name='titleTour'

@@ -36,7 +36,7 @@ const TopBar = () => {
                            <div className='contact-form-action'>
                               <form action='#'>
                                  <div className='form-group mb-0'>
-                                    <input className='form-control' type='text' name='text' placeholder='Search' />
+                                    <input className='form-control' type='text' name='text' placeholder='Tìm kiếm' />
                                     <button className='search-btn'>
                                        <i className='la la-search' />
                                     </button>
