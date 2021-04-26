@@ -132,11 +132,11 @@ const TourTableListAdminPage = (props) => {
                         })
                      };
                   });
-                  // props.setPagination({
-                  //    page: 1,
-                  //    size: 10,
-                  //    total: tourWithImage.length
-                  // });
+                  props.setPagination({
+                     page: 1,
+                     size: 10,
+                     total: tourWithImage.length
+                  });
                   setTours(tourWithImage);
                })
                .catch((err) => {
@@ -153,10 +153,19 @@ const TourTableListAdminPage = (props) => {
    return (
       <TourTableListAdminPageStyled>
          {(currentEdit || props.isCreateTour) && (
-            <CRUDTourAdmin setCurrentEdit={setCurrentEdit} currentEdit={currentEdit} setIsCreateTour={props.setIsCreateTour}/>
+            <CRUDTourAdmin
+               setCurrentEdit={setCurrentEdit}
+               currentEdit={currentEdit}
+               setIsCreateTour={props.setIsCreateTour}
+            />
          )}
-         {(!currentEdit && !props.isCreateTour) && (
-            <Table onChange={handleChangeTable} columns={columns} dataSource={tours} scroll={{ scrollToFirstRowOnChange: true, x: 1200 }} />
+         {!currentEdit && !props.isCreateTour && (
+            <Table
+               onChange={handleChangeTable}
+               columns={columns}
+               dataSource={tours}
+               scroll={{ scrollToFirstRowOnChange: true, x: 1200 }}
+            />
          )}
       </TourTableListAdminPageStyled>
    );

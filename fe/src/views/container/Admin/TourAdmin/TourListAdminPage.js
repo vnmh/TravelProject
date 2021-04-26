@@ -26,6 +26,7 @@ const TourListAdminPage = (props) => {
                         <h3 className='title'>Danh sách tour</h3>
                         <Button
                            type='primary'
+                           className='float-right'
                            onClick={() => {
                               setIsCreateTour(true);
                            }}>
@@ -38,7 +39,12 @@ const TourListAdminPage = (props) => {
                      </div>
                      <div className='form-content'>
                         <div className='table-form table-responsive'>
-                           <TourTableListAdminPage isCreateTour={isCreateTour} setIsCreateTour={setIsCreateTour} pagination={pagination}/>
+                           <TourTableListAdminPage
+                              isCreateTour={isCreateTour}
+                              setIsCreateTour={setIsCreateTour}
+                              pagination={pagination}
+                              setPagination={setPagination}
+                           />
                         </div>
                      </div>
                   </div>
