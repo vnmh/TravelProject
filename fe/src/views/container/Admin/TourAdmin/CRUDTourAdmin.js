@@ -8,98 +8,93 @@ import * as PATH from "~/configs/routesConfig";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
-import { Form, Input, Button, Checkbox, Row } from "antd";
-
+import { Form, Input, Button, Checkbox, Row, Select, DatePicker, InputNumber, Cascader } from "antd";
+import { PROVINCES } from "~/configs/VNprovinces";
+import moment from "moment";
+import { mapAddressNotWardToOptionAntd } from "~/configs/addressVN";
+import { SERVICES } from "~/configs/servicesConfig";
+import { TYPE_TOUR } from "~/configs/const";
+const { Option } = Select;
 const CRUDTourAdminStyled = styled.div``;
 
 const layout = {
-   // labelCol: { span: 24 },
-   // wrapperCol: { span: 24 }
+   labelCol: { span: 8 },
+   wrapperCol: { span: 8 }
+};
+const tailLayout = {
+   wrapperCol: { offset: 20, span: 16 }
 };
 
 const CRUDTourAdmin = (props) => {
-   
    const onFinish = (values) => {
+      console.log("🚀 ~ file: CRUDTourAdmin.js ~ line 29 ~ onFinish ~ values", values?.services.join(","));
       //Nếu currentEdit thì gọi API update, không thì gọi API create
-      if (props.currentEdit) {
-         //Gọi API update tour
-         const bodyUpdate = { ...values, idTour: props.currentEdit?.idTour };
-         console.log("hiendev ~ file: EditTourAdmin.js ~ line 27 ~ onFinish ~ bodyUpdate", bodyUpdate);
-         props
-            .patchTour(bodyUpdate)
-            .then((res) => {
-               //Success: thì đóng form edit lại và thông báo cho người dùng
-               props.setCurrentEdit(undefined);
-            })
-            .catch((err) => {
-               console.log("hiendev ~ file: EditTourAdmin.js ~ line 30 ~ onFinish ~ err", err);
-            });
-
-         //Fail: không làm gì
-      } else {
-         //Gọi API post tour
-         const bodyCreate = {
-            titleTour: "",
-            price: 1000,
-            sale: "",
-            departureDay: "",
-            describe: "",
-            address: "",
-            vocationTime: "",
-            idAccount: "",
-            tags: "",
-            services: "",
-            views: "",
-            votes: "",
-            reuse: "",
-            type: "",
-            ...values
-         };
-         console.log("hiendev ~ file: CRUDTourAdmin.js ~ line 42 ~ onFinish ~ bodyCreate", bodyCreate);
-
-         props
-            .postTour(bodyCreate)
-            .then((res) => {
-               //Success: thì đóng form create lại và thông báo cho người dùng
-               props.setIsCreateTour(false);
-            })
-            .catch((err) => {
-               console.log("hiendev ~ file: EditTourAdmin.js ~ line 30 ~ onFinish ~ err", err);
-            });
-
-         //Fail: không làm gì
-      }
+      // if (props.currentEdit) {
+      //    //Gọi API update tour
+      //    const bodyUpdate = { ...values, idTour: props.currentEdit?.idTour };
+      //    console.log("hiendev ~ file: EditTourAdmin.js ~ line 27 ~ onFinish ~ bodyUpdate", bodyUpdate);
+      //    props
+      //       .patchTour(bodyUpdate)
+      //       .then((res) => {
+      //          //Success: thì đóng form edit lại và thông báo cho người dùng
+      //          props.setCurrentEdit(undefined);
+      //       })
+      //       .catch((err) => {
+      //          console.log("hiendev ~ file: EditTourAdmin.js ~ line 30 ~ onFinish ~ err", err);
+      //       });
+      //    //Fail: không làm gì
+      // } else {
+      //    //Gọi API post tour
+      //    const bodyCreate = {
+      //       titleTour: "",
+      //       price: 1000,
+      //       sale: "",
+      //       departureDay: "",
+      //       describe: "",
+      //       address: "",
+      //       vocationTime: "",
+      //       idAccount: "",
+      //       tags: "",
+      //       services: "",
+      //       views: "",
+      //       votes: "",
+      //       reuse: "",
+      //       type: "",
+      //       ...values
+      //    };
+      //    console.log("hiendev ~ file: CRUDTourAdmin.js ~ line 42 ~ onFinish ~ bodyCreate", bodyCreate);
+      //    props
+      //       .postTour(bodyCreate)
+      //       .then((res) => {
+      //          //Success: thì đóng form create lại và thông báo cho người dùng
+      //          props.setIsCreateTour(false);
+      //       })
+      //       .catch((err) => {
+      //          console.log("hiendev ~ file: EditTourAdmin.js ~ line 30 ~ onFinish ~ err", err);
+      //       });
+      //    //Fail: không làm gì
+      // }
    };
 
    const onFinishFailed = (errorInfo) => {
       console.log("Failed:", errorInfo);
    };
-   console.log("hiendev ~ file: EditTourAdmin.js ~ line 78 ~ CRUDTourAdmin ~ props.currentEdit", props.user);
+
    return (
       <CRUDTourAdminStyled>
          <Form
             {...layout}
             name='basic'
             initialValues={{
-               ...props.currentEdit
+               ...props.currentEdit,
+               departureDay: moment(props.currentEdit?.departureDay),
+               address: props.currentEdit?.address ? props.currentEdit?.address.split(",") : undefined,
+               services: props.currentEdit?.services ? props.currentEdit?.services.split(",") : undefined
             }}
-            name='horizontal_login'
-            layout='inline'
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}>
             <Form.Item
-               label='Tên Tour'
-               name='titleTour'
-               rules={[
-                  {
-                     required: true,
-                     message: "Hãy nhập tên tour!"
-                  }
-               ]}>
-               <Input />
-            </Form.Item>
-            <Form.Item
-               label='Tên Tour'
+               label='Tên tour'
                name='titleTour'
                rules={[
                   {
@@ -110,7 +105,81 @@ const CRUDTourAdmin = (props) => {
                <Input />
             </Form.Item>
 
-            <Form.Item>
+            <Form.Item label='Giá' name='price' rules={[{ required: true, message: "Hãy nhập tên giá tour!" }]}>
+               <InputNumber
+                  style={{ width: "100%" }}
+                  min={0}
+                  step={1000}
+                  formatter={(value) => `${value}đ`}
+                  parser={(value) => value.replace("đ", "")}
+               />
+            </Form.Item>
+            <Form.Item
+               label='Ngày khởi hành'
+               name='departureDay'
+               rules={[{ required: true, message: "Hãy nhập tên ngày khởi hành!" }]}>
+               <DatePicker
+                  format='DD/MM/YYYY'
+                  // value của thằng này là một dạng moment (from momentjs)
+               />
+            </Form.Item>
+            <Form.Item
+               label='Địa điểm khởi hành'
+               name='departureAddress'
+               rules={[{ required: true, message: "Hãy nhập tên địa điểm!" }]}>
+               <Select
+                  showSearch
+                  style={{ width: "100%" }}
+                  placeholder='Chọn địa chỉ'
+                  optionFilterProp='children'
+                  filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
+                  {PROVINCES.map((province) => {
+                     return <Option value={province}>{province}</Option>;
+                  })}
+               </Select>
+            </Form.Item>
+
+            <Form.Item label='Mô tả' name='describe' rules={[{ required: true, message: "Hãy nhập mô tả!" }]}>
+               <Input />
+            </Form.Item>
+            <Form.Item label='Địa điểm' name='address' rules={[{ required: true, message: "Hãy nhập tên địa điểm!" }]}>
+               <Cascader
+                  //
+                  // defaultValue={["zhejiang", "hangzhou"]}
+                  options={mapAddressNotWardToOptionAntd()}
+               />
+            </Form.Item>
+            <Form.Item
+               name='type'
+               label='Loại tour'
+               hasFeedback
+               rules={[
+                  {
+                     required: true,
+                     message: "Hãy chọn loại tour!"
+                  }
+               ]}>
+               <Select style={{ width: "100%" }}>
+                  {Object.keys(TYPE_TOUR).map((o) => {
+                     return <Option value={o}>{TYPE_TOUR[o]}</Option>;
+                  })}
+               </Select>
+            </Form.Item>
+            <Form.Item label='Dịch vụ' name='services' rules={[{ required: true, message: "Hãy chọn loại dịch vụ!" }]}>
+               <Select
+                  showSearch
+                  mode='multiple'
+                  style={{ width: "100%" }}
+                  placeholder='Chọn dich vụ'
+                  optionFilterProp='children'
+                  filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
+                  {SERVICES.map((service) => {
+                     return <Option value={service}>{service}</Option>;
+                  })}
+               </Select>
+            </Form.Item>
+
+            <Form.Item {...tailLayout}>
                <Button type='primary' htmlType='submit'>
                   Submit
                </Button>
