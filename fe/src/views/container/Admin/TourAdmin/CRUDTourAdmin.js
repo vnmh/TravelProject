@@ -13,6 +13,7 @@ import { PROVINCES } from "~/configs/VNprovinces";
 import moment from "moment";
 import { mapAddressNotWardToOptionAntd } from "~/configs/addressVN";
 import { SERVICES } from "~/configs/servicesConfig";
+import { TYPE_TOUR } from "~/configs/const";
 const { Option } = Select;
 const CRUDTourAdminStyled = styled.div``;
 
@@ -158,8 +159,10 @@ const CRUDTourAdmin = (props) => {
                      message: "Hãy chọn loại tour!"
                   }
                ]}>
-               <Select placeholder='Hãy chọn loại tour'>
-                  <Option value='china'>China</Option>
+               <Select style={{ width: "100%" }}>
+                  {Object.keys(TYPE_TOUR).map((o) => {
+                     return <Option value={o}>{TYPE_TOUR[o]}</Option>;
+                  })}
                </Select>
             </Form.Item>
             <Form.Item label='Dịch vụ' name='services' rules={[{ required: true, message: "Hãy chọn loại dịch vụ!" }]}>
