@@ -1,3 +1,4 @@
+const { config } = require("../config");
 const database = require("../dbconnectMySql");
 
 //Task object constructor
