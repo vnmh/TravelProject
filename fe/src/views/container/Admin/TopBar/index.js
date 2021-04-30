@@ -213,7 +213,7 @@ const TopBar = () => {
                               <div className='notification-item'>
                                  <div className='dropdown'>
                                     <a
-                                       href='#'
+                                       href='/admin-profile'
                                        className='dropdown-toggle'
                                        id='userDropdownMenu'
                                        data-toggle='dropdown'

@@ -140,7 +140,7 @@ const HeaderTop = () => {
                            <div className='nav-btn'>
                               <Button type='primary' onClick={() => setIsModalVisibleRegister(true)}>
                                  Đăng ký
-                              </Button>
+                              </Button>{" "}
                               <Button type='primary' onClick={() => setIsModalVisibleLogin(true)}>
                                  Đăng nhập
                               </Button>

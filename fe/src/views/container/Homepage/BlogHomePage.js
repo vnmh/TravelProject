@@ -2,38 +2,53 @@ import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import _ from "lodash";
 
 import { authActions } from "~/state/ducks/authUser";
+import { firstImage } from "~/views/utilities/helpers/utilObject";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
 import { CarouselProvider, Slider, Slide } from "pure-react-carousel";
-import { Tooltip, Typography } from "antd";
+import { Tooltip, Typography, Switch } from "antd";
+const { Paragraph, Text } = Typography;
 
-const CarouselProviderWrapper = styled(CarouselProvider)`
-   position: relative;
-   .arrow-left {
-      position: absolute;
-      left: -15px;
-      top: 200px;
-      outline: none;
-      border: none;
-      border-radius: 50%;
-   }
-   .arrow-right {
-      position: absolute;
-      right: -15px;
-      top: 200px;
-      outline: none;
-      border: none;
-      border-radius: 50%;
-   }
-`;
+const BlogHomePageStyled = styled(CarouselProvider)``;
 
 const BlogHomePage = (props) => {
    const [posts, setPosts] = useState([]);
+   const [ellipsis, setEllipsis] = useState(true);
+   const colors = ["blue"];
+
+   useEffect(() => {
+      props
+         .getPosts()
+         .then(({ res }) => {
+            props
+               .getAllImagesPost()
+               .then((resImg) => {
+                  // setImages(res);
+                  const postWithImage = res.map((post) => {
+                     return {
+                        ...post,
+                        images: resImg.res.filter((image) => {
+                           return post.idPost === image.idPost;
+                        })
+                     };
+                  });
+                  setPosts(postWithImage);
+               })
+               .catch((err) => {
+                  console.log("hiendev ~ file: CardItemHomePage.js ~ line 27 ~ useEffect ~ err", err);
+               });
+         })
+         .catch((err) => {
+            console.log("🚀 ~ file: BlogHomePage.js ~ line 40 ~ useEffect ~ err", err);
+         });
+   }, []);
    return (
-      <CarouselProviderWrapper
+      <BlogHomePageStyled
          naturalSlideWidth={100}
          naturalSlideHeight={160}
          totalSlides={posts.length}
@@ -44,62 +59,91 @@ const BlogHomePage = (props) => {
             {posts.map((item, index) => {
                return (
                   <Slide index={index}>
-                     <div className='card-item blog-card'>
-                        <div className='card-img'>
-                           <img src='images/img6.jpg' alt='blog-img' />
-                           <div className='post-format icon-element'>
-                              <i className='la la-play' />
-                           </div>
-                           <div className='card-body'>
-                              <div className='post-categories'>
-                                 <a href='#' className='badge'>
-                                    Video
-                                 </a>
+                     <div className='row padding-top-50px'>
+                        <div className='col-lg-12 responsive-column'>
+                           <div className='card-item blog-card'>
+                              <div className='card-img'>
+                                 <Link to='/blog-detail' className='d-block'>
+                                    <img
+                                       src={
+                                          _.get(_.head(item.images), "url")
+                                             ? firstImage(_.get(_.head(item.images), "url", ""))
+                                             : "images/destination-img7.jpg"
+                                       }
+                                       alt='Destination-img'
+                                    />
+                                 </Link>
+                                 <div className='card-body'>
+                                    <h3 className='card-title line-height-26'>
+                                       <Tooltip title={item.titlePost} color={colors}>
+                                          <Link to='/blog-detail'>
+                                             <Typography.Paragraph ellipsis={{ rows: 2 }}>
+                                                {item.titlePost}
+                                             </Typography.Paragraph>
+                                          </Link>
+                                       </Tooltip>
+                                    </h3>
+                                    <p className='card-meta'>
+                                       {/* <span className='post__date'> 1 February, 2020</span>
+                                       <span className='post-dot' />
+                                       <span className='post__time'>4 Mins read</span> */}
+                                       <Text
+                                          white
+                                          style={
+                                             ellipsis
+                                                ? {
+                                                     width: 200
+                                                  }
+                                                : undefined
+                                          }
+                                          ellipsis={
+                                             ellipsis
+                                                ? {
+                                                     tooltip: item.describe
+                                                  }
+                                                : false
+                                          }>
+                                          {item.describe}
+                                       </Text>
+                                    </p>
+                                 </div>
                               </div>
-                              <h3 className='card-title line-height-26'>
-                                 <a href='blog-single.html'>Amazing Places to Stay in Norway</a>
-                              </h3>
-                              <p className='card-meta'>
-                                 <span className='post__date'> 1 February, 2020</span>
-                                 <span className='post-dot' />
-                                 <span className='post__time'>4 Mins read</span>
-                              </p>
-                           </div>
-                        </div>
-                        <div className='card-footer d-flex align-items-center justify-content-between'>
-                           <div className='author-content d-flex align-items-center'>
-                              <div className='author-img'>
-                                 <img src='images/small-team2.jpg' alt='testimonial image' />
-                              </div>
-                              <div className='author-bio'>
-                                 <a href='#' className='author__title'>
-                                    Phillip Hunt
-                                 </a>
-                              </div>
-                           </div>
-                           <div className='post-share'>
-                              <ul>
-                                 <li>
-                                    <i className='la la-share icon-element' />
-                                    <ul className='post-share-dropdown d-flex align-items-center'>
+                              <div className='card-footer d-flex align-items-center justify-content-between'>
+                                 <div className='author-bio'>
+                                    <span className='author__meta'>Đánh giá</span>
+                                    <span className='ratings d-flex align-items-center'>
+                                       <i className='la la-star' />
+                                       <i className='la la-star' />
+                                       <i className='la la-star' />
+                                       <i className='la la-star' />
+                                       <i className='la la-star' />
+                                    </span>
+                                 </div>
+                                 <div className='post-share'>
+                                    <ul>
                                        <li>
-                                          <a href='#'>
-                                             <i className='lab la-facebook-f' />
-                                          </a>
-                                       </li>
-                                       <li>
-                                          <a href='#'>
-                                             <i className='lab la-twitter' />
-                                          </a>
-                                       </li>
-                                       <li>
-                                          <a href='#'>
-                                             <i className='lab la-instagram' />
-                                          </a>
+                                          <i className='la la-share icon-element' />
+                                          <ul className='post-share-dropdown d-flex align-items-center'>
+                                             <li>
+                                                <a href='#'>
+                                                   <i className='lab la-facebook-f' />
+                                                </a>
+                                             </li>
+                                             <li>
+                                                <a href='#'>
+                                                   <i className='lab la-twitter' />
+                                                </a>
+                                             </li>
+                                             <li>
+                                                <a href='#'>
+                                                   <i className='lab la-instagram' />
+                                                </a>
+                                             </li>
+                                          </ul>
                                        </li>
                                     </ul>
-                                 </li>
-                              </ul>
+                                 </div>
+                              </div>
                            </div>
                         </div>
                      </div>
@@ -107,8 +151,9 @@ const BlogHomePage = (props) => {
                );
             })}
          </Slider>
+
          {/* end card-item */}
-      </CarouselProviderWrapper>
+      </BlogHomePageStyled>
    );
 };
 
@@ -119,7 +164,8 @@ export default compose(
       }),
       {
          // postLogin: appApisActions.postLogin
-         getPosts: appApisActions.getPosts
+         getPosts: appApisActions.getPosts,
+         getAllImagesPost: appApisActions.getAllImagesPost
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,

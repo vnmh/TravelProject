@@ -11,6 +11,10 @@ export const deleteTour = (body) => apiAction("delete")(types.COMMON, "/tour", b
 
 //IMAGE
 export const getAllImagesTour = (params) => apiAction("get")(types.COMMON, "/imagesTour" + parseObjToQuery(params), {}, true);
+export const getAllImagesPost = (params) => apiAction("get")(types.COMMON, "/imagesPost" + parseObjToQuery(params), {}, true);
 
 //Blog
 export const getPosts = (params) => apiAction("get")(types.COMMON, "/posts" + parseObjToQuery(params), {}, true);
+export const getPost = (idTour) => apiAction("get")(types.COMMON, "/post/" + idTour, {}, true);
+
+//Evaluates

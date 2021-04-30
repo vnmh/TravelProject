@@ -12,20 +12,22 @@ import SliderHomePage from "./SliderHomePage";
 import CardItemHomePage from "./CardItemHomePage";
 import ReviewHomePage from "./ReviewHomePage";
 import BlogHomePage from "./BlogHomePage";
+import FamousPlaceHomePage from "./FamousPlaceHomePage";
+import Footer from "../Footer";
+import TitleTourHomePage from "./TitleTourHomePage";
 
 const ImpHomePageStyled = styled.div`
    height: 100vh;
-   .container-search-tour{
+   .container-search-tour {
       position: relative;
    }
-   .search-tour{
+   .search-tour {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
    }
 `;
-
 
 const ImpHomePage = (props) => {
    return (
@@ -34,11 +36,17 @@ const ImpHomePage = (props) => {
             START HERO-WRAPPER AREA
          ================================= */}
          <section className='hero-wrapper container-search-tour'>
-               <SliderHomePage />
-               <div className='search-tour'>
-               <SearchTour />
+            <SliderHomePage />
+            <div className='search-tour'>
+               <div className='container'>
+                  <div className='row'>
+                     <div className='col-lg-12'>
+                        <TitleTourHomePage />
+                        <SearchTour />
+                     </div>
+                  </div>
                </div>
-               
+            </div>
          </section>
          {/* end hero-wrapper */}
          {/* ================================
@@ -96,7 +104,7 @@ const ImpHomePage = (props) => {
                   <div className='col-lg-12'>
                      <div className='section-heading mb-0'>
                         <h2 className='sec__title curve-shape padding-bottom-30px' data-text='curvs'>
-                           Customers Testimonial
+                           Đánh giá Tour
                         </h2>
                      </div>
                      {/* end section-heading */}
@@ -105,13 +113,7 @@ const ImpHomePage = (props) => {
                </div>
                {/* end row  */}
                <div className='row padding-top-50px'>
-                  <div className='col-lg-12'>
-                     <div className='testimonial-carousel carousel-action'>
-                        <ReviewHomePage />
-                     </div>
-                     {/* end testimonial-carousel */}
-                  </div>
-                  {/* end col-lg-12 */}
+                  <ReviewHomePage />
                </div>
                {/* end row */}
             </div>
@@ -121,36 +123,260 @@ const ImpHomePage = (props) => {
          {/* ================================
             START TESTIMONIAL AREA
          ================================= */}
+         <div>
+            <div className='section-block' />
+            {/* ================================
+ START TOP ACTIVITY AREA
+================================= */}
+            <section className='top-activity-area section--padding'>
+               <div className='container'>
+                  <div className='row'>
+                     <div className='col-lg-12'>
+                        <div className='section-heading'>
+                           <h2 className='sec__title curve-shape padding-bottom-30px' data-text='curvs'>
+                              Địa danh nổi tiếng
+                           </h2>
+                        </div>
+                        {/* end section-heading */}
+                     </div>
+                     {/* end col-lg-12 */}
+                  </div>
+                  {/* end row */}
+                  <div className='row padding-top-50px'>
+                     <div className='col-lg-3 responsive-column'>
+                        <FamousPlaceHomePage />
+                     </div>
+                     {/* end col-lg-3 */}
+                     <div className='col-lg-3 responsive-column'>
+                        <div className='flip-box'>
+                           <div className='flip-box-front'>
+                              <img src='images/img3.jpg' alt='' className='flip-img' />
+                              <a href='#' className='flip-content d-flex align-items-end justify-content-start'>
+                                 <h3 className='flip-title'>Murano</h3>
+                              </a>
+                              {/* end flip-content */}
+                           </div>
+                           {/* end flip-box-front */}
+                           <div className='flip-box-back'>
+                              <img src='images/img3.jpg' alt='' className='flip-img' />
+                              <a href='#' className='flip-content d-flex align-items-center justify-content-center'>
+                                 <div>
+                                    <div className='icon-element mx-auto mb-3 bg-white text-color-2'>
+                                       <i className='la la-arrow-right' />
+                                    </div>
+                                    <h3 className='flip-title'>Explore Activity</h3>
+                                 </div>
+                              </a>
+                              {/* end flip-content */}
+                           </div>
+                           {/* end flip-box-back */}
+                        </div>
+                        {/* end flip-box */}
+                     </div>
+                     {/* end col-lg-3 */}
+                     <div className='col-lg-3 responsive-column'>
+                        <div className='flip-box'>
+                           <div className='flip-box-front'>
+                              <img src='images/img4.jpg' alt='' className='flip-img' />
+                              <a href='#' className='flip-content d-flex align-items-end justify-content-start'>
+                                 <h3 className='flip-title'>Eat + Drink</h3>
+                              </a>
+                              {/* end flip-content */}
+                           </div>
+                           {/* end flip-box-front */}
+                           <div className='flip-box-back'>
+                              <img src='images/img4.jpg' alt='' className='flip-img' />
+                              <a href='#' className='flip-content d-flex align-items-center justify-content-center'>
+                                 <div>
+                                    <div className='icon-element mx-auto mb-3 bg-white text-color-2'>
+                                       <i className='la la-arrow-right' />
+                                    </div>
+                                    <h3 className='flip-title'>Explore Activity</h3>
+                                 </div>
+                              </a>
+                              {/* end flip-content */}
+                           </div>
+                           {/* end flip-box-back */}
+                        </div>
+                        {/* end flip-box */}
+                     </div>
+                     {/* end col-lg-3 */}
+                     <div className='col-lg-3 responsive-column'>
+                        <div className='flip-box'>
+                           <div className='flip-box-front'>
+                              <img src='images/img5.jpg' alt='' className='flip-img' />
+                              <a href='#' className='flip-content d-flex align-items-end justify-content-start'>
+                                 <h3 className='flip-title'>Gondola Ride</h3>
+                              </a>
+                              {/* end flip-content */}
+                           </div>
+                           {/* end flip-box-front */}
+                           <div className='flip-box-back'>
+                              <img src='images/img5.jpg' alt='' className='flip-img' />
+                              <a href='#' className='flip-content d-flex align-items-center justify-content-center'>
+                                 <div>
+                                    <div className='icon-element mx-auto mb-3 bg-white text-color-2'>
+                                       <i className='la la-arrow-right' />
+                                    </div>
+                                    <h3 className='flip-title'>Explore Activity</h3>
+                                 </div>
+                              </a>
+                              {/* end flip-content */}
+                           </div>
+                           {/* end flip-box-back */}
+                        </div>
+                        {/* end flip-box */}
+                     </div>
+                     {/* end col-lg-3 */}
+                     <div className='col-lg-3 responsive-column'>
+                        <div className='flip-box'>
+                           <div className='flip-box-front'>
+                              <img src='images/img6.jpg' alt='' className='flip-img' />
+                              <a href='#' className='flip-content d-flex align-items-end justify-content-start'>
+                                 <h3 className='flip-title'>Museum Tickets</h3>
+                              </a>
+                              {/* end flip-content */}
+                           </div>
+                           {/* end flip-box-front */}
+                           <div className='flip-box-back'>
+                              <img src='images/img6.jpg' alt='' className='flip-img' />
+                              <a href='#' className='flip-content d-flex align-items-center justify-content-center'>
+                                 <div>
+                                    <div className='icon-element mx-auto mb-3 bg-white text-color-2'>
+                                       <i className='la la-arrow-right' />
+                                    </div>
+                                    <h3 className='flip-title'>Explore Activity</h3>
+                                 </div>
+                              </a>
+                              {/* end flip-content */}
+                           </div>
+                           {/* end flip-box-back */}
+                        </div>
+                        {/* end flip-box */}
+                     </div>
+                     {/* end col-lg-3 */}
+                     <div className='col-lg-3 responsive-column'>
+                        <div className='flip-box'>
+                           <div className='flip-box-front'>
+                              <img src='images/img7.jpg' alt='' className='flip-img' />
+                              <a href='#' className='flip-content d-flex align-items-end justify-content-start'>
+                                 <h3 className='flip-title'>Sightseeing</h3>
+                              </a>
+                              {/* end flip-content */}
+                           </div>
+                           {/* end flip-box-front */}
+                           <div className='flip-box-back'>
+                              <img src='images/img7.jpg' alt='' className='flip-img' />
+                              <a href='#' className='flip-content d-flex align-items-center justify-content-center'>
+                                 <div>
+                                    <div className='icon-element mx-auto mb-3 bg-white text-color-2'>
+                                       <i className='la la-arrow-right' />
+                                    </div>
+                                    <h3 className='flip-title'>Explore Activity</h3>
+                                 </div>
+                              </a>
+                              {/* end flip-content */}
+                           </div>
+                           {/* end flip-box-back */}
+                        </div>
+                        {/* end flip-box */}
+                     </div>
+                     {/* end col-lg-3 */}
+                     <div className='col-lg-3 responsive-column'>
+                        <div className='flip-box'>
+                           <div className='flip-box-front'>
+                              <img src='images/img8.jpg' alt='' className='flip-img' />
+                              <a href='#' className='flip-content d-flex align-items-end justify-content-start'>
+                                 <h3 className='flip-title'>Outdoor Activities</h3>
+                              </a>
+                              {/* end flip-content */}
+                           </div>
+                           {/* end flip-box-front */}
+                           <div className='flip-box-back'>
+                              <img src='images/img8.jpg' alt='' className='flip-img' />
+                              <a href='#' className='flip-content d-flex align-items-center justify-content-center'>
+                                 <div>
+                                    <div className='icon-element mx-auto mb-3 bg-white text-color-2'>
+                                       <i className='la la-arrow-right' />
+                                    </div>
+                                    <h3 className='flip-title'>Explore Activity</h3>
+                                 </div>
+                              </a>
+                              {/* end flip-content */}
+                           </div>
+                           {/* end flip-box-back */}
+                        </div>
+                        {/* end flip-box */}
+                     </div>
+                     {/* end col-lg-3 */}
+                  </div>
+                  {/* end row */}
+               </div>
+               {/* end container */}
+            </section>
+            {/* end top-activity-area */}
+            {/* ================================
+ START TOP ACTIVITY AREA
+================================= */}
+         </div>
 
          {/* ================================
-            START BLOG AREA
-         ================================= */}
-         <section className='blog-area section--padding'>
+    START CTA AREA
+================================= */}
+         <section className='cta-area cta-bg bg-fixed section-padding'>
             <div className='container'>
                <div className='row'>
                   <div className='col-lg-12'>
                      <div className='section-heading'>
-                        <h2 className='sec__title curve-shape padding-bottom-30px' data-text='curvs'>
-                           Blog
+                        <h2 className='sec__title text-white font-size-50 line-height-60'>
+                           Tận hưởng kỳ nghỉ <br /> của bạn với giảm giá 50%
                         </h2>
+                        <p className='sec__desc text-white pt-3'>
+                           Nemo enim ipsam voluptatem quia voluptas sit aspernatur
+                        </p>
                      </div>
                      {/* end section-heading */}
+                     <div className='btn-box padding-top-35px'>
+                        <a href='#' className='theme-btn border-0'>
+                           Explore Now <i className='la la-arrow-right ml-1' />
+                        </a>
+                     </div>
                   </div>
                   {/* end col-lg-12 */}
-               </div>
-               {/* end row */}
-               <div className='row padding-top-50px'>
-                  {/* end col-lg-4 */}
-                  <div className='col-lg-4 responsive-column'>
-                     <BlogHomePage />
-                  </div>
-                  {/* end col-lg-4 */}
                </div>
                {/* end row */}
             </div>
             {/* end container */}
          </section>
+         {/* end cta-area */}
+         {/* ================================
+    END CTA AREA
+================================= */}
+
+         {/* ================================
+            START BLOG AREA
+         ================================= */}
+         <section className='blog-area section--padding'>
+            <div class='container'>
+               {/* end row */}
+               {/* end col-lg-4 */}
+               <div className='row'>
+                  <div className='col-lg-12'>
+                     <div className='section-heading'>
+                        <h2 className='sec__title curve-shape padding-bottom-30px' data-text='curvs'>
+                           Cẩm nang du lịch
+                        </h2>
+                     </div>
+                  </div>
+               </div>
+               <BlogHomePage />
+               {/* end col-lg-4 */}
+               {/* end row */}
+            </div>
+         </section>
+         {/* end container */}
          {/* end blog-area */}
+         <Footer />
       </ImpHomePageStyled>
    );
 };
