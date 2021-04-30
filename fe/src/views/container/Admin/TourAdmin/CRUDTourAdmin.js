@@ -17,6 +17,8 @@ import { TYPE_TOUR } from "~/configs/const";
 const { Option } = Select;
 const CRUDTourAdminStyled = styled.div``;
 
+const { TextArea } = Input;
+
 const layout = {
    labelCol: { span: 8 },
    wrapperCol: { span: 8 }
@@ -140,7 +142,7 @@ const CRUDTourAdmin = (props) => {
             </Form.Item>
 
             <Form.Item label='Mô tả' name='describe' rules={[{ required: true, message: "Hãy nhập mô tả!" }]}>
-               <Input />
+               <TextArea rows={4} />
             </Form.Item>
             <Form.Item label='Địa điểm' name='address' rules={[{ required: true, message: "Hãy nhập tên địa điểm!" }]}>
                <Cascader

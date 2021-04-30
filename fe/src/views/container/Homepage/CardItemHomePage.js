@@ -6,13 +6,15 @@ import { Link } from "react-router-dom";
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { currencyFormat } from "~/views/utilities/helpers/currency";
-import _ from "lodash";
+import _, { values } from "lodash";
 import { appApisActions } from "~/state/ducks/appApis";
+import * as PATH from "~/configs/routesConfig";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { Tooltip, Typography } from "antd";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
 import { LeftCircleOutlined, RightCircleOutlined } from "@ant-design/icons";
+import { parseObjToQuery } from "~/views/utilities/helpers";
 
 const CarouselProviderWrapper = styled(CarouselProvider)`
    position: relative;
@@ -36,7 +38,12 @@ const CarouselProviderWrapper = styled(CarouselProvider)`
 
 const CardItemHomePage = (props) => {
    const [tours, setTours] = useState([]);
-   const [images, setImages] = useState([]);
+   const onFinish = (values) => {
+      const params = {
+         titleTour: values.titleTour
+      }
+      props.history.push(PATH.TOUR_DETAIL + parseObjToQuery(params))
+   }
 
    useEffect(() => {
       props
@@ -64,6 +71,7 @@ const CardItemHomePage = (props) => {
             console.log("hiendev ~ file: CardItemHomePage.js ~ line 27 ~ useEffect ~ err", err);
          });
    }, []);
+   
 
    return (
       <CarouselProviderWrapper
@@ -71,14 +79,14 @@ const CardItemHomePage = (props) => {
          naturalSlideHeight={160}
          totalSlides={tours.length}
          visibleSlides={3}
-         step={3}>
+         step={3} >
          <Slider>
             {tours.map((item, index) => {
                return (
-                  <Slide index={index}>
+                  <Slide>
                      <div className='card-item trending-card mb-0 mr-2'>
                         <div className='card-img'>
-                           <Link to='/tour-detail' className='d-block'>
+                           <Link to={onFinish} className='d-block'>
                               <img
                                  src={
                                     _.get(_.head(item.images), "url")
@@ -91,7 +99,7 @@ const CardItemHomePage = (props) => {
                            <span className='badge'>Bestseller</span>
                         </div>
                         <div className='card-body'>
-                           <h3 className='card-title mb-0'>
+                           <h3 className='card-title'>
                               <Tooltip title={item.titleTour}>
                                  <Link to='/tour-detail'>
                                     <Typography.Paragraph className='text_link' ellipsis={{ rows: 2 }}>
