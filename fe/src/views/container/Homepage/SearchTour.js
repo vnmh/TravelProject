@@ -36,73 +36,55 @@ const SearchTour = (props) => {
          to,
          price: values.price
       };
-      
+
       //sau đó chuyển sang trang danh sách tour
-      props.history.push(PATH.TOUR_LIST + parseObjToQuery(params))
+      props.history.push(PATH.TOUR_LIST + parseObjToQuery(params));
    };
 
    return (
-      <div className='container'>
-         <div className='row'>
-            <div className='col-lg-12'>
-               <div className='hero-content pb-5 text-center'>
-                  <div className='section-heading'>
-                     <h2 className='sec__title font-size-50 pb-3 pt-5'>Du lịch theo phong cách riêng</h2>
-                     <p className='sec__desc font-size-25 font-weight-medium'>Trải nghiệm trọn vẹn - Giá cả phải chăng</p>
-                  </div>
+      <div className='search-fields-container'>
+         <div className='contact-form-action'>
+            <Form name='basic' className='row' {...layout} onFinish={onFinish}>
+               <div className='col-lg-4'>
+                  <Form.Item
+                     name='destination'
+                     className='input-box'
+                     label={<label className='label-text'>Điểm đến</label>}>
+                     <Input size='large' type='text' placeholder='Bạn muốn đi đâu?' width='100%' />
+                  </Form.Item>
                </div>
-               {/* end hero-content */}
-               <div className='search-fields-container'>
-                  <div className='contact-form-action'>
-                     <Form name='basic' className='row' {...layout} onFinish={onFinish}>
-                        <div className='col-lg-4'>
-                           <Form.Item
-                              name='destination'
-                              className='input-box'
-                              label={<label className='label-text'>Điểm đến</label>}>
-                              <Input size='large' type='text' placeholder='Bạn muốn đi đâu?' width='100%' />
-                           </Form.Item>
-                        </div>
-                        {/* end col-lg-4 */}
-                        <div className='col-lg-4'>
-                           <Form.Item
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "Vui lòng chọn thời gian!"
-                                 }
-                              ]}
-                              name='days'
-                              className='input-box'
-                              label={<label className='label-text'>Thời gian</label>}>
-                              <RangePicker size='large' style={{ width: "100%" }} />
-                           </Form.Item>
-                        </div>
+               {/* end col-lg-4 */}
+               <div className='col-lg-4'>
+                  <Form.Item
+                     rules={[
+                        {
+                           required: true,
+                           message: "Vui lòng chọn thời gian!"
+                        }
+                     ]}
+                     name='days'
+                     className='input-box'
+                     label={<label className='label-text'>Thời gian</label>}>
+                     <RangePicker size='large' style={{ width: "100%" }} />
+                  </Form.Item>
+               </div>
 
-                        {/* end col-lg-4 */}
-                        <div className='col-lg-4'>
-                           <Form.Item
-                              name='price'
-                              className='input-box'
-                              label={<label className='label-text'>Giá</label>}>
-                              <Select size='large' placeholder='Search to Select' style={{ width: "100%" }}>
-                                 <Option value={1000000}>0 - 1000000</Option>
-                              </Select>
-                           </Form.Item>
-                        </div>
-                        {/* end col-lg-3 */}
-                        <div className='d-flex justify-content-end w-100 col-12'>
-                           <Button type='primary' size='large' className='btn-box pt-2' htmlType='submit'>
-                              Tìm kiếm
-                           </Button>
-                        </div>
-                     </Form>
-                  </div>
+               {/* end col-lg-4 */}
+               <div className='col-lg-4'>
+                  <Form.Item name='price' className='input-box' label={<label className='label-text'>Giá</label>}>
+                     <Select size='large' placeholder='Chọn giá' style={{ width: "100%" }}>
+                        <Option value={1000000}>0 - 1000000</Option>
+                     </Select>
+                  </Form.Item>
                </div>
-            </div>
-            {/* end col-lg-12 */}
+               {/* end col-lg-3 */}
+               <div className='d-flex justify-content-end w-100 col-12'>
+                  <Button type='primary' size='large' className='btn-box pt-2' htmlType='submit'>
+                     Tìm kiếm
+                  </Button>
+               </div>
+            </Form>
          </div>
-         {/* end row */}
       </div>
    );
 };

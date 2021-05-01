@@ -64,7 +64,7 @@ const SideBar = () => {
                         </span>
                         <Link to='/admin-tour-list'>
                            <i className='la la-list mr-2 text-color-4' />
-                           Tour
+                           Danh sách Tour
                         </Link>
                         <ul className='toggle-drop-menu'>
                            <li>
@@ -75,7 +75,7 @@ const SideBar = () => {
                      <li>
                         <Link to='admin-dashboard-reviews.html'>
                            <i className='la la-star mr-2 text-color-6' />
-                           Reviews
+                           Đánh giá
                         </Link>
                      </li>
                      <li>
@@ -85,9 +85,9 @@ const SideBar = () => {
                         </Link>
                      </li>
                      <li>
-                        <Link to='admin-dashboard-travel-agents.html'>
+                        <Link to='/admin-blog'>
                            <i className='la la-text-width mr-2' />
-                           Travel Agents
+                           Bài viết
                         </Link>
                      </li>
                      <li>
@@ -99,7 +99,7 @@ const SideBar = () => {
                      <li>
                         <Link to='index.html'>
                            <i className='la la-power-off mr-2 text-color-11' />
-                           Logout
+                           Đăng xuất
                         </Link>
                      </li>
                   </ul>

@@ -10,11 +10,11 @@ import { Table, Tag, Space, Button, Image } from "antd";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
-import CRUDTourAdmin from "./CRUDTourAdmin";
+import CRUDBlogAdmin from "./CRUDBlogAdmin";
 
-const TourTableListAdminPageStyled = styled.div``;
+const BlogTableListAdminPageStyled = styled.div``;
 
-const TourTableListAdminPage = (props) => {
+const BlogTableListAdminPage = (props) => {
    const columns = [
       {
          title: "Hình ảnh",
@@ -50,33 +50,9 @@ const TourTableListAdminPage = (props) => {
          }
       },
       {
-         title: "Tên Tour",
-         dataIndex: "titleTour",
-         key: "titleTour",
-         ellipsis: true
-      },
-      {
-         title: "Địa chỉ khởi hành",
-         dataIndex: "departureAddress",
-         key: "departureAddress",
-         ellipsis: true
-      },
-      {
-         title: "Ngày khởi hành",
-         dataIndex: "departureDay",
-         key: "departureDay",
-         ellipsis: true
-      },
-      {
-         title: "Giá",
-         dataIndex: "price",
-         key: "price",
-         ellipsis: true
-      },
-      {
-         title: "Địa chỉ",
-         dataIndex: "address",
-         key: "address",
+         title: "Tiêu đề",
+         dataIndex: "titlePost",
+         key: "titlePost",
          ellipsis: true
       },
       {
@@ -116,28 +92,28 @@ const TourTableListAdminPage = (props) => {
       });
    };
 
-   const [tours, setTours] = useState([]);
+   const [posts, setPosts] = useState([]);
    useEffect(() => {
       props
-         .getTours()
+         .getPosts()
          .then(({ res }) => {
             props
-               .getAllImagesTour()
+               .getAllImagesPost()
                .then((resImg) => {
-                  const tourWithImage = res.map((tour) => {
+                  const postWithImage = res.map((post) => {
                      return {
-                        ...tour,
+                        ...post,
                         images: resImg.res.filter((image) => {
-                           return tour.idTour === image.idTour;
+                           return post.idPost === image.idPost;
                         })
                      };
                   });
                   props.setPagination({
                      page: 1,
                      size: 10,
-                     total: tourWithImage.length
+                     total: postWithImage.length
                   });
-                  setTours(tourWithImage);
+                  setPosts(postWithImage);
                })
                .catch((err) => {
                   console.log("hiendev ~ file: CardItemListTour.js ~ line 34 ~ .then ~ err", err);
@@ -151,23 +127,23 @@ const TourTableListAdminPage = (props) => {
    const [currentEdit, setCurrentEdit] = useState();
 
    return (
-      <TourTableListAdminPageStyled>
-         {(currentEdit || props.isCreateTour) && (
-            <CRUDTourAdmin
+      <BlogTableListAdminPageStyled>
+         {(currentEdit || props.isCreatePost) && (
+            <CRUDBlogAdmin
                setCurrentEdit={setCurrentEdit}
                currentEdit={currentEdit}
-               setIsCreateTour={props.setIsCreateTour}
+               setIsCreatePost={props.setIsCreatePost}
             />
          )}
-         {!currentEdit && !props.isCreateTour && (
+         {!currentEdit && !props.isCreatePost && (
             <Table
                onChange={handleChangeTable}
                columns={columns}
-               dataSource={tours}
+               dataSource={posts}
                scroll={{ scrollToFirstRowOnChange: true, x: 1200 }}
             />
          )}
-      </TourTableListAdminPageStyled>
+      </BlogTableListAdminPageStyled>
    );
 };
 
@@ -176,13 +152,13 @@ export default compose(
       (state) => ({
          user: state["authUser"].user,
          isAuthenticated: state["authUser"].isAuthenticated
-         // có thể check user?.role === ROLE.administrator && isAuthenticated => TourTableListAdminPage admin , không thì redirect tới homepage
+         // có thể check user?.role === ROLE.administrator && isAuthenticated => BlogTableListAdminPage admin , không thì redirect tới homepage
       }),
       {
          // postLogin: appApisActions.postLogin
-         getTours: appApisActions.getTours,
-         getAllImagesTour: appApisActions.getAllImagesTour
+         getPosts: appApisActions.getPosts,
+         getAllImagesPost: appApisActions.getAllImagesPost
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,
-)(TourTableListAdminPage);
+)(BlogTableListAdminPage);
