@@ -8,7 +8,6 @@ export const REGISTER_PATH = "/register";
 export const REGISTER_COMPLETED_PATH = "/register/completed";
 export const SETUP_PROFILE_PATH = "/setup-profile";
 
-
 // export const HOME_PAGE = "/homepage";
 export const HOME_PAGE = "/homepage";
 export const APP_DEFAULT_PATH = HOME_PAGE;
@@ -27,11 +26,18 @@ export const TOUR_BOOKING = "/tour-booking";
 export const PAYMENT_RECEIVED = "/payment-received";
 
 /**
+ * Blog
+ */
+export const BLOG_GRID = "/blog-grid";
+export const BLOG_DETAIL = "/blog-detail";
+
+/**
  * Admin
  */
 
- export const ADMIN_DASHBOARD = "/admin-dashboard";
- export const ADMIN_BOOKING = "/admin-booking";
- export const ADMIN_TOUR_LIST = "/admin-tour-list";
- export const ADMIN_REVIEW = "/admin-review";
- export const ADMIN_PROFILE = "/admin-profile";
+export const ADMIN_DASHBOARD = "/admin-dashboard";
+export const ADMIN_BOOKING = "/admin-booking";
+export const ADMIN_TOUR_LIST = "/admin-tour-list";
+export const ADMIN_REVIEW = "/admin-review";
+export const ADMIN_PROFILE = "/admin-profile";
+export const ADMIN_BLOG = "/admin-blog";

@@ -18,10 +18,11 @@ import InfoTour from "../InfoTour";
 const ImpTourListStyled = styled.div``;
 
 function ImpTourList(props) {
-   const [sortType, setSortType] = useState()
-   const [searchTour, setSearchTour] = useState()
-   const [timeSubmit, setTimeSubmit] = useState()
-   
+   const [sortType, setSortType] = useState();
+   const [searchTour, setSearchTour] = useState();
+   const [timeSubmit, setTimeSubmit] = useState();
+   const [pagination, setPagination] = useState({ page: 1, size: 0, total: 0 });
+
    return (
       <ImpTourListStyled>
          {/* ================================
@@ -33,7 +34,7 @@ function ImpTourList(props) {
                   <div className='col-lg-12'>
                      <div className='filter-wrap margin-bottom-30px'>
                         <FilterTopTour />
-                        <FilterOptionTour setSortType={setSortType}/>
+                        <FilterOptionTour setSortType={setSortType} />
                      </div>
                      {/* end filter-wrap */}
                   </div>
@@ -44,7 +45,7 @@ function ImpTourList(props) {
                <div className='row'>
                   <div className='col-lg-4'>
                      <div className='sidebar mt-0'>
-                        <SearchListTour setSearchTour={setSearchTour} setTimeSubmit={setTimeSubmit}/>
+                        <SearchListTour setSearchTour={setSearchTour} setTimeSubmit={setTimeSubmit} />
                         <hr></hr>
                         <FilterByPrice />
                         <hr></hr>
@@ -61,7 +62,13 @@ function ImpTourList(props) {
                   </div>
                   {/* end col-lg-4 */}
                   <div className='col-lg-8'>
-                     <CardItemListTour sortType={sortType} searchTour={searchTour} timeSubmit={timeSubmit}/>
+                     <CardItemListTour
+                        sortType={sortType}
+                        searchTour={searchTour}
+                        timeSubmit={timeSubmit}
+                        pagination={pagination}
+                        setPagination={setPagination}
+                     />
                   </div>
                   {/* end col-lg-8 */}
                </div>
@@ -74,7 +81,10 @@ function ImpTourList(props) {
                            <i className='la la-refresh mr-1' />
                            Load More
                         </button>
-                        <p className='font-size-13 pt-2'>Showing 1 - 8 of 2292 Tours</p>
+                        <p className='font-size-13 pt-2'>
+                           Showing {pagination.page} to {Math.ceil(pagination.total / pagination.size)} of{" "}
+                           {pagination.total} entries
+                        </p>
                      </div>
                      {/* end btn-box */}
                   </div>

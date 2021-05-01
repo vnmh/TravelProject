@@ -1,45 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
-import { compose, lifecycle } from "recompose";
+import { compose } from "recompose";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import _ from "lodash";
-import { appApisActions } from "~/state/ducks/appApis";
 
+import { DatePicker } from "antd";
 import { authActions } from "~/state/ducks/authUser";
-import { Carousel } from "antd";
+import { appApisActions } from "~/state/ducks/appApis";
 import { Tooltip, Typography } from "antd";
-import { firstImage } from "~/views/utilities/helpers/utilObject";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import SearchTour from "./SearchTour";
 
-const SliderHomePageStyled = styled.div`
-   position: relative;
-   img {
-      object-fit: cover;
-      max-width: 100%;
-      mask-height: 450px !important;
-   }
-   .mask {
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-color: rgb(170, 170, 170, 0.5);
-      width: 100%;
-      height: 450px;
-   }
-`;
-const contentStyle = {
-   height: "160px",
-   // width: '100px',
-   color: "#fff",
-   lineHeight: "160px",
-   textAlign: "center",
-   background: "#364d79"
-};
+const TitleTourHomePageStyled = styled.div``;
 
-const SliderHomePage = (props) => {
+const TitleTourHomePage = (props) => {
    const [tours, setTours] = useState([]);
 
    useEffect(() => {
@@ -69,24 +44,30 @@ const SliderHomePage = (props) => {
          });
    }, []);
    return (
-      <SliderHomePageStyled>
-         <Carousel id='fullscreen-slide-contain'>
-            {tours.map((item, index) => {
-               return (
-                  <img
-                     src={
-                        _.get(_.head(item.images), "url")
-                           ? firstImage(_.get(_.head(item.images), "url", ""))
-                           : "images/destination-img7.jpg"
-                     }
-                     alt='Destination-img'
-                  />
-               );
-            })}
-         </Carousel>
-
-         {/* <div className='mask'></div> */}
-      </SliderHomePageStyled>
+      <TitleTourHomePageStyled>
+         {/* {tours.map((item, index) => {
+            return ( */}
+               <div className='hero-content pb-5 text-center'>
+                  <div className='section-heading'>
+                     <h2 className='sec__title font-size-50 pb-3 pt-5'>
+                        {" "}
+                        {/* <Tooltip title={item.titleTour}>
+                           <Link to='/tour-detail'>
+                              <Typography.Paragraph className='text_link' ellipsis={{ rows: 2 }}>
+                                 {item.titleTour}
+                              </Typography.Paragraph>
+                           </Link>
+                        </Tooltip> */}
+                     </h2>
+                     <p className='sec__desc font-size-25 font-weight-medium'>
+                        Trải nghiệm trọn vẹn - Giá cả phải chăng
+                     </p>
+                  </div>
+               </div>
+            {/* );
+         })}
+         ; */}
+      </TitleTourHomePageStyled>
    );
 };
 
@@ -102,5 +83,5 @@ export default compose(
          getAllImagesTour: appApisActions.getAllImagesTour
       }
    ),
-   withRouter //để push(nhảy qua trang khác) là chủ yếu,
-)(SliderHomePage);
+   withRouter //để push(nhảy qua trang khác) là chủ yếu
+)(TitleTourHomePage);

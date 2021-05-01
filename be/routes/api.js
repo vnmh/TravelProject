@@ -118,7 +118,7 @@ router.post('/evaluate', authenticated, evaluate.create);
 router.put('/evaluate', authenticated, evaluate.update);
 router.delete('/evaluate', authenticated, evaluate.delete);
 
-//for post
+// //for post
 router.get('/post', post.read);
 router.get('/posts', post.listAll);
 router.post('/posts/search', post.listPostSearch);

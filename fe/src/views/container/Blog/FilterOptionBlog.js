@@ -8,19 +8,19 @@ import { Select } from "antd";
 
 const { Option } = Select;
 
-const FilterOptionBlogStyled = styled.div``;
+const FilterOptionTourStyled = styled.div``;
 
-function FilterOptionBlog(props) {
+function FilterOptionTour(props) {
    const handleChange = (value) => {
       props.setSortType(value);
       console.log(`selected ${value}`);
    };
    return (
-      <FilterOptionBlogStyled>
+      <FilterOptionTourStyled>
          <div className='filter-bar d-flex align-items-center justify-content-between'>
             <div className='filter-bar-filter d-flex flex-wrap align-items-center'>
                <div className='filter-option'>
-                  <h3 className='title font-size-16'>Lọc theo:</h3>
+                  <h3 className='title font-size-16'>Filter by:</h3>
                </div>
                <div className='filter-option'>
                   <div className='dropdown dropdown-contain'>
@@ -29,7 +29,7 @@ function FilterOptionBlog(props) {
                         href='#'
                         role='button'
                         data-toggle='dropdown'>
-                        Bài viết mới nhất
+                        Filter Price
                      </a>
                      <div className='dropdown-menu dropdown-menu-wrap'>
                         <div className='dropdown-item'>
@@ -192,7 +192,7 @@ function FilterOptionBlog(props) {
                </div>
             </div>
             {/* end filter-bar-filter */}
-            <div className='select-contain'>
+            {/* <div className='select-contain'>
                <Select defaultValue='Mặc định' style={{ width: 200 }} onChange={handleChange}>
                   <Option value='filter-default'>Mặc định</Option>
                   <Option value='new-tour'>Tour mới</Option>
@@ -200,11 +200,11 @@ function FilterOptionBlog(props) {
                   <Option value='price-high-to-low'>Giá: cao đến thấp</Option>
                   <Option value='a-to-z'>A đến Z</Option>
                </Select>
-            </div>
+            </div> */}
             {/* end select-contain */}
          </div>
          {/* end filter-bar */}
-      </FilterOptionBlogStyled>
+      </FilterOptionTourStyled>
    );
 }
 
@@ -215,4 +215,4 @@ export default connect(
    {
       getTours: appApisActions.getTours
    }
-)(FilterOptionBlog);
+)(FilterOptionTour);

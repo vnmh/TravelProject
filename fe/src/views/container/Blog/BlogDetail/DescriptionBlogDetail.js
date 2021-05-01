@@ -1,68 +1,62 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import TourList from "../TourList";
+import { Tooltip, Typography } from "antd";
 
-const DescriptionTourDetailStyled = styled.div``;
+const DescriptionBlogDetailStyled = styled.div``;
 
-const DescriptionTourDetail = (props) => {
-   const [tours, setTours] = useState([]);
-   const [toursDefault, setToursDefault] = useState([]);
+const DescriptionBlogDetail = (props) => {
+   const [posts, setPosts] = useState([]);
 
    useEffect(() => {
       props
-         .getTours()
+         .getPosts()
          .then(({ res }) => {
             props
-               .getAllImagesTour()
+               .getAllImagesPost()
                .then((resImg) => {
-                  const tourWithImage = res.map((tour) => {
+                  // setImages(res);
+                  const postWithImage = res.map((post) => {
                      return {
-                        ...tour,
-                        // images: resImg.res.filter((image) => {
-                        //    return tour.idTour === image.idTour;
-                        // })
+                        ...post,
+                        images: resImg.res.filter((image) => {
+                           return post.idPost === image.idPost;
+                        })
                      };
                   });
-                  setTours(tourWithImage);
-                  setToursDefault(tourWithImage);
+                  setPosts(postWithImage);
                })
                .catch((err) => {
-                  console.log("hiendev ~ file: CardItemListTour.js ~ line 34 ~ .then ~ err", err);
+                  console.log("hiendev ~ file: CardItemHomePage.js ~ line 27 ~ useEffect ~ err", err);
                });
          })
          .catch((err) => {
-            console.log("hiendev ~ file: CardItemListTour.js ~ line 24 ~ useEffect ~ err", err);
+            console.log("🚀 ~ file: BlogHomePage.js ~ line 40 ~ useEffect ~ err", err);
          });
    }, []);
-
-   useEffect(() => {
-      let toursTemp = Array.from(toursDefault);
-      if (props.tourDetail?.titleTour) {
-         toursTemp = toursTemp.filter((o) => {
-            return o.titleTour === props.tourDetail.titleTour;
-         });
-      }
-      setTours(toursTemp); //tours
-   }, [props.timeSubmit]);
-
    return (
-      <DescriptionTourDetailStyled>
-         {tours.map((item, index) => {
+      <DescriptionBlogDetailStyled>
+         {posts.map((item, index) => {
             return (
-               <div>
-                  <h3 className='title font-size-20' name='titleTour'>
-                     {item.titleTour}
+               <div key={index}>
+                  <h3 className='title font-size-20'>
+                     {" "}
+                     <Tooltip title={item.titlePost}>
+                        <Link to='/tour-detail'>
+                           <Typography.Paragraph className='text-link' ellipsis={{ rows: 2 }}>
+                              {item.titlePost}
+                           </Typography.Paragraph>
+                        </Link>
+                     </Tooltip>
                   </h3>
                   <p className='py-3'>
-                     Per consequat adolescens ex, cu nibh commune temporibus vim, ad sumo viris eloquentiam sed. Mea
-                     appareat omittantur eloquentiam ad, nam ei quas oportere democritum. Prima causae admodum id est,
-                     ei timeam inimicus sed. Sit an meis aliquam, cetero inermis vel ut. An sit illum euismod facilisis,
-                     tamquam vulputate pertinacia eum at.
+                     {item.describe}
                   </p>
+                  
                   <h3 className='title font-size-15 font-weight-medium pb-3'>Highlights</h3>
                   <div className='row'>
                      <div className='col-lg-6 responsive-column'>
@@ -151,11 +145,11 @@ const DescriptionTourDetail = (props) => {
                         </ul>
                      </div>
                   </div>
-                  {/* end row */}
                </div>
             );
          })}
-      </DescriptionTourDetailStyled>
+         {/* end row */}
+      </DescriptionBlogDetailStyled>
    );
 };
 
@@ -164,7 +158,7 @@ export default connect(
       user: state["authUser"].user
    }),
    {
-      getTours: appApisActions.getTours,
-      getAllImagesTour: appApisActions.getAllImagesTour
+      getPosts: appApisActions.getPosts,
+      getAllImagesPost: appApisActions.getAllImagesPost
    }
-)(DescriptionTourDetail);
+)(DescriptionBlogDetail);

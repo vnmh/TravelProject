@@ -14,7 +14,13 @@ const CardItemListTourStyled = styled.div``;
 const CardItemListTour = (props) => {
    const [tours, setTours] = useState([]);
    const [toursDefault, setToursDefault] = useState([]);
-   const [images, setImages] = useState([]);
+   const handleChangeTable = (pagination, filters, sorter, extra) => {
+      props.setPagination({
+         ...props.pagination,
+         page: pagination?.current,
+         size: pagination?.pageSize
+      });
+   };
 
    useEffect(() => {
       props
@@ -30,6 +36,11 @@ const CardItemListTour = (props) => {
                            return tour.idTour === image.idTour;
                         })
                      };
+                  });
+                  props.setPagination({
+                     page: 1,
+                     size: 10,
+                     total: tourWithImage.length
                   });
                   setTours(tourWithImage);
                   setToursDefault(tourWithImage);
@@ -103,7 +114,7 @@ const CardItemListTour = (props) => {
       <CardItemListTourStyled>
          {tours.map((item, index) => {
             return (
-               <div className='card-item card-item-list '>
+               <div className='card-item card-item-list'>
                   <div className='card-img'>
                      <Link to='/tour-detail' className='d-block'>
                         <img
