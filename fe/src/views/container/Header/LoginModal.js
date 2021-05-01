@@ -50,7 +50,6 @@ const LoginModal = (props) => {
                   props.history.push(PATH.ADMIN_DASHBOARD);
                }
                // user => (no redirect)
-             
             }
             props.onCancel();
          })
