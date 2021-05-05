@@ -50,15 +50,18 @@ router.get('/tour', tour.read);
 router.get('/tours', tour.listAll);
 router.post('/tours/search', tour.listTourSearch);
 router.post('/tour', authenticated, tour.create); //sẽ tạo luôn một schedule tương ứng với idTour mới tạo
-router.patch('/tour', authenticated, tour.update);
-router.patch('/tour/tags-and-services', authenticated, tour.putTagsAndServices);
+// router.patch('/tour', authenticated, tour.update);
+// router.patch('/tour/tags-and-services', authenticated, tour.putTagsAndServices);
+router.put('/tour', authenticated, tour.update);
+router.put('/tour/tags-and-services', authenticated, tour.putTagsAndServices);
 router.delete('/tour', authenticated, tour.delete);
 
 //for schedule
 router.get('/schedule', schedule.read);
 router.get('/schedules', schedule.listAll);
 router.post('/schedule', authenticated, schedule.create);
-router.patch('/schedule', authenticated, schedule.update);
+// router.patch('/schedule', authenticated, schedule.update);
+router.put('/schedule', authenticated, schedule.update);
 router.delete('/schedule', authenticated, schedule.delete);
 
 //for img
@@ -76,7 +79,8 @@ router.get('/account', authenticated, account.read);
 router.get('/accountWithEmail', authenticated, account.readByEmail);
 router.get('/accounts', authenticated, account.listAll);
 router.post('/account', authenticated, account.create);
-router.patch('/account', authenticated, account.update);
+// router.patch('/account', authenticated, account.update);
+router.put('/account', authenticated, account.update);
 router.delete('/account', authenticated, account.delete);
 
 // //for payment
@@ -90,8 +94,10 @@ router.get('/order', order.read);
 router.get('/orderWithEmail', order.readByEmail);
 router.get('/orders', order.listAll);
 router.post('/order', order.create);
-router.patch('/order', order.update);
-router.patch('/orderUpdateStatus', order.updateStatus);
+// router.patch('/order', order.update);
+// router.patch('/orderUpdateStatus', order.updateStatus);
+router.put('/order', order.update);
+router.put('/orderUpdateStatus', order.updateStatus);
 router.delete('/order', authenticated, order.delete);
 
 // //favorites
