@@ -12,7 +12,7 @@ function ItineraryTourDetail(props) {
       <ItineraryTourDetailStyled>
          <div id='itinerary' className='page-scroll'>
             <div className='single-content-item padding-top-40px padding-bottom-40px'>
-               <h3 className='title font-size-20'>Itinerary</h3>
+               <h3 className='title font-size-20'>Hành trình</h3>
                <div className='accordion accordion-item padding-top-30px' id='accordionExample'>
                   <div className='card'>
                      <div className='card-header' id='faqHeadingOne'>

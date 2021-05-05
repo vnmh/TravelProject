@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { compose } from "recompose";
 import styled from "styled-components";
-import _, { overArgs } from "lodash";
+import _ from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import { Tooltip, Typography } from "antd";
 import { firstImage, removeVietnameseTones } from "~/views/utilities/helpers/utilObject";
 import { currencyFormat } from "~/views/utilities/helpers/currency";
 import { TYPE_TOUR } from "~/configs/const";
+import * as PATH from "~/configs/routesConfig";
 
 const CardItemListTourStyled = styled.div``;
 
@@ -97,8 +99,8 @@ const CardItemListTour = (props) => {
       // }
       if (props.searchTour?.type && props.searchTour?.type !== "all") {
          toursTemp = toursTemp.filter((o) => {
-               return o.type === props.searchTour.type;
-            })
+            return o.type === props.searchTour.type;
+         });
       }
 
       if (
@@ -110,13 +112,14 @@ const CardItemListTour = (props) => {
          toursTemp = Array.from(toursDefault);
       setTours(toursTemp); //tours
    }, [props.timeSubmit]);
+
    return (
       <CardItemListTourStyled>
          {tours.map((item, index) => {
             return (
                <div className='card-item card-item-list'>
                   <div className='card-img'>
-                     <Link to='/tour-detail' className='d-block'>
+                     <Link to={PATH.TOUR_DETAIL.replace(":id", item?.idTour)} className='d-block'>
                         <img
                            src={
                               _.get(_.head(item.images), "url")
@@ -137,8 +140,8 @@ const CardItemListTour = (props) => {
                   <div className='card-body'>
                      <h3 className='card-title'>
                         <Tooltip title={item.titleTour}>
-                           <Link to='/tour-detail'>
-                              <Typography.Paragraph classname='text-link' ellipsis={{ rows: 2 }}>
+                           <Link to={PATH.TOUR_DETAIL.replace(":id", item?.idTour)}>
+                              <Typography.Paragraph name='title' classname='text-link' ellipsis={{ rows: 2 }}>
                                  {item.titleTour}
                               </Typography.Paragraph>
                            </Link>
@@ -153,7 +156,7 @@ const CardItemListTour = (props) => {
                      </div>
                      <div className='card-price d-flex align-items-center justify-content-between'>
                         <p>
-                           <span className='price__from'>From </span>
+                           <span className='price__from'>Chỉ từ </span>
                            <span className='price__num'>{currencyFormat(item.price)}</span>
                         </p>
                         <span className='tour-hour'>
@@ -169,12 +172,25 @@ const CardItemListTour = (props) => {
    );
 };
 
-export default connect(
-   (state) => ({
-      user: state["authUser"].user
-   }),
-   {
-      getTours: appApisActions.getTours,
-      getAllImagesTour: appApisActions.getAllImagesTour
-   }
+// export default connect(
+//    (state) => ({
+//       user: state["authUser"].user
+//    }),
+//    {
+//       getTours: appApisActions.getTours,
+//       getAllImagesTour: appApisActions.getAllImagesTour
+//    }
+// )(CardItemListTour);
+
+export default compose(
+   connect(
+      (state) => ({
+         user: state["authUser"].user
+      }),
+      {
+         getTours: appApisActions.getTours,
+         getAllImagesTour: appApisActions.getAllImagesTour
+      }
+   ),
+   withRouter //để push(nhảy qua trang khác) là chủ yếu
 )(CardItemListTour);

@@ -69,7 +69,7 @@ const SearchListTour = (props) => {
                            label={<label className='label-text'>Ngày đi</label>}>
                            <DatePicker
                               disabledDate={(current) => {
-                                 // Can not select days before today and today
+                                 // Can not select days before today
                                  return current && current < moment().subtract(1, "day").endOf("day");
                               }}
                               style={{ width: "100%" }}

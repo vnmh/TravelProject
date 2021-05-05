@@ -17,7 +17,9 @@ export const APP_DEFAULT_PATH = HOME_PAGE;
  */
 export const TOUR_LIST = "/tour-list";
 export const TOUR_GRID = "/tour-grid";
-export const TOUR_DETAIL = "/tour-detail";
+export const TOUR_DETAIL = "/tour-detail/:id";
+// Ex http://localhost:5000/tour-detail/4
+
 export const TOUR_BOOKING = "/tour-booking";
 
 /**

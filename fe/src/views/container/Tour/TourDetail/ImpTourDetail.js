@@ -20,6 +20,7 @@ import EnquiryFormTourDetail from "./EnquiryFormTourDetail.js";
 const ImpTourDetailStyled = styled.div``;
 
 function ImpTourDetail(props) {
+   
    return (
       <ImpTourDetailStyled>
          {/* ================================
@@ -99,17 +100,17 @@ function ImpTourDetail(props) {
                            <ul>
                               <li>
                                  <a data-scroll='description' href='#description' className='scroll-link active'>
-                                    Description
+                                    Mô tả
                                  </a>
                               </li>
                               <li>
                                  <a data-scroll='itinerary' href='#itinerary' className='scroll-link'>
-                                    Itinerary
+                                    Hành trình
                                  </a>
                               </li>
                               <li>
                                  <a data-scroll='photo' href='#photo' className='scroll-link'>
-                                    Photo
+                                    Hình ảnh
                                  </a>
                               </li>
                               <li>
@@ -119,12 +120,12 @@ function ImpTourDetail(props) {
                               </li>
                               <li>
                                  <a data-scroll='location-map' href='#location-map' className='scroll-link'>
-                                    Map
+                                    Bản đồ
                                  </a>
                               </li>
                               <li>
                                  <a data-scroll='reviews' href='#reviews' className='scroll-link'>
-                                    Reviews
+                                    Đánh giá
                                  </a>
                               </li>
                            </ul>
@@ -140,10 +141,10 @@ function ImpTourDetail(props) {
                      <div className='col-lg-8'>
                         <div className='single-content-wrap padding-top-60px'>
                            <div id='description' className='page-scroll'>
-                              <SingleContentTourDetail />
+                              <SingleContentTourDetail tourDetail={props.tourDetail}/>
                               <div className='section-block' />
                               <div className='single-content-item padding-top-40px padding-bottom-40px'>
-                                 <DescriptionTourDetail />
+                                 <DescriptionTourDetail tourDetail={props.tourDetail}/>
                               </div>
                               {/* end single-content-item */}
                               <div className='section-block' />
@@ -167,7 +168,7 @@ function ImpTourDetail(props) {
                      {/* end col-lg-8 */}
                      <div className='col-lg-4'>
                         <div className='sidebar single-content-sidebar mb-0'>
-                           <BookingFormTourDetail /><br></br>
+                           <BookingFormTourDetail tourDetail={props.tourDetail}/><br></br>
                            <EnquiryFormTourDetail /><br></br>
                            <div className='sidebar-widget single-content-widget'>
                               <h3 className='title stroke-shape'>Why Book With Us?</h3>

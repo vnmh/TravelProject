@@ -8,7 +8,7 @@ import * as PATH from "~/configs/routesConfig";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
-import { Form, Input, Button, Checkbox, Row, Select, DatePicker, InputNumber, Cascader } from "antd";
+import { Form, Input, Button, Checkbox, Row, Select, DatePicker, InputNumber, Cascader, message } from "antd";
 import { PROVINCES } from "~/configs/VNprovinces";
 import moment from "moment";
 import { mapAddressNotWardToOptionAntd } from "~/configs/addressVN";
@@ -29,53 +29,53 @@ const tailLayout = {
 
 const CRUDTourAdmin = (props) => {
    const onFinish = (values) => {
-      console.log("🚀 ~ file: CRUDTourAdmin.js ~ line 29 ~ onFinish ~ values", values?.services.join(","));
-      //Nếu currentEdit thì gọi API update, không thì gọi API create
-      // if (props.currentEdit) {
-      //    //Gọi API update tour
-      //    const bodyUpdate = { ...values, idTour: props.currentEdit?.idTour };
-      //    console.log("hiendev ~ file: EditTourAdmin.js ~ line 27 ~ onFinish ~ bodyUpdate", bodyUpdate);
-      //    props
-      //       .patchTour(bodyUpdate)
-      //       .then((res) => {
-      //          //Success: thì đóng form edit lại và thông báo cho người dùng
-      //          props.setCurrentEdit(undefined);
-      //       })
-      //       .catch((err) => {
-      //          console.log("hiendev ~ file: EditTourAdmin.js ~ line 30 ~ onFinish ~ err", err);
-      //       });
-      //    //Fail: không làm gì
-      // } else {
-      //    //Gọi API post tour
-      //    const bodyCreate = {
-      //       titleTour: "",
-      //       price: 1000,
-      //       sale: "",
-      //       departureDay: "",
-      //       describe: "",
-      //       address: "",
-      //       vocationTime: "",
-      //       idAccount: "",
-      //       tags: "",
-      //       services: "",
-      //       views: "",
-      //       votes: "",
-      //       reuse: "",
-      //       type: "",
-      //       ...values
-      //    };
-      //    console.log("hiendev ~ file: CRUDTourAdmin.js ~ line 42 ~ onFinish ~ bodyCreate", bodyCreate);
-      //    props
-      //       .postTour(bodyCreate)
-      //       .then((res) => {
-      //          //Success: thì đóng form create lại và thông báo cho người dùng
-      //          props.setIsCreateTour(false);
-      //       })
-      //       .catch((err) => {
-      //          console.log("hiendev ~ file: EditTourAdmin.js ~ line 30 ~ onFinish ~ err", err);
-      //       });
-      //    //Fail: không làm gì
-      // }
+      // Nếu currentEdit thì gọi API update, không thì gọi API create
+      if (props.currentEdit) {
+         //Gọi API update tour
+         const bodyUpdate = { ...props.currentEdit, ...values, idTour: props.currentEdit?.idTour };
+         console.log("hiendev ~ file: EditTourAdmin.js ~ line 27 ~ onFinish ~ bodyUpdate", bodyUpdate);
+         props
+            .putTour(bodyUpdate)
+            .then((res) => {
+               //Success: thì đóng form edit lại và thông báo cho người dùng
+               props.setCurrentEdit(undefined);
+            })
+            .catch((err) => {
+               message.error(JSON.stringify(err));
+               console.log("hiendev ~ file: EditTourAdmin.js ~ line 30 ~ onFinish ~ err", err);
+            });
+         //Fail: không làm gì
+      } else {
+         //Gọi API post tour
+         const bodyCreate = {
+            titleTour: "",
+            price: 1000,
+            sale: "",
+            departureDay: "",
+            describe: "",
+            address: "",
+            vocationTime: "",
+            idAccount: "",
+            tags: "",
+            services: "",
+            views: "",
+            votes: "",
+            reuse: "",
+            type: "",
+            ...values
+         };
+         console.log("hiendev ~ file: CRUDTourAdmin.js ~ line 42 ~ onFinish ~ bodyCreate", bodyCreate);
+         props
+            .postTour(bodyCreate)
+            .then((res) => {
+               //Success: thì đóng form create lại và thông báo cho người dùng
+               props.setIsCreateTour(false);
+            })
+            .catch((err) => {
+               console.log("hiendev ~ file: EditTourAdmin.js ~ line 30 ~ onFinish ~ err", err);
+            });
+         //Fail: không làm gì
+      }
    };
 
    const onFinishFailed = (errorInfo) => {
@@ -211,7 +211,7 @@ export default compose(
          getTours: appApisActions.getTours,
          getAllImagesTour: appApisActions.getAllImagesTour,
          postTour: appApisActions.postTour,
-         patchTour: appApisActions.patchTour
+         putTour: appApisActions.putTour
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,

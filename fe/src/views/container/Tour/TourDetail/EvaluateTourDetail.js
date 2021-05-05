@@ -12,7 +12,7 @@ function EvaluateTourDetail(props) {
       <EvaluateTourDetailStyled>
          <div id='reviews' className='page-scroll'>
             <div className='single-content-item padding-top-40px padding-bottom-40px'>
-               <h3 className='title font-size-20'>Reviews</h3>
+               <h3 className='title font-size-20'>Đánh giá</h3>
                <div className='review-container padding-top-30px'>
                   <div className='row align-items-center'>
                      <div className='col-lg-4'>

@@ -8,25 +8,32 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 import Header from "../../Header";
 import Footer from "../../Footer";
 import ImpTourDetail from "./ImpTourDetail";
+import { useHistory, useRouteMatch } from "react-router";
 
 const TourDetailStyled = styled.div``;
 
 function TourDetail(props) {
-   const [tourDetail, setTourDetail] = useState([]);
+   const [tourDetail, setTourDetail] = useState({});
+   const hisory = useHistory();
+   console.log("hiendev ~ file: index.js ~ line 18 ~ TourDetail ~ hisory", hisory)
+   const match = useRouteMatch();
+   console.log("hiendev ~ file: index.js ~ line 20 ~ TourDetail ~ match", match)
    useEffect(() => {
       props
-         .getTours()
+         .getTour(match?.params?.id)
          .then(({ res }) => {
-            setTourDetail(_.get(res, undefined, []));
+            setTourDetail(res);
          })
          .catch((err) => {
             message.error("Lỗi load dữ liệu tour rồi nha");
          });
    }, []);
+   console.log("hiendev ~ file: index.js ~ line 17 ~ TourDetail ~ tourDetail", tourDetail);
+
    return (
       <TourDetailStyled>
          <Header />
-         <ImpTourDetail />
+         <ImpTourDetail tourDetail={tourDetail}/>
          <Footer />
       </TourDetailStyled>
    );
@@ -37,6 +44,6 @@ export default connect(
       user: state["authUser"].user
    }),
    {
-      getTours: appApisActions.getTours
+      getTour: appApisActions.getTour
    }
 )(TourDetail);
