@@ -5,6 +5,9 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import { currencyFormat } from "~/views/utilities/helpers/currency";
+import { DatePicker } from "antd";
+const { RangePicker } = DatePicker;
 
 const BookingFormTourDetailStyled = styled.div``;
 
@@ -16,8 +19,8 @@ function BookingFormTourDetail(props) {
                <div className='sidebar-book-title-wrap mb-3'>
                   <h3>Bestseller</h3>
                   <p>
-                     <span className='text-form'>From</span>
-                     <span className='text-value ml-2 mr-1'>$399.00</span> <span className='before-price'>$412.00</span>
+                     <span className='text-form'>Chỉ từ</span>
+                     <span className='text-value ml-2 mr-1'>{currencyFormat(props.tourDetail?.price)}</span> <span className='before-price'>$412.00</span>
                   </p>
                </div>
             </div>
@@ -26,10 +29,9 @@ function BookingFormTourDetail(props) {
                <div className='contact-form-action'>
                   <form action='#'>
                      <div className='input-box'>
-                        <label className='label-text'>Date</label>
+                        <label className='label-text'>Thời gian</label>
                         <div className='form-group'>
-                           <span className='la la-calendar form-icon' />
-                           <input className='date-range form-control' type='text' name='daterange' readOnly />
+                           <RangePicker size='large' style={{ width: "100%" }} />
                         </div>
                      </div>
                   </form>

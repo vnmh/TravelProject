@@ -7,7 +7,7 @@ const authHeader = () => {
    if (token) {
       //YYYY-MM-DDTHH:mm:ss.SSS[Z]
       return {
-         Authencation: token,
+         Authentication: token, // Chỗ này phải là Authentication chứ không phải Authencation
          localDatetime: moment().format("YYYY-MM-DDTHH:mm:ssZ")
       };
    } else {

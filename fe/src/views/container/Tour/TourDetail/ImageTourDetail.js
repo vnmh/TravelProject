@@ -12,7 +12,7 @@ function ImageTourDetail(props) {
       <ImageTourDetailStyled>
          <div id='photo' className='page-scroll'>
             <div className='single-content-item padding-top-40px padding-bottom-40px'>
-               <h3 className='title font-size-20'>Photo</h3>
+               <h3 className='title font-size-20'>Hình ảnh</h3>
                <div className='gallery-carousel carousel-action padding-top-30px'>
                   <div className='card-item mb-0'>
                      <div className='card-img'>

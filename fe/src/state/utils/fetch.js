@@ -10,7 +10,7 @@ export const requestHeaders = (withToken) => {
    let header = {
       Accept: "application/json",
       "Content-Type": "application/json",
-      // "Access-Control-Allow-Origin": "*"
+      "Access-Control-Allow-Origin": "*"
    };
    if (withToken) {
       header = {

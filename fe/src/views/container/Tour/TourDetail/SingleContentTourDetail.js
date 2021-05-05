@@ -11,9 +11,9 @@ function SingleContentTourDetail(props) {
    return (
       <SingleContentTourDetailStyled>
          <div className='single-content-item pb-4'>
-            <h3 className='title font-size-26'>3 Days Tour: the Great Wall of China</h3>
+            <h3 className='title font-size-26'>{props.tourDetail?.titleTour}</h3>
             <div className='d-flex flex-wrap align-items-center pt-2'>
-               <p className='mr-2'>Huairou District, China</p>
+               <p className='mr-2'>{props.tourDetail?.address}</p>
                <p>
                   <span className='badge badge-warning text-white font-size-16'>4.6</span>
                   <span>(4,209 Reviews)</span>
@@ -30,8 +30,8 @@ function SingleContentTourDetail(props) {
                         <i className='la la-clock-o' />
                      </div>
                      <div className='single-feature-titles'>
-                        <h3 className='title font-size-15 font-weight-medium'>Duration</h3>
-                        <span className='font-size-13'>3 Days</span>
+                        <h3 className='title font-size-15 font-weight-medium'>Khoảng thời gian</h3>
+                        <span className='font-size-13'>{props.tourDetail?.vocationTime} ngày</span>
                      </div>
                   </div>
                   {/* end single-tour-feature */}
@@ -56,8 +56,8 @@ function SingleContentTourDetail(props) {
                         <i className='la la-globe' />
                      </div>
                      <div className='single-feature-titles'>
-                        <h3 className='title font-size-15 font-weight-medium'>Tour Type</h3>
-                        <span className='font-size-13'>Adventures Tour</span>
+                        <h3 className='title font-size-15 font-weight-medium'>Loại tour</h3>
+                        <span className='font-size-13'>{props.tourDetail?.type}</span>
                      </div>
                   </div>
                   {/* end single-tour-feature */}
