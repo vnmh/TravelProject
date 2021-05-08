@@ -120,6 +120,8 @@ const TourTableListAdminPage = (props) => {
    // Thì sẽ fetch lại dữ liệu
 
    const [tours, setTours] = useState([]);
+   const [currentEdit, setCurrentEdit] = useState();
+
    useEffect(() => {
       // Đã có fetch dữ liệu
       // => Thêm một điều kiện là currentEdit mà không có dữ liệu thì sẽ chạy props.getTours()
@@ -153,12 +155,14 @@ const TourTableListAdminPage = (props) => {
                   .catch((err) => {
                      console.log("hiendev ~ file: CardItemListTour.js ~ line 34 ~ .then ~ err", err);
                   });
+
             })
             .catch((err) => {
                console.log("hiendev ~ file: CardItemListTour.js ~ line 24 ~ useEffect ~ err", err);
             });
       //Vậy chúng ta cần useEffect này được chạy lại khi currentEdit thay đổi
    }, [currentEdit]);
+
 
    return (
       <TourTableListAdminPageStyled>

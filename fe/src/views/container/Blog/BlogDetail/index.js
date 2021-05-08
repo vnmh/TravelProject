@@ -8,25 +8,29 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 import Header from "../../Header";
 import Footer from "../../Footer";
 import ImpBlogDetail from "./ImpBlogDetail";
+import { useHistory, useRouteMatch } from "react-router";
 
 const BlogDetailStyled = styled.div``;
 
 function BlogDetail(props) {
-   const [BlogDetail, setBlogDetail] = useState([]);
+   const [blogDetail, setBlogDetail] = useState([]);
+   const match = useRouteMatch();
    useEffect(() => {
       props
-         .getPosts()
+         .getPost(match?.params?.id)
          .then(({ res }) => {
-            setBlogDetail(_.get(res, undefined, []));
+            console.log("🚀 ~ file: index.js ~ line 22 ~ .then ~ res", res)
+            setBlogDetail(_.head(res || []));
          })
          .catch((err) => {
             message.error("Lỗi load dữ liệu tour rồi nha");
          });
    }, []);
+
    return (
       <BlogDetailStyled>
          <Header />
-         <ImpBlogDetail />
+         <ImpBlogDetail blogDetail={blogDetail} />
          <Footer />
       </BlogDetailStyled>
    );
@@ -37,6 +41,6 @@ export default connect(
       user: state["authUser"].user
    }),
    {
-      getPosts: appApisActions.getPosts
+      getPost: appApisActions.getPost
    }
 )(BlogDetail);

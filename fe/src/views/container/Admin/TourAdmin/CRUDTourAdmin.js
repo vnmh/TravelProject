@@ -41,7 +41,6 @@ const CRUDTourAdmin = (props) => {
             services: values?.services.join(","),
             idTour: props.currentEdit?.idTour
          };
-
          props
             .putTour(bodyUpdate)
             .then((res) => {
@@ -55,23 +54,7 @@ const CRUDTourAdmin = (props) => {
          //Fail: không làm gì
       } else {
          //Gọi API post tour
-         const bodyCreate = {
-            titleTour: "",
-            price: 1000,
-            sale: "",
-            departureDay: "",
-            describe: "",
-            address: "",
-            vocationTime: "",
-            idAccount: "",
-            tags: "",
-            services: "",
-            views: "",
-            votes: "",
-            reuse: "",
-            type: "",
-            ...values
-         };
+         const bodyCreate = values;
          console.log("hiendev ~ file: CRUDTourAdmin.js ~ line 42 ~ onFinish ~ bodyCreate", bodyCreate);
          props
             .postTour(bodyCreate)
@@ -96,6 +79,7 @@ const CRUDTourAdmin = (props) => {
             {...layout}
             name='basic'
             initialValues={{
+               // Để load dữ liệu đã có lên
                ...props.currentEdit,
                departureDay: moment(props.currentEdit?.departureDay),
                address: props.currentEdit?.address ? props.currentEdit?.address : undefined, // vì đã map bên kia ròi, ở đây không cần làm lại

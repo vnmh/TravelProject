@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import { Card, Tooltip, Typography } from "antd";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
+import * as PATH from "~/configs/routesConfig";
 
 const CardItemGridBlogStyled = styled.div``;
 
@@ -49,7 +50,7 @@ const CardItemGridBlog = (props) => {
             return (
                <div className='card-item'>
                   <div className='card-img'>
-                     <Link to='/tour-detail' className='d-block'>
+                     <Link to={PATH.BLOG_DETAIL.replace(":id", item?.idPost)} className='d-block'>
                         <img
                            src={
                               _.get(_.head(item.images), "url")
@@ -70,7 +71,7 @@ const CardItemGridBlog = (props) => {
                   <div className='card-body'>
                      <h3 className='card-title'>
                         <Tooltip title={item.titlePost}>
-                           <Link to='/tour-detail'>
+                           <Link to={PATH.BLOG_DETAIL.replace(":id", item?.idPost)}>
                               <Typography.Paragraph className='text-link' ellipsis={{ rows: 2 }}>
                                  {item.titlePost}
                               </Typography.Paragraph>
