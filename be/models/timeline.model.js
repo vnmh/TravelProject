@@ -7,7 +7,8 @@ const Timeline = function (timeline) {
    this.idTour = timeline.idTour;
    this.title = timeline.title;
    this.description = timeline.description;
-   this.date = timeline.date.slice(0, 10).replace(/-/g, '/');
+   this.dayIndex = timeline.dayIndex;
+   // this.date = timeline.date.slice(0, 10).replace(/-/g, "/");
 };
 
 const databaseLocal = config.database;
