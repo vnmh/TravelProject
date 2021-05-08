@@ -15,6 +15,8 @@ const TourListAdminPageStyled = styled.div``;
 
 const TourListAdminPage = (props) => {
    const [isCreateTour, setIsCreateTour] = useState(false);
+   const [isSubmit, setIsSubmit] = useState(false);
+   const [currentEdit, setCurrentEdit] = useState();
    const [pagination, setPagination] = useState({ page: 1, size: 0, total: 0 });
    return (
       <TourListAdminPageStyled>
@@ -24,28 +26,33 @@ const TourListAdminPage = (props) => {
                   <div className='form-box'>
                      <div className='form-title-wrap'>
                         <h3 className='title'>Danh sách tour</h3>
-                        <Button
-                           type='primary'
-                           className='float-right'
-                           onClick={() => {
-                              setIsCreateTour(true);
-                           }}>
-                           Thêm
-                        </Button>
+                        {!isCreateTour && !currentEdit && (
+                           <Button
+                              type='primary'
+                              className='float-right'
+                              onClick={() => {
+                                 setIsCreateTour(true);
+                                 isCreateTour && setIsSubmit(true); // chỉ submit khi isCreateTour
+                              }}>
+                              Thêm
+                           </Button>
+                        )}
                         <p className='font-size-14'>
                            Showing {pagination.page} to {Math.ceil(pagination.total / pagination.size)} of{" "}
                            {pagination.total} entries
                         </p>
                      </div>
                      <div className='form-content'>
-                        <div className='table-form table-responsive'>
-                           <TourTableListAdminPage
-                              isCreateTour={isCreateTour}
-                              setIsCreateTour={setIsCreateTour}
-                              pagination={pagination}
-                              setPagination={setPagination}
-                           />
-                        </div>
+                        <TourTableListAdminPage
+                           setIsSubmit={setIsSubmit}
+                           isSubmit={isSubmit}
+                           isCreateTour={isCreateTour}
+                           setIsCreateTour={setIsCreateTour}
+                           setCurrentEdit={setCurrentEdit}
+                           currentEdit={currentEdit}
+                           pagination={pagination}
+                           setPagination={setPagination}
+                        />
                      </div>
                   </div>
                   {/* end form-box */}

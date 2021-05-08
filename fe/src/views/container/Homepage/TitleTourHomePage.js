@@ -12,7 +12,10 @@ import { Tooltip, Typography } from "antd";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import SearchTour from "./SearchTour";
 
-const TitleTourHomePageStyled = styled.div``;
+const TitleTourHomePageStyled = styled.div`
+   .sec__title {
+   }
+`;
 
 const TitleTourHomePage = (props) => {
    const [tours, setTours] = useState([]);
@@ -47,24 +50,22 @@ const TitleTourHomePage = (props) => {
       <TitleTourHomePageStyled>
          {/* {tours.map((item, index) => {
             return ( */}
-               <div className='hero-content pb-5 text-center'>
-                  <div className='section-heading'>
-                     <h2 className='sec__title font-size-50 pb-3 pt-5'>
-                        {" "}
-                        {/* <Tooltip title={item.titleTour}>
+         <div className='hero-content pb-5 text-center'>
+            <div className='section-heading'>
+               <h2 className='sec__title font-size-50 pb-3 pt-5'>
+                  {" "}
+                  {/* <Tooltip title={item.titleTour}>
                            <Link to='/tour-detail'>
                               <Typography.Paragraph className='text_link' ellipsis={{ rows: 2 }}>
                                  {item.titleTour}
                               </Typography.Paragraph>
                            </Link>
                         </Tooltip> */}
-                     </h2>
-                     <p className='sec__desc font-size-25 font-weight-medium'>
-                        Trải nghiệm trọn vẹn - Giá cả phải chăng
-                     </p>
-                  </div>
-               </div>
-            {/* );
+               </h2>
+               <p className='sec__desc font-size-25 font-weight-medium'>Trải nghiệm trọn vẹn - Giá cả phải chăng</p>
+            </div>
+         </div>
+         {/* );
          })}
          ; */}
       </TitleTourHomePageStyled>
