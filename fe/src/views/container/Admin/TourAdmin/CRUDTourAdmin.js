@@ -32,12 +32,20 @@ const CRUDTourAdmin = (props) => {
       // Nếu currentEdit thì gọi API update, không thì gọi API create
       if (props.currentEdit) {
          //Gọi API update tour
-         const bodyUpdate = { ...props.currentEdit, ...values, idTour: props.currentEdit?.idTour };
-         console.log("hiendev ~ file: EditTourAdmin.js ~ line 27 ~ onFinish ~ bodyUpdate", bodyUpdate);
+         //Trước khi gọi API phải map thành JSON hết những dữ liệu Địa điểm, Dịch vụ
+         const bodyUpdate = {
+            ...values,
+
+            // values.address là một mảng, khi lưu xuống CSDL cần phải chuyển thành string bằng phương thức join
+            address: values?.address.join(","),
+            services: values?.services.join(","),
+            idTour: props.currentEdit?.idTour
+         };
+
          props
             .putTour(bodyUpdate)
             .then((res) => {
-               //Success: thì đóng form edit lại và thông báo cho người dùng
+               //Success: gọi lại API lấy dữ liệu ở table VÀ đóng form edit lại, thông báo cho người dùng
                props.setCurrentEdit(undefined);
             })
             .catch((err) => {
@@ -90,8 +98,8 @@ const CRUDTourAdmin = (props) => {
             initialValues={{
                ...props.currentEdit,
                departureDay: moment(props.currentEdit?.departureDay),
-               address: props.currentEdit?.address ? props.currentEdit?.address.split(",") : undefined,
-               services: props.currentEdit?.services ? props.currentEdit?.services.split(",") : undefined
+               address: props.currentEdit?.address ? props.currentEdit?.address : undefined, // vì đã map bên kia ròi, ở đây không cần làm lại
+               services: props.currentEdit?.services ? props.currentEdit?.services : undefined // vì đã map bên kia ròi, ở đây không cần làm lại
             }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}>

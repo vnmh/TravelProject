@@ -115,40 +115,50 @@ const TourTableListAdminPage = (props) => {
          size: pagination?.pageSize
       });
    };
+   const [currentEdit, setCurrentEdit] = useState(); // Chúng ta sẽ đảm bảo useEffect chạy lần đầu tiên vì useState()=> gán giá trị ban đầu là undefined rồi
+   // Khi currentEdit này mà nó từ có dữ liệu sang không có (có nghĩa là create hoặc update đó)
+   // Thì sẽ fetch lại dữ liệu
 
    const [tours, setTours] = useState([]);
    useEffect(() => {
-      props
-         .getTours()
-         .then(({ res }) => {
-            props
-               .getAllImagesTour()
-               .then((resImg) => {
-                  const tourWithImage = res.map((tour) => {
-                     return {
-                        ...tour,
-                        images: resImg.res.filter((image) => {
-                           return tour.idTour === image.idTour;
-                        })
-                     };
+      // Đã có fetch dữ liệu
+      // => Thêm một điều kiện là currentEdit mà không có dữ liệu thì sẽ chạy props.getTours()
+      // Để dấu ! đằng trước có nghĩa là đúng khi currentEdit không có dữ liệu, currentEdit dữ liệu thì là sai
+      !currentEdit &&
+         props
+            .getTours()
+            .then(({ res }) => {
+               props
+                  .getAllImagesTour()
+                  .then((resImg) => {
+                     const tourWithImage = res.map((tour) => {
+                        return {
+                           ...tour,
+                           // Khi lưu ở CSDL tour.address có dạng: Đồng Tháp, Hà Nội
+                           // Chúng ta sẽ chuyển chuỗi đó thành mảng với hàm split(',') // dấu , là dấu hiệu để cắt
+                           address: (tour?.address || "").split(","), // vì address phải là mảng mới truyền vào Select Multiple được
+                           services: (tour?.services || "").split(","),
+                           images: resImg.res.filter((image) => {
+                              return tour.idTour === image.idTour;
+                           })
+                        };
+                     });
+                     props.setPagination({
+                        page: 1,
+                        size: 10,
+                        total: tourWithImage.length
+                     });
+                     setTours(tourWithImage);
+                  })
+                  .catch((err) => {
+                     console.log("hiendev ~ file: CardItemListTour.js ~ line 34 ~ .then ~ err", err);
                   });
-                  props.setPagination({
-                     page: 1,
-                     size: 10,
-                     total: tourWithImage.length
-                  });
-                  setTours(tourWithImage);
-               })
-               .catch((err) => {
-                  console.log("hiendev ~ file: CardItemListTour.js ~ line 34 ~ .then ~ err", err);
-               });
-         })
-         .catch((err) => {
-            console.log("hiendev ~ file: CardItemListTour.js ~ line 24 ~ useEffect ~ err", err);
-         });
-   }, []);
-
-   const [currentEdit, setCurrentEdit] = useState();
+            })
+            .catch((err) => {
+               console.log("hiendev ~ file: CardItemListTour.js ~ line 24 ~ useEffect ~ err", err);
+            });
+      //Vậy chúng ta cần useEffect này được chạy lại khi currentEdit thay đổi
+   }, [currentEdit]);
 
    return (
       <TourTableListAdminPageStyled>
@@ -184,5 +194,5 @@ export default compose(
          getAllImagesTour: appApisActions.getAllImagesTour
       }
    ),
-   withRouter //để push(nhảy qua trang khác) là chủ yếu,
+   withRouter //để push(nhảy qua trang khác) là chủ yếu
 )(TourTableListAdminPage);
