@@ -32,7 +32,12 @@ const CRUDTourAdmin = (props) => {
       // Nếu currentEdit thì gọi API update, không thì gọi API create
       if (props.currentEdit) {
          //Gọi API update tour
-         const bodyUpdate = { ...props.currentEdit, ...values, idTour: props.currentEdit?.idTour };
+         const bodyUpdate = {
+            ...values,
+            idTour: props.currentEdit?.idTour,
+            address: values.address.join(","),
+            services: values.services.join(",")
+         };
          console.log("hiendev ~ file: EditTourAdmin.js ~ line 27 ~ onFinish ~ bodyUpdate", bodyUpdate);
          props
             .putTour(bodyUpdate)
@@ -47,23 +52,7 @@ const CRUDTourAdmin = (props) => {
          //Fail: không làm gì
       } else {
          //Gọi API post tour
-         const bodyCreate = {
-            titleTour: "",
-            price: 1000,
-            sale: "",
-            departureDay: "",
-            describe: "",
-            address: "",
-            vocationTime: "",
-            idAccount: "",
-            tags: "",
-            services: "",
-            views: "",
-            votes: "",
-            reuse: "",
-            type: "",
-            ...values
-         };
+         const bodyCreate = values;
          console.log("hiendev ~ file: CRUDTourAdmin.js ~ line 42 ~ onFinish ~ bodyCreate", bodyCreate);
          props
             .postTour(bodyCreate)
@@ -88,6 +77,7 @@ const CRUDTourAdmin = (props) => {
             {...layout}
             name='basic'
             initialValues={{
+               // Để load dữ liệu đã có lên
                ...props.currentEdit,
                departureDay: moment(props.currentEdit?.departureDay),
                address: props.currentEdit?.address ? props.currentEdit?.address.split(",") : undefined,

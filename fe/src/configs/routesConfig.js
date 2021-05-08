@@ -31,7 +31,7 @@ export const PAYMENT_RECEIVED = "/payment-received";
  * Blog
  */
 export const BLOG_GRID = "/blog-grid";
-export const BLOG_DETAIL = "/blog-detail";
+export const BLOG_DETAIL = "/blog-detail/:id";
 
 /**
  * Admin

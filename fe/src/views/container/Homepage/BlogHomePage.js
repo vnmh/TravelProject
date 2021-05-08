@@ -12,7 +12,9 @@ import styled from "styled-components"; // Dùng để ghi đè style bên trong
 import { appApisActions } from "~/state/ducks/appApis";
 import { CarouselProvider, Slider, Slide } from "pure-react-carousel";
 import { Tooltip, Typography, Switch } from "antd";
+import * as PATH from "~/configs/routesConfig";
 const { Paragraph, Text } = Typography;
+
 
 const BlogHomePageStyled = styled(CarouselProvider)``;
 
@@ -63,7 +65,7 @@ const BlogHomePage = (props) => {
                         <div className='col-lg-12 responsive-column'>
                            <div className='card-item blog-card'>
                               <div className='card-img'>
-                                 <Link to='/blog-detail' className='d-block'>
+                                 <Link to={PATH.BLOG_DETAIL.replace(":id", item?.idPost)} className='d-block'>
                                     <img
                                        src={
                                           _.get(_.head(item.images), "url")
@@ -76,7 +78,7 @@ const BlogHomePage = (props) => {
                                  <div className='card-body'>
                                     <h3 className='card-title line-height-26'>
                                        <Tooltip title={item.titlePost} color={colors}>
-                                          <Link to='/blog-detail'>
+                                          <Link to={PATH.BLOG_DETAIL.replace(":id", item?.idPost)}>
                                              <Typography.Paragraph ellipsis={{ rows: 2 }}>
                                                 {item.titlePost}
                                              </Typography.Paragraph>

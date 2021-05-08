@@ -18,6 +18,6 @@ export const getAllImagesPost = (params) =>
 
 //Blog
 export const getPosts = (params) => apiAction("get")(types.COMMON, "/posts" + parseObjToQuery(params), {}, true);
-export const getPost = (idTour) => apiAction("get")(types.COMMON, "/post/" + idTour, {}, true);
+export const getPost = (idPost) => apiAction("get")(types.COMMON, "/post" + parseObjToQuery({idPost}), {}, true);
 
 //Evaluates

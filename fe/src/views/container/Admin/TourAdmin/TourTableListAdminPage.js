@@ -117,6 +117,8 @@ const TourTableListAdminPage = (props) => {
    };
 
    const [tours, setTours] = useState([]);
+   const [currentEdit, setCurrentEdit] = useState();
+
    useEffect(() => {
       props
          .getTours()
@@ -146,9 +148,7 @@ const TourTableListAdminPage = (props) => {
          .catch((err) => {
             console.log("hiendev ~ file: CardItemListTour.js ~ line 24 ~ useEffect ~ err", err);
          });
-   }, []);
-
-   const [currentEdit, setCurrentEdit] = useState();
+   }, [currentEdit, props.isCreateTour]);
 
    return (
       <TourTableListAdminPageStyled>

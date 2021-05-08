@@ -12,7 +12,7 @@ import { useHistory, useRouteMatch } from "react-router";
 
 const TourDetailStyled = styled.div``;
 
-function TourDetail(props) {
+function TourDetail(props)  {
    const [tourDetail, setTourDetail] = useState({});
    const hisory = useHistory();
    console.log("hiendev ~ file: index.js ~ line 18 ~ TourDetail ~ hisory", hisory)
@@ -22,6 +22,7 @@ function TourDetail(props) {
       props
          .getTour(match?.params?.id)
          .then(({ res }) => {
+            console.log("🚀 ~ file: index.js ~ line 25 ~ .then ~ res", res)
             setTourDetail(res);
          })
          .catch((err) => {

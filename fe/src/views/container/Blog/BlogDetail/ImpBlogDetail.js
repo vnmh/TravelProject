@@ -7,6 +7,7 @@ import { appApisActions } from "~/state/ducks/appApis/index";
 import { message } from "antd";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import DescriptionBlogDetail from "./DescriptionBlogDetail.js";
+import SingleContentBlogDetail from "./SingleContentBlogDetail.js";
 
 const ImpBlogDetailStyled = styled.div``;
 
@@ -90,7 +91,7 @@ function ImpBlogDetail(props) {
                            <ul>
                               <li>
                                  <a data-scroll='description' href='#description' className='scroll-link active'>
-                                    Description
+                                    Mô tả
                                  </a>
                               </li>
                               <li>
@@ -131,10 +132,10 @@ function ImpBlogDetail(props) {
                      <div className='col-lg-8'>
                         <div className='single-content-wrap padding-top-60px'>
                            <div id='description' className='page-scroll'>
-                              {/* <SingleContentBlogDetail /> */}
+                              <SingleContentBlogDetail blogDetail = {props.blogDetail} />
                               <div className='section-block' />
                               <div className='single-content-item padding-top-40px padding-bottom-40px'>
-                                 <DescriptionBlogDetail />
+                                 <DescriptionBlogDetail blogDetail = {props.blogDetail}/>
                               </div>
                               {/* end single-content-item */}
                               <div className='section-block' />
@@ -353,7 +354,6 @@ export default connect(
       user: state["authUser"].user
    }),
    {
-      getPosts: appApisActions.getPosts,
-      getAllImagesPost: appApisActions.getAllImagesPost
+      getPosts: appApisActions.getPosts
    }
 )(ImpBlogDetail);
