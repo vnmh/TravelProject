@@ -70,10 +70,11 @@ const SliderHomePage = (props) => {
    }, []);
    return (
       <SliderHomePageStyled>
-         <Carousel id='fullscreen-slide-contain'>
+         <Carousel id='fullscreen-slide-contain' style={{ height: 500 }}>
             {tours.map((item, index) => {
                return (
                   <img
+                     style={{ height: 500, maxWidth: "100%" }}
                      src={
                         _.get(_.head(item.images), "url")
                            ? firstImage(_.get(_.head(item.images), "url", ""))

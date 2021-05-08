@@ -20,7 +20,6 @@ import EnquiryFormTourDetail from "./EnquiryFormTourDetail.js";
 const ImpTourDetailStyled = styled.div``;
 
 function ImpTourDetail(props) {
-   
    return (
       <ImpTourDetailStyled>
          {/* ================================
@@ -100,7 +99,7 @@ function ImpTourDetail(props) {
                            <ul>
                               <li>
                                  <a data-scroll='description' href='#description' className='scroll-link active'>
-                                    Mô tả
+                                    Mô tả ngắn
                                  </a>
                               </li>
                               <li>
@@ -141,10 +140,10 @@ function ImpTourDetail(props) {
                      <div className='col-lg-8'>
                         <div className='single-content-wrap padding-top-60px'>
                            <div id='description' className='page-scroll'>
-                              <SingleContentTourDetail tourDetail={props.tourDetail}/>
+                              <SingleContentTourDetail tourDetail={props.tourDetail} />
                               <div className='section-block' />
                               <div className='single-content-item padding-top-40px padding-bottom-40px'>
-                                 <DescriptionTourDetail tourDetail={props.tourDetail}/>
+                                 <DescriptionTourDetail tourDetail={props.tourDetail} />
                               </div>
                               {/* end single-content-item */}
                               <div className='section-block' />
@@ -168,8 +167,10 @@ function ImpTourDetail(props) {
                      {/* end col-lg-8 */}
                      <div className='col-lg-4'>
                         <div className='sidebar single-content-sidebar mb-0'>
-                           <BookingFormTourDetail tourDetail={props.tourDetail}/><br></br>
-                           <EnquiryFormTourDetail /><br></br>
+                           <BookingFormTourDetail tourDetail={props.tourDetail} />
+                           <br></br>
+                           <EnquiryFormTourDetail />
+                           <br></br>
                            <div className='sidebar-widget single-content-widget'>
                               <h3 className='title stroke-shape'>Why Book With Us?</h3>
                               <div className='sidebar-list'>

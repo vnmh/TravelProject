@@ -14,6 +14,7 @@ import moment from "moment";
 import { mapAddressNotWardToOptionAntd } from "~/configs/addressVN";
 import { SERVICES } from "~/configs/servicesConfig";
 import { TYPE_TOUR } from "~/configs/const";
+import { PEOPLE_NUM } from "~/configs/const";
 const { Option } = Select;
 const CRUDTourAdminStyled = styled.div``;
 
@@ -21,13 +22,11 @@ const { TextArea } = Input;
 
 const layout = {
    labelCol: { span: 8 },
-   wrapperCol: { span: 8 }
-};
-const tailLayout = {
-   wrapperCol: { offset: 20, span: 16 }
+   wrapperCol: { span: 12 }
 };
 
 const CRUDTourAdmin = (props) => {
+   const [form] = Form.useForm();
    const onFinish = (values) => {
       // Nếu currentEdit thì gọi API update, không thì gọi API create
       if (props.currentEdit) {
@@ -44,6 +43,7 @@ const CRUDTourAdmin = (props) => {
          props
             .putTour(bodyUpdate)
             .then((res) => {
+               message.success("Thành công!");
                //Success: gọi lại API lấy dữ liệu ở table VÀ đóng form edit lại, thông báo cho người dùng
                props.setCurrentEdit(undefined);
             })
@@ -59,10 +59,12 @@ const CRUDTourAdmin = (props) => {
          props
             .postTour(bodyCreate)
             .then((res) => {
+               message.success("Thành công!");
                //Success: thì đóng form create lại và thông báo cho người dùng
                props.setIsCreateTour(false);
             })
             .catch((err) => {
+               message.error("Thất bại!");
                console.log("hiendev ~ file: EditTourAdmin.js ~ line 30 ~ onFinish ~ err", err);
             });
          //Fail: không làm gì
@@ -73,9 +75,18 @@ const CRUDTourAdmin = (props) => {
       console.log("Failed:", errorInfo);
    };
 
+   // for submit
+   useEffect(() => {
+      if (props.isSubmit) {
+         form.submit();
+         props.setIsSubmit(false);
+      }
+   }, [props.isSubmit]);
+
    return (
       <CRUDTourAdminStyled>
          <Form
+            form={form} //ref
             {...layout}
             name='basic'
             initialValues={{
@@ -87,105 +98,153 @@ const CRUDTourAdmin = (props) => {
             }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}>
-            <Form.Item
-               label='Tên tour'
-               name='titleTour'
-               rules={[
-                  {
-                     required: true,
-                     message: "Hãy nhập tên tour!"
-                  }
-               ]}>
-               <Input />
-            </Form.Item>
+            <div className='row overflow-hidden'>
+               <Form.Item
+                  className='col-6'
+                  label='Tên tour'
+                  name='titleTour'
+                  rules={[
+                     {
+                        required: true,
+                        message: "Hãy nhập tên tour!"
+                     }
+                  ]}>
+                  <Input />
+               </Form.Item>
 
-            <Form.Item label='Giá' name='price' rules={[{ required: true, message: "Hãy nhập tên giá tour!" }]}>
-               <InputNumber
-                  style={{ width: "100%" }}
-                  min={0}
-                  step={1000}
-                  formatter={(value) => `${value}đ`}
-                  parser={(value) => value.replace("đ", "")}
-               />
-            </Form.Item>
-            <Form.Item
-               label='Ngày khởi hành'
-               name='departureDay'
-               rules={[{ required: true, message: "Hãy nhập tên ngày khởi hành!" }]}>
-               <DatePicker
-                  format='DD/MM/YYYY'
-                  // value của thằng này là một dạng moment (from momentjs)
-               />
-            </Form.Item>
-            <Form.Item
-               label='Địa điểm khởi hành'
-               name='departureAddress'
-               rules={[{ required: true, message: "Hãy nhập tên địa điểm!" }]}>
-               <Select
-                  showSearch
-                  style={{ width: "100%" }}
-                  placeholder='Chọn địa chỉ'
-                  optionFilterProp='children'
-                  filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
-                  {PROVINCES.map((province) => {
-                     return <Option value={province}>{province}</Option>;
-                  })}
-               </Select>
-            </Form.Item>
+               <Form.Item
+                  className='col-6'
+                  label='Giá'
+                  name='price'
+                  rules={[{ required: true, message: "Hãy nhập tên giá tour!" }]}>
+                  <InputNumber
+                     style={{ width: "100%" }}
+                     min={0}
+                     step={1000}
+                     formatter={(value) => `${value}đ`}
+                     parser={(value) => value.replace("đ", "")}
+                  />
+               </Form.Item>
+               <Form.Item
+                  className='col-6'
+                  label='Ngày khởi hành'
+                  name='departureDay'
+                  rules={[{ required: true, message: "Hãy nhập tên ngày khởi hành!" }]}>
+                  <DatePicker
+                     format='DD/MM/YYYY'
+                     // value của thằng này là một dạng moment (from momentjs)
+                  />
+               </Form.Item>
+               <Form.Item
+                  className='col-6'
+                  label='Địa điểm khởi hành'
+                  name='departureAddress'
+                  rules={[{ required: true, message: "Hãy nhập tên địa điểm!" }]}>
+                  <Select
+                     showSearch
+                     style={{ width: "100%" }}
+                     placeholder='Chọn địa chỉ'
+                     optionFilterProp='children'
+                     filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
+                     {PROVINCES.map((province) => {
+                        return <Option value={province}>{province}</Option>;
+                     })}
+                  </Select>
+               </Form.Item>
 
-            <Form.Item label='Mô tả' name='describe' rules={[{ required: true, message: "Hãy nhập mô tả!" }]}>
-               <TextArea rows={4} />
-            </Form.Item>
-            <Form.Item label='Địa điểm' name='address' rules={[{ required: true, message: "Hãy nhập tên địa điểm!" }]}>
-               <Cascader
-                  //
-                  // defaultValue={["zhejiang", "hangzhou"]}
-                  options={mapAddressNotWardToOptionAntd()}
-               />
-            </Form.Item>
-            <Form.Item
-               name='type'
-               label='Loại tour'
-               hasFeedback
-               rules={[
-                  {
-                     required: true,
-                     message: "Hãy chọn loại tour!"
-                  }
-               ]}>
-               <Select style={{ width: "100%" }}>
-                  {Object.keys(TYPE_TOUR).map((o) => {
-                     return <Option value={o}>{TYPE_TOUR[o]}</Option>;
-                  })}
-               </Select>
-            </Form.Item>
-            <Form.Item label='Dịch vụ' name='services' rules={[{ required: true, message: "Hãy chọn loại dịch vụ!" }]}>
-               <Select
-                  showSearch
-                  mode='multiple'
-                  style={{ width: "100%" }}
-                  placeholder='Chọn dich vụ'
-                  optionFilterProp='children'
-                  filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
-                  {SERVICES.map((service) => {
-                     return <Option value={service}>{service}</Option>;
-                  })}
-               </Select>
-            </Form.Item>
+               <Form.Item className='col-6' label='Youtube' name='video'>
+                  <Input />
+               </Form.Item>
 
-            <Form.Item {...tailLayout}>
-               <Button type='primary' htmlType='submit'>
-                  Submit
+               <Form.Item
+                  className='col-6'
+                  label='Độ tuổi thấp nhất'
+                  name='minAge'
+                  rules={[{ required: true, message: "Hãy nhập độ tuổi thấp nhất!" }]}>
+                  <InputNumber style={{ width: "100%" }} min={0} max={200} step={1} />
+               </Form.Item>
+
+               <Form.Item
+                  className='col-6'
+                  label='Số người'
+                  name='groupSize'
+                  rules={[{ required: true, message: "Hãy nhập số người!" }]}>
+                  <Select
+                     style={{ width: "100%" }}
+                     placeholder='Chọn số người'
+                     optionFilterProp='children'
+                     filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
+                     {PEOPLE_NUM.map((pNum) => {
+                        return <Option value={pNum}>{`<${pNum}`}</Option>;
+                     })}
+                  </Select>
+               </Form.Item>
+
+               <Form.Item
+                  className='col-6'
+                  label='Địa điểm'
+                  name='address'
+                  rules={[{ required: true, message: "Hãy nhập tên địa điểm!" }]}>
+                  <Cascader
+                     //
+                     // defaultValue={["zhejiang", "hangzhou"]}
+                     options={mapAddressNotWardToOptionAntd()}
+                  />
+               </Form.Item>
+               <Form.Item
+                  className='col-6'
+                  name='type'
+                  label='Loại tour'
+                  hasFeedback
+                  rules={[
+                     {
+                        required: true,
+                        message: "Hãy chọn loại tour!"
+                     }
+                  ]}>
+                  <Select style={{ width: "100%" }}>
+                     {Object.keys(TYPE_TOUR).map((o) => {
+                        return <Option value={o}>{TYPE_TOUR[o]}</Option>;
+                     })}
+                  </Select>
+               </Form.Item>
+               <Form.Item
+                  className='col-6'
+                  label='Dịch vụ'
+                  name='services'
+                  rules={[{ required: true, message: "Hãy chọn loại dịch vụ!" }]}>
+                  <Select
+                     showSearch
+                     mode='multiple'
+                     style={{ width: "100%" }}
+                     placeholder='Chọn dich vụ'
+                     optionFilterProp='children'
+                     filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
+                     {SERVICES.map((service) => {
+                        return <Option value={service}>{service}</Option>;
+                     })}
+                  </Select>
+               </Form.Item>
+               <Form.Item
+                  className='col-6'
+                  label='Mô tả'
+                  name='describe'
+                  rules={[{ required: true, message: "Hãy nhập mô tả!" }]}>
+                  <TextArea rows={4} />
+               </Form.Item>
+            </div>
+            <div className='w-100 d-flex justify-content-center align-items-center'>
+               <Button type='primary' htmlType='submit' className='mr-4'>
+                  {props.currentEdit ? "Sửa" : "Thêm"}
                </Button>
                <Button
-                  type='danger'
                   onClick={() => {
                      props.setCurrentEdit(undefined);
                      props.setIsCreateTour && props.setIsCreateTour(undefined);
                   }}>
                   Đóng
                </Button>
-            </Form.Item>
+            </div>
          </Form>
       </CRUDTourAdminStyled>
    );

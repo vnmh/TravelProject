@@ -5,16 +5,32 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import { authActions } from "~/state/ducks/authUser";
 import * as PATH from "~/configs/routesConfig";
-import { Table, Tag, Space, Button, Image } from "antd";
+import { Table, Tag, Space, Button, Image, message, Popconfirm } from "antd";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
-import CRUDTourAdmin from "./CRUDTourAdmin";
+import CRUDTourAdminContainer from "./CRUDTourAdminContainer";
+import UtilDate from "~/views/utilities/helpers/UtilDate";
+import { currencyFormat } from "~/views/utilities/helpers/currency";
 
 const TourTableListAdminPageStyled = styled.div``;
 
 const TourTableListAdminPage = (props) => {
+   const [deleteTour, setDeleteTour] = useState(false);
+   const [tours, setTours] = useState([]);
+
+   const onDeleteTour = (tour) => {
+      props
+         .deleteTour(tour.idTour)
+         .then((res) => {
+            setDeleteTour(true);
+            message.success("Xóa thành công!");
+         })
+         .catch((err) => {
+            message.error("Xóa thất bại!");
+         });
+   };
    const columns = [
       {
          title: "Hình ảnh",
@@ -52,32 +68,36 @@ const TourTableListAdminPage = (props) => {
       {
          title: "Tên Tour",
          dataIndex: "titleTour",
-         key: "titleTour",
-         ellipsis: true
+         key: "titleTour"
       },
       {
          title: "Địa chỉ khởi hành",
          dataIndex: "departureAddress",
-         key: "departureAddress",
-         ellipsis: true
+         key: "departureAddress"
       },
       {
          title: "Ngày khởi hành",
          dataIndex: "departureDay",
          key: "departureDay",
-         ellipsis: true
+         render: (departureDay) => {
+            return UtilDate.toDateLocal(departureDay);
+         }
       },
       {
          title: "Giá",
          dataIndex: "price",
          key: "price",
-         ellipsis: true
+         render: (price) => {
+            return currencyFormat(price, "đ");
+         }
       },
       {
          title: "Địa chỉ",
          dataIndex: "address",
          key: "address",
-         ellipsis: true
+         render: (address) => {
+            return address.join(", ");
+         }
       },
       {
          title: "Mô tả",
@@ -97,12 +117,19 @@ const TourTableListAdminPage = (props) => {
                   className='btn-primary'
                   icon={<i className='fa fa-pencil-square-o' aria-hidden='true'></i>}
                   onClick={() => {
-                     setCurrentEdit(record);
+                     props.setCurrentEdit(record);
                   }}></Button>
-               <Button
-                  className='btn-danger'
-                  type='dashed'
-                  icon={<i class='fa fa-trash-o' aria-hidden='true'></i>}></Button>
+               <Popconfirm
+                  placement='topRight'
+                  title={"Bạn có muốn xóa tour này?"}
+                  onConfirm={() => onDeleteTour(record)}
+                  okText='Có'
+                  cancelText='Không'>
+                  <Button
+                     className='btn-danger'
+                     type='dashed'
+                     icon={<i class='fa fa-trash-o' aria-hidden='true'></i>}></Button>
+               </Popconfirm>
             </Space>
          ),
          width: 130
@@ -115,17 +142,9 @@ const TourTableListAdminPage = (props) => {
          size: pagination?.pageSize
       });
    };
-   const [currentEdit, setCurrentEdit] = useState(); // Chúng ta sẽ đảm bảo useEffect chạy lần đầu tiên vì useState()=> gán giá trị ban đầu là undefined rồi
-   // Khi currentEdit này mà nó từ có dữ liệu sang không có (có nghĩa là create hoặc update đó)
-   // Thì sẽ fetch lại dữ liệu
-
-   const [tours, setTours] = useState([]);
 
    useEffect(() => {
-      // Đã có fetch dữ liệu
-      // => Thêm một điều kiện là currentEdit mà không có dữ liệu thì sẽ chạy props.getTours()
-      // Để dấu ! đằng trước có nghĩa là đúng khi currentEdit không có dữ liệu, currentEdit dữ liệu thì là sai
-      !currentEdit &&
+      if (!props.currentEdit || props.isCreateTour === false || deleteTour)
          props
             .getTours()
             .then(({ res }) => {
@@ -150,29 +169,31 @@ const TourTableListAdminPage = (props) => {
                         total: tourWithImage.length
                      });
                      setTours(tourWithImage);
+                     setDeleteTour(false);
                   })
                   .catch((err) => {
                      console.log("hiendev ~ file: CardItemListTour.js ~ line 34 ~ .then ~ err", err);
                   });
-
             })
             .catch((err) => {
                console.log("hiendev ~ file: CardItemListTour.js ~ line 24 ~ useEffect ~ err", err);
             });
-      //Vậy chúng ta cần useEffect này được chạy lại khi currentEdit thay đổi
-   }, [currentEdit]);
-
+   }, [props.currentEdit, props.isCreateTour, deleteTour]);
 
    return (
       <TourTableListAdminPageStyled>
-         {(currentEdit || props.isCreateTour) && (
-            <CRUDTourAdmin
-               setCurrentEdit={setCurrentEdit}
-               currentEdit={currentEdit}
+         {(props.currentEdit || props.isCreateTour) && (
+            <CRUDTourAdminContainer
+               // for submit
+               setIsSubmit={props.setIsSubmit}
+               isSubmit={props.isSubmit}
+               // for submit
+               setCurrentEdit={props.setCurrentEdit}
+               currentEdit={props.currentEdit}
                setIsCreateTour={props.setIsCreateTour}
             />
          )}
-         {!currentEdit && !props.isCreateTour && (
+         {!props.currentEdit && !props.isCreateTour && (
             <Table
                onChange={handleChangeTable}
                columns={columns}
@@ -194,7 +215,8 @@ export default compose(
       {
          // postLogin: appApisActions.postLogin
          getTours: appApisActions.getTours,
-         getAllImagesTour: appApisActions.getAllImagesTour
+         getAllImagesTour: appApisActions.getAllImagesTour,
+         deleteTour: appApisActions.deleteTour
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu
