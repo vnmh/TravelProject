@@ -120,7 +120,6 @@ const TourTableListAdminPage = (props) => {
    // Thì sẽ fetch lại dữ liệu
 
    const [tours, setTours] = useState([]);
-   const [currentEdit, setCurrentEdit] = useState();
 
    useEffect(() => {
       // Đã có fetch dữ liệu
