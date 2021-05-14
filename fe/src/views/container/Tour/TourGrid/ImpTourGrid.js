@@ -30,11 +30,7 @@ function ImpTourGrid(props) {
                   {/* end col-lg-12 */}
                </div>
                {/* end row */}
-               <div className='row'>
-                  <div className='col-lg-4 responsive-column'>
-                     <CardItemGridTour />
-                  </div>
-               </div>
+               <CardItemGridTour />
                {/* end row */}
                <div className='row'>
                   <div className='col-lg-12'>

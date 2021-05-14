@@ -46,47 +46,51 @@ const CardItemGridBlog = (props) => {
    }, []);
    return (
       <CardItemGridBlogStyled>
-         {posts.map((item, index) => {
-            return (
-               <div className='card-item'>
-                  <div className='card-img'>
-                     <Link to={PATH.BLOG_DETAIL.replace(":id", item?.idPost)} className='d-block'>
-                        <img
-                           src={
-                              _.get(_.head(item.images), "url")
-                                 ? firstImage(_.get(_.head(item.images), "url", ""))
-                                 : "images/destination-img7.jpg"
-                           }
-                           alt='Destination-img'
-                        />
-                     </Link>
-                     <div
-                        className='add-to-wishlist icon-element'
-                        data-toggle='tooltip'
-                        data-placement='top'
-                        title='Save for Later'>
-                        <i className='la la-heart-o' />
-                     </div>
-                  </div>
-                  <div className='card-body'>
-                     <h3 className='card-title'>
-                        <Tooltip title={item.titlePost}>
-                           <Link to={PATH.BLOG_DETAIL.replace(":id", item?.idPost)}>
-                              <Typography.Paragraph className='text-link' ellipsis={{ rows: 2 }}>
-                                 {item.titlePost}
-                              </Typography.Paragraph>
+         <div className='row'>
+            {posts.map((item, index) => {
+               return (
+                  <div className='col-lg-4 responsive-column'>
+                     <div className='card-item'>
+                        <div className='card-img'>
+                           <Link to={PATH.BLOG_DETAIL.replace(":id", item?.idPost)} className='d-block'>
+                              <img
+                                 src={
+                                    _.get(_.head(item.images), "url")
+                                       ? firstImage(_.get(_.head(item.images), "url", ""))
+                                       : "images/destination-img7.jpg"
+                                 }
+                                 alt='Destination-img'
+                              />
                            </Link>
-                        </Tooltip>
-                     </h3>
-                     <p className='card-meta'>{item.describe}</p>
-                     <div className='card-rating'>
-                              <span className='badge text-white'>4.4/5</span> {" "}
+                           <div
+                              className='add-to-wishlist icon-element'
+                              data-toggle='tooltip'
+                              data-placement='top'
+                              title='Save for Later'>
+                              <i className='la la-heart-o' />
+                           </div>
+                        </div>
+                        <div className='card-body'>
+                           <h3 className='card-title'>
+                              <Tooltip title={item.titlePost}>
+                                 <Link to={PATH.BLOG_DETAIL.replace(":id", item?.idPost)}>
+                                    <Typography.Paragraph className='text-link' ellipsis={{ rows: 2 }}>
+                                       {item.titlePost}
+                                    </Typography.Paragraph>
+                                 </Link>
+                              </Tooltip>
+                           </h3>
+                           <p className='card-meta'>{item.describe}</p>
+                           <div className='card-rating'>
+                              <span className='badge text-white'>4.4/5</span>{" "}
                               <span className='rating__text'>30 Reviews</span>
                            </div>
+                        </div>
+                     </div>
                   </div>
-               </div>
-            );
-         })}
+               );
+            })}
+         </div>
       </CardItemGridBlogStyled>
    );
 };

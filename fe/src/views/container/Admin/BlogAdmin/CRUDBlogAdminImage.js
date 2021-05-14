@@ -6,16 +6,16 @@ import _ from "lodash";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
-import { Form, Input, Button, Checkbox, Row, Select, DatePicker, InputNumber, Cascader, message } from "antd";
+import {  message } from "antd";
 import { API_URL } from "~/configs";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
 
 import { Upload } from "antd";
 import ImgCrop from "antd-img-crop";
 
-const CRUDTourAdminImageStyled = styled.div``;
+const CRUDBlogAdminImageStyled = styled.div``;
 
-const CRUDTourAdminImage = (props) => {
+const CRUDBlogAdminImage = (props) => {
    const [fileList, setFileList] = useState(
       (props.currentEdit?.images || []).map((im) => {
          return {
@@ -58,12 +58,12 @@ const CRUDTourAdminImage = (props) => {
       props
          .deleteImage(file.idImage ? file.idImage : file.response?.insertId)
          .then((res) => {
-            console.log(`ithoangtan -  ~ file: CRUDTourAdminImage.js ~ line 68 ~ .deleteImage ~ res`, res);
+            console.log(`ithoangtan -  ~ file: CRUDBlogAdminImage.js ~ line 68 ~ .deleteImage ~ res`, res);
             message.success("Thành công!");
          })
          .catch((err) => {
             message.error("Thất bại!");
-            console.log(`ithoangtan -  ~ file: CRUDTourAdminImage.js ~ line 69 ~ onRemove ~ err`, err);
+            console.log(`ithoangtan -  ~ file: CRUDBlogAdminImage.js ~ line 69 ~ onRemove ~ err`, err);
          });
       // xóa phần tử image và gọi API xóa image khỏi tour
    };
@@ -72,7 +72,7 @@ const CRUDTourAdminImage = (props) => {
       /**
        * If you return, action will call again
        * */
-      const actionUpload = `${API_URL}/image?idTour=${props.currentEdit.idTour}`;
+      const actionUpload = `${API_URL}/image?idPost=${props.currentEdit.idPost}`;
 
       const newListImage = [...fileList];
       setFileList(newListImage);
@@ -88,7 +88,7 @@ const CRUDTourAdminImage = (props) => {
    };
 
    return (
-      <CRUDTourAdminImageStyled>
+      <CRUDBlogAdminImageStyled>
          {props.currentEdit && (
             <ImgCrop rotate aspect={16 / 9} grid modalWidth={650}>
                <Upload
@@ -105,8 +105,8 @@ const CRUDTourAdminImage = (props) => {
                </Upload>
             </ImgCrop>
          )}
-         {!props.currentEdit && "Chỉ có thể tải ảnh lên sau khi tạo tour thành công!"}
-      </CRUDTourAdminImageStyled>
+         {!props.currentEdit && "Chỉ có thể tải ảnh lên sau khi tạo blog thành công!"}
+      </CRUDBlogAdminImageStyled>
    );
 };
 
@@ -115,16 +115,16 @@ export default compose(
       (state) => ({
          user: state["authUser"].user,
          isAuthenticated: state["authUser"].isAuthenticated
-         // có thể check user?.role === ROLE.administrator && isAuthenticated => CRUDTourAdminImage admin , không thì redirect tới homepage
+         // có thể check user?.role === ROLE.administrator && isAuthenticated => CRUDBlogAdminImage admin , không thì redirect tới homepage
       }),
       {
          // postLogin: appApisActions.postLogin
-         getTours: appApisActions.getTours,
-         getAllImagesTour: appApisActions.getAllImagesTour,
-         postTour: appApisActions.postTour,
-         putTour: appApisActions.putTour,
+         // getTours: appApisActions.getTours,
+         // getAllImagesTour: appApisActions.getAllImagesTour,
+         // postTour: appApisActions.postTour,
+         // putTour: appApisActions.putTour,
          deleteImage: appApisActions.deleteImage
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,
-)(CRUDTourAdminImage);
+)(CRUDBlogAdminImage);

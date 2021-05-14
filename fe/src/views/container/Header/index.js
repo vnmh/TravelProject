@@ -54,26 +54,13 @@ const HeaderTop = () => {
                                           <li>
                                              <Link to='/tour-list'>Tour List</Link>
                                           </li>
-                                          <li>
-                                             <Link to='/tour-detail'>Tour Detail</Link>
-                                          </li>
+      
                                        </ul>
                                     </li>
                                     <li>
-                                       <Link to='#'>
-                                          Blog <i className='la la-angle-down' />
+                                       <Link to='/blog-grid'>
+                                          Blog
                                        </Link>
-                                       <ul className='dropdown-menu-item'>
-                                          <li>
-                                             <Link to='/blog-grid'>Blog Grid</Link>
-                                          </li>
-                                          <li>
-                                             <Link to='/blog-sidebar'>Blog Sidebar</Link>
-                                          </li>
-                                          <li>
-                                             <Link to='/blog-detail'>Blog Detail</Link>
-                                          </li>
-                                       </ul>
                                     </li>
                                     <li>
                                        <Link to='#'>

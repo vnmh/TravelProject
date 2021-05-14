@@ -43,8 +43,8 @@ function SingleContentTourDetail(props) {
                         <i className='la la-users' />
                      </div>
                      <div className='single-feature-titles'>
-                        <h3 className='title font-size-15 font-weight-medium'>Group Size</h3>
-                        <span className='font-size-13'>30 People</span>
+                        <h3 className='title font-size-15 font-weight-medium'>Số lượng</h3>
+                        <span className='font-size-13'>{props.tourDetail?.groupSize}</span>
                      </div>
                   </div>
                   {/* end single-tour-feature */}
@@ -69,7 +69,7 @@ function SingleContentTourDetail(props) {
                         <i className='la la-calendar' />
                      </div>
                      <div className='single-feature-titles'>
-                        <h3 className='title font-size-15 font-weight-medium'>Date</h3>
+                        <h3 className='title font-size-15 font-weight-medium'>Ngày khởi hành</h3>
                         <span className='font-size-13'>Jan 19' - Dec 21'</span>
                      </div>
                   </div>
@@ -82,8 +82,8 @@ function SingleContentTourDetail(props) {
                         <i className='la la-user' />
                      </div>
                      <div className='single-feature-titles'>
-                        <h3 className='title font-size-15 font-weight-medium'>Min Age</h3>
-                        <span className='font-size-13'>10+</span>
+                        <h3 className='title font-size-15 font-weight-medium'>Độ tuổi nhỏ nhất</h3>
+                        <span className='font-size-13'>{props.tourDetail?.minAge}</span>
                      </div>
                   </div>
                   {/* end single-tour-feature */}
@@ -95,8 +95,8 @@ function SingleContentTourDetail(props) {
                         <i className='la la-plane' />
                      </div>
                      <div className='single-feature-titles'>
-                        <h3 className='title font-size-15 font-weight-medium'>Pickup From</h3>
-                        <span className='font-size-13'>Airport</span>
+                        <h3 className='title font-size-15 font-weight-medium'>Địa điểm khởi hành</h3>
+                        <span className='font-size-13'>{props.tourDetail?.departureAddress}</span>
                      </div>
                   </div>
                   {/* end single-tour-feature */}

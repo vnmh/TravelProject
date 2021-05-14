@@ -109,12 +109,7 @@ function ImpTourDetail(props) {
                               </li>
                               <li>
                                  <a data-scroll='photo' href='#photo' className='scroll-link'>
-                                    Hình ảnh
-                                 </a>
-                              </li>
-                              <li>
-                                 <a data-scroll='faq' href='#faq' className='scroll-link'>
-                                    FAQ
+                                    Chi tiết
                                  </a>
                               </li>
                               <li>
