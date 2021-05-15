@@ -70,7 +70,7 @@ function SingleContentBlogDetail(props) {
                      </div>
                      <div className='single-feature-titles'>
                         <h3 className='title font-size-15 font-weight-medium'>Ngày khởi hành</h3>
-                        <span className='font-size-13'>Jan 19' - Dec 21'</span>
+                        <span className='font-size-13'></span>
                      </div>
                   </div>
                   {/* end single-tour-feature */}

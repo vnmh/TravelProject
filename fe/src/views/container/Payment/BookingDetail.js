@@ -4,6 +4,7 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import { firstImage } from "~/views/utilities/helpers/utilObject";
 
 const BookingDetailStyled = styled.div``;
 
@@ -12,26 +13,28 @@ function BookingDetail(props) {
       <BookingDetailStyled>
          <div className='form-box booking-detail-form'>
             <div className='form-title-wrap'>
-               <h3 className='title'>Booking Details</h3>
+               <h3 className='title'>Chi tiết đặt tour</h3>
             </div>
             {/* end form-title-wrap */}
             <div className='form-content'>
                <div className='card-item shadow-none radius-none mb-0'>
                   <div className='card-img pb-4'>
-                     <a href='tour-details.html' className='d-block'>
-                        <img src='images/img11.jpg' alt='tour-img' />
-                     </a>
+                     <div className='d-block'>
+                        <img
+                           src={
+                              props.payment?.images?.length > 0
+                                 ? firstImage(_.head(props.payment?.images)?.url || "")
+                                 : "images/destination-img7.jpg"
+                           }
+                           alt='Destination-img'
+                        />
+                     </div>
                   </div>
                   <div className='card-body p-0'>
                      <div className='d-flex justify-content-between'>
                         <div>
-                           <h3 className='card-title'>Golden Gate Seaplane Tour</h3>
-                           <p className='card-meta'>124 E Huron St, New york</p>
-                        </div>
-                        <div>
-                           <a href='tour-details.html' className='btn ml-1'>
-                              <i className='la la-edit' data-toggle='tooltip' data-placement='top' title='Edit' />
-                           </a>
+                           <h3 className='card-title'>{props.payment?.titleTour}</h3>
+                           <p className='card-meta'>{props.payment?.address}</p>
                         </div>
                      </div>
                      <div className='card-rating'>
@@ -44,14 +47,14 @@ function BookingDetail(props) {
                         <li className='font-size-15'>
                            <span className='w-auto d-block mb-n1'>
                               <i className='la la-calendar mr-1 text-black font-size-17' />
-                              Check in
+                              Ngày khởi hành
                            </span>
                            12 May 2020 7:40am
                         </li>
                         <li className='font-size-15'>
                            <span className='w-auto d-block mb-n1'>
                               <i className='la la-calendar mr-1 text-black font-size-17' />
-                              Check out
+                              Ngày kết thúc
                            </span>
                            15 May 2020 7:40am
                         </li>

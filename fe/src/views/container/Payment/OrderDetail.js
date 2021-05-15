@@ -9,11 +9,11 @@ import PaymentDetail from "./PaymentDetail";
 import InfoBooking from "./InfoBooking";
 import Header from "../Header";
 
-const PaymentReceivedStyled = styled.div``;
+const OrderDetailStyled = styled.div``;
 
-function PaymentReceived(props) {
+function OrderDetail(props) {
    return (
-      <PaymentReceivedStyled>
+      <OrderDetailStyled>
          <Header />
          {/* ================================
             START PAYMENT AREA
@@ -164,7 +164,7 @@ function PaymentReceived(props) {
          {/* ================================
             END PAYMENT AREA
          ================================= */}
-      </PaymentReceivedStyled>
+      </OrderDetailStyled>
    );
 }
 
@@ -175,4 +175,4 @@ export default connect(
    {
       getTours: appApisActions.getTours
    }
-)(PaymentReceived);
+)(OrderDetail);
