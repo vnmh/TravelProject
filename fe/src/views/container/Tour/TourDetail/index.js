@@ -12,29 +12,43 @@ import { useHistory, useRouteMatch } from "react-router";
 
 const TourDetailStyled = styled.div``;
 
-function TourDetail(props)  {
+function TourDetail(props) {
    const [tourDetail, setTourDetail] = useState({});
+
    const hisory = useHistory();
-   console.log("hiendev ~ file: index.js ~ line 18 ~ TourDetail ~ hisory", hisory)
+   console.log("hiendev ~ file: index.js ~ line 18 ~ TourDetail ~ hisory", hisory);
    const match = useRouteMatch();
-   console.log("hiendev ~ file: index.js ~ line 20 ~ TourDetail ~ match", match)
+   console.log("hiendev ~ file: index.js ~ line 20 ~ TourDetail ~ match", match);
    useEffect(() => {
+      let tourDetail = {};
       props
          .getTour(match?.params?.id)
          .then(({ res }) => {
-            console.log("🚀 ~ file: index.js ~ line 25 ~ .then ~ res", res)
-            setTourDetail(res);
+            props.getAllImagesTour().then((resImg) => {
+               tourDetail = Object.assign(tourDetail, {
+                  ...res,
+                  images: resImg.res.filter((image) => {
+                     return res.idTour === image.idTour;
+                  })
+               });
+               props.getTimelineTour(match?.params?.id).then((resTimeline) => {
+                  tourDetail = Object.assign(tourDetail, { timelines: _.head(resTimeline.res) });
+                  props.getScheduleTour(match?.params?.id).then((resSchedule) => {
+                     tourDetail = Object.assign(tourDetail, { schedule: resSchedule.res });
+                     setTourDetail(tourDetail);
+                  });
+               });
+            });
          })
          .catch((err) => {
             message.error("Lỗi load dữ liệu tour rồi nha");
          });
    }, []);
-   console.log("hiendev ~ file: index.js ~ line 17 ~ TourDetail ~ tourDetail", tourDetail);
 
    return (
       <TourDetailStyled>
          <Header />
-         <ImpTourDetail tourDetail={tourDetail}/>
+         <ImpTourDetail tourDetail={tourDetail} />
          <Footer />
       </TourDetailStyled>
    );
@@ -45,6 +59,9 @@ export default connect(
       user: state["authUser"].user
    }),
    {
-      getTour: appApisActions.getTour
+      getTour: appApisActions.getTour,
+      getScheduleTour: appApisActions.getScheduleTour,
+      getTimelineTour: appApisActions.getTimelineTour,
+      getAllImagesTour: appApisActions.getAllImagesTour
    }
 )(TourDetail);

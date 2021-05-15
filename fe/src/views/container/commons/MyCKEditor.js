@@ -29,7 +29,8 @@ export default class MyCKEditor extends React.PureComponent {
 					editor={ ClassicEditor }
 					data={data}
 					config={{
-						extraPlugins: [ MyCustomUploadAdapterPlugin ]
+						extraPlugins: [ MyCustomUploadAdapterPlugin ],
+						mediaEmbed: {previewsInData: true} 
 					}}
 					onInit={ editor => {
 						// You can store the "editor" and use when it is needed.

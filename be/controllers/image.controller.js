@@ -20,6 +20,10 @@ let upload = multer({
   storage: Storage
 }).array('imgUploader', 3); //Field name and max count
 
+let file = multer({
+  storage: Storage
+}).array('file', 3); //Field name and max count
+
 exports.create = function (req, res) {
    //Nên dùng express-validator để validator dữ liệu trước
    //Nhưng vì không có thời gian nên khoan làm
@@ -95,6 +99,21 @@ exports.upload = function (req, res) {
       return res.send(err);
     }
   });
+};
+
+exports.file = function (req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+
+  //Cú pháp cũ với callback - các controller khác sẽ dùng ES7 để code
+ file(req, res, function (err) {
+   if (err) {
+     return res.send(err);
+   } else {
+     res.send({nameFile})
+   }
+ });
 };
 
 exports.listAllImageTour = function (req, res) {

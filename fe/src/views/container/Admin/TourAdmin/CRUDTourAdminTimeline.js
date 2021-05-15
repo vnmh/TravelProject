@@ -7,26 +7,28 @@ import _ from "lodash";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
-import {
-   Button,
-   Form,
-   Input,
-   InputNumber,
-   Popconfirm,
-   Table,
-   Typography,
-   message
-} from "antd";
+import { Button, Form, Input, InputNumber, Popconfirm, Table, Typography, message, Upload, Image } from "antd";
 import TextArea from "antd/lib/input/TextArea";
+import { firstImage } from "~/views/utilities/helpers/utilObject";
+import { UploadOutlined } from "@ant-design/icons";
+import { API_URL } from "~/configs";
 
 const EditableCell = ({ editing, dataIndex, title, inputType, record, index, children, ...restProps }) => {
    let inputNode = undefined;
+   
    switch (inputType) {
       case "number":
          inputNode = <InputNumber min={1} max={100} />;
          break;
       case "textarea":
          inputNode = <TextArea />;
+         break;
+      case "upload":
+         inputNode = (
+            <Upload name={"file"} action={`${API_URL}/file`} listType='picture'>
+               <Button icon={<UploadOutlined />}>Click to upload</Button>
+            </Upload>
+         );
          break;
       default:
          inputNode = <Input />;
@@ -183,6 +185,16 @@ const EditableTable = (props) => {
          editable: true
       },
       {
+         title: "Hình ảnh",
+         dataIndex: "image",
+         width: "15%",
+         inputType: "upload",
+         editable: true,
+         render: (row, record) => {
+            return <Image src={firstImage(row || "")} />;
+         }
+      },
+      {
          title: "Mô tả",
          dataIndex: "description",
          width: "40%",
@@ -251,9 +263,18 @@ const EditableTable = (props) => {
          {!props.currentEdit && "Chỉ có thể thêm timeline sau khi tạo tour thành công!"}
          {props.currentEdit && (
             <Form form={form} component={false}>
-               <Button type='primary' className="float-right mb-20" onClick={addRow}>
-                  Thêm
-               </Button>
+               <div className='d-flex justify-content-end w-100 mb-3'>
+                  <Button type='primary' onClick={addRow} className='mr-3'>
+                     Thêm
+                  </Button>
+                  <Button
+                     onClick={() => {
+                        props.setCurrentEdit(undefined);
+                        props.setIsCreateTour && props.setIsCreateTour(undefined);
+                     }}>
+                     Đóng
+                  </Button>
+               </div>
                <Table
                   components={{
                      body: {
