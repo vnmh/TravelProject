@@ -28,13 +28,12 @@ const layout = {
 const CRUDTourAdmin = (props) => {
    const [form] = Form.useForm();
    const onFinish = (values) => {
-      // Nếu currentEdit thì gọi API update, không thì gọi API create
+      // Nếu currentEdit có dữ liệu thì gọi API update, không thì gọi API create
       if (props.currentEdit) {
          //Gọi API update tour
          //Trước khi gọi API phải map thành JSON hết những dữ liệu Địa điểm, Dịch vụ
          const bodyUpdate = {
             ...values,
-
             // values.address là một mảng, khi lưu xuống CSDL cần phải chuyển thành string bằng phương thức join
             address: values?.address.join(","),
             services: values?.services.join(","),
