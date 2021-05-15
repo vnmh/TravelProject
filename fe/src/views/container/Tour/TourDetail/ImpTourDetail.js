@@ -4,76 +4,46 @@ import styled from "styled-components";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
-import { message } from "antd";
+import { Button, Image, message, Modal } from "antd";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import SingleContentTourDetail from "./SingleContentTourDetail.js";
 import DescriptionTourDetail from "./DescriptionTourDetail.js";
 import ItineraryTourDetail from "./ItineraryTourDetail.js";
-import ImageTourDetail from "./ImageTourDetail.js";
+import ScheduleTourDetail from "./ScheduleTourDetail.js";
 import LocationTourDetail from "./LocationTourDetail.js";
 import EvaluateTourDetail from "./EvaluateTourDetail.js";
 import ReviewTourDetail from "./ReviewTourDetail.js";
 import CommentTourDetail from "./CommentTourDetail.js";
 import BookingFormTourDetail from "./BookingFormTourDetail.js";
 import EnquiryFormTourDetail from "./EnquiryFormTourDetail.js";
+import { firstImage } from "~/views/utilities/helpers/utilObject.js";
+import VideoComponent from "./VideoComponent.js";
 
-const ImpTourDetailStyled = styled.div``;
+const ImpTourDetailStyled = styled.div`
+   .style-image {
+      max-height: 300px;
+   }
+`;
 
 function ImpTourDetail(props) {
+   const [isModalVisible, setIsModalVisible] = useState(false);
    return (
-      <ImpTourDetailStyled>
+      <ImpTourDetailStyled backgroundImage={firstImage(_.head(props.tourDetail?.images)?.url || "")}>
          {/* ================================
             START BREADCRUMB AREA
          ================================= */}
-         <section className='breadcrumb-area bread-bg-2 py-0'>
-            <div className='breadcrumb-wrap'>
+         <section className='py-0 position-relative'>
+            <Image className='style-image ' src={firstImage(_.head(props.tourDetail?.images)?.url || "")} />
+            <div className='position-absolute ' style={{ bottom: 32, left: 32 }}>
+               <Button className='btn-image mx-2'>Hình ảnh</Button>
+               <Button className='btn-video mx-2' onClick={()=> setIsModalVisible(true)}>Video</Button>
+               <VideoComponent isModalVisible={isModalVisible}  onCancel={() => setIsModalVisible(false)} urlVideo={props.tourDetail?.video}/>
+               
+            </div>
+            <div>
                <div className='container'>
                   <div className='row'>
-                     <div className='col-lg-12'>
-                        <div className='breadcrumb-btn'>
-                           <div className='btn-box'>
-                              <a
-                                 className='theme-btn text-dark'
-                                 data-fancybox='video'
-                                 data-src='https://www.youtube.com/watch?v=0GZSfBuhf6Y'
-                                 data-speed={700}>
-                                 <i className='la la-video-camera mr-2' />
-                                 Video
-                              </a>
-                              <a
-                                 className='theme-btn text-dark'
-                                 data-src='images/destination-img.jpg'
-                                 data-fancybox='gallery'
-                                 data-caption='Showing image - 01'
-                                 data-speed={700}>
-                                 <i className='la la-photo mr-2' />
-                                 More Photos
-                              </a>
-                           </div>
-                           <a
-                              className='d-none'
-                              data-fancybox='gallery'
-                              data-src='images/destination-img2.jpg'
-                              data-caption='Showing image - 02'
-                              data-speed={700}
-                           />
-                           <a
-                              className='d-none'
-                              data-fancybox='gallery'
-                              data-src='images/destination-img3.jpg'
-                              data-caption='Showing image - 03'
-                              data-speed={700}
-                           />
-                           <a
-                              className='d-none'
-                              data-fancybox='gallery'
-                              data-src='images/destination-img4.jpg'
-                              data-caption='Showing image - 04'
-                              data-speed={700}
-                           />
-                        </div>
-                        {/* end breadcrumb-btn */}
-                     </div>
+                     <div className='col-lg-12'></div>
                      {/* end col-lg-12 */}
                   </div>
                   {/* end row */}
@@ -144,8 +114,8 @@ function ImpTourDetail(props) {
                               <div className='section-block' />
                            </div>
                            {/* end description */}
-                           <ItineraryTourDetail />
-                           <ImageTourDetail />
+                           <ItineraryTourDetail tourDetail={props.tourDetail} />
+                           <ScheduleTourDetail tourDetail={props.tourDetail}/>
                            <LocationTourDetail />
                            <EvaluateTourDetail />
                            <div className='review-box'>

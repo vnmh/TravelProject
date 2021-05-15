@@ -66,6 +66,7 @@
       "formik": "^2.2.6",
       "fs-extra": "^7.0.0",
       "glyphicons": "^0.2.0",
+      "html-react-parser": "^1.2.6",
       "html-webpack-plugin": "^4.0.0-alpha.2",
       "identity-obj-proxy": "^3.0.0",
       "immer": "^9.0.1",

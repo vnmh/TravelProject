@@ -44,9 +44,11 @@ const CRUDTourAdminDetail = (props) => {
       <CRUDTourAdminDetailStyled>
          {props.currentEdit && (
             <>
-               <Button type='primary' onClick={saveDetail}>
-                  Lưu
-               </Button>
+               <div className='d-flex justify-content-end w-100 mb-3'>
+                  <Button type='primary' onClick={saveDetail}>
+                     Lưu
+                  </Button>
+               </div>
                <MyCKEditor data={data || ""} onChange={onChangeDetail} />
             </>
          )}
