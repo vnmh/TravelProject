@@ -15,7 +15,6 @@ import { Tooltip, Typography, Switch } from "antd";
 import * as PATH from "~/configs/routesConfig";
 const { Paragraph, Text } = Typography;
 
-
 const BlogHomePageStyled = styled(CarouselProvider)``;
 
 const BlogHomePage = (props) => {
@@ -76,38 +75,35 @@ const BlogHomePage = (props) => {
                                     />
                                  </Link>
                                  <div className='card-body'>
-                                    <h3 className='card-title line-height-26'>
-                                       <Tooltip title={item.titlePost} color={colors}>
-                                          <Link to={PATH.BLOG_DETAIL.replace(":id", item?.idPost)}>
-                                             <Typography.Paragraph ellipsis={{ rows: 2 }}>
-                                                {item.titlePost}
-                                             </Typography.Paragraph>
-                                          </Link>
-                                       </Tooltip>
-                                    </h3>
-                                    <p className='card-meta'>
-                                       {/* <span className='post__date'> 1 February, 2020</span>
+                                    <Tooltip title={item.titlePost}>
+                                       <Link to={PATH.BLOG_DETAIL.replace(":id", item?.idPost)}>
+                                          <Typography.Paragraph ellipsis={{ rows: 2 }} className='card-title'>
+                                             {item.titlePost}
+                                          </Typography.Paragraph>
+                                       </Link>
+                                    </Tooltip>
+
+                                    {/* <span className='post__date'> 1 February, 2020</span>
                                        <span className='post-dot' />
                                        <span className='post__time'>4 Mins read</span> */}
-                                       <Text
-                                          white
-                                          style={
-                                             ellipsis
-                                                ? {
-                                                     width: 200
-                                                  }
-                                                : undefined
-                                          }
-                                          ellipsis={
-                                             ellipsis
-                                                ? {
-                                                     tooltip: item.describe
-                                                  }
-                                                : false
-                                          }>
-                                          {item.describe}
-                                       </Text>
-                                    </p>
+                                    <Text
+                                       className='card-meta'
+                                       style={
+                                          ellipsis
+                                             ? {
+                                                  width: 200
+                                               }
+                                             : undefined
+                                       }
+                                       ellipsis={
+                                          ellipsis
+                                             ? {
+                                                  tooltip: item.describe
+                                               }
+                                             : false
+                                       }>
+                                       {item.describe}
+                                    </Text>
                                  </div>
                               </div>
                               <div className='card-footer d-flex align-items-center justify-content-between'>

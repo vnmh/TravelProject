@@ -4,20 +4,38 @@ import parseObjToQuery from "~/views/utilities/helpers/parseObjToQuery";
 
 // TOUR
 export const getTours = (params) => apiAction("get")(types.COMMON, "/tours" + parseObjToQuery(params), {}, true);
+export const putTour = (body) => apiAction("put")(types.COMMON, "/tour", body, true);
 export const getTour = (idTour) => apiAction("get")(types.COMMON, "/tour" + parseObjToQuery({ idTour }), {}, true);
 export const postTour = (body) => apiAction("post")(types.COMMON, "/tour", body, true);
-// export const patchTour = (body) => apiAction("patch")(types.COMMON, "/tour", body, true);
-export const putTour = (body) => apiAction("put")(types.COMMON, "/tour", body, true);
-export const deleteTour = (body) => apiAction("delete")(types.COMMON, "/tour", body, true);
+export const deleteTour = (idTour) =>
+   apiAction("delete")(types.COMMON, "/tour" + parseObjToQuery({ idTour }), {}, true);
+
+// SCHEDULE
+export const getScheduleTour = (idTour) =>
+   apiAction("get")(types.COMMON, "/schedule" + parseObjToQuery({ idTour }), {}, true);
+export const putSchedule = (body) => apiAction("put")(types.COMMON, "/schedule", body, true);
+
+// TIMELINE
+export const getTimelineTour = (idTour) =>
+   apiAction("get")(types.COMMON, "/timeline" + parseObjToQuery({ idTour }), {}, true);
+export const postTimeline = (body) => apiAction("post")(types.COMMON, "/timeline", body, true);
+export const putTimeline = (body) => apiAction("put")(types.COMMON, "/timeline", body, true);
+export const deleteTimeline = (idTimelines) =>
+   apiAction("delete")(types.COMMON, "/timeline" + parseObjToQuery({ idTimelines }), {}, true);
 
 //IMAGE
 export const getAllImagesTour = (params) =>
    apiAction("get")(types.COMMON, "/imagesTour" + parseObjToQuery(params), {}, true);
 export const getAllImagesPost = (params) =>
    apiAction("get")(types.COMMON, "/imagesPost" + parseObjToQuery(params), {}, true);
+export const deleteImage = (idImage) =>
+   apiAction("delete")(types.COMMON, "/image" + parseObjToQuery({ idImage }), {}, true);
 
 //Blog
 export const getPosts = (params) => apiAction("get")(types.COMMON, "/posts" + parseObjToQuery(params), {}, true);
-export const getPost = (idPost) => apiAction("get")(types.COMMON, "/post" + parseObjToQuery({idPost}), {}, true);
-
+export const getPost = (idPost) => apiAction("get")(types.COMMON, "/post" + parseObjToQuery({ idPost }), {}, true);
+export const putPost = (body) => apiAction("put")(types.COMMON, "/post", body, true);
+export const postPost = (body) => apiAction("post")(types.COMMON, "/post", body, true);
+export const deletePost = (idPost) =>
+   apiAction("delete")(types.COMMON, "/post" + parseObjToQuery({ idPost }), {}, true);
 //Evaluates

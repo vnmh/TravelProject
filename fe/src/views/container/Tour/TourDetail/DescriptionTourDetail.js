@@ -12,7 +12,7 @@ const DescriptionTourDetail = (props) => {
       <DescriptionTourDetailStyled>
          <div>
             <h3 className='title font-size-20' name='titleTour'>
-               Mô tả
+               Mô tả ngắn
             </h3>
             <p className='py-3'>
                {props.tourDetail?.describe}

@@ -8,6 +8,7 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 const ItineraryTourDetailStyled = styled.div``;
 
 function ItineraryTourDetail(props) {
+
    return (
       <ItineraryTourDetailStyled>
          <div id='itinerary' className='page-scroll'>
@@ -24,7 +25,7 @@ function ItineraryTourDetail(props) {
                               data-target='#faqCollapseOne'
                               aria-expanded='true'
                               aria-controls='faqCollapseOne'>
-                              <span>Day 01 - Linfen – Historical place in Beijing</span>
+                              <span>{props.tourDetail?.title}</span>
                            </button>
                         </h2>
                      </div>

@@ -30,11 +30,8 @@ function ImpBlogGrid(props) {
                   {/* end col-lg-12 */}
                </div>
                {/* end row */}
-               <div className='row'>
-                  <div className='col-lg-4 responsive-column'>
                      <CardItemGridBlog />
-                  </div>
-               </div>
+
                {/* end row */}
                <div className='row'>
                   <div className='col-lg-12'>
