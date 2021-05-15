@@ -4,6 +4,8 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import UtilDate from "~/views/utilities/helpers/UtilDate";
+import { TYPE_TOUR } from "~/configs/const";
 
 const SingleContentTourDetailStyled = styled.div``;
 
@@ -57,7 +59,7 @@ function SingleContentTourDetail(props) {
                      </div>
                      <div className='single-feature-titles'>
                         <h3 className='title font-size-15 font-weight-medium'>Loại tour</h3>
-                        <span className='font-size-13'>{props.tourDetail?.type}</span>
+                        <span className='font-size-13'>{TYPE_TOUR[props.tourDetail?.type] || ""}</span>
                      </div>
                   </div>
                   {/* end single-tour-feature */}
@@ -70,7 +72,7 @@ function SingleContentTourDetail(props) {
                      </div>
                      <div className='single-feature-titles'>
                         <h3 className='title font-size-15 font-weight-medium'>Ngày khởi hành</h3>
-                        <span className='font-size-13'>Jan 19' - Dec 21'</span>
+                        <span className='font-size-13'> {UtilDate.toDateLocal(props.tourDetail?.departureDay)}</span>
                      </div>
                   </div>
                   {/* end single-tour-feature */}

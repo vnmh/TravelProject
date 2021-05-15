@@ -19,6 +19,7 @@ function TourDetail(props) {
    console.log("hiendev ~ file: index.js ~ line 18 ~ TourDetail ~ hisory", hisory);
    const match = useRouteMatch();
    console.log("hiendev ~ file: index.js ~ line 20 ~ TourDetail ~ match", match);
+   
    useEffect(() => {
       let tourDetail = {};
       props

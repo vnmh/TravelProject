@@ -23,7 +23,7 @@ function ImpPayment(props) {
                   </div>
                   {/* end col-lg-8 */}
                   <div className='col-lg-4'>
-                     <BookingDetail />
+                     <BookingDetail payment={props.payment}/>
                   </div>
                   {/* end col-lg-4 */}
                </div>

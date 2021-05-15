@@ -6,7 +6,7 @@ import _ from "lodash";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
-import { Form, Input, Button, Checkbox, Row, Select, DatePicker, InputNumber, Cascader, message } from "antd";
+import { message } from "antd";
 import { API_URL } from "~/configs";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
 

@@ -18,6 +18,7 @@ import BookingFormTourDetail from "./BookingFormTourDetail.js";
 import EnquiryFormTourDetail from "./EnquiryFormTourDetail.js";
 import { firstImage } from "~/views/utilities/helpers/utilObject.js";
 import VideoComponent from "./VideoComponent.js";
+import ImageComponent from "./ImageComponent.js";
 
 const ImpTourDetailStyled = styled.div`
    .style-image {
@@ -27,6 +28,8 @@ const ImpTourDetailStyled = styled.div`
 
 function ImpTourDetail(props) {
    const [isModalVisible, setIsModalVisible] = useState(false);
+   const [isModalVisibleImage, setIsModalVisibleImage] = useState(false);
+
    return (
       <ImpTourDetailStyled backgroundImage={firstImage(_.head(props.tourDetail?.images)?.url || "")}>
          {/* ================================
@@ -35,10 +38,10 @@ function ImpTourDetail(props) {
          <section className='py-0 position-relative'>
             <Image className='style-image ' src={firstImage(_.head(props.tourDetail?.images)?.url || "")} />
             <div className='position-absolute ' style={{ bottom: 32, left: 32 }}>
-               <Button className='btn-image mx-2'>Hình ảnh</Button>
+               <Button className='btn-image mx-2' onClick={()=> setIsModalVisibleImage(true)}>Hình ảnh</Button>
                <Button className='btn-video mx-2' onClick={()=> setIsModalVisible(true)}>Video</Button>
                <VideoComponent isModalVisible={isModalVisible}  onCancel={() => setIsModalVisible(false)} urlVideo={props.tourDetail?.video}/>
-               
+               <ImageComponent isModalVisibleImage={isModalVisibleImage}  onCancel={() => setIsModalVisibleImage(false)} urlImage={props.tourDetail?.images}/>
             </div>
             <div>
                <div className='container'>
@@ -220,7 +223,6 @@ function ImpTourDetail(props) {
                            <a href='tour-details.html' className='d-block'>
                               <img src='images/img9.jpg' alt='Destination-img' />
                            </a>
-                           <span className='badge'>Bestseller</span>
                         </div>
                         <div className='card-body'>
                            <h3 className='card-title'>

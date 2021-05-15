@@ -8,7 +8,6 @@ import TourDetail from "~/views/container/Tour/TourDetail";
 import TourList from "~/views/container/Tour/TourList";
 import TourGrid from "~/views/container/Tour/TourGrid";
 import Payment from "~/views/container/Payment";
-import PaymentReceived from "~/views/container/Payment/PaymentReceived";
 import DashBoard from "~/views/container/Admin/DashBoardAdmin";
 import BookingAdminPage from "~/views/container/Admin/BookingAdmin";
 import TourAdminPage from "~/views/container/Admin/TourAdmin";
@@ -17,6 +16,7 @@ import ProfileAdminPage from "~/views/container/Admin/ProfileAdmin";
 import BlogAdminPage from "~/views/container/Admin/BlogAdmin";
 import BlogGrid from "~/views/container/Blog/BlogGrid";
 import BlogDetail from "~/views/container/Blog/BlogDetail";
+import OrderDetail from "~/views/container/Payment/OrderDetail";
 
 const AppRouter = (props) => {
    return (
@@ -29,7 +29,7 @@ const AppRouter = (props) => {
             <Route path={PATH.TOUR_GRID} exact component={() => <TourGrid />} />
             <Route path={PATH.TOUR_DETAIL} exact component={() => <TourDetail />} />
             <Route path={PATH.TOUR_BOOKING} exact component={() => <Payment />} />
-            <Route path={PATH.PAYMENT_RECEIVED} exact component={() => <PaymentReceived />} />
+            <Route path={PATH.ORDER_DETAIL} exact component={() => <OrderDetail />} />
 
             <Route path={PATH.BLOG_GRID} exact component={() => <BlogGrid />} />
             <Route path={PATH.BLOG_DETAIL} exact component={() => <BlogDetail />} />
@@ -37,7 +37,6 @@ const AppRouter = (props) => {
             {/* Trang nào (Routing) CẦN phải đăng nhập mới vào được thì dùng AuthorizedRoute */}
             <AuthorizedRoute path={PATH.HOME_PAGE} />
             <AuthorizedRoute path={PATH.TOUR_BOOKING} />
-            <AuthorizedRoute path={PATH.PAYMENT_RECEIVED} />
 
             <Route path={PATH.ADMIN_DASHBOARD} exact component={() => <DashBoard />} />
             <Route path={PATH.ADMIN_BOOKING} exact component={() => <BookingAdminPage />} />
@@ -45,6 +44,7 @@ const AppRouter = (props) => {
             <Route path={PATH.ADMIN_REVIEW} exact component={() => <ReviewAdminPage />} />
             <Route path={PATH.ADMIN_PROFILE} exact component={() => <ProfileAdminPage />} />
             <Route path={PATH.ADMIN_BLOG} exact component={() => <BlogAdminPage />} />
+            
             <Redirect to={PATH.HOME_PAGE} />
          </Switch>
       </Router>

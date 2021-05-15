@@ -122,8 +122,8 @@ const CardItemListTour = (props) => {
                      <Link to={PATH.TOUR_DETAIL.replace(":id", item?.idTour)} className='d-block'>
                         <img
                            src={
-                              _.get(_.head(item.images), "url")
-                                 ? firstImage(_.get(_.head(item.images), "url", ""))
+                              item.images?.length > 0
+                                 ? firstImage(_.head(item.images)?.url || "")
                                  : "images/destination-img7.jpg"
                            }
                            alt='Destination-img'
