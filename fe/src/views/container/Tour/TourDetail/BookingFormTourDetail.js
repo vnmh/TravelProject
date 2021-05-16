@@ -10,13 +10,14 @@ import { DatePicker } from "antd";
 import moment from "moment";
 import UtilDate from "~/views/utilities/helpers/UtilDate";
 import * as PATH from "~/configs/routesConfig";
+import { parseObjToQuery } from "~/views/utilities/helpers";
 
 const { RangePicker } = DatePicker;
 
 const BookingFormTourDetailStyled = styled.div``;
 
 function BookingFormTourDetail(props) {
-   const [numberPeople, setNumberPeople] = useState(1)
+   const [numberPeople, setNumberPeople] = useState(1);
    return (
       <BookingFormTourDetailStyled>
          <div className='sidebar-widget single-content-widget'>
@@ -24,8 +25,17 @@ function BookingFormTourDetail(props) {
                <div className='sidebar-book-title-wrap mb-3'>
                   <p>
                      <span className='text-form'>Chỉ từ</span>
-                     <span className='text-value ml-2 mr-1'>{currencyFormat(props.tourDetail?.price*numberPeople)}</span>{" "}
-                     <span className='before-price'>$412.00</span>
+                     <span className='text-value ml-2 mr-1'>
+                        {currencyFormat(
+                           props.tourDetail?.price * numberPeople -
+                              props.tourDetail?.price * props.tourDetail?.sale * 0.01 * numberPeople
+                        )}
+                     </span>{" "}
+                     {props.tourDetail?.sale > 0 ? (
+                        <span className='before-price'>{currencyFormat(props.tourDetail?.price * numberPeople)}</span>
+                     ) : (
+                        <React.Fragment></React.Fragment>
+                     )}
                   </p>
                </div>
             </div>
@@ -56,19 +66,23 @@ function BookingFormTourDetail(props) {
                <div className='qty-box mb-2 d-flex align-items-center justify-content-between'>
                   <label className='font-size-16'>Số người</label>
                   <div className='qtyBtn d-flex align-items-center'>
-                     <div className='qtyDec' onClick={() => {
-                        if(numberPeople > 1) {
-                           setNumberPeople(numberPeople - 1)
-                        }
-                     }}>
+                     <div
+                        className='qtyDec'
+                        onClick={() => {
+                           if (numberPeople > 1) {
+                              setNumberPeople(numberPeople - 1);
+                           }
+                        }}>
                         <i className='la la-minus' />
                      </div>
                      <input type='text' name='qtyInput' value={numberPeople} />
-                     <div className='qtyInc' onClick={() => {
-                        if(numberPeople < 100) {
-                           setNumberPeople(numberPeople + 1)
-                        }
-                     }}>
+                     <div
+                        className='qtyInc'
+                        onClick={() => {
+                           if (numberPeople < 100) {
+                              setNumberPeople(numberPeople + 1);
+                           }
+                        }}>
                         <i className='la la-plus' />
                      </div>
                   </div>
@@ -77,7 +91,7 @@ function BookingFormTourDetail(props) {
             {/* end sidebar-widget-item */}
             <div className='btn-box pt-2'>
                <Link
-                  to={PATH.TOUR_BOOKING.replace(":id", props.tourDetail?.idTour)}
+                  to={PATH.TOUR_BOOKING.replace(":id", props.tourDetail?.idTour) + parseObjToQuery({ numberPeople })}
                   className='theme-btn text-center w-100 mb-2'>
                   <i className='la la-shopping-cart mr-2 font-size-18' />
                   Đặt ngay

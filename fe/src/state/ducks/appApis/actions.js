@@ -39,3 +39,7 @@ export const postPost = (body) => apiAction("post")(types.COMMON, "/post", body,
 export const deletePost = (idPost) =>
    apiAction("delete")(types.COMMON, "/post" + parseObjToQuery({ idPost }), {}, true);
 //Evaluates
+
+//MOMO
+
+export const getLinkMoMo = (body) => apiAction("post")(types.COMMON, "/getLinkMomo", body, true);
