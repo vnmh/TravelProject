@@ -73,6 +73,7 @@ router.delete('/image', authenticated, image.delete);
 router.post('/image', image.create);
 router.post('/avatar', image.avatar);
 router.post('/upload', image.upload);
+router.post('/file', image.file);
  
 //for account
 router.get('/account', authenticated, account.read);

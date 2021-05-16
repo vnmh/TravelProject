@@ -13,32 +13,33 @@ import ProfileBreadPage from "./ProfileBreadPage";
 const ProfilePageStyled = styled.div``;
 
 const ProfilePage = (props) => {
-   const [profile, setProfile] = useState({})
+   const [profile, setProfile] = useState({});
 
    useEffect(() => {
-      props
-      .getProfile(props.user?.idAccount)
-      .then(({res}) => {
-         setProfile(res)
-         console.log("maidev ~ file: index.js ~ line 23 ~ .then ~ res", res)
-      })
-   }, [])
+      props.getProfile(props.user?.idAccount).then(({ res }) => {
+         setProfile(res);
+      });
+   }, []);
 
    return (
       <ProfilePageStyled>
          {props.user?.role === "user" ? (
             <>
-               <div className='mb-5'><Header /></div>
-               <div><Profile /></div>
+               <div className='mb-5'>
+                  <Header />
+               </div>
+               <div>
+                  <Profile profile={profile}/>
+               </div>
             </>
          ) : (
             <>
                <body className='section-bg'>
                   <section className='dashboard-area'>
+                     <TopBar />
                      <SideBar />
                      <ProfileBreadPage />
-                     <TopBar />
-                     <Profile />
+                     <Profile profile={profile}/>
                   </section>
                </body>
             </>
