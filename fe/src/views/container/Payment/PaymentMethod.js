@@ -16,12 +16,12 @@ function PaymentMethod(props) {
    const params = queryString.parse(window.location.search);
    const [linkMomo, setLinkMomo] = useState("");
    const history = useHistory();
-
+   const [PIN, setPIN] = useState(Date.now());
    useEffect(() => {
       if (props.payment?.price > 0) {
          const body = {
             order: {
-               PIN: Date.now(),
+               PIN,
                numberPeople: params.numberPeople,
                email: props.user?.email
             },
@@ -44,8 +44,9 @@ function PaymentMethod(props) {
 
    const submitTransfer = () => {
       const body = {
-         PIN: Date.now(),
+         PIN,
          status: "new",
+         paymentMethod,
          totalPrice:
             props.payment?.price * params.numberPeople -
             props.payment?.price * props.payment?.sale * 0.01 * params.numberPeople,
@@ -62,7 +63,8 @@ function PaymentMethod(props) {
          .createOrder(body)
          .then(({ res }) => {
             message.success("Tạo đơn hàng thành công");
-            history.push(PATH.ORDER_DETAIL + parseObjToQuery({ idOrder: res.insertId, idTour: props.payment?.idTour}));
+            history.push(PATH.ORDER_DETAIL + parseObjToQuery({ idOrder: res.insertId, idTour: props.payment?.idTour }));
+            setPIN(Date.now());
          })
          .catch((err) => {
             message.error("Tạo đơn hàng thất bại");
@@ -84,7 +86,11 @@ function PaymentMethod(props) {
                            {/* end col-lg-6 */}
                            <div className='col-lg-12'>
                               <div className='btn-box'>
-                                 <a className='theme-btn' type='submit' href={linkMomo?.data?.payUrl}>
+                                 <a
+                                    className='theme-btn'
+                                    type='submit'
+                                    href={linkMomo?.data?.payUrl}
+                                    onClick={submitTransfer}>
                                     Thanh toán ngay
                                  </a>
                               </div>
