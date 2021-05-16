@@ -31,8 +31,6 @@ exports.create = function (req, res) {
    let newOrder = new Order(req.body);
 
    //60% giá vé đối với trẻ em
-   newOrder.totalPrice =
-      newOrder.numberPeople * newOrder.totalPrice + newOrder.numberChildren * newOrder.totalPrice * 0.6;
    Order.createOrder(newOrder, function (err, order) {
       if (err) res.send(err);
       res.json(order);
