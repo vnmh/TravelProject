@@ -21,13 +21,10 @@ function InfoBooking(props) {
    console.log("hiendev ~ file: index.js ~ line 20 ~ TourDetail ~ match", match);
 
    useEffect(() => {
-      console.log(
-         "maidev ~ file: InfoBooking.js ~ line 24 ~ InfoBooking ~ window.location.search",
-         window.location.search
-      );
+   
       let tourDetail = {};
       props
-         .getOrder({ idOrder: params.idOrder, PIN: params.requestId })
+         .getOrder({ idOrder: params.idOrder, PIN: params.orderId })
          .then(({ res }) => {
             tourDetail = Object.assign(tourDetail, { order: res });
 
