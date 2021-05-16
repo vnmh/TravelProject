@@ -14,7 +14,7 @@ const ProfileSystem = (props) => {
          <div className='col-lg-12 d-flex justify-content-center'>
             <div className='form-box '>
                <div className='form-title-wrap'>
-                  <h1 className='title d-flex justify-content-center align-item-center'>THÔNG TIN CÁ NHÂN</h1>
+                  <h1 className='title d-flex justify-content-center pt-1'>THNG TIN CÁ NHÂN</h1>
                </div>
                <div className='form-content'>
                   <div className='user-profile-action d-flex align-items-center pb-4'>
