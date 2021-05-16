@@ -27,7 +27,7 @@ function InfoBooking(props) {
       );
       let tourDetail = {};
       props
-         .getOrder({ idOrder: params.idOrder })
+         .getOrder({ idOrder: params.idOrder, PIN: params.requestId })
          .then(({ res }) => {
             tourDetail = Object.assign(tourDetail, { order: res });
 
