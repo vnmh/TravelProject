@@ -5,10 +5,12 @@ import { connect } from "react-redux";
 import { authActions } from "~/state/ducks/authUser";
 import * as PATH from "~/configs/routesConfig";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
-import { Avatar, Button, Dropdown, Menu } from "antd";
+import { Avatar, Button, Dropdown, Image, Menu } from "antd";
 import LoginModal from "~/views/container/Header/LoginModal";
 import RegisterModal from "./RegisterModal";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
+import { firstImage } from "~/views/utilities/helpers/utilObject";
+import logo from "~/static/images/logo.png";
 
 const HeaderTopStyled = styled.div``;
 
@@ -16,10 +18,10 @@ const HeaderTop = (props) => {
    const [isModalVisibleLogin, setIsModalVisibleLogin] = useState(false);
    const [isModalVisibleRegister, setIsModalVisibleRegister] = useState(false);
    const history = useHistory();
-   console.log("maidev ~ file: index.js ~ line 22 ~ HeaderTop ~ history", history)
+   console.log("maidev ~ file: index.js ~ line 22 ~ HeaderTop ~ history", history);
    const menu = (
       <Menu>
-         <Menu.Item key='0' onClick={()=>history.push(PATH.PROFILE)}>
+         <Menu.Item key='0' onClick={() => history.push(PATH.PROFILE)}>
             {" "}
             <i className='fa fa-user mr-1' aria-hidden='true'></i> Thông tin cá nhân
          </Menu.Item>
@@ -49,7 +51,7 @@ const HeaderTop = (props) => {
                            </Link>
                            <div className='logo'>
                               <Link to={PATH.HOME_PAGE}>
-                                 <img src='images/logo.png' alt='logo' />
+                                 <img src={logo} alt='logo' />
                               </Link>
                               <div className='menu-toggler'>
                                  <i className='la la-bars' />
@@ -142,13 +144,24 @@ const HeaderTop = (props) => {
 
                            {props.isAuthenticated ? (
                               <Dropdown overlay={menu} trigger={["click"]}>
-                                 <a className='d-flex justify-content-center align-items-center' href='#1'>
+                                 <a href='#1'>
                                     {" "}
                                     <Avatar
                                        className='mr-2'
-                                       //
-                                       icon={<UserOutlined />}
-                                       //    src={<Image src={props.user?.avatar} />}
+                                       src={
+                                          <Image
+                                             width={50}
+                                             height={50}
+                                             preview={false}
+                                             src={
+                                                props.user?.avatar ? (
+                                                   firstImage("/img/" + props.user?.avatar)
+                                                ) : (
+                                                   <UserOutlined />
+                                                )
+                                             }
+                                          />
+                                       }
                                     />
                                     {props.user?.name} <DownOutlined />
                                  </a>

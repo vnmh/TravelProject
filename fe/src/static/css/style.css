@@ -5308,7 +5308,7 @@ body {
     height: 100%;
     top: 0;
     left: 0;
-    background-color: #0d233e;
+    /* background-color: #0d233e; */
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;

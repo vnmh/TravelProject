@@ -56,7 +56,7 @@ const ImpHomePage = (props) => {
          {/* ================================
             START TRENDING AREA
          ================================= */}
-         <section className='trending-area position-relative section-bg padding-top-100px padding-bottom-200px '>
+         <section className='trending-area position-relative section-bg padding-top-100px pb-0'>
             <div className='container'>
                <div className='row'>
                   <div className='col-lg-12'>
@@ -98,7 +98,7 @@ const ImpHomePage = (props) => {
          {/* ================================
             START TESTIMONIAL AREA
          ================================= */}
-         <section className='testimonial-area section-padding'>
+         <section className='testimonial-area section-padding pt-5'>
             <div className='container'>
                <div className='row'>
                   <div className='col-lg-12'>

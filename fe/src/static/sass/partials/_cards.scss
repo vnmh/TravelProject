@@ -1042,7 +1042,7 @@
     height: 100%;
     top: 0;
     left: 0;
-    background-color: $theme-color;
+    // background-color: $theme-color;
     @include border-radius(8px);
     opacity: 0.7;
   }
