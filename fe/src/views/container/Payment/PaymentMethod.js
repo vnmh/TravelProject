@@ -4,35 +4,42 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import queryString from "query-string";
 
 const PaymentMethodStyled = styled.div``;
 
 function PaymentMethod(props) {
+   const params = queryString.parse(window.location.search);
    const [linkMomo, setLinkMomo] = useState("");
 
    useEffect(() => {
-      const body = {
-         order: {
-            PIN: Date.now(),
-            numberPeople: 1,
-            email: "hiendev@gmail.com"
-         },
-         tour: {
-            price: "99000",
-            sale: 0
-         }
-      };
+      if (props.payment?.price > 0) {
+         const body = {
+            order: {
+               PIN: Date.now(),
+               numberPeople: params.numberPeople,
+               email: props.user?.email
+            },
+            tour: {
+               price: props.payment?.price,
+               sale: props.payment?.sale
+            }
+         };
+         props
+            .getLinkMoMo(body)
+            .then(({ res }) => {
+               setLinkMomo(res);
+            })
 
-      props
-         .getLinkMoMo(body)
-         .then(({ res }) => {
-            setLinkMomo(res);
-         })
-
-         .catch((err) => {});
-   }, []);
+            .catch((err) => {});
+      }
+   }, [props.payment?.price]);
 
    const [paymentMethod, setPaymentMethod] = useState("");
+
+   const submitTransfer = () => {
+      
+   }
 
    const renderPaymentMethod = () => {
       switch (paymentMethod) {
@@ -132,7 +139,7 @@ function PaymentMethod(props) {
                            {/* end col-lg-6 */}
                            <div className='col-lg-12'>
                               <div className='btn-box'>
-                                 <button className='theme-btn' type='submit'>
+                                 <button className='theme-btn' onClick={submitTransfer}>
                                     Hoàn tất
                                  </button>
                               </div>
