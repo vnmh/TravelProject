@@ -39,8 +39,7 @@ exports.login = (req, res, next) => {
             {
                idAccount: loadAccount.idAccount,
                email: loadAccount.email,
-               role: loadAccount.role,
-               ...loadAccount
+               role: loadAccount.role
             },
             process.env.SECURITY
          );
