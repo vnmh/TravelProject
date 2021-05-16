@@ -108,7 +108,7 @@ Order.getOrderById = function(idOrder, funcResult) {
   mysql.query(
     "SELECT * FROM " +
       databaseProduction +
-      ".orders  WHERE idOrder = ? AND WHERE statusAction <> 'deleted';",
+      ".orders  WHERE idOrder = ? AND statusAction <> 'deleted';",
     [+idOrder],
     function(err, res) {
       if (err) {
