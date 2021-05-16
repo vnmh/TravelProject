@@ -9,13 +9,12 @@ import styled from "styled-components"; // Dùng để ghi đè style bên trong
 const ProfileSystemStyled = styled.div``;
 
 const ProfileSystem = (props) => {
-   
    return (
       <ProfileSystemStyled>
-         <div className='col-lg-6'>
-            <div className='form-box'>
+         <div className='col-lg-12 d-flex justify-content-center'>
+            <div className='form-box '>
                <div className='form-title-wrap'>
-                  <h3 className='title'>Thông tin cá nhân</h3>
+                  <h1 className='title d-flex justify-content-center'>THÔNG TIN CÁ NHÂN</h1>
                </div>
                <div className='form-content'>
                   <div className='user-profile-action d-flex align-items-center pb-4'>
@@ -42,19 +41,10 @@ const ProfileSystem = (props) => {
                         <div className='row'>
                            <div className='col-lg-6 responsive-column'>
                               <div className='input-box'>
-                                 <label className='label-text'>Họ</label>
+                                 <label className='label-text'>Họ và tên</label>
                                  <div className='form-group'>
                                     <span className='la la-user form-icon' />
-                                    <input className='form-control' type='text' placeholder='Họ' />
-                                 </div>
-                              </div>
-                           </div>
-                           <div className='col-lg-6 responsive-column'>
-                              <div className='input-box'>
-                                 <label className='label-text'>Tên</label>
-                                 <div className='form-group'>
-                                    <span className='la la-user form-icon' />
-                                    <input className='form-control' type='text' placeholder='Tên' />
+                                    <input className='form-control' type='text' placeholder='Họ và tên' />
                                  </div>
                               </div>
                            </div>
@@ -64,11 +54,7 @@ const ProfileSystem = (props) => {
                                  <label className='label-text'>Email</label>
                                  <div className='form-group'>
                                     <span className='la la-envelope form-icon' />
-                                    <input
-                                       className='form-control'
-                                       type='text'
-                                       placeholder={props.user?.email}
-                                    />
+                                    <input className='form-control' type='text' placeholder={props.user?.email} />
                                  </div>
                               </div>
                            </div>
