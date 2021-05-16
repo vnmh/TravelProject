@@ -10,14 +10,14 @@ import ChangePassword from "./ChangePassword";
 
 const ProfileStyled = styled.div``;
 
-const Profile = () => {
+const Profile = (props) => {
    return (
       <ProfileStyled>
          <div className='dashboard-main-content'>
             <div className='container-fluid'>
                <div className='row d-flex justify-content-center'>
-                  <ProfileSettingPage />
-                  <ChangePassword />
+                  <ProfileSettingPage profile={props.profile}/>
+                  <ChangePassword profile={props.profile}/>
                </div>
             </div>
          </div>
