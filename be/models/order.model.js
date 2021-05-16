@@ -110,7 +110,7 @@ Order.getOrderById = function (idOrder, funcResult) {
 Order.getOrderByPIN = function (PIN, funcResult) {
    mysql.query(
       'SELECT * FROM ' + databaseProduction + ".orders  WHERE PIN = ? AND statusAction <> 'deleted';",
-      [+PIN],
+      [PIN],
       function (err, res) {
          if (err) {
             funcResult(err, null);
