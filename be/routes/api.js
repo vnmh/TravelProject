@@ -84,8 +84,8 @@ router.post('/account', authenticated, account.create);
 router.put('/account', authenticated, account.update);
 router.delete('/account', authenticated, account.delete);
 
-// //for payment
-// router.post('/getLinkMoMo', order.getLinkMoMo);
+//for payment
+router.post('/getLinkMoMo', order.getLinkMoMo);
 // router.post('/getLinkPayment', order.getLinkPayment);
 // router.post('/resultPayment', order.resultPayment);
 // router.post('/cancelPayment', order.cancelPayment);

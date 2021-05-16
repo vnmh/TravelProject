@@ -5,10 +5,17 @@ import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
+import UtilDate from "~/views/utilities/helpers/UtilDate";
+import moment from "moment";
+import { useParams } from "react-router";
+import queryString from "query-string";
+import { currencyFormat } from "~/views/utilities/helpers/currency";
 
 const BookingDetailStyled = styled.div``;
 
 function BookingDetail(props) {
+   const params = queryString.parse(window.location.search);
+
    return (
       <BookingDetailStyled>
          <div className='form-box booking-detail-form'>
@@ -49,53 +56,55 @@ function BookingDetail(props) {
                               <i className='la la-calendar mr-1 text-black font-size-17' />
                               Ngày khởi hành
                            </span>
-                           12 May 2020 7:40am
+                           {UtilDate.toDateLocal(props.payment?.departureDay)}
                         </li>
                         <li className='font-size-15'>
                            <span className='w-auto d-block mb-n1'>
                               <i className='la la-calendar mr-1 text-black font-size-17' />
                               Ngày kết thúc
                            </span>
-                           15 May 2020 7:40am
+                           {UtilDate.toDateLocal(
+                              moment(props.payment?.departureDay).add(props.payment?.vocationTime, "days")
+                           )}
                         </li>
                         <li className='font-size-15'>
                            <span className='w-auto d-block mb-n1'>
                               <i className='la la-clock-o mr-1 text-black font-size-17' />
-                              Duration
+                              Khoảng thời gian
                            </span>
-                           3 days 3 hours
+                           {props.payment?.vocationTime} ngày
                         </li>
                         <li className='font-size-15'>
                            <span className='w-auto d-block mb-n1'>
                               <i className='la la-map-marker mr-1 text-black font-size-17' />
-                              Location
+                              Địa điểm khởi hành
                            </span>
-                           124 E Huron St, New york
+                           {props.payment?.departureAddress}
                         </li>
                      </ul>
-                     <h3 className='card-title pb-3'>Order Details</h3>
-                     <div className='section-block' />
-                     <ul className='list-items list-items-2 py-3'>
-                        <li>
-                           <span>Tour:</span>3 Days
-                        </li>
-                        <li>
-                           <span>Extra Benefits:</span>No
-                        </li>
-                        <li>
-                           <span>Travellers:</span>4
-                        </li>
-                     </ul>
+                     <h3 className='card-title pb-3'>Thanh toán</h3>
                      <div className='section-block' />
                      <ul className='list-items list-items-2 pt-3'>
                         <li>
-                           <span>Sub Total:</span>$240
+                           <span>Số người:</span>
+                           {params.numberPeople}
                         </li>
                         <li>
-                           <span>Taxes And Fees:</span>$5
+                           <span>Giá gốc:</span>
+                           {currencyFormat(props.payment?.price * params.numberPeople)}
                         </li>
                         <li>
-                           <span>Total Price:</span>$245
+                           <span>Khuyến mãi:</span>
+                           {currencyFormat(props.payment?.price * props.payment?.sale * 0.01 * params.numberPeople)} (
+                           {currencyFormat(props.payment?.sale, "%")})
+                        </li>
+                        <div className='section-block' />
+                        <li>
+                           <span>Tổng tiền:</span>
+                           {currencyFormat(
+                              props.payment?.price * params.numberPeople -
+                                 props.payment?.price * props.payment?.sale * 0.01 * params.numberPeople
+                           )}
                         </li>
                      </ul>
                   </div>
