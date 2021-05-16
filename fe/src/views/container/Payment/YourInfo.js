@@ -8,6 +8,13 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 const YourInfoStyled = styled.div``;
 
 function YourInfo(props) {
+
+   const [firstName, setFirstName] = useState('');
+   const [lasttName, setLastName] = useState('');
+   const [email, setEmail] = useState('');
+   const [phone, setPhone] = useState('');
+   const [address, setAddress] = useState('');
+
    return (
       <YourInfoStyled>
          <div className='form-box'>
@@ -24,7 +31,7 @@ function YourInfo(props) {
                               <label className='label-text'>Họ</label>
                               <div className='form-group'>
                                  <span className='la la-user form-icon' />
-                                 <input className='form-control' type='text' name='text' placeholder='Họ' />
+                                 <input onChange   className='form-control' type='text' name='text' placeholder='Họ' />
                               </div>
                            </div>
                         </div>

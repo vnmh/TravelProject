@@ -12,7 +12,7 @@ import DashBoard from "~/views/container/Admin/DashBoardAdmin";
 import BookingAdminPage from "~/views/container/Admin/BookingAdmin";
 import TourAdminPage from "~/views/container/Admin/TourAdmin";
 import ReviewAdminPage from "~/views/container/Admin/ReviewAdmin";
-import ProfileAdminPage from "~/views/container/Admin/ProfileAdmin";
+import ProfilePage from "~/views/container/Profile";
 import BlogAdminPage from "~/views/container/Admin/BlogAdmin";
 import BlogGrid from "~/views/container/Blog/BlogGrid";
 import BlogDetail from "~/views/container/Blog/BlogDetail";
@@ -42,7 +42,7 @@ const AppRouter = (props) => {
             <Route path={PATH.ADMIN_BOOKING} exact component={() => <BookingAdminPage />} />
             <Route path={PATH.ADMIN_TOUR_LIST} exact component={() => <TourAdminPage />} />
             <Route path={PATH.ADMIN_REVIEW} exact component={() => <ReviewAdminPage />} />
-            <Route path={PATH.ADMIN_PROFILE} exact component={() => <ProfileAdminPage />} />
+            <Route path={PATH.PROFILE} exact component={() => <ProfilePage />} />
             <Route path={PATH.ADMIN_BLOG} exact component={() => <BlogAdminPage />} />
             
             <Redirect to={PATH.HOME_PAGE} />

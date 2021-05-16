@@ -58,6 +58,7 @@ const SliderHomePage = (props) => {
                         })
                      };
                   });
+                  tourWithImage.length=3;
                   setTours(tourWithImage);
                })
                .catch((err) => {

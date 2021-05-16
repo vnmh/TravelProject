@@ -8,15 +8,34 @@ import * as PATH from "~/configs/routesConfig";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 
-import { Button } from "antd";
+import { Avatar, Button, Dropdown, Image, Menu } from "antd";
 import LoginModal from "~/views/container/Header/LoginModal";
 import RegisterModal from "./RegisterModal";
+import { DownOutlined, UserOutlined } from "@ant-design/icons";
 
 const HeaderTopStyled = styled.div``;
 
-const HeaderTop = () => {
+const HeaderTop = (props) => {
    const [isModalVisibleLogin, setIsModalVisibleLogin] = useState(false);
    const [isModalVisibleRegister, setIsModalVisibleRegister] = useState(false);
+   const menu = (
+      <Menu>
+         <Menu.Item key='0'>
+            {" "}
+            <i className='fa fa-user mr-1' aria-hidden='true'></i> Thông tin cá nhân
+         </Menu.Item>
+         <Menu.Item key='1'>
+            {" "}
+            <i className='fa fa-history mr-1' aria-hidden='true'></i>Lịch sử booking
+         </Menu.Item>
+         <Menu.Divider />
+         <Menu.Item key='3' onClick={props.logout}>
+            {" "}
+            <i className='fa fa-sign-out mr-1' aria-hidden='true'></i>
+            Đăng xuất
+         </Menu.Item>
+      </Menu>
+   );
 
    return (
       <HeaderTopStyled>
@@ -54,13 +73,10 @@ const HeaderTop = () => {
                                           <li>
                                              <Link to='/tour-list'>Tour List</Link>
                                           </li>
-      
                                        </ul>
                                     </li>
                                     <li>
-                                       <Link to='/blog-grid'>
-                                          Blog
-                                       </Link>
+                                       <Link to='/blog-grid'>Blog</Link>
                                     </li>
                                     <li>
                                        <Link to='#'>
@@ -124,14 +140,30 @@ const HeaderTop = () => {
                               </nav>
                            </div>
                            {/* end main-menu-content */}
-                           <div className='nav-btn'>
-                              <Button type='primary' onClick={() => setIsModalVisibleRegister(true)}>
-                                 Đăng ký
-                              </Button>{" "}
-                              <Button type='primary' onClick={() => setIsModalVisibleLogin(true)}>
-                                 Đăng nhập
-                              </Button>
-                           </div>
+
+                           {props.isAuthenticated ? (
+                              <Dropdown overlay={menu} trigger={["click"]}>
+                                 <a className='d-flex justify-content-center align-items-center' href='#1'>
+                                    {" "}
+                                    <Avatar
+                                       className='mr-2'
+                                       //
+                                       icon={<UserOutlined />}
+                                       //    src={<Image src={props.user?.avatar} />}
+                                    />
+                                    {props.user?.name ? props.user?.name : props.user?.email} <DownOutlined />
+                                 </a>
+                              </Dropdown>
+                           ) : (
+                              <div className='nav-btn'>
+                                 <Button type='primary' onClick={() => setIsModalVisibleRegister(true)}>
+                                    Đăng ký
+                                 </Button>{" "}
+                                 <Button type='primary' onClick={() => setIsModalVisibleLogin(true)}>
+                                    Đăng nhập
+                                 </Button>
+                              </div>
+                           )}
                            {/* end nav-btn */}
                         </div>
                         {/* end menu-wrapper */}
@@ -165,7 +197,8 @@ export default compose(
       }),
       {
          // postLogin: appApisActions.postLogin
-         login: authActions.login
+         login: authActions.login,
+         logout: authActions.logout
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,

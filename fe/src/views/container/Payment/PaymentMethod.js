@@ -32,7 +32,7 @@ function PaymentMethod(props) {
          .catch((err) => {});
    }, []);
 
-   const [paymentMethod, setPaymentMethod] = useState("MOMO");
+   const [paymentMethod, setPaymentMethod] = useState("");
 
    const renderPaymentMethod = () => {
       switch (paymentMethod) {
@@ -164,7 +164,7 @@ function PaymentMethod(props) {
                            className={`nav-link ${paymentMethod === "MOMO" ? "active" : ""} `}
                            id='credit-card-tab'
                            data-toggle='tab'
-                           href='#credit-card'
+                           href='#1'
                            role='tab'
                            aria-controls='credit-card'
                            aria-selected='false'>
@@ -178,7 +178,7 @@ function PaymentMethod(props) {
                            className={`nav-link ${paymentMethod === "Transfer" ? "active" : ""} `}
                            id='paypal-tab'
                            data-toggle='tab'
-                           href='#paypal'
+                           href='#1'
                            role='tab'
                            aria-controls='paypal'
                            aria-selected='true'>
@@ -192,7 +192,7 @@ function PaymentMethod(props) {
                            className={`nav-link ${paymentMethod === "Cash" ? "active" : ""} `}
                            id='payoneer-tab'
                            data-toggle='tab'
-                           href='#payoneer'
+                           href='#1'
                            role='tab'
                            aria-controls='payoneer'
                            aria-selected='true'>

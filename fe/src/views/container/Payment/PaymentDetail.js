@@ -4,10 +4,6 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import InfoTour from "../Tour/InfoTour";
-import YourInfo from "./YourInfo";
-import PaymentMethod from "./PaymentMethod";
-import BookingDetail from "./BookingDetail";
 
 const PaymentDetailStyled = styled.div``;
 

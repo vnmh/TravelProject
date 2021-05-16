@@ -24,13 +24,6 @@ exports.login = (req, res, next) => {
             res.status(500).json(error);
             throw error;
          }
-         // if (!account.verify) {
-         //   const error = new Error();
-         //   error.statusCode = 200;
-         //   error.message = "Your account was not verified!!!";
-         //   res.status(200).json(error);
-         //   throw error;
-         // }
          loadAccount = account;
          return bcrypt.compare(password, account.password);
       })
@@ -64,7 +57,8 @@ exports.login = (req, res, next) => {
                idAccount: loadAccount.idAccount,
                name: loadAccount.name,
                role: loadAccount.role,
-               avatar: loadAccount.avatar
+               avatar: loadAccount.avatar,
+               ...loadAccount
             })
             .status(200);
       })
@@ -159,9 +153,9 @@ exports.register = (req, res, next) => {
          accounts.forEach((account) => {
             if (account && account.email === newAccount.email) {
                const error = new Error();
-               error.statusCode = 400;
+               error.statusCode = 500;
                error.message = 'The email already exists';
-               res.status(400).json(error);
+               res.status(500).json(error);
                throw error;
             }
          });
@@ -248,9 +242,9 @@ exports.verify = async (req, res, next) => {
          .then(async (account) => {
             if (!account) {
                const error = new Error();
-               error.statusCode = 200;
+               error.statusCode = 500;
                error.message = 'Some thing Wrong!!!';
-               res.status(200).json(error);
+               res.status(500).json(error);
                throw error;
             }
             if (account.verifyToken === verifyToken) {
@@ -275,9 +269,9 @@ exports.verify = async (req, res, next) => {
                   });
                }
                const error = new Error();
-               error.statusCode = 200;
+               error.statusCode = 500;
                error.message = 'Something Wrong!';
-               res.status(200).json(error);
+               res.status(500).json(error);
                throw error;
             }
          })
@@ -306,9 +300,9 @@ exports.forgotPasswordStep1 = (req, res, next) => {
       .then(async (account) => {
          if (!account) {
             const error = new Error();
-            error.statusCode = 200;
+            error.statusCode = 500;
             error.message = 'This email is not resgitered!';
-            res.status(200).json(error);
+            res.status(500).json(error);
             throw error;
          }
          account.verifyToken = verifyToken;
@@ -321,13 +315,13 @@ exports.forgotPasswordStep1 = (req, res, next) => {
                         We are Trùm Tour:
                         <br/><br/>
                         On the following page in order to get new password:
-                        <a href="${process.env.FRONT_END}forgotPassword?ddSWuQzP8x2cHckmKxiK=${jwt.sign(
+                        <a href="${process.env.FRONT_END}forgot-password?ddSWuQzP8x2cHckmKxiK=${jwt.sign(
             verifyToken,
             process.env.SECURITY
          )}&QZmWYU22y2zb2qZg8clJ=${jwt.sign(account.email, process.env.SECURITY)}&wXvkihdDAD9D8FI9Nwpf=${jwt.sign(
             Date.now(),
             process.env.SECURITY
-         )}">${process.env.FRONT_END}forgotPassword?${jwt.sign('verifyToken', process.env.SECURITY)}=${jwt.sign(
+         )}">${process.env.FRONT_END}forgot-password?${jwt.sign('verifyToken', process.env.SECURITY)}=${jwt.sign(
             verifyToken,
             process.env.SECURITY
          )}</a>
@@ -335,7 +329,7 @@ exports.forgotPasswordStep1 = (req, res, next) => {
                         Have a pleasant day.`;
          //micro service gmail
          await mailerGmail.sendEmail(
-            'itk160454@gmail.com',
+            process.env.MY_GMAIL,
             account.email,
             'Vui lòng nhấp vào link dưới để khôi phục mật khẩu!',
             html
@@ -368,18 +362,18 @@ exports.forgotPasswordStep2 = (req, res, next) => {
       const email = jwt.verify(req.query.QZmWYU22y2zb2qZg8clJ, process.env.SECURITY);
       if (Date.now() - date >= 500000) {
          const error = new Error();
-         error.statusCode = 200;
+         error.statusCode = 500;
          error.message = 'Phiên quá hạn, vui lòng thực hiện lại trình tự khôi phục mật khẩu!';
-         res.status(200).json(error);
+         res.status(500).json(error);
          throw error;
       }
       Accounts.getByEmailAndRole(email, 'user')
          .then((account) => {
             if (!account) {
                const error = new Error();
-               error.statusCode = 200;
+               error.statusCode = 500;
                error.message = 'This email is not resgitered!';
-               res.status(200).json(error);
+               res.status(500).json(error);
                throw error;
             } else if (account.verifyToken === verifyToken) {
                //Lấy password từ body
@@ -396,9 +390,9 @@ exports.forgotPasswordStep2 = (req, res, next) => {
                });
             } else {
                const error = new Error();
-               error.statusCode = 200;
+               error.statusCode = 500;
                error.message = 'Có gì đó sai sai á nè!';
-               res.status(200).json(error);
+               res.status(500).json(error);
                throw error;
             }
          })
