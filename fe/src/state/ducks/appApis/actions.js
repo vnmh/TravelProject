@@ -43,3 +43,4 @@ export const deletePost = (idPost) =>
 //MOMO
 
 export const getLinkMoMo = (body) => apiAction("post")(types.COMMON, "/getLinkMomo", body, true);
+export const createOrder = (body) => apiAction("post")(types.COMMON, "/order", body, true);

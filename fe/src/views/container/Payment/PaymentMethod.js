@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import queryString from "query-string";
+import { message } from "antd";
 
 const PaymentMethodStyled = styled.div``;
 
@@ -38,8 +39,31 @@ function PaymentMethod(props) {
    const [paymentMethod, setPaymentMethod] = useState("");
 
    const submitTransfer = () => {
-      
-   }
+      const body = {
+         PIN: Date.now(),
+         status: "new",
+         totalPrice:
+            props.payment?.price * params.numberPeople -
+            props.payment?.price * props.payment?.sale * 0.01 * params.numberPeople,
+         numberPeople: params.numberPeople,
+         address: props.user?.address,
+         phone: props.user?.phone,
+         email: props.user?.email,
+         notes: '',
+         idAccount: props.user?.idAccount,
+         buyer: props.user?.name,
+         idTour: props.payment?.idTour
+      };
+      props
+      .createOrder(body)
+      .then(({ res }) => {
+      console.log("maidev ~ file: PaymentMethod.js ~ line 60 ~ .then ~ res", res)
+         message.success('Tạo đơn hàng thành công')
+      })
+      .catch((err) => {
+         message.error('Tạo đơn hàng thất bại')
+      });
+   };
 
    const renderPaymentMethod = () => {
       switch (paymentMethod) {
@@ -100,7 +124,7 @@ function PaymentMethod(props) {
                   role='tabpanel'
                   aria-labelledby='credit-card-tab'>
                   <div className='contact-form-action'>
-                     <form method='post'>
+                     <div>
                         <div className='row'>
                            <div className='col-lg-6 responsive-column'>
                               <div className='input-box'>
@@ -146,7 +170,7 @@ function PaymentMethod(props) {
                            </div>
                            {/* end col-lg-12 */}
                         </div>
-                     </form>
+                     </div>
                   </div>
                   {/* end contact-form-action */}
                </div>
@@ -226,6 +250,7 @@ export default connect(
    }),
    {
       getTours: appApisActions.getTours,
-      getLinkMoMo: appApisActions.getLinkMoMo
+      getLinkMoMo: appApisActions.getLinkMoMo,
+      createOrder: appApisActions.createOrder,
    }
 )(PaymentMethod);
