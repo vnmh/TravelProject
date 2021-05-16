@@ -50,7 +50,14 @@ exports.read = function (req, res) {
          res.json(order[0]); //Đã là API thì trả về phải chuẩn
          //Chỉ có một phần tử thì không lý do gì phải res về một mảng
       });
-   } else {
+   } else if(req.query.PIN){
+      //Cú pháp cũ với callback - các controller khác sẽ dùng với Promisez
+      Order.getOrderByPIN(req.query.PIN, function (err, order) {
+         if (err) res.send(err);
+         res.json(order[0]); //Đã là API thì trả về phải chuẩn
+         //Chỉ có một phần tử thì không lý do gì phải res về một mảng
+      });
+   }else {
       //Cú pháp cũ với callback - các controller khác sẽ dùng với Promisez
       Order.getOrderById(req.query.idOrder, function (err, order) {
          if (err) res.send(err);
