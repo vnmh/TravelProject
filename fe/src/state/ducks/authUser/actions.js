@@ -1,5 +1,6 @@
 import * as types from "./types";
 import apiAction, { defaultAction } from "../utils/createAction";
+import { parseObjToQuery } from "~/views/utilities/helpers";
 
 export const login = (data) => apiAction("post")(types.LOGIN, "/login", data, false);
 
@@ -15,8 +16,8 @@ export const validateResetPasswordOTP = (data) =>
    apiAction("post")(types.VERIFY_OTP, `/api/v1/sys/account/reset-password/validate-otp`, data, false);
 export const resetPasswordFinish = (data) =>
    apiAction("post")(types.COMMON, `/api/v1/sys/account/reset-password/finish`, data, false);
-export const getProfile = () =>
-   apiAction("get")(types.GET_USER, "/account", null, true);
+export const getProfile = (idAccount) =>
+   apiAction("get")(types.GET_USER, "/account" + parseObjToQuery({idAccount}), null, true);
 
 /**
  * create profile

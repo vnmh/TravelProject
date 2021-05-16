@@ -15,7 +15,7 @@ const Profile = () => {
       <ProfileStyled>
          <div className='dashboard-main-content'>
             <div className='container-fluid'>
-               <div className='row'>
+               <div className='row d-flex justify-content-center'>
                   <ProfileSettingPage />
                   <ChangePassword />
                </div>

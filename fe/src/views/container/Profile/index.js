@@ -16,7 +16,12 @@ const ProfilePage = (props) => {
    const [profile, setProfile] = useState({})
 
    useEffect(() => {
-      
+      props
+      .getProfile(props.user?.idAccount)
+      .then(({res}) => {
+         setProfile(res)
+         console.log("maidev ~ file: index.js ~ line 23 ~ .then ~ res", res)
+      })
    }, [])
 
    return (
