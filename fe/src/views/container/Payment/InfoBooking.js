@@ -13,6 +13,7 @@ const InfoBookingStyled = styled.div``;
 function InfoBooking(props) {
    const [orderDetail, setOrderDetail] = useState();
    const params = queryString.parse(window.location.search);
+   console.log("maidev ~ file: InfoBooking.js ~ line 16 ~ InfoBooking ~ params", params);
 
    const hisory = useHistory();
    console.log("hiendev ~ file: index.js ~ line 18 ~ TourDetail ~ hisory", hisory);
@@ -20,12 +21,17 @@ function InfoBooking(props) {
    console.log("hiendev ~ file: index.js ~ line 20 ~ TourDetail ~ match", match);
 
    useEffect(() => {
+      console.log(
+         "maidev ~ file: InfoBooking.js ~ line 24 ~ InfoBooking ~ window.location.search",
+         window.location.search
+      );
       let tourDetail = {};
       props
-         .getOrder({idOrder: +params.idOrder})
+         .getOrder({ idOrder: params.idOrder })
          .then(({ res }) => {
-            console.log("maidev ~ file: InfoBooking.js ~ line 27 ~ .then ~  res",  res)
-            props.getTour(match?.params?.id).then(({ res }) => {
+            tourDetail = Object.assign(tourDetail, { order: res });
+
+            props.getTour(res.idTour).then(({ res }) => {
                props.getAllImagesTour().then((resImg) => {
                   tourDetail = Object.assign(tourDetail, {
                      ...res,
@@ -45,7 +51,7 @@ function InfoBooking(props) {
    return (
       <InfoBookingStyled>
          <div className='payment-received-list'>
-            <h3 className='title font-size-24'>{}</h3>
+            <h3 className='title font-size-24'>{orderDetail?.titleTour}</h3>
             <div className='card-rating'>
                <span className='badge badge-warning text-white'>4.4/5</span>
                <span className='review__text text-warning'>Average</span>
@@ -82,6 +88,7 @@ export default connect(
    }),
    {
       getTour: appApisActions.getTour,
-      getOrder: appApisActions.getOrder
+      getOrder: appApisActions.getOrder,
+      getAllImagesTour: appApisActions.getAllImagesTour
    }
 )(InfoBooking);
