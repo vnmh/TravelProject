@@ -25,13 +25,10 @@ function ImpTourGrid(props) {
                         <FilterTopTour />
                         <FilterOptionTour />
                      </div>
-                     {/* end filter-wrap */}
                   </div>
-                  {/* end col-lg-12 */}
                </div>
                {/* end row */}
                <CardItemGridTour />
-               {/* end row */}
                <div className='row'>
                   <div className='col-lg-12'>
                      <div className='btn-box mt-3 text-center'>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
@@ -6,24 +6,48 @@ import { authActions } from "~/state/ducks/authUser";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { firstImage } from "~/views/utilities/helpers/utilObject";
 import Avatar from "./Avatar";
+import { message } from "antd";
 
 const ProfileSystemStyled = styled.div``;
 
 const ProfileSystem = (props) => {
-   const [fileList, setFileList] = useState(
-      (props.currentEdit?.images || []).map((im) => {
-         return {
-            idImage: im.idImage,
-            name: im.name,
-            status: "done",
-            url: firstImage(im.url)
-         };
-      })
-   );
+   const [avatar, setAvatar] = useState("");
+   const [name, setName] = useState("");
+   const [email, setEmail] = useState("");
 
-   const onChange = ({ fileList: newFileList }) => {
-      setFileList(newFileList);
+   const handleSubmit = () => {
+      const body = {
+         idAccount: props.profile?.idAccount,
+         avatar: avatar ? avatar : props.profile.avatar,
+         name: name ? name : props.profile.name
+      };
+      props
+         .updateProfile(body)
+         .then((res) => {
+            message.success("Cập nhật thành công");
+         })
+         .catch((err) => {
+            message.error("Cập nhật thất bại");
+         });
    };
+
+   const handleChange = (e, field) => {
+      switch (field) {
+         case "name":
+            setName(e.target?.value || "");
+            break;
+
+         default:
+            break;
+      }
+   };
+
+   useEffect(() => {
+      if (props.profile?.email) {
+         setName(props.profile?.name);
+         setEmail(props.profile?.email);
+      }
+   }, [props.profile?.email]);
 
    return (
       <ProfileSystemStyled>
@@ -36,7 +60,7 @@ const ProfileSystem = (props) => {
                </div>
                <div className='form-content'>
                   <div className='user-profile-action d-flex align-items-center pb-4'>
-                     <Avatar />
+                     <Avatar avatarAPI={props.profile?.avatar} setAvatar={setAvatar} />
                   </div>
                   <div className='contact-form-action'>
                      <form action='#'>
@@ -50,7 +74,8 @@ const ProfileSystem = (props) => {
                                        className='form-control'
                                        type='text'
                                        placeholder='Họ và tên'
-                                       value={props.profile?.name}
+                                       value={name}
+                                       onChange={(e) => handleChange(e, "name")}
                                     />
                                  </div>
                               </div>
@@ -61,7 +86,13 @@ const ProfileSystem = (props) => {
                                  <label className='label-text'>Email</label>
                                  <div className='form-group'>
                                     <span className='la la-envelope form-icon' />
-                                    <input className='form-control' type='text' placeholder={props.user?.email} />
+                                    <input
+                                       onChange={(e) => handleChange(e, "email")}
+                                       className='form-control'
+                                       type='text'
+                                       value={email}
+                                       disabled
+                                    />
                                  </div>
                               </div>
                            </div>
@@ -88,8 +119,8 @@ const ProfileSystem = (props) => {
                            {/* end col-lg-6 */}
                            <div className='col-lg-12'>
                               <div className='btn-box'>
-                                 <button className='theme-btn' type='button'>
-                                    Save Changes
+                                 <button className='theme-btn' type='button' onClick={handleSubmit}>
+                                    Lưu thông tin
                                  </button>
                               </div>
                            </div>
@@ -116,7 +147,8 @@ export default compose(
       }),
       {
          // postLogin: appApisActions.postLogin
-         login: authActions.login
+         login: authActions.login,
+         updateProfile: authActions.updateProfile
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,

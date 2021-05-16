@@ -4,7 +4,6 @@ import { parseObjToQuery } from "~/views/utilities/helpers";
 
 export const login = (data) => apiAction("post")(types.LOGIN, "/login", data, false);
 
-
 // export const register = (data) => apiAction("post")(types.COMMON, "/api/v1/sys/account/register", data, false);
 export const register = (data) => apiAction("post")(types.COMMON, "/register", data, false);
 
@@ -17,7 +16,9 @@ export const validateResetPasswordOTP = (data) =>
 export const resetPasswordFinish = (data) =>
    apiAction("post")(types.COMMON, `/api/v1/sys/account/reset-password/finish`, data, false);
 export const getProfile = (idAccount) =>
-   apiAction("get")(types.GET_USER, "/account" + parseObjToQuery({idAccount}), null, true);
+   apiAction("get")(types.GET_USER, "/account" + parseObjToQuery({ idAccount }), null, true);
+export const updateProfile = (body) =>
+   apiAction("put")(types.GET_USER, "/account" , body, true);
 
 /**
  * create profile

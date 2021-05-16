@@ -53,14 +53,14 @@ const BlogHomePage = (props) => {
          naturalSlideWidth={100}
          naturalSlideHeight={160}
          totalSlides={posts.length}
-         visibleSlides={3}
+         visibleSlides={3.2}
          step={3}>
          {/* end col-lg-4 */}
          <Slider>
             {posts.map((item, index) => {
                return (
                   <Slide index={index}>
-                     <div className='row padding-top-50px'>
+                     <div className='row padding-top-50px mx-1'>
                         <div className='col-lg-12 responsive-column'>
                            <div className='card-item blog-card'>
                               <div className='card-img'>
