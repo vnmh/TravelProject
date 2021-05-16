@@ -44,3 +44,4 @@ export const deletePost = (idPost) =>
 
 export const getLinkMoMo = (body) => apiAction("post")(types.COMMON, "/getLinkMomo", body, true);
 export const createOrder = (body) => apiAction("post")(types.COMMON, "/order", body, true);
+export const getOrder = (params) => apiAction("get")(types.COMMON, "/order" + parseObjToQuery(params), {}, true);

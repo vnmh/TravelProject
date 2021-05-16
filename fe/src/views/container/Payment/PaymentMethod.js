@@ -6,12 +6,16 @@ import { appApisActions } from "~/state/ducks/appApis/index";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import queryString from "query-string";
 import { message } from "antd";
+import * as PATH from "~/configs/routesConfig";
+import { parseObjToQuery } from "~/views/utilities/helpers";
+import { useHistory } from "react-router";
 
 const PaymentMethodStyled = styled.div``;
 
 function PaymentMethod(props) {
    const params = queryString.parse(window.location.search);
    const [linkMomo, setLinkMomo] = useState("");
+   const history = useHistory();
 
    useEffect(() => {
       if (props.payment?.price > 0) {
@@ -49,20 +53,20 @@ function PaymentMethod(props) {
          address: props.user?.address,
          phone: props.user?.phone,
          email: props.user?.email,
-         notes: '',
+         notes: "",
          idAccount: props.user?.idAccount,
          buyer: props.user?.name,
          idTour: props.payment?.idTour
       };
       props
-      .createOrder(body)
-      .then(({ res }) => {
-      console.log("maidev ~ file: PaymentMethod.js ~ line 60 ~ .then ~ res", res)
-         message.success('Tạo đơn hàng thành công')
-      })
-      .catch((err) => {
-         message.error('Tạo đơn hàng thất bại')
-      });
+         .createOrder(body)
+         .then(({ res }) => {
+            message.success("Tạo đơn hàng thành công");
+            history.push(PATH.ORDER_DETAIL + parseObjToQuery({ idOrder: res.insertId, idTour: props.payment?.idTour}));
+         })
+         .catch((err) => {
+            message.error("Tạo đơn hàng thất bại");
+         });
    };
 
    const renderPaymentMethod = () => {
@@ -251,6 +255,6 @@ export default connect(
    {
       getTours: appApisActions.getTours,
       getLinkMoMo: appApisActions.getLinkMoMo,
-      createOrder: appApisActions.createOrder,
+      createOrder: appApisActions.createOrder
    }
 )(PaymentMethod);

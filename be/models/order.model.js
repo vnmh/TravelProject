@@ -109,7 +109,7 @@ Order.getOrderById = function(idOrder, funcResult) {
     "SELECT * FROM " +
       databaseProduction +
       ".orders  WHERE idOrder = ? AND WHERE statusAction <> 'deleted';",
-    [idOrder],
+    [+idOrder],
     function(err, res) {
       if (err) {
         funcResult(err, null);
