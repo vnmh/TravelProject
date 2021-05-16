@@ -16,7 +16,7 @@ exports.listAll = async (req, res, next) => {
 
 exports.read = async (req, res, next) => {
   try {
-    account = await Account.getById();
+    account = await Account.getById(req.query.idAccount);
     res.status(200).json(account);
   } catch (err) {
     if (!err.statusCode) {

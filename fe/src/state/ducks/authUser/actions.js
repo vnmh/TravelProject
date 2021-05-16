@@ -16,7 +16,7 @@ export const validateResetPasswordOTP = (data) =>
 export const resetPasswordFinish = (data) =>
    apiAction("post")(types.COMMON, `/api/v1/sys/account/reset-password/finish`, data, false);
 export const getProfile = () =>
-   apiAction("get")(types.GET_USER, "/services/sys/api/v1/sys-accounts/profile", null, true);
+   apiAction("get")(types.GET_USER, "/account", null, true);
 
 /**
  * create profile

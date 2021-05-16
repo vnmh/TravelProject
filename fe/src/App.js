@@ -50,8 +50,7 @@ class App extends React.Component {
          "./static/js/total-price.js",
          "./static/js/waypoints.min.js",
          "./static/js/wow.js",
-         "./static/js/main.js",
-
+         "./static/js/main.js"
       ].map((item) => {
          const script = document.createElement("script");
          script.src = item;

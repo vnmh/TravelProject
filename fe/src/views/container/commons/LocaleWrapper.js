@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { appDataSelector } from "../../../state/ducks/appData";
 import { connect } from "react-redux";
 

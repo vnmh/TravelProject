@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
@@ -13,6 +13,12 @@ import ProfileBreadPage from "./ProfileBreadPage";
 const ProfilePageStyled = styled.div``;
 
 const ProfilePage = (props) => {
+   const [profile, setProfile] = useState({})
+
+   useEffect(() => {
+      
+   }, [])
+
    return (
       <ProfilePageStyled>
          {props.user?.role === "user" ? (
@@ -45,7 +51,8 @@ export default compose(
       }),
       {
          // postLogin: appApisActions.postLogin
-         login: authActions.login
+         login: authActions.login,
+         getProfile: authActions.getProfile
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,

@@ -100,12 +100,12 @@ const RegisterModal = (props) => {
          ) : (
             <Form {...layout} form={form} name='register' onFinish={onFinish} onFinishFailed={onFinishFailed}>
                <Form.Item
-                  label='Tên tài khoản'
-                  name='username'
+                  label='Họ và tên'
+                  name='name'
                   rules={[
                      {
                         required: true,
-                        message: "Hãy nhập tên tài khoản của bạn!"
+                        message: "Hãy nhập họ và tên của bạn!"
                      }
                   ]}>
                   <Input size='large' />

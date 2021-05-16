@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { compose, lifecycle } from "recompose";
+import { Link, useHistory, withRouter } from "react-router-dom";
+import { compose } from "recompose";
 import { connect } from "react-redux";
-
 import { authActions } from "~/state/ducks/authUser";
 import * as PATH from "~/configs/routesConfig";
-
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
-
-import { Avatar, Button, Dropdown, Image, Menu } from "antd";
+import { Avatar, Button, Dropdown, Menu } from "antd";
 import LoginModal from "~/views/container/Header/LoginModal";
 import RegisterModal from "./RegisterModal";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
@@ -18,9 +15,11 @@ const HeaderTopStyled = styled.div``;
 const HeaderTop = (props) => {
    const [isModalVisibleLogin, setIsModalVisibleLogin] = useState(false);
    const [isModalVisibleRegister, setIsModalVisibleRegister] = useState(false);
+   const history = useHistory();
+   console.log("maidev ~ file: index.js ~ line 22 ~ HeaderTop ~ history", history)
    const menu = (
       <Menu>
-         <Menu.Item key='0'>
+         <Menu.Item key='0' onClick={()=>history.push(PATH.PROFILE)}>
             {" "}
             <i className='fa fa-user mr-1' aria-hidden='true'></i> Thông tin cá nhân
          </Menu.Item>
@@ -151,7 +150,7 @@ const HeaderTop = (props) => {
                                        icon={<UserOutlined />}
                                        //    src={<Image src={props.user?.avatar} />}
                                     />
-                                    {props.user?.name ? props.user?.name : props.user?.email} <DownOutlined />
+                                    {props.user?.name} <DownOutlined />
                                  </a>
                               </Dropdown>
                            ) : (

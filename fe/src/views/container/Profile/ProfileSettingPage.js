@@ -9,7 +9,6 @@ import styled from "styled-components"; // Dùng để ghi đè style bên trong
 const ProfileSystemStyled = styled.div``;
 
 const ProfileSystem = (props) => {
-   console.log("maidev ~ file: ProfileSettingPage.js ~ line 119 ~ ProfileSystem ~ props.user", props.user)
    
    return (
       <ProfileSystemStyled>
