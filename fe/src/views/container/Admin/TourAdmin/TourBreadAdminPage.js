@@ -33,7 +33,6 @@ const TourBreadAdminPage = () => {
                                  Trang chủ
                               </a>
                            </li>
-                           <li>Dashboard</li>
                            <li>Tour</li>
                         </ul>
                      </div>
