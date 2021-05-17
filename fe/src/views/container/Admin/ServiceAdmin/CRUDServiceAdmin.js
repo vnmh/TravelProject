@@ -21,7 +21,7 @@ const CRUDServiceAdmin = (props) => {
       if (props.currentEdit) {
          const bodyUpdate = {
             ...values,
-            idService: props.currentEdit?.idService,
+            idServices: props.currentEdit?.idServices,
          };
          props
             .putService(bodyUpdate)
@@ -72,7 +72,7 @@ const CRUDServiceAdmin = (props) => {
                ]}>
                <Input />
             </Form.Item>
-            <Form.Item label='Mô tả' name='describe' rules={[{ required: true, message: "Hãy nhập mô tả!" }]}>
+            <Form.Item label='Mô tả' name='description' rules={[{ required: true, message: "Hãy nhập mô tả!" }]}>
                <TextArea rows={6} />
             </Form.Item>
             <div className='w-100 d-flex justify-content-center align-items-center'>
