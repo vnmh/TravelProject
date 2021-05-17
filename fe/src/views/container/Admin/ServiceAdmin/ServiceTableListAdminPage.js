@@ -108,6 +108,11 @@ const ServiceTableListAdminPage = (props) => {
                columns={columns}
                dataSource={services}
                scroll={{ scrollToFirstRowOnChange: true, x: 1200 }}
+               pagination={{
+                  current: props.pagination?.page || 1,
+                  pageSize: props.pagination?.size || 5,
+                  total: props.pagination?.total || services.length
+               }}
             />
          )}
       </ServiceTableListAdminPageStyled>

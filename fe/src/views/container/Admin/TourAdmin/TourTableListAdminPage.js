@@ -100,7 +100,12 @@ const TourTableListAdminPage = (props) => {
       {
          title: "Mô tả",
          dataIndex: "describe",
-         key: "describe"
+         key: "describe",
+         render: (describe) => {
+            return (
+               <div style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{describe}</div>
+            );
+         }
       },
       {
          title: "Độ tuổi thấp nhất",
