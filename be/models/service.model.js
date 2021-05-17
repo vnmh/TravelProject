@@ -5,6 +5,7 @@ const database = require("../dbconnectMySql");
 const Service = function(service) {
   this.idServices = service.idServices | 0;
   this.name = service.name;
+  this.discription = service.discription;
 };
 
 const databaseLocal = config.database;
@@ -59,8 +60,10 @@ Service.createService = function(newService) {
       .query(
         "INSERT INTO " +
           databaseProduction +
-          ".services (`name`) VALUES ('" +
+          ".services (`name`, `discription`) VALUES ('" +
           newService.name +
+          "', '" +
+          newService.description +
           "') "
       )
       .then(rows => resolve(rows))

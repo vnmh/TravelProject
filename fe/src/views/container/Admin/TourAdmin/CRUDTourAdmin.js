@@ -26,13 +26,12 @@ const layout = {
 const CRUDTourAdmin = (props) => {
    const [form] = Form.useForm();
    const onFinish = (values) => {
-      // Nếu currentEdit thì gọi API update, không thì gọi API create
+      // Nếu currentEdit có dữ liệu thì gọi API update, không thì gọi API create
       if (props.currentEdit) {
          //Gọi API update tour
          //Trước khi gọi API phải map thành JSON hết những dữ liệu Địa điểm, Dịch vụ
          const bodyUpdate = {
             ...values,
-
             // values.address là một mảng, khi lưu xuống CSDL cần phải chuyển thành string bằng phương thức join
             address: values?.address.join(","),
             services: values?.services.join(","),
@@ -46,8 +45,8 @@ const CRUDTourAdmin = (props) => {
                props.setCurrentEdit(undefined);
             })
             .catch((err) => {
+               console.log("hiendev ~ file: CRUDTourAdmin.js ~ line 48 ~ onFinish ~ err", err);
                message.error(JSON.stringify(err));
-               console.log("hiendev ~ file: EditTourAdmin.js ~ line 30 ~ onFinish ~ err", err);
             });
          //Fail: không làm gì
       } else {
@@ -59,6 +58,7 @@ const CRUDTourAdmin = (props) => {
             .then((res) => {
                message.success("Thành công!");
                //Success: thì đóng form create lại và thông báo cho người dùng
+               props.setCurrentEdit(bodyCreate);
                props.setIsCreateTour(false);
             })
             .catch((err) => {
@@ -109,7 +109,6 @@ const CRUDTourAdmin = (props) => {
                   ]}>
                   <Input />
                </Form.Item>
-
                <Form.Item
                   className='col-6'
                   label='Giá'
@@ -119,8 +118,8 @@ const CRUDTourAdmin = (props) => {
                      style={{ width: "100%" }}
                      min={0}
                      step={1000}
-                     formatter={(value) => `${value}đ`}
-                     parser={(value) => value.replace("đ", "")}
+                     formatter={(value) => `${value} VNĐ`}
+                     parser={(value) => value.replace(" VNĐ", "")}
                   />
                </Form.Item>
                <Form.Item
@@ -149,17 +148,15 @@ const CRUDTourAdmin = (props) => {
                      })}
                   </Select>
                </Form.Item>
-
                <Form.Item className='col-6' label='Youtube' name='video'>
                   <Input />
                </Form.Item>
-
                <Form.Item
                   className='col-6'
                   label='Độ tuổi thấp nhất'
                   name='minAge'
                   rules={[{ required: true, message: "Hãy nhập độ tuổi thấp nhất!" }]}>
-                  <InputNumber style={{ width: "100%" }} min={0} max={200} step={1} />
+                  <InputNumber style={{ width: "100%" }} min={0} max={80} step={1} />
                </Form.Item>
 
                <Form.Item
@@ -184,7 +181,6 @@ const CRUDTourAdmin = (props) => {
                   name='address'
                   rules={[{ required: true, message: "Hãy nhập tên địa điểm!" }]}>
                   <Cascader
-                     //
                      // defaultValue={["zhejiang", "hangzhou"]}
                      options={mapAddressNotWardToOptionAntd()}
                   />

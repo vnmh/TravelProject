@@ -45,8 +45,15 @@ const CRUDTourAdminDetail = (props) => {
          {props.currentEdit && (
             <>
                <div className='d-flex justify-content-end w-100 mb-3'>
-                  <Button type='primary' onClick={saveDetail}>
+                  <Button type='primary' onClick={saveDetail} className='mr-3'>
                      Lưu
+                  </Button>
+                  <Button
+                     onClick={() => {
+                        props.setCurrentEdit(undefined);
+                        props.setIsCreateTour && props.setIsCreateTour(undefined);
+                     }}>
+                     Đóng
                   </Button>
                </div>
                <MyCKEditor data={data || ""} onChange={onChangeDetail} />

@@ -7,8 +7,7 @@ const Tour = function (tour) {
   this.titleTour = tour.titleTour;
   this.price = tour.price;
   this.sale = tour.sale;
-  this.departureDay = tour.departureDay.slice(0, 10).replace(/-/g, "/");
-  //Chúng ta cần format date lại khi đưa xuống CSDL;
+  this.departureDay = tour.departureDay.slice(0, 10).replace(/-/g, "/"); //Chúng ta cần format date lại khi đưa xuống CSDL;
   this.describe = tour.describe;
   this.address = tour.address;
   this.vocationTime = tour.vocationTime;

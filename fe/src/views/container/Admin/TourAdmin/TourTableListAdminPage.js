@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { compose, lifecycle } from "recompose";
+import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
 import { connect } from "react-redux";
 import _ from "lodash";
-import { authActions } from "~/state/ducks/authUser";
-import * as PATH from "~/configs/routesConfig";
-import { Table, Tag, Space, Button, Image, message, Popconfirm } from "antd";
-
+import { Table, Space, Button, Image, message, Popconfirm, Typography } from "antd";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
@@ -31,6 +28,7 @@ const TourTableListAdminPage = (props) => {
             message.error("Xóa thất bại!");
          });
    };
+
    const columns = [
       {
          title: "Hình ảnh",
@@ -88,7 +86,7 @@ const TourTableListAdminPage = (props) => {
          dataIndex: "price",
          key: "price",
          render: (price) => {
-            return currencyFormat(price, "đ");
+            return currencyFormat(price);
          }
       },
       {
@@ -102,8 +100,17 @@ const TourTableListAdminPage = (props) => {
       {
          title: "Mô tả",
          dataIndex: "describe",
-         key: "describe",
-         ellipsis: true
+         key: "describe"
+      },
+      {
+         title: "Độ tuổi thấp nhất",
+         dataIndex: "minAge",
+         key: "minAge"
+      },
+      {
+         title: "Số người tối đa",
+         dataIndex: "groupSize",
+         key: "groupSize"
       },
       {
          title: "Trạng thái",
@@ -135,7 +142,7 @@ const TourTableListAdminPage = (props) => {
          width: 130
       }
    ];
-   const handleChangeTable = (pagination, filters, sorter, extra) => {
+   const handleChangeTable = (pagination) => {
       props.setPagination({
          ...props.pagination,
          page: pagination?.current,
@@ -187,7 +194,7 @@ const TourTableListAdminPage = (props) => {
                // for submit
                setIsSubmit={props.setIsSubmit}
                isSubmit={props.isSubmit}
-               // for submit
+               // for edit
                setCurrentEdit={props.setCurrentEdit}
                currentEdit={props.currentEdit}
                setIsCreateTour={props.setIsCreateTour}

@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import { connect } from "react-redux";
 import _ from "lodash";
-
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
-import { Form, Input, Button, Checkbox, Row, Select, DatePicker, InputNumber, Cascader, message } from "antd";
-const { Option } = Select;
-const CRUDBlogAdminStyled = styled.div``;
+import { Form, Input, Button, message } from "antd";
+
+const CRUDServiceAdminStyled = styled.div``;
 
 const { TextArea } = Input;
 
@@ -17,15 +16,15 @@ const layout = {
    wrapperCol: { span: 12 }
 };
 
-const CRUDBlogAdmin = (props) => {
+const CRUDServiceAdmin = (props) => {
    const onFinish = (values) => {
       if (props.currentEdit) {
          const bodyUpdate = {
             ...values,
-            idPost: props.currentEdit?.idPost,
+            idService: props.currentEdit?.idService,
          };
          props
-            .putPost(bodyUpdate)
+            .putService(bodyUpdate)
             .then((res) => {
                message.success("Sửa thành công!");
                props.setCurrentEdit(undefined);
@@ -36,13 +35,13 @@ const CRUDBlogAdmin = (props) => {
       } else {
          const bodyCreate = { ...values, idAccount: props.user?.idAccount };
          props
-            .postPost(bodyCreate)
+            .postService(bodyCreate)
             .then((res) => {
-               message.success("Tạo bài viết thành công!");
-               props.setIsCreatePost(false);
+               message.success("Tạo dịch vụ thành công!");
+               props.setIsCreateService(false);
             })
             .catch((err) => {
-               console.log("🚀 ~ file: CRUDBlogAdmin.js ~ line 45 ~ onFinish ~ err", err);
+               console.log("hiendev ~ file: CRUDServiceAdmin.js ~ line 45 ~ onFinish ~ err", err)
                message.error("Thất bại!");
             });
       }
@@ -53,7 +52,7 @@ const CRUDBlogAdmin = (props) => {
    };
 
    return (
-      <CRUDBlogAdminStyled>
+      <CRUDServiceAdminStyled>
          <Form
             {...layout}
             name='basic'
@@ -63,8 +62,8 @@ const CRUDBlogAdmin = (props) => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}>
             <Form.Item
-               label='Tiêu đề'
-               name='titlePost'
+               label='Tên dịch vụ'
+               name='titleService'
                rules={[
                   {
                      required: true,
@@ -83,13 +82,13 @@ const CRUDBlogAdmin = (props) => {
                <Button
                   onClick={() => {
                      props.setCurrentEdit(undefined);
-                     props.setIsCreatePost && props.setIsCreatePost(undefined);
+                     props.setIsCreateService && props.setIsCreateService(undefined);
                   }}>
                   Đóng
                </Button>
             </div>
          </Form>
-      </CRUDBlogAdminStyled>
+      </CRUDServiceAdminStyled>
    );
 };
 
@@ -98,16 +97,14 @@ export default compose(
       (state) => ({
          user: state["authUser"].user,
          isAuthenticated: state["authUser"].isAuthenticated
-         // có thể check user?.role === ROLE.administrator && isAuthenticated => CRUDBlogAdmin admin , không thì redirect tới homepage
+         // có thể check user?.role === ROLE.administrator && isAuthenticated => CRUDServiceAdmin admin , không thì redirect tới homepage
       }),
       {
-         // postLogin: appApisActions.postLogin
-         getPosts: appApisActions.getPosts,
-         getAllImagesPost: appApisActions.getAllImagesPost,
-         putPost: appApisActions.putPost,
-         postPost: appApisActions.postPost
-         // patchPost: appApisActions.patchTour
+         // ServiceLogin: appApisActions.ServiceLogin
+         getServices: appApisActions.getServices,
+         postService: appApisActions.postService,
+         putService: appApisActions.putService
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,
-)(CRUDBlogAdmin);
+)(CRUDServiceAdmin);

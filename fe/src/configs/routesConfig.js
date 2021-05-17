@@ -44,3 +44,4 @@ export const ADMIN_BOOKING = "/admin-booking";
 export const ADMIN_TOUR_LIST = "/admin-tour-list";
 export const ADMIN_REVIEW = "/admin-review";
 export const ADMIN_BLOG = "/admin-blog";
+export const ADMIN_SERVICE = "/admin-service";
