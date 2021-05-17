@@ -33,8 +33,7 @@ const BlogBreadAdminPage = () => {
                                  Trang chủ
                               </a>
                            </li>
-                           <li>Dashboard</li>
-                           <li>Blog</li>
+                           <li>Bài viết</li>
                         </ul>
                      </div>
                      {/* end breadcrumb-list */}

@@ -13,6 +13,7 @@ import { mapAddressNotWardToOptionAntd } from "~/configs/addressVN";
 import { SERVICES } from "~/configs/servicesConfig";
 import { TYPE_TOUR } from "~/configs/const";
 import { PEOPLE_NUM } from "~/configs/const";
+import { getServices } from "~/state/ducks/appApis/actions";
 const { Option } = Select;
 const CRUDTourAdminStyled = styled.div``;
 
@@ -25,6 +26,7 @@ const layout = {
 
 const CRUDTourAdmin = (props) => {
    const [form] = Form.useForm();
+
    const onFinish = (values) => {
       // Nếu currentEdit có dữ liệu thì gọi API update, không thì gọi API create
       if (props.currentEdit) {
@@ -81,6 +83,19 @@ const CRUDTourAdmin = (props) => {
       }
    }, [props.isSubmit]);
 
+   // services
+   const [services, setServices] = useState([]);
+   useEffect(() => {
+      props
+         .getServices()
+         .then(({ res }) => {
+            setServices(res || []);
+         })
+         .catch((err) => {
+            console.error("hiendev ~ file: CRUDTourAdmin.js ~ line 234 ~ getServices ~ err", err);
+         });
+   }, []);
+   // services
    return (
       <CRUDTourAdminStyled>
          <Form
@@ -202,6 +217,24 @@ const CRUDTourAdmin = (props) => {
                      })}
                   </Select>
                </Form.Item>
+               {/* <Form.Item
+                  className='col-6'
+                  label='Dịch vụ'
+                  name='services'
+                  rules={[{ required: true, message: "Hãy chọn loại dịch vụ!" }]}>
+                  <Select
+                     showSearch
+                     mode='multiple'
+                     style={{ width: "100%" }}
+                     placeholder='Chọn dịch vụ'
+                     optionFilterProp='children'
+                     filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
+                     {SERVICES.map((service) => {
+
+                        return <Option value={service}>{service}</Option>;
+                     })}
+                  </Select>
+               </Form.Item> */}
                <Form.Item
                   className='col-6'
                   label='Dịch vụ'
@@ -211,11 +244,11 @@ const CRUDTourAdmin = (props) => {
                      showSearch
                      mode='multiple'
                      style={{ width: "100%" }}
-                     placeholder='Chọn dich vụ'
+                     placeholder='Chọn dịch vụ'
                      optionFilterProp='children'
                      filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
-                     {SERVICES.map((service) => {
-                        return <Option value={service}>{service}</Option>;
+                     {services.map((service) => {
+                        return <Option value={service?.idServices + ""}>{service.titleService}</Option>;
                      })}
                   </Select>
                </Form.Item>
@@ -256,7 +289,8 @@ export default compose(
          getTours: appApisActions.getTours,
          getAllImagesTour: appApisActions.getAllImagesTour,
          postTour: appApisActions.postTour,
-         putTour: appApisActions.putTour
+         putTour: appApisActions.putTour,
+         getServices: appApisActions.getServices
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,

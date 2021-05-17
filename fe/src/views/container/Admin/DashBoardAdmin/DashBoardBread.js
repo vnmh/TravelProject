@@ -30,11 +30,9 @@ const DashBoard = () => {
                         <ul className='list-items'>
                            <li>
                               <a href='index.html' className='text-white'>
-                                 Home
+                                 Trang chủ
                               </a>
                            </li>
-                           <li>Pages</li>
-                           <li>Dashboard</li>
                         </ul>
                      </div>
                      {/* end breadcrumb-list */}
