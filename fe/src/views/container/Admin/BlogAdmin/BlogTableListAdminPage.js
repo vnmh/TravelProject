@@ -1,20 +1,31 @@
 import React, { useState, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { compose, lifecycle } from "recompose";
+import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
 import { connect } from "react-redux";
 import _ from "lodash";
-import { authActions } from "~/state/ducks/authUser";
-import * as PATH from "~/configs/routesConfig";
-import { Table, Tag, Space, Button, Image } from "antd";
+import { Table, Tag, Space, Button, Image, Popconfirm, message } from "antd";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
-import CRUDBlogAdmin from "./CRUDBlogAdmin";
+import CRUDBlogAdminContainer from "./CRUDBlogAdminContainer";
 
 const BlogTableListAdminPageStyled = styled.div``;
 
 const BlogTableListAdminPage = (props) => {
+   const [deleteBlog, setDeleteBlog] = useState(false);
+
+   const onDeletePost = (blog) => {
+      props
+         .deletePost(blog.idPost)
+         .then((res)=> {
+            setDeleteBlog(true);
+            message.success("Xóa thành công!");
+         })
+         .catch((err) => {
+            message.error("Xóa thất bại!");
+         });
+   }
    const columns = [
       {
          title: "Hình ảnh",
@@ -69,16 +80,23 @@ const BlogTableListAdminPage = (props) => {
          width: 100,
          render: (text, record) => (
             <Space size='middle'>
-               <Button
+               <Button  
                   className='btn-primary'
                   icon={<i className='fa fa-pencil-square-o' aria-hidden='true'></i>}
                   onClick={() => {
-                     setCurrentEdit(record);
+                     props.setCurrentEdit(record);
                   }}></Button>
-               <Button
-                  className='btn-danger'
-                  type='dashed'
-                  icon={<i class='fa fa-trash-o' aria-hidden='true'></i>}></Button>
+              <Popconfirm
+                  placement='topRight'
+                  title={"Bạn có muốn xóa blog này?"}
+                  onConfirm={() => onDeletePost(record)}
+                  okText='Có'
+                  cancelText='Không'>
+                  <Button
+                     className='btn-danger'
+                     type='dashed'
+                     icon={<i class='fa fa-trash-o' aria-hidden='true'></i>}></Button>
+               </Popconfirm>
             </Space>
          ),
          width: 130
@@ -122,20 +140,19 @@ const BlogTableListAdminPage = (props) => {
          .catch((err) => {
             console.log("hiendev ~ file: CardItemListTour.js ~ line 24 ~ useEffect ~ err", err);
          });
-   }, []);
+   }, [props.currentEdit, props.isCreatePost, deleteBlog]);
 
-   const [currentEdit, setCurrentEdit] = useState();
 
    return (
       <BlogTableListAdminPageStyled>
-         {(currentEdit || props.isCreatePost) && (
-            <CRUDBlogAdmin
-               setCurrentEdit={setCurrentEdit}
-               currentEdit={currentEdit}
+         {(props.currentEdit || props.isCreatePost) && (
+            <CRUDBlogAdminContainer
+               setCurrentEdit={props.setCurrentEdit}
+               currentEdit={props.currentEdit}
                setIsCreatePost={props.setIsCreatePost}
             />
          )}
-         {!currentEdit && !props.isCreatePost && (
+         {!props.currentEdit && !props.isCreatePost && (
             <Table
                onChange={handleChangeTable}
                columns={columns}
@@ -157,7 +174,8 @@ export default compose(
       {
          // postLogin: appApisActions.postLogin
          getPosts: appApisActions.getPosts,
-         getAllImagesPost: appApisActions.getAllImagesPost
+         getAllImagesPost: appApisActions.getAllImagesPost,
+         deletePost: appApisActions.deletePost
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,

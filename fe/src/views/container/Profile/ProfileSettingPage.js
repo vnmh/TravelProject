@@ -1,65 +1,97 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
-
 import { authActions } from "~/state/ducks/authUser";
-import * as PATH from "~/configs/routesConfig";
-
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
+import { firstImage } from "~/views/utilities/helpers/utilObject";
+import Avatar from "./Avatar";
+import { message } from "antd";
 
 const ProfileSystemStyled = styled.div``;
 
-const ProfileSystem = () => {
+const ProfileSystem = (props) => {
+   const [avatar, setAvatar] = useState("");
+   const [name, setName] = useState("");
+   const [email, setEmail] = useState("");
+
+   const handleSubmit = () => {
+      const body = {
+         idAccount: props.profile?.idAccount,
+         avatar: avatar ? avatar : props.profile.avatar,
+         name: name ? name : props.profile.name
+      };
+      props
+         .updateProfile(body)
+         .then((res) => {
+            message.success("Cập nhật thành công");
+         })
+         .catch((err) => {
+            message.error("Cập nhật thất bại");
+         });
+   };
+
+   const handleChange = (e, field) => {
+      switch (field) {
+         case "name":
+            setName(e.target?.value || "");
+            break;
+
+         default:
+            break;
+      }
+   };
+
+   useEffect(() => {
+      if (props.profile?.email) {
+         setName(props.profile?.name);
+         setEmail(props.profile?.email);
+      }
+   }, [props.profile?.email]);
+
    return (
       <ProfileSystemStyled>
-         <div className='col-lg-6'>
-            <div className='form-box'>
+         <div className='col-lg-12 d-flex justify-content-center'>
+            <div className='form-box '>
                <div className='form-title-wrap'>
-                  <h3 className='title'>Profile Setting</h3>
+                  <h1 className='title d-flex justify-content-center pt-2' style={{ fontWeight: 700, fontSize: 28 }}>
+                     THÔNG TIN CÁ NHÂN
+                  </h1>
                </div>
                <div className='form-content'>
                   <div className='user-profile-action d-flex align-items-center pb-4'>
-                     <div className='user-pro-img'>
-                        <img src='images/team1.jpg' alt='user-image' />
-                     </div>
-                     <div className='upload-btn-box'>
-                        <div className='file-upload-wrap file-upload-wrap-2'>
-                           <input
-                              type='file'
-                              name='files[]'
-                              className='multi file-upload-input with-preview'
-                              maxLength={1}
-                           />
-                           <span className='file-upload-text'>
-                              <i className='la la-upload mr-2' />
-                              Upload Image
-                           </span>
-                        </div>
-                     </div>
+                     <Avatar avatarAPI={props.profile?.avatar} setAvatar={setAvatar} />
                   </div>
                   <div className='contact-form-action'>
                      <form action='#'>
                         <div className='row'>
                            <div className='col-lg-6 responsive-column'>
                               <div className='input-box'>
-                                 <label className='label-text'>Website Title</label>
+                                 <label className='label-text'>Họ và tên</label>
                                  <div className='form-group'>
                                     <span className='la la-user form-icon' />
-                                    <input className='form-control' type='text' defaultValue='Royel travel agency' />
+                                    <input
+                                       className='form-control'
+                                       type='text'
+                                       placeholder='Họ và tên'
+                                       value={name}
+                                       onChange={(e) => handleChange(e, "name")}
+                                    />
                                  </div>
                               </div>
                            </div>
                            {/* end col-lg-6 */}
                            <div className='col-lg-6 responsive-column'>
                               <div className='input-box'>
-                                 <label className='label-text'>Email Address</label>
+                                 <label className='label-text'>Email</label>
                                  <div className='form-group'>
                                     <span className='la la-envelope form-icon' />
                                     <input
+                                       onChange={(e) => handleChange(e, "email")}
                                        className='form-control'
                                        type='text'
-                                       defaultValue='royeltravelagency@gmail.com'
+                                       value={email}
+                                       disabled
                                     />
                                  </div>
                               </div>
@@ -87,8 +119,8 @@ const ProfileSystem = () => {
                            {/* end col-lg-6 */}
                            <div className='col-lg-12'>
                               <div className='btn-box'>
-                                 <button className='theme-btn' type='button'>
-                                    Save Changes
+                                 <button className='theme-btn' type='button' onClick={handleSubmit}>
+                                    Lưu thông tin
                                  </button>
                               </div>
                            </div>
@@ -115,7 +147,8 @@ export default compose(
       }),
       {
          // postLogin: appApisActions.postLogin
-         login: authActions.login
+         login: authActions.login,
+         updateProfile: authActions.updateProfile
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,

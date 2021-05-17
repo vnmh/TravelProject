@@ -3,8 +3,6 @@ import { Link, withRouter } from "react-router-dom";
 import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
 import _ from "lodash";
-import { authActions } from "~/state/ducks/authUser";
-import * as PATH from "~/configs/routesConfig";
 import { Table, Tag, Space, Button, Image } from "antd";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
@@ -15,7 +13,9 @@ const BlogListAdminPageStyled = styled.div``;
 
 const BlogListAdminPage = (props) => {
    const [isCreatePost, setIsCreatePost] = useState(false);
+   const [isSubmit, setIsSubmit] = useState(false);
    const [pagination, setPagination] = useState({ page: 1, size: 0, total: 0 });
+   const [currentEdit, setCurrentEdit] = useState();
    return (
       <BlogListAdminPageStyled>
          <div>
@@ -24,14 +24,17 @@ const BlogListAdminPage = (props) => {
                   <div className='form-box'>
                      <div className='form-title-wrap'>
                         <h3 className='title'>Danh sách bài viết</h3>
+                        {!isCreatePost && !currentEdit && (
                         <Button
                            type='primary'
                            className='float-right'
                            onClick={() => {
                               setIsCreatePost(true);
+                              isCreatePost && setIsSubmit(true); // chỉ submit khi isCreateTour
                            }}>
                            Thêm
                         </Button>
+                          )}
                         <p className='font-size-14'>
                            Showing {pagination.page} to {Math.ceil(pagination.total / pagination.size)} of{" "}
                            {pagination.total} entries
@@ -42,6 +45,8 @@ const BlogListAdminPage = (props) => {
                            <BlogTableListAdminPage
                               isCreatePost={isCreatePost}
                               setIsCreatePost={setIsCreatePost}
+                              currentEdit={currentEdit}
+                              setCurrentEdit={setCurrentEdit}
                               pagination={pagination}
                               setPagination={setPagination}
                            />

@@ -18,12 +18,12 @@ function ImpPayment(props) {
             <div className='container'>
                <div className='row'>
                   <div className='col-lg-8'>
-                     <YourInfo />
-                     <PaymentMethod />
+                     <YourInfo payment={props.payment}/>
+                     <PaymentMethod payment={props.payment}/>
                   </div>
                   {/* end col-lg-8 */}
                   <div className='col-lg-4'>
-                     <BookingDetail />
+                     <BookingDetail payment={props.payment}/>
                   </div>
                   {/* end col-lg-4 */}
                </div>

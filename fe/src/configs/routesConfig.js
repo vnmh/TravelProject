@@ -20,18 +20,20 @@ export const TOUR_GRID = "/tour-grid";
 export const TOUR_DETAIL = "/tour-detail/:id";
 // Ex http://localhost:5000/tour-detail/4
 
-export const TOUR_BOOKING = "/tour-booking";
+export const TOUR_BOOKING = "/tour-booking/:id";
 
 /**
  * PAYMENT PATHS
  */
-export const PAYMENT_RECEIVED = "/payment-received";
+export const ORDER_DETAIL = "/order-detail";
 
 /**
  * Blog
  */
 export const BLOG_GRID = "/blog-grid";
 export const BLOG_DETAIL = "/blog-detail/:id";
+
+export const PROFILE = "/profile";
 
 /**
  * Admin
@@ -41,5 +43,4 @@ export const ADMIN_DASHBOARD = "/admin-dashboard";
 export const ADMIN_BOOKING = "/admin-booking";
 export const ADMIN_TOUR_LIST = "/admin-tour-list";
 export const ADMIN_REVIEW = "/admin-review";
-export const ADMIN_PROFILE = "/admin-profile";
 export const ADMIN_BLOG = "/admin-blog";

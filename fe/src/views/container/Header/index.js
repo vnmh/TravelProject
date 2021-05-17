@@ -1,22 +1,42 @@
 import React, { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { compose, lifecycle } from "recompose";
+import { Link, useHistory, withRouter } from "react-router-dom";
+import { compose } from "recompose";
 import { connect } from "react-redux";
-
 import { authActions } from "~/state/ducks/authUser";
 import * as PATH from "~/configs/routesConfig";
-
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
-
-import { Button } from "antd";
+import { Avatar, Button, Dropdown, Image, Menu } from "antd";
 import LoginModal from "~/views/container/Header/LoginModal";
 import RegisterModal from "./RegisterModal";
+import { DownOutlined, UserOutlined } from "@ant-design/icons";
+import { firstImage } from "~/views/utilities/helpers/utilObject";
+import logo from "~/static/images/logo.png";
 
 const HeaderTopStyled = styled.div``;
 
-const HeaderTop = () => {
+const HeaderTop = (props) => {
    const [isModalVisibleLogin, setIsModalVisibleLogin] = useState(false);
    const [isModalVisibleRegister, setIsModalVisibleRegister] = useState(false);
+   const history = useHistory();
+   console.log("maidev ~ file: index.js ~ line 22 ~ HeaderTop ~ history", history);
+   const menu = (
+      <Menu>
+         <Menu.Item key='0' onClick={() => history.push(PATH.PROFILE)}>
+            {" "}
+            <i className='fa fa-user mr-1' aria-hidden='true'></i> Thông tin cá nhân
+         </Menu.Item>
+         <Menu.Item key='1'>
+            {" "}
+            <i className='fa fa-history mr-1' aria-hidden='true'></i>Lịch sử booking
+         </Menu.Item>
+         <Menu.Divider />
+         <Menu.Item key='3' onClick={props.logout}>
+            {" "}
+            <i className='fa fa-sign-out mr-1' aria-hidden='true'></i>
+            Đăng xuất
+         </Menu.Item>
+      </Menu>
+   );
 
    return (
       <HeaderTopStyled>
@@ -31,7 +51,7 @@ const HeaderTop = () => {
                            </Link>
                            <div className='logo'>
                               <Link to={PATH.HOME_PAGE}>
-                                 <img src='images/logo.png' alt='logo' />
+                                 <img src={logo} alt='logo' />
                               </Link>
                               <div className='menu-toggler'>
                                  <i className='la la-bars' />
@@ -54,26 +74,10 @@ const HeaderTop = () => {
                                           <li>
                                              <Link to='/tour-list'>Tour List</Link>
                                           </li>
-                                          <li>
-                                             <Link to='/tour-detail'>Tour Detail</Link>
-                                          </li>
                                        </ul>
                                     </li>
                                     <li>
-                                       <Link to='#'>
-                                          Blog <i className='la la-angle-down' />
-                                       </Link>
-                                       <ul className='dropdown-menu-item'>
-                                          <li>
-                                             <Link to='/blog-grid'>Blog Grid</Link>
-                                          </li>
-                                          <li>
-                                             <Link to='/blog-sidebar'>Blog Sidebar</Link>
-                                          </li>
-                                          <li>
-                                             <Link to='/blog-detail'>Blog Detail</Link>
-                                          </li>
-                                       </ul>
+                                       <Link to='/blog-grid'>Blog</Link>
                                     </li>
                                     <li>
                                        <Link to='#'>
@@ -137,14 +141,41 @@ const HeaderTop = () => {
                               </nav>
                            </div>
                            {/* end main-menu-content */}
-                           <div className='nav-btn'>
-                              <Button type='primary' onClick={() => setIsModalVisibleRegister(true)}>
-                                 Đăng ký
-                              </Button>{" "}
-                              <Button type='primary' onClick={() => setIsModalVisibleLogin(true)}>
-                                 Đăng nhập
-                              </Button>
-                           </div>
+
+                           {props.isAuthenticated ? (
+                              <Dropdown overlay={menu} trigger={["click"]}>
+                                 <a href='#1'>
+                                    {" "}
+                                    <Avatar
+                                       className='mr-2'
+                                       src={
+                                          <Image
+                                             width={50}
+                                             height={50}
+                                             preview={false}
+                                             src={
+                                                props.user?.avatar ? (
+                                                   firstImage("/img/" + props.user?.avatar)
+                                                ) : (
+                                                   <UserOutlined />
+                                                )
+                                             }
+                                          />
+                                       }
+                                    />
+                                    {props.user?.name} <DownOutlined />
+                                 </a>
+                              </Dropdown>
+                           ) : (
+                              <div className='nav-btn'>
+                                 <Button type='primary' onClick={() => setIsModalVisibleRegister(true)}>
+                                    Đăng ký
+                                 </Button>{" "}
+                                 <Button type='primary' onClick={() => setIsModalVisibleLogin(true)}>
+                                    Đăng nhập
+                                 </Button>
+                              </div>
+                           )}
                            {/* end nav-btn */}
                         </div>
                         {/* end menu-wrapper */}
@@ -178,7 +209,8 @@ export default compose(
       }),
       {
          // postLogin: appApisActions.postLogin
-         login: authActions.login
+         login: authActions.login,
+         logout: authActions.logout
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,
