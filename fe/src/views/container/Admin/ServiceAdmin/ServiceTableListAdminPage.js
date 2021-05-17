@@ -15,7 +15,7 @@ const ServiceTableListAdminPage = (props) => {
 
    const onDeleteService = (service) => {
       props
-         .deleteService(service.idService)
+         .deleteService(service.idServices)
          .then((res) => {
             setDeleteService(true);
             message.success("Xóa thành công!");
@@ -124,7 +124,6 @@ export default compose(
       {
          // login: appApisActions.login
          getServices: appApisActions.getServices,
-         getAllImagesService: appApisActions.getAllImagesService,
          deleteService: appApisActions.deleteService
       }
    ),

@@ -41,8 +41,10 @@ export const deletePost = (idPost) =>
 
 //SERVICE
 export const getServices = (params) => apiAction("get")(types.COMMON, "/services" + parseObjToQuery(params), {}, true);
-export const postService = (body) => apiAction("post")(types.COMMON, "/post", body, true);
-export const putService = (body) => apiAction("put")(types.COMMON, "/put", body, true);
+export const postService = (body) => apiAction("post")(types.COMMON, "/service", body, true);
+export const putService = (body) => apiAction("put")(types.COMMON, "/service", body, true);
+export const deleteService = (idServices) =>
+   apiAction("delete")(types.COMMON, "/service" + parseObjToQuery({ idServices }), {}, true);
 
 //MOMO
 
