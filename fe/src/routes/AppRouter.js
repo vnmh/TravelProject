@@ -16,6 +16,7 @@ import BlogAdminPage from "~/views/container/Admin/BlogAdmin";
 import BlogGrid from "~/views/container/Blog/BlogGrid";
 import BlogDetail from "~/views/container/Blog/BlogDetail";
 import OrderDetail from "~/views/container/Payment/OrderDetail";
+import ServiceAdminPage from "~/views/container/Admin/ServiceAdmin";
 
 const AppRouter = (props) => {
    return (
@@ -42,6 +43,7 @@ const AppRouter = (props) => {
             <Route path={PATH.ADMIN_REVIEW} exact component={() => <ReviewAdminPage />} />
             <Route path={PATH.PROFILE} exact component={() => <ProfilePage />} />
             <Route path={PATH.ADMIN_BLOG} exact component={() => <BlogAdminPage />} />
+            <Route path={PATH.ADMIN_SERVICE} exact component={() => <ServiceAdminPage />} />
             
             <Redirect to={PATH.HOME_PAGE} />
          </Switch>

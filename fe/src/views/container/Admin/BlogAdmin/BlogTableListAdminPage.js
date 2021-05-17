@@ -3,8 +3,7 @@ import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import { connect } from "react-redux";
 import _ from "lodash";
-import { Table, Tag, Space, Button, Image, Popconfirm, message } from "antd";
-
+import { Table, Space, Button, Image, Popconfirm, message } from "antd";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
@@ -86,9 +85,9 @@ const BlogTableListAdminPage = (props) => {
                   onClick={() => {
                      props.setCurrentEdit(record);
                   }}></Button>
-              <Popconfirm
+               <Popconfirm
                   placement='topRight'
-                  title={"Bạn có muốn xóa blog này?"}
+                  title={"Bạn có muốn xóa bài viết này?"}
                   onConfirm={() => onDeletePost(record)}
                   okText='Có'
                   cancelText='Không'>
@@ -111,6 +110,7 @@ const BlogTableListAdminPage = (props) => {
    };
 
    const [posts, setPosts] = useState([]);
+
    useEffect(() => {
       props
          .getPosts()

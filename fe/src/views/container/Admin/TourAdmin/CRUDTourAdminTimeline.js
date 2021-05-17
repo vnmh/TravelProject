@@ -242,6 +242,7 @@ const EditableTable = (props) => {
          }
       }
    ];
+   
    const mergedColumns = columns.map((col) => {
       if (!col.editable) {
          return col;
@@ -258,6 +259,7 @@ const EditableTable = (props) => {
          })
       };
    });
+
    return (
       <>
          {!props.currentEdit && "Chỉ có thể thêm timeline sau khi tạo tour thành công!"}

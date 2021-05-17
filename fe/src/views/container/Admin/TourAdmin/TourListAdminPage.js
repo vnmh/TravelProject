@@ -3,10 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
 import _ from "lodash";
-import { authActions } from "~/state/ducks/authUser";
-import * as PATH from "~/configs/routesConfig";
-import { Table, Tag, Space, Button, Image } from "antd";
-
+import { Button} from "antd";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
 import TourTableListAdminPage from "./TourTableListAdminPage";
@@ -52,14 +49,11 @@ const TourListAdminPage = (props) => {
                            currentEdit={currentEdit}
                            pagination={pagination}
                            setPagination={setPagination}
-                        />
+                           />
                      </div>
                   </div>
-                  {/* end form-box */}
                </div>
-               {/* end col-lg-12 */}
             </div>
-            {/* end row */}
          </div>
       </TourListAdminPageStyled>
    );

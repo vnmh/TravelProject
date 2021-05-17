@@ -10,7 +10,7 @@ import styled from "styled-components"; // Dùng để ghi đè style bên trong
 
 const SideBarStyled = styled.div``;
 
-const SideBar = () => {
+const SideBar = (props) => {
    return (
       <SideBarStyled>
          <div className='sidebar-nav sidebar--nav'>
@@ -25,7 +25,7 @@ const SideBar = () => {
                         <img src='images/team9.jpg' alt='testimonial image' />
                      </div>
                      <div className='author-bio'>
-                        <h4 className='author__title'>Royel travel agency</h4>
+                        <h4 className='author__title'>Tour Booking</h4>
                         <span className='author__meta'>Welcome to Admin Page</span>
                      </div>
                   </div>
@@ -35,42 +35,26 @@ const SideBar = () => {
                      <li>
                         <Link to='/admin-dashboard'>
                            <i className='la la-dashboard mr-2 text-color' />
-                           Dashboard
+                           Trang chủ
                         </Link>
                      </li>
                      <li>
-                        <Link to='admin-booking'>
+                        <Link to='/admin-booking'>
                            <i className='la la-shopping-cart mr-2 text-color-2' />
-                           Booking
+                           Quản lý booking
                         </Link>
                      </li>
                      <li>
-                        <span className='side-menu-icon toggle-menu-icon'>
-                           <i className='la la-angle-down' />
-                        </span>
-                        <Link to='admin-dashboard-orders.html'>
-                           <i className='la la-list mr-2 text-color-3' />
-                           Orders
-                        </Link>
-                        <ul className='toggle-drop-menu'>
-                           <li>
-                              <Link to='admin-dashboard-orders-details.html'>Order Details</Link>
-                           </li>
-                        </ul>
-                     </li>
-                     <li>
-                        <span className='side-menu-icon toggle-menu-icon'>
-                           <i className='la la-angle-down' />
-                        </span>
                         <Link to='/admin-tour-list'>
-                           <i className='la la-list mr-2 text-color-4' />
-                           Danh sách Tour
+                           <i class='la la-plane mr-2 text-color-3' />
+                           Danh sách tour
                         </Link>
-                        <ul className='toggle-drop-menu'>
-                           <li>
-                              <Link to='admin-dashboard-traveler-detail.html'>Traveller Details</Link>
-                           </li>
-                        </ul>
+                     </li>
+                     <li>
+                        <Link to='/admin-service'>
+                           <i className='la la-list mr-2 text-color-4' />
+                           Danh sách dịch vụ
+                        </Link>
                      </li>
                      <li>
                         <Link to='admin-dashboard-reviews.html'>
@@ -79,25 +63,25 @@ const SideBar = () => {
                         </Link>
                      </li>
                      <li>
-                        <Link to='admin-dashboard-wishlist.html'>
-                           <i className='la la-heart mr-2 text-color-7' />
-                           Wishlist
+                        <Link to='/admin-blog'>
+                           <i className='la la-text-width mr-2' />
+                           Danh sách bài viết
                         </Link>
                      </li>
                      <li>
-                        <Link to='/admin-blog'>
-                           <i className='la la-text-width mr-2' />
-                           Bài viết
+                        <Link to='admin-dashboard-wishlist.html'>
+                           <i className='la la-heart mr-2 text-color-7' />
+                           Danh sách yêu thích
                         </Link>
                      </li>
                      <li>
                         <Link to='admin-dashboard-settings.html'>
                            <i className='la la-cog mr-2 text-color-10' />
-                           Settings
+                           Cài đặt
                         </Link>
                      </li>
                      <li>
-                        <Link to='index.html'>
+                        <Link to='/' onClick={props.logout}>
                            <i className='la la-power-off mr-2 text-color-11' />
                            Đăng xuất
                         </Link>
@@ -120,7 +104,8 @@ export default compose(
       }),
       {
          // postLogin: appApisActions.postLogin
-         login: authActions.login
+         login: authActions.login,
+         logout: authActions.logout
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,
