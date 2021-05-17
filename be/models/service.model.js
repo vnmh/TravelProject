@@ -4,7 +4,7 @@ const database = require("../dbconnectMySql");
 //Task object constructor
 const Service = function(service) {
   this.idServices = service.idServices | 0;
-  this.name = service.name;
+  this.titleService = service.titleService;
   this.discription = service.discription;
 };
 
@@ -60,8 +60,8 @@ Service.createService = function(newService) {
       .query(
         "INSERT INTO " +
           databaseProduction +
-          ".services (`name`, `discription`) VALUES ('" +
-          newService.name +
+          ".services (`titleService`, `discription`) VALUES ('" +
+          newService.titleService +
           "', '" +
           newService.description +
           "') "
