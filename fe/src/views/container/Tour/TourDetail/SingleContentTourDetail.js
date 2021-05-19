@@ -22,7 +22,6 @@ function SingleContentTourDetail(props) {
                </p>
             </div>
          </div>
-         {/* end single-content-item */}
          <div className='section-block' />
          <div className='single-content-item py-4'>
             <div className='row'>
@@ -36,9 +35,7 @@ function SingleContentTourDetail(props) {
                         <span className='font-size-13'>{props.tourDetail?.vocationTime} ngày</span>
                      </div>
                   </div>
-                  {/* end single-tour-feature */}
                </div>
-               {/* end col-lg-4 */}
                <div className='col-lg-4 responsive-column'>
                   <div className='single-tour-feature d-flex align-items-center mb-3'>
                      <div className='single-feature-icon icon-element ml-0 flex-shrink-0 mr-3'>
@@ -49,9 +46,7 @@ function SingleContentTourDetail(props) {
                         <span className='font-size-13'>{props.tourDetail?.groupSize}</span>
                      </div>
                   </div>
-                  {/* end single-tour-feature */}
                </div>
-               {/* end col-lg-4 */}
                <div className='col-lg-4 responsive-column'>
                   <div className='single-tour-feature d-flex align-items-center mb-3'>
                      <div className='single-feature-icon icon-element ml-0 flex-shrink-0 mr-3'>
@@ -62,9 +57,7 @@ function SingleContentTourDetail(props) {
                         <span className='font-size-13'>{TYPE_TOUR[props.tourDetail?.type] || ""}</span>
                      </div>
                   </div>
-                  {/* end single-tour-feature */}
                </div>
-               {/* end col-lg-4 */}
                <div className='col-lg-4 responsive-column'>
                   <div className='single-tour-feature d-flex align-items-center mb-3'>
                      <div className='single-feature-icon icon-element ml-0 flex-shrink-0 mr-3'>
@@ -75,9 +68,7 @@ function SingleContentTourDetail(props) {
                         <span className='font-size-13'> {UtilDate.toDateLocal(props.tourDetail?.departureDay)}</span>
                      </div>
                   </div>
-                  {/* end single-tour-feature */}
                </div>
-               {/* end col-lg-4 */}
                <div className='col-lg-4 responsive-column'>
                   <div className='single-tour-feature d-flex align-items-center mb-3'>
                      <div className='single-feature-icon icon-element ml-0 flex-shrink-0 mr-3'>
@@ -88,9 +79,7 @@ function SingleContentTourDetail(props) {
                         <span className='font-size-13'>{props.tourDetail?.minAge}</span>
                      </div>
                   </div>
-                  {/* end single-tour-feature */}
                </div>
-               {/* end col-lg-4 */}
                <div className='col-lg-4 responsive-column'>
                   <div className='single-tour-feature d-flex align-items-center mb-3'>
                      <div className='single-feature-icon icon-element ml-0 flex-shrink-0 mr-3'>
@@ -101,13 +90,9 @@ function SingleContentTourDetail(props) {
                         <span className='font-size-13'>{props.tourDetail?.departureAddress}</span>
                      </div>
                   </div>
-                  {/* end single-tour-feature */}
                </div>
-               {/* end col-lg-4 */}
             </div>
-            {/* end row */}
          </div>
-         {/* end single-content-item */}
       </SingleContentTourDetailStyled>
    );
 }

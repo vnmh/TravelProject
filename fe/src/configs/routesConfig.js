@@ -20,11 +20,11 @@ export const TOUR_GRID = "/tour-grid";
 export const TOUR_DETAIL = "/tour-detail/:id";
 // Ex http://localhost:5000/tour-detail/4
 
-export const TOUR_BOOKING = "/tour-booking/:id";
 
 /**
  * PAYMENT PATHS
  */
+export const TOUR_BOOKING = "/tour-booking/:id";
 export const ORDER_DETAIL = "/order-detail";
 
 /**

@@ -19,7 +19,7 @@ function BlogDetail(props) {
       props
          .getPost(match?.params?.id)
          .then(({ res }) => {
-            console.log("🚀 ~ file: index.js ~ line 22 ~ .then ~ res", res)
+            console.log("hiendev ~ file: index.js ~ line 22 ~ .then ~ res", res)
             setBlogDetail(_.head(res || []));
          })
          .catch((err) => {

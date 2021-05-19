@@ -14,12 +14,16 @@ const ProfileSystem = (props) => {
    const [avatar, setAvatar] = useState("");
    const [name, setName] = useState("");
    const [email, setEmail] = useState("");
+   const [phone, setPhone] = useState("");
+   const [address, setAddress] = useState("");
 
    const handleSubmit = () => {
       const body = {
          idAccount: props.profile?.idAccount,
          avatar: avatar ? avatar : props.profile.avatar,
-         name: name ? name : props.profile.name
+         name: name ? name : props.profile.name,
+         phone: phone ? phone : props.profile.phone,
+         address: address ? address : props.profile.address
       };
       props
          .updateProfile(body)
@@ -36,7 +40,12 @@ const ProfileSystem = (props) => {
          case "name":
             setName(e.target?.value || "");
             break;
-
+         case "phone":
+            setPhone(e.target?.value || "");
+            break;
+            case "address":
+            setAddress(e.target?.value || "");
+            break;
          default:
             break;
       }
@@ -46,6 +55,8 @@ const ProfileSystem = (props) => {
       if (props.profile?.email) {
          setName(props.profile?.name);
          setEmail(props.profile?.email);
+         setPhone(props.profile?.phone);
+         setAddress(props.profile?.address);
       }
    }, [props.profile?.email]);
 
@@ -80,7 +91,6 @@ const ProfileSystem = (props) => {
                                  </div>
                               </div>
                            </div>
-                           {/* end col-lg-6 */}
                            <div className='col-lg-6 responsive-column'>
                               <div className='input-box'>
                                  <label className='label-text'>Email</label>
@@ -96,27 +106,34 @@ const ProfileSystem = (props) => {
                                  </div>
                               </div>
                            </div>
-                           {/* end col-lg-6 */}
                            <div className='col-lg-6 responsive-column'>
                               <div className='input-box'>
-                                 <label className='label-text'>Phone</label>
+                                 <label className='label-text'>Số điện thoại</label>
                                  <div className='form-group'>
                                     <span className='la la-phone form-icon' />
-                                    <input className='form-control' type='text' defaultValue='+ 00 222 44 5678' />
+                                    <input
+                                       className='form-control'
+                                       type='text'
+                                       value={phone}
+                                       onChange={(e) => handleChange(e, "phone")}
+                                    />
                                  </div>
                               </div>
                            </div>
-                           {/* end col-lg-6 */}
                            <div className='col-lg-6 responsive-column'>
                               <div className='input-box'>
-                                 <label className='label-text'>Address</label>
+                                 <label className='label-text'>Địa chỉ</label>
                                  <div className='form-group'>
                                     <span className='la la-map form-icon' />
-                                    <input className='form-control' type='text' defaultValue='124/6 Street view, USA' />
+                                    <input
+                                       className='form-control'
+                                       type='text'
+                                       value={address}
+                                       onChange={(e) => handleChange(e, "address")}
+                                    />
                                  </div>
                               </div>
                            </div>
-                           {/* end col-lg-6 */}
                            <div className='col-lg-12'>
                               <div className='btn-box'>
                                  <button className='theme-btn' type='button' onClick={handleSubmit}>
@@ -124,16 +141,12 @@ const ProfileSystem = (props) => {
                                  </button>
                               </div>
                            </div>
-                           {/* end col-lg-12 */}
                         </div>
-                        {/* end row */}
                      </form>
                   </div>
                </div>
             </div>
-            {/* end form-box */}
          </div>
-         {/* end col-lg-6 */}
       </ProfileSystemStyled>
    );
 };
@@ -146,10 +159,9 @@ export default compose(
          // có thể check user?.role === ROLE.administrator && isAuthenticated => dashboard admin , không thì redirect tới homepage
       }),
       {
-         // postLogin: appApisActions.postLogin
          login: authActions.login,
          updateProfile: authActions.updateProfile
       }
    ),
-   withRouter //để push(nhảy qua trang khác) là chủ yếu,
+   withRouter
 )(ProfileSystem);

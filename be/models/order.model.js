@@ -14,6 +14,7 @@ const Order = function (order) {
    this.notes = order.notes || ' ';
    this.idAccount = order.idAccount || 8;
    this.buyer = order.buyer || ' ';
+   this.paymentMethod = order.paymentMethod || ' ';
    this.idTour = order.idTour || ' ';
 };
 
@@ -49,6 +50,7 @@ Order.createOrder = function (newOrder, funcResult) {
    this.status = newOrder.status;
    this.totalPrice = newOrder.totalPrice;
    this.numberPeople = newOrder.numberPeople;
+   this.paymentMethod = newOrder.paymentMethod;
    this.address = newOrder.address;
    this.phone = newOrder.phone;
    this.email = newOrder.email;
@@ -61,7 +63,7 @@ Order.createOrder = function (newOrder, funcResult) {
       'INSERT INTO ' +
          databaseProduction +
          '.orders (`PIN`, `status`, `totalPrice`, `numberPeople`,' +
-         " `address`, `phone`,`email`,`notes`, `idAccount`, `buyer`, `idTour` ) VALUES ('" +
+         " `address`, `phone`,`email`,`notes`, `idAccount`, `buyer`, `idTour`, `paymentMethod` ) VALUES ('" +
          this.PIN +
          "', '" +
          this.status +
@@ -83,6 +85,8 @@ Order.createOrder = function (newOrder, funcResult) {
          this.buyer +
          "', '" +
          this.idTour +
+         "', '" +
+         this.paymentMethod +
          "') ",
       function (err, res) {
          if (err) {
