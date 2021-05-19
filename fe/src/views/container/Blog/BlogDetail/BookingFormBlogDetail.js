@@ -6,11 +6,11 @@ import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import "pure-react-carousel/dist/react-carousel.es.css";
 
-const BookingFormTourDetailStyled = styled.div``;
+const BookingFormBlogDetailStyled = styled.div``;
 
-function BookingFormTourDetail(props) {
+function BookingFormBlogDetail(props) {
    return (
-      <BookingFormTourDetailStyled>
+      <BookingFormBlogDetailStyled>
          <div className='sidebar-widget single-content-widget'>
             <div className='sidebar-widget-item'>
                <div className='sidebar-book-title-wrap mb-3'>
@@ -109,7 +109,7 @@ function BookingFormTourDetail(props) {
                </div>
             </div>
          </div>
-      </BookingFormTourDetailStyled>
+      </BookingFormBlogDetailStyled>
    );
 }
 
@@ -120,4 +120,4 @@ export default connect(
    {
       getTours: appApisActions.getTours
    }
-)(BookingFormTourDetail);
+)(BookingFormBlogDetail);

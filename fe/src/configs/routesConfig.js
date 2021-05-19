@@ -12,6 +12,9 @@ export const SETUP_PROFILE_PATH = "/setup-profile";
 export const HOME_PAGE = "/homepage";
 export const APP_DEFAULT_PATH = HOME_PAGE;
 
+export const FORGET_PASSWORD = "/forgetpassword";
+
+
 /**
  * TOUR PATHS
  */

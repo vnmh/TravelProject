@@ -40,7 +40,10 @@ function Avatar(props) {
          className='avatar-uploader'
          showUploadList={false}
          action={`${API_URL}/file`}
-         onChange={handleChange}>
+         onChange={handleChange}
+         width='100%'
+         height='100%'
+         >
          {imageUrl ? <img src={firstImage("/img/" + imageUrl)} alt='avatar' style={{ width: "100%" }} /> : uploadButton}
       </Upload>
    );

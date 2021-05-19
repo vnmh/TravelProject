@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, {  useState } from "react";
 import styled from "styled-components";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
-import { Button, Image, message, Modal } from "antd";
+import { Button, Image } from "antd";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import SingleContentTourDetail from "./SingleContentTourDetail.js";
 import DescriptionTourDetail from "./DescriptionTourDetail.js";
@@ -31,38 +30,35 @@ function ImpTourDetail(props) {
    const [isModalVisibleImage, setIsModalVisibleImage] = useState(false);
 
    return (
-      <ImpTourDetailStyled backgroundImage={firstImage(_.head(props.tourDetail?.images)?.url || "")}>
-         {/* ================================
-            START BREADCRUMB AREA
-         ================================= */}
+      <ImpTourDetailStyled>
          <section className='py-0 position-relative'>
-            <Image className='style-image ' src={firstImage(_.head(props.tourDetail?.images)?.url || "")} />
+            <Image className='style-image ' src={firstImage(_.head(props.tourDetail?.images)?.url || "")} width='100%' height='100%' />
             <div className='position-absolute ' style={{ bottom: 32, left: 32 }}>
-               <Button className='btn-image mx-2' onClick={()=> setIsModalVisibleImage(true)}>Hình ảnh</Button>
-               <Button className='btn-video mx-2' onClick={()=> setIsModalVisible(true)}>Video</Button>
-               <VideoComponent isModalVisible={isModalVisible}  onCancel={() => setIsModalVisible(false)} urlVideo={props.tourDetail?.video}/>
-               <ImageComponent isModalVisibleImage={isModalVisibleImage}  onCancel={() => setIsModalVisibleImage(false)} urlImage={props.tourDetail?.images}/>
+               <Button className='btn-image mx-2' onClick={() => setIsModalVisibleImage(true)}>
+                  Hình ảnh
+               </Button>
+               <Button className='btn-video mx-2' onClick={() => setIsModalVisible(true)}>
+                  Video
+               </Button>
+               <VideoComponent
+                  isModalVisible={isModalVisible}
+                  onCancel={() => setIsModalVisible(false)}
+                  urlVideo={props.tourDetail?.video}
+               />
+               <ImageComponent
+                  isModalVisibleImage={isModalVisibleImage}
+                  onCancel={() => setIsModalVisibleImage(false)}
+                  urlImage={props.tourDetail?.images}
+               />
             </div>
             <div>
                <div className='container'>
                   <div className='row'>
                      <div className='col-lg-12'></div>
-                     {/* end col-lg-12 */}
                   </div>
-                  {/* end row */}
                </div>
-               {/* end container */}
             </div>
-            {/* end breadcrumb-wrap */}
          </section>
-         {/* end breadcrumb-area */}
-         {/* ================================
-            END BREADCRUMB AREA
-         ================================= */}
-
-         {/* ================================
-            START TOUR DETAIL AREA
-         ================================= */}
          <section className='tour-detail-area padding-bottom-90px'>
             <div className='single-content-navbar-wrap menu section-bg' id='single-content-navbar'>
                <div className='container'>
@@ -118,7 +114,7 @@ function ImpTourDetail(props) {
                            </div>
                            {/* end description */}
                            <ItineraryTourDetail tourDetail={props.tourDetail} />
-                           <ScheduleTourDetail tourDetail={props.tourDetail}/>
+                           <ScheduleTourDetail tourDetail={props.tourDetail} />
                            <LocationTourDetail />
                            <EvaluateTourDetail />
                            <div className='review-box'>
@@ -126,13 +122,9 @@ function ImpTourDetail(props) {
                                  <ReviewTourDetail />
                                  <CommentTourDetail />
                               </div>
-                              {/* end single-content-item */}
                            </div>
-                           {/* end review-box */}
                         </div>
-                        {/* end single-content-wrap */}
                      </div>
-                     {/* end col-lg-8 */}
                      <div className='col-lg-4'>
                         <div className='sidebar single-content-sidebar mb-0'>
                            <BookingFormTourDetail tourDetail={props.tourDetail} />
@@ -182,28 +174,14 @@ function ImpTourDetail(props) {
                                     </li>
                                  </ul>
                               </div>
-                              {/* end sidebar-list */}
                            </div>
-                           {/* end sidebar-widget */}
                         </div>
-                        {/* end sidebar */}
                      </div>
-                     {/* end col-lg-4 */}
                   </div>
-                  {/* end row */}
                </div>
-               {/* end container */}
             </div>
-            {/* end single-content-box */}
          </section>
-         {/* end tour-detail-area */}
-         {/* ================================
-            END TOUR DETAIL AREA
-         ================================= */}
 
-         {/* ================================
-            START RELATE TOUR AREA
-         ================================= */}
          <section className='related-tour-area section--padding'>
             <div className='container'>
                <div className='row'>
@@ -211,11 +189,9 @@ function ImpTourDetail(props) {
                      <div className='section-heading text-center'>
                         <h2 className='sec__title'>You might also like</h2>
                      </div>
-                     {/* end section-heading */}
                   </div>
-                  {/* end col-lg-12 */}
                </div>
-               {/* end row */}
+
                <div className='row padding-top-50px'>
                   <div className='col-lg-4 responsive-column'>
                      <div className='card-item trending-card'>
@@ -318,10 +294,6 @@ function ImpTourDetail(props) {
             </div>
             {/* end container */}
          </section>
-         {/* end related-tour-area */}
-         {/* ================================
-            END RELATE TOUR AREA
-         ================================= */}
       </ImpTourDetailStyled>
    );
 }
