@@ -4,7 +4,6 @@ import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
 import { authActions } from "~/state/ducks/authUser";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
-import { firstImage } from "~/views/utilities/helpers/utilObject";
 import Avatar from "./Avatar";
 import { message } from "antd";
 
