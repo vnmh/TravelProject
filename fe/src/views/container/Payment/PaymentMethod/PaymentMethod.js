@@ -9,6 +9,7 @@ import { message } from "antd";
 import * as PATH from "~/configs/routesConfig";
 import { parseObjToQuery } from "~/views/utilities/helpers";
 import { useHistory } from "react-router";
+import { ORDER_STATUS } from "~/configs/status";
 
 const PaymentMethodStyled = styled.div``;
 
@@ -45,7 +46,7 @@ function PaymentMethod(props) {
    const submitTransfer = () => {
       const body = {
          PIN,
-         status: "new",
+         status: ORDER_STATUS.New,
          paymentMethod,
          totalPrice:
             props.payment?.price * params.numberPeople -
@@ -83,7 +84,6 @@ function PaymentMethod(props) {
                   <div className='contact-form-action'>
                      <form method='post'>
                         <div className='row'>
-                           {/* end col-lg-6 */}
                            <div className='col-lg-12'>
                               <div className='btn-box'>
                                  <a
@@ -95,11 +95,9 @@ function PaymentMethod(props) {
                                  </a>
                               </div>
                            </div>
-                           {/* end col-lg-12 */}
                         </div>
                      </form>
                   </div>
-                  {/* end contact-form-action */}
                </div>
             );
          case "Cash":
@@ -111,19 +109,16 @@ function PaymentMethod(props) {
                   aria-labelledby='credit-card-tab'>
                   <div className='contact-form-action'>
                      <div className='row'>
-                        {/* end col-lg-6 */}
                         <div className='col-lg-12 responsive-column mb-4'>Bạn sẽ thanh toán tại với đại lý du lịch</div>
                         <div className='col-lg-12'>
                            <div className='btn-box'>
-                              <button className='theme-btn' type='submit'>
+                              <button className='theme-btn' onClick={submitTransfer}>
                                  Hoàn tất
                               </button>
                            </div>
                         </div>
-                        {/* end col-lg-12 */}
                      </div>
                   </div>
-                  {/* end contact-form-action */}
                </div>
             );
          case "Transfer":
@@ -170,7 +165,6 @@ function PaymentMethod(props) {
                                  </div>
                               </div>
                            </div>
-                           {/* end col-lg-6 */}
                            <div className='col-lg-12'>
                               <div className='btn-box'>
                                  <button className='theme-btn' onClick={submitTransfer}>
@@ -178,11 +172,9 @@ function PaymentMethod(props) {
                                  </button>
                               </div>
                            </div>
-                           {/* end col-lg-12 */}
                         </div>
                      </div>
                   </div>
-                  {/* end contact-form-action */}
                </div>
             );
          default:
@@ -196,7 +188,6 @@ function PaymentMethod(props) {
             <div className='form-title-wrap'>
                <h3 className='title'>Chọn phương thức thanh toán</h3>
             </div>
-            {/* form-title-wrap */}
             <div className='form-content'>
                <div className='section-tab check-mark-tab text-center pb-4'>
                   <ul className='nav nav-tabs justify-content-center' id='myTab' role='tablist'>
@@ -244,11 +235,8 @@ function PaymentMethod(props) {
                      </li>
                   </ul>
                </div>
-               {/* end section-tab */}
                <div className='tab-content'>{renderPaymentMethod()}</div>
-               {/* end tab-content */}
             </div>
-            {/* end form-content */}
          </div>
       </PaymentMethodStyled>
    );

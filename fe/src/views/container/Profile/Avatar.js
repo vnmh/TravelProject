@@ -24,7 +24,6 @@ function Avatar(props) {
    useEffect(() => {
       setImageUrl(props.avatarAPI);
    }, [props.avatarAPI]);
-  
 
    const uploadButton = (
       <div>

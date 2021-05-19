@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import _ from "lodash";
 import { connect } from "react-redux";
@@ -7,7 +7,7 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 
 const StatusPaymentStyled = styled.div``;
 
-function StatusPayment(props) {
+function StatusPayment() {
    return (
       <StatusPaymentStyled>
          <div className='form-title-wrap'>
@@ -37,6 +37,6 @@ export default connect(
       user: state["authUser"].user
    }),
    {
-      getTours: appApisActions.getTours
+      
    }
 )(StatusPayment);

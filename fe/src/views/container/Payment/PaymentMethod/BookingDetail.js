@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import _ from "lodash";
 import { connect } from "react-redux";
@@ -7,7 +7,6 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
 import UtilDate from "~/views/utilities/helpers/UtilDate";
 import moment from "moment";
-import { useParams } from "react-router";
 import queryString from "query-string";
 import { currencyFormat } from "~/views/utilities/helpers/currency";
 
@@ -22,7 +21,6 @@ function BookingDetail(props) {
             <div className='form-title-wrap'>
                <h3 className='title'>Chi tiết đặt tour</h3>
             </div>
-            {/* end form-title-wrap */}
             <div className='form-content'>
                <div className='card-item shadow-none radius-none mb-0'>
                   <div className='card-img pb-4'>
@@ -109,9 +107,7 @@ function BookingDetail(props) {
                      </ul>
                   </div>
                </div>
-               {/* end card-item */}
             </div>
-            {/* end form-content */}
          </div>
       </BookingDetailStyled>
    );

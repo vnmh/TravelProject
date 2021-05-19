@@ -5,21 +5,17 @@ import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import { message } from "antd";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import Header from "../Header";
-import Footer from "../Footer";
-import TopBarTour from "../Tour/TopBarTour";
 import ImpPayment from "./ImpPayment";
-import { useHistory, useRouteMatch } from "react-router";
+import { useRouteMatch } from "react-router";
+import TopBarTour from "../../Tour/TopBarTour";
+import Header from "../../Header";
+import Footer from "../../Footer";
 
 const PaymentStyled = styled.div``;
 
 function Payment(props) {
    const [payment, setPayment] = useState();
-
-   const hisory = useHistory();
-   console.log("hiendev ~ file: index.js ~ line 18 ~ TourDetail ~ hisory", hisory);
    const match = useRouteMatch();
-   console.log("hiendev ~ file: index.js ~ line 20 ~ TourDetail ~ match", match);
 
    useEffect(() => {
       let tourDetail = {};

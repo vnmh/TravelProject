@@ -28,8 +28,8 @@ function BookingFormTourDetail(props) {
                      <span className='text-value ml-2 mr-1'>
                         {currencyFormat(
                            props.tourDetail?.price * numberPeople -
-                              props.tourDetail?.price * props.tourDetail?.sale * 0.01 * numberPeople
-                        )}
+                           props.tourDetail?.price * props.tourDetail?.sale * 0.01 * numberPeople
+                           )}
                      </span>{" "}
                      {props.tourDetail?.sale > 0 ? (
                         <span className='before-price'>{currencyFormat(props.tourDetail?.price * numberPeople)}</span>
@@ -39,7 +39,6 @@ function BookingFormTourDetail(props) {
                   </p>
                </div>
             </div>
-            {/* end sidebar-widget-item */}
             <div className='sidebar-widget-item'>
                <div className='contact-form-action'>
                   <form action='#'>
@@ -61,7 +60,6 @@ function BookingFormTourDetail(props) {
                   </form>
                </div>
             </div>
-            {/* end sidebar-widget-item */}
             <div className='sidebar-widget-item'>
                <div className='qty-box mb-2 d-flex align-items-center justify-content-between'>
                   <label className='font-size-16'>Số người</label>
@@ -88,7 +86,6 @@ function BookingFormTourDetail(props) {
                   </div>
                </div>
             </div>
-            {/* end sidebar-widget-item */}
             <div className='btn-box pt-2'>
                <Link
                   to={PATH.TOUR_BOOKING.replace(":id", props.tourDetail?.idTour) + parseObjToQuery({ numberPeople })}
