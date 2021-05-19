@@ -17,14 +17,6 @@ function ScheduleTourDetail(props) {
                <div className='ck-content'>{parseHtml(props.tourDetail?.schedule?.data || "")}</div>
             </div>
             <div className='section-block' />
-            {/* <iframe
-               width='900'
-               height='506'
-               src='https://www.youtube.com/embed/yLWnfXfZVMI'
-               title='YouTube video player'
-               frameborder='0'
-               allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-               allowfullscreen></iframe> */}
          </div>
       </ScheduleTourDetailStyled>
    );

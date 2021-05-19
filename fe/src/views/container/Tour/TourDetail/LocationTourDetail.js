@@ -22,7 +22,6 @@ function LocationTourDetail(props) {
                   />
                </div>
             </div>
-            {/* end single-content-item */}
             <div className='section-block' />
          </div>
       </LocationTourDetailStyled>

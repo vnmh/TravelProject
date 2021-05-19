@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import _ from "lodash";
 import { connect } from "react-redux";
@@ -22,6 +22,11 @@ import ImageComponent from "./ImageComponent.js";
 const ImpTourDetailStyled = styled.div`
    .style-image {
       max-height: 300px;
+      width: 100%;
+      object-fit: cover;
+   }
+   .ant-image {
+      width: 100%;
    }
 `;
 
@@ -97,7 +102,6 @@ function ImpTourDetail(props) {
                   </div>
                </div>
             </div>
-            {/* end single-content-navbar-wrap */}
             <div className='single-content-box'>
                <div className='container'>
                   <div className='row'>
@@ -109,10 +113,8 @@ function ImpTourDetail(props) {
                               <div className='single-content-item padding-top-40px padding-bottom-40px'>
                                  <DescriptionTourDetail tourDetail={props.tourDetail} />
                               </div>
-                              {/* end single-content-item */}
                               <div className='section-block' />
                            </div>
-                           {/* end description */}
                            <ItineraryTourDetail tourDetail={props.tourDetail} />
                            <ScheduleTourDetail tourDetail={props.tourDetail} />
                            <LocationTourDetail />
@@ -153,9 +155,7 @@ function ImpTourDetail(props) {
                                     </li>
                                  </ul>
                               </div>
-                              {/* end sidebar-list */}
                            </div>
-                           {/* end sidebar-widget */}
                            <div className='sidebar-widget single-content-widget'>
                               <h3 className='title stroke-shape'>Get a Question?</h3>
                               <p className='font-size-14 line-height-24'>
@@ -191,7 +191,6 @@ function ImpTourDetail(props) {
                      </div>
                   </div>
                </div>
-
                <div className='row padding-top-50px'>
                   <div className='col-lg-4 responsive-column'>
                      <div className='card-item trending-card'>
@@ -221,9 +220,7 @@ function ImpTourDetail(props) {
                            </div>
                         </div>
                      </div>
-                     {/* end card-item */}
                   </div>
-                  {/* end col-lg-4 */}
                   <div className='col-lg-4 responsive-column'>
                      <div className='card-item trending-card'>
                         <div className='card-img'>
@@ -254,9 +251,7 @@ function ImpTourDetail(props) {
                            </div>
                         </div>
                      </div>
-                     {/* end card-item */}
                   </div>
-                  {/* end col-lg-4 */}
                   <div className='col-lg-4 responsive-column'>
                      <div className='card-item trending-card'>
                         <div className='card-img'>
@@ -286,13 +281,9 @@ function ImpTourDetail(props) {
                            </div>
                         </div>
                      </div>
-                     {/* end card-item */}
                   </div>
-                  {/* end col-lg-4 */}
                </div>
-               {/* end row */}
             </div>
-            {/* end container */}
          </section>
       </ImpTourDetailStyled>
    );
