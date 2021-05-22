@@ -128,9 +128,7 @@ Order.getOrderByEmail = function (email, funcResult) {
    mysql.query(
       'SELECT * FROM ' +
          databaseProduction +
-         ".orders inner join tours on tours.idTour = orders.idTour WHERE email = ? AND orders.statusAction <> 'deleted' order by " +
-         databaseProduction +
-         '.orders.dateAdded desc limit 0,5;',
+         ".orders inner join tours on tours.idTour = orders.idTour WHERE email = ? AND orders.statusAction <> 'deleted'"
       [email],
       function (err, res) {
          if (err) {

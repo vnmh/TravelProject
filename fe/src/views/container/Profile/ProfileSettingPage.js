@@ -113,7 +113,7 @@ const ProfileSystem = (props) => {
                                     <input
                                        className='form-control'
                                        type='text'
-                                       value={phone}
+                                       value={`${phone}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
                                        onChange={(e) => handleChange(e, "phone")}
                                     />
                                  </div>

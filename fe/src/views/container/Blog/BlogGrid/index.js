@@ -9,6 +9,7 @@ import Header from "../../Header";
 import ImpBlogGrid from "./ImpBlogGrid";
 import Footer from "../../Footer";
 import TopBarBlog from "../TopBarBlog";
+import ScrollToTop from "~/ScrollToTop";
 
 const BlogGridStyled = styled.div``;
 
@@ -25,12 +26,14 @@ function BlogGrid(props) {
          });
    }, []);
    return (
-      <BlogGridStyled>
-         <Header />
-         <TopBarBlog />
-         <ImpBlogGrid />
-         <Footer />
-      </BlogGridStyled>
+      <ScrollToTop>
+         <BlogGridStyled>
+            <Header />
+            <TopBarBlog />
+            <ImpBlogGrid />
+            <Footer />
+         </BlogGridStyled>
+      </ScrollToTop>
    );
 }
 

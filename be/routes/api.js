@@ -97,7 +97,7 @@ router.get('/orders', order.listAll);
 router.post('/order', order.create);
 router.put('/orderUpdateStatus', order.updateStatus);
 router.put('/order', order.update);
-router.put('/orderUpdateStatus', order.updateStatus);
+// router.put('/orderUpdateStatus', order.updateStatus);
 router.delete('/order', authenticated, order.delete);
  
 // //favorites

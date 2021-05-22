@@ -11,9 +11,6 @@ const PaymentDetailStyled = styled.div``;
 
 function PaymentDetail(props) {
    const params = queryString.parse(window.location.search);
-   console.log("hiendev ~ file: PaymentDetail.js ~ line 13 ~ PaymentDetail ~ params", params)
-
-   console.log("hiendev ~ file: InfoBooking.js ~ line 22 ~ InfoBooking ~ props.orderDetail", props.orderDetail);
 
    return (
       <PaymentDetailStyled>

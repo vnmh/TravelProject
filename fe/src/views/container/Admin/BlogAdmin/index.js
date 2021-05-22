@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory, withRouter } from "react-router-dom";
 import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
 
@@ -10,20 +10,30 @@ import styled from "styled-components"; // Dùng để ghi đè style bên trong
 import BlogAdmin from "./BlogAdmin";
 import TopBar from "../TopBar";
 import SideBar from "../SideBar";
+import { ROLES } from "~/configs";
+import ScrollToTop from "~/ScrollToTop";
 
 const BlogAdminPageStyled = styled.div``;
 
-const BlogAdminPage = () => {
+const BlogAdminPage = (props) => {
+   const history = useHistory();
+   useEffect(() => {
+      if (props.user?.role !== ROLES.administrator) {
+         history.push(PATH.APP_DEFAULT_PATH);
+      }
+   }, [props.user?.role]);
    return (
-      <BlogAdminPageStyled>
-         <body className='section-bg'>
-            <section class='dashboard-area'>
-               <SideBar />
-               <TopBar />
-               <BlogAdmin />
-            </section>
-         </body>
-      </BlogAdminPageStyled>
+      <ScrollToTop>
+         <BlogAdminPageStyled>
+            <body className='section-bg'>
+               <section class='dashboard-area'>
+                  <SideBar />
+                  <TopBar />
+                  <BlogAdmin />
+               </section>
+            </body>
+         </BlogAdminPageStyled>
+      </ScrollToTop>
    );
 };
 

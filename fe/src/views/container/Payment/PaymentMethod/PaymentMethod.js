@@ -65,7 +65,7 @@ function PaymentMethod(props) {
          .then(({ res }) => {
             message.success("Tạo đơn hàng thành công");
             history.push(PATH.ORDER_DETAIL + parseObjToQuery({ idOrder: res.insertId, idTour: props.payment?.idTour }));
-            setPIN(Date.now());
+            setPIN(Date.now()); // Cần tạo mã PIN mới cho lần thanh toán tiếp theo
          })
          .catch((err) => {
             message.error("Tạo đơn hàng thất bại");
@@ -191,7 +191,12 @@ function PaymentMethod(props) {
             <div className='form-content'>
                <div className='section-tab check-mark-tab text-center pb-4'>
                   <ul className='nav nav-tabs justify-content-center' id='myTab' role='tablist'>
-                     <li className='nav-item' onClick={() => setPaymentMethod("MOMO")}>
+                     <li
+                        className='nav-item'
+                        onClick={() => {
+                           if (props.infoTrue) setPaymentMethod("MOMO");
+                           else message.error("Vui lòng điền thông tin thanh toán");
+                        }}>
                         <a
                            className={`nav-link ${paymentMethod === "MOMO" ? "active" : ""} `}
                            id='credit-card-tab'

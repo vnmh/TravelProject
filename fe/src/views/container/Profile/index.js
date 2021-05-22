@@ -9,6 +9,7 @@ import Header from "../Header";
 import TopBar from "../Admin/TopBar";
 import SideBar from "../Admin/SideBar";
 import ProfileBreadPage from "./ProfileBreadPage";
+import ScrollToTop from "~/ScrollToTop";
 
 const ProfilePageStyled = styled.div``;
 
@@ -22,29 +23,31 @@ const ProfilePage = (props) => {
    }, []);
 
    return (
-      <ProfilePageStyled>
-         {props.user?.role === "user" ? (
-            <>
-               <div className='mb-5'>
-                  <Header />
-               </div>
-               <div>
-                  <Profile profile={profile}/>
-               </div>
-            </>
-         ) : (
-            <>
-               <body className='section-bg'>
-                  <section className='dashboard-area'>
-                     <TopBar />
-                     <SideBar />
-                     <ProfileBreadPage />
-                     <Profile profile={profile}/>
-                  </section>
-               </body>
-            </>
-         )}
-      </ProfilePageStyled>
+      <ScrollToTop>
+         <ProfilePageStyled>
+            {props.user?.role === "user" ? (
+               <>
+                  <div className='mb-5'>
+                     <Header />
+                  </div>
+                  <div>
+                     <Profile profile={profile} />
+                  </div>
+               </>
+            ) : (
+               <>
+                  <body className='section-bg'>
+                     <section className='dashboard-area'>
+                        <TopBar />
+                        <SideBar />
+                        <ProfileBreadPage />
+                        <Profile profile={profile} />
+                     </section>
+                  </body>
+               </>
+            )}
+         </ProfilePageStyled>
+      </ScrollToTop>
    );
 };
 

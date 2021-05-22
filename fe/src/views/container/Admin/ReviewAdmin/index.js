@@ -10,20 +10,23 @@ import styled from "styled-components"; // Dùng để ghi đè style bên trong
 import ReviewAdmin from "./ReviewAdmin";
 import TopBar from "../TopBar";
 import SideBar from "../SideBar";
+import ScrollToTop from "~/ScrollToTop";
 
 const ReviewAdminPageStyled = styled.div``;
 
 const ReviewAdminPage = () => {
    return (
-      <ReviewAdminPageStyled>
-         <body className='section-bg'>
-            <section class='dashboard-area'>
-               <SideBar />
-               <TopBar />
-               <ReviewAdmin />
-            </section>
-         </body>
-      </ReviewAdminPageStyled>
+      <ScrollToTop>
+         <ReviewAdminPageStyled>
+            <body className='section-bg'>
+               <section class='dashboard-area'>
+                  <SideBar />
+                  <TopBar />
+                  <ReviewAdmin />
+               </section>
+            </body>
+         </ReviewAdminPageStyled>
+      </ScrollToTop>
    );
 };
 

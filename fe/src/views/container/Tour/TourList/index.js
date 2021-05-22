@@ -9,6 +9,7 @@ import Header from "../../Header";
 import Footer from "../../Footer";
 import TopBarTour from "../TopBarTour";
 import ImpTourList from "./ImpTourList";
+import ScrollToTop from "~/ScrollToTop";
 
 const TourListStyled = styled.div``;
 
@@ -25,12 +26,14 @@ function TourList(props) {
          });
    }, []);
    return (
-      <TourListStyled>
-         <Header />
-         <TopBarTour />
-         <ImpTourList />
-         <Footer />
-      </TourListStyled>
+      <ScrollToTop>
+         <TourListStyled>
+            <Header />
+            <TopBarTour />
+            <ImpTourList />
+            <Footer />
+         </TourListStyled>
+      </ScrollToTop>
    );
 }
 

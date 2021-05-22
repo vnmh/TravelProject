@@ -8,6 +8,7 @@ import { authActions } from "~/state/ducks/authUser";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import Header from "../Header";
 import ImpHomePage from "./ImpHomePage";
+import ScrollToTop from "~/ScrollToTop";
 
 const HomePageStyled = styled.div`
    height: 100vh;
@@ -15,10 +16,12 @@ const HomePageStyled = styled.div`
 
 const Homepage = (props) => {
    return (
-      <HomePageStyled>
-         <Header />
-         <ImpHomePage />
-      </HomePageStyled>
+      <ScrollToTop>
+         <HomePageStyled>
+            <Header />
+            <ImpHomePage />
+         </HomePageStyled>
+      </ScrollToTop>
    );
 };
 

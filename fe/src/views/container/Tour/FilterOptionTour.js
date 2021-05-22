@@ -201,9 +201,7 @@ function FilterOptionBlog(props) {
                   <Option value='a-to-z'>A đến Z</Option>
                </Select>
             </div>
-            {/* end select-contain */}
          </div>
-         {/* end filter-bar */}
       </FilterOptionBlogStyled>
    );
 }
