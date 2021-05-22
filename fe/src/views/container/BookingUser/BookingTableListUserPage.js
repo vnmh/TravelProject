@@ -127,24 +127,6 @@ const BookingTableListUserPage = (props) => {
                               </li>
                            </ul>
                         </div>
-                        {props.bookingDetail?.status !== ORDER_STATUS.Done && (
-                           <div className='action-btns position-relative'>
-                              <button
-                                 className='d-flex justify-content-center align-items-center theme-btn theme-btn-small mr-4 position-absolute'
-                                 style={{ bottom: 47, right: 124, width: 130 }}
-                                 onClick={onSubmit}>
-                                 <i className='la la-check-circle mr-1' />
-                                 {props.bookingDetail?.status === "New" ? "Phê duyệt" : "Hoàn thành"}
-                              </button>
-                              <button
-                                 className='d-flex justify-content-center align-items-center theme-btn theme-btn-small position-absolute'
-                                 style={{ bottom: 47, right: 24, width: 120 }}
-                                 onClick={onCancel}>
-                                 <i className='la la-times mr-1' />
-                                 Hủy bỏ
-                              </button>
-                           </div>
-                        )}
                      </div>
                      {/* end card-item */}
                   </div>

@@ -36,9 +36,7 @@ const BookingUserPage = (props) => {
       props
          .getOrdersWithEmail({email : props.user?.email})
          .then(({ res }) => {
-         console.log("maidev ~ file: index.js ~ line 39 ~ useEffect ~ props.user?.email", props.user?.email)
-           console.log("maidev ~ file: index.js ~ line 39 ~ .then ~ res", res)
-           // setTourBooking(res);
+            setTourBooking(res);
          })
          .catch((err) => {
             message.error("Lỗi load dữ liệu tour rồi nha");
