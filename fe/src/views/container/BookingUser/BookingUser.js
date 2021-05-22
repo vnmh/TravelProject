@@ -4,19 +4,19 @@ import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
 import { authActions } from "~/state/ducks/authUser";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
-import BookingListAdminPage from "./BookingListAdminPage";
-import BookingBreadAdminPage from "./BookingBreadAdminPage";
+import BookingListUserPage from "./BookingListUserPage";
+import BookingBreadUserPage from "./BookingBreadUserPage";
 
-const BookingAdminStyled = styled.div``;
+const BookingUserStyled = styled.div``;
 
-const BookingAdmin = (props) => {
+const BookingUser = (props) => {
    return (
-      <BookingAdminStyled>
+      <BookingUserStyled>
          <div class='dashboard-content-wrap'>
-            <BookingBreadAdminPage />
+            <BookingBreadUserPage />
             <div class='dashboard-main-content'>
                <div class='container-fluid'>
-                  <BookingListAdminPage
+                  <BookingListUserPage
                      tourBooking={props.tourBooking}
                      needLoading={props.needLoading}
                      setNeedLoading={props.setNeedLoading}
@@ -27,7 +27,7 @@ const BookingAdmin = (props) => {
                </div>
             </div>
          </div>
-      </BookingAdminStyled>
+      </BookingUserStyled>
    );
 };
 
@@ -36,7 +36,7 @@ export default compose(
       (state) => ({
          user: state["authUser"].user,
          isAuthenticated: state["authUser"].isAuthenticated
-         // có thể check user?.role === ROLE.administrator && isAuthenticated => dashboard admin , không thì redirect tới homepage
+         // có thể check user?.role === ROLE.Useristrator && isAuthenticated => dashboard User , không thì redirect tới homepage
       }),
       {
          // postLogin: appApisActions.postLogin
@@ -44,4 +44,4 @@ export default compose(
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,
-)(BookingAdmin);
+)(BookingUser);

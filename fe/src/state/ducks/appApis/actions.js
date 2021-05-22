@@ -57,3 +57,4 @@ export const getOrders = (params) => apiAction("get")(types.COMMON, "/orders" + 
 export const deleteOrder = (idOrder) =>
    apiAction("delete")(types.COMMON, "/order" + parseObjToQuery({ idOrder }), {}, true);
 
+export const getOrdersWithEmail = (params) => apiAction("get")(types.COMMON, "/orderWithEmail" + parseObjToQuery(params), {}, false);

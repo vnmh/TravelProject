@@ -5,18 +5,18 @@ import { connect } from "react-redux";
 import { authActions } from "~/state/ducks/authUser";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 
-const BookingBreadAdminPageStyled = styled.div``;
+const BookingBreadUserPageStyled = styled.div``;
 
-const BookingBreadAdminPage = () => {
+const BookingBreadUserPage = () => {
    return (
-      <BookingBreadAdminPageStyled>
+      <BookingBreadUserPageStyled>
          <div className='dashboard-bread dashboard--bread dashboard-bread-2'>
             <div className='container-fluid'>
                <div className='row align-items-center'>
                   <div className='col-lg-6'>
                      <div className='breadcrumb-content'>
                         <div className='section-heading'>
-                           <h2 className='sec__title font-size-30 text-white'>Đại lý du lịch</h2>
+                           <h2 className='sec__title font-size-30 text-white'>Danh sách tour đã đặt</h2>
                         </div>
                      </div>
                      {/* end breadcrumb-content */}
@@ -30,7 +30,7 @@ const BookingBreadAdminPage = () => {
                                  Trang chủ
                               </a>
                            </li>
-                           <li>Booking</li>
+                           <li>Lịch sử booking</li>
                         </ul>
                      </div>
                      {/* end breadcrumb-list */}
@@ -41,7 +41,7 @@ const BookingBreadAdminPage = () => {
             </div>
          </div>
          {/* end dashboard-bread */}
-      </BookingBreadAdminPageStyled>
+      </BookingBreadUserPageStyled>
    );
 };
 
@@ -50,7 +50,7 @@ export default compose(
       (state) => ({
          user: state["authUser"].user,
          isAuthenticated: state["authUser"].isAuthenticated
-         // có thể check user?.role === ROLE.administrator && isAuthenticated => dashboard admin , không thì redirect tới homepage
+         // có thể check user?.role === ROLE.Useristrator && isAuthenticated => dashboard User , không thì redirect tới homepage
       }),
       {
          // postLogin: appApisActions.postLogin
@@ -58,4 +58,4 @@ export default compose(
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,
-)(BookingBreadAdminPage);
+)(BookingBreadUserPage);

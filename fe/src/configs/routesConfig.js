@@ -38,6 +38,8 @@ export const BLOG_DETAIL = "/blog-detail/:id";
 
 export const PROFILE = "/profile";
 
+export const USER_BOOKING = "/user-booking";
+
 /**
  * Admin
  */
@@ -48,3 +50,5 @@ export const ADMIN_TOUR_LIST = "/admin-tour-list";
 export const ADMIN_REVIEW = "/admin-review";
 export const ADMIN_BLOG = "/admin-blog";
 export const ADMIN_SERVICE = "/admin-service";
+
+

@@ -5,19 +5,18 @@ import { connect } from "react-redux";
 import { authActions } from "~/state/ducks/authUser";
 import * as PATH from "~/configs/routesConfig";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
-import TopBar from "../TopBar";
-import SideBar from "../SideBar";
 import { ROLES } from "~/configs";
-import BookingAdmin from "./BookingAdmin";
+import BookingUser from "./BookingUser";
 import { message } from "antd";
 import { appApisActions } from "~/state/ducks/appApis";
 import ScrollToTop from "~/ScrollToTop";
 import { ORDER_STATUS } from "~/configs/status";
 import _ from "lodash";
+import Header from "../Header";
 
-const BookingAdminPageStyled = styled.div``;
+const BookingUserPageStyled = styled.div``;
 
-const BookingAdminPage = (props) => {
+const BookingUserPage = (props) => {
    const history = useHistory();
    const [tourBooking, setTourBooking] = useState([]);
    const [needLoading, setNeedLoading] = useState(true);
@@ -34,13 +33,12 @@ const BookingAdminPage = (props) => {
    };
 
    useEffect(() => {
-      if (props.user?.role !== ROLES.administrator && needLoading) {
-         history.push(PATH.APP_DEFAULT_PATH);
-      }
       props
-         .getOrders()
+         .getOrdersWithEmail({email : props.user?.email})
          .then(({ res }) => {
-            setTourBooking(res);
+         console.log("maidev ~ file: index.js ~ line 39 ~ useEffect ~ props.user?.email", props.user?.email)
+           console.log("maidev ~ file: index.js ~ line 39 ~ .then ~ res", res)
+           // setTourBooking(res);
          })
          .catch((err) => {
             message.error("Lỗi load dữ liệu tour rồi nha");
@@ -99,12 +97,10 @@ const BookingAdminPage = (props) => {
 
    return (
       <ScrollToTop>
-         <BookingAdminPageStyled>
+         <BookingUserPageStyled>
             <body className='section-bg'>
-               <section class='dashboard-area'>
-                  <SideBar />
-                  <TopBar />
-                  <BookingAdmin
+                  <Header />
+                  <BookingUser
                      onChange={handleChangeTable}
                      tourBooking={tourBooking}
                      needLoading={needLoading}
@@ -113,9 +109,8 @@ const BookingAdminPage = (props) => {
                      status={status}
                      tourBookingFilter={tourBookingFilter}
                   />
-               </section>
             </body>
-         </BookingAdminPageStyled>
+         </BookingUserPageStyled>
       </ScrollToTop>
    );
 };
@@ -125,13 +120,14 @@ export default compose(
       (state) => ({
          user: state["authUser"].user,
          isAuthenticated: state["authUser"].isAuthenticated
-         // có thể check user?.role === ROLE.administrator && isAuthenticated => BookingAdminPage admin , không thì redirect tới homepage
+         // có thể check user?.role === ROLE.administrator && isAuthenticated => BookingUserPage admin , không thì redirect tới homepage
       }),
       {
          // postLogin: appApisActions.postLogin
          login: authActions.login,
-         getOrders: appApisActions.getOrders
+         getOrders: appApisActions.getOrders,
+         getOrdersWithEmail : appApisActions.getOrdersWithEmail
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,
-)(BookingAdminPage);
+)(BookingUserPage);
