@@ -19,6 +19,7 @@ const ImpTourListStyled = styled.div``;
 
 function ImpTourList(props) {
    const [sortType, setSortType] = useState();
+   const [addressType, setAddressType] = useState();
    const [searchTour, setSearchTour] = useState();
    const [timeSubmit, setTimeSubmit] = useState();
    const [pagination, setPagination] = useState({ page: 1, size: 0, total: 0 });
@@ -34,7 +35,7 @@ function ImpTourList(props) {
                   <div className='col-lg-12'>
                      <div className='filter-wrap margin-bottom-30px'>
                         <FilterTopTour />
-                        <FilterOptionTour setSortType={setSortType} />
+                        <FilterOptionTour setSortType={setSortType} setAddressType={setAddressType} />
                      </div>
                      {/* end filter-wrap */}
                   </div>
@@ -64,6 +65,7 @@ function ImpTourList(props) {
                   <div className='col-lg-8'>
                      <CardItemListTour
                         sortType={sortType}
+                        addressType={addressType}
                         searchTour={searchTour}
                         timeSubmit={timeSubmit}
                         pagination={pagination}
