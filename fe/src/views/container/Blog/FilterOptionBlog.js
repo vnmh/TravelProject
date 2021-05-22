@@ -184,26 +184,11 @@ function FilterOptionTour(props) {
                               </div>
                            </div>
                         </div>
-                        {/* end dropdown-item */}
                      </div>
-                     {/* end dropdown-menu */}
                   </div>
-                  {/* end dropdown */}
                </div>
             </div>
-            {/* end filter-bar-filter */}
-            {/* <div className='select-contain'>
-               <Select defaultValue='Mặc định' style={{ width: 200 }} onChange={handleChange}>
-                  <Option value='filter-default'>Mặc định</Option>
-                  <Option value='new-tour'>Tour mới</Option>
-                  <Option value='price-low-to-high'>Giá: thấp đến cao</Option>
-                  <Option value='price-high-to-low'>Giá: cao đến thấp</Option>
-                  <Option value='a-to-z'>A đến Z</Option>
-               </Select>
-            </div> */}
-            {/* end select-contain */}
          </div>
-         {/* end filter-bar */}
       </FilterOptionTourStyled>
    );
 }

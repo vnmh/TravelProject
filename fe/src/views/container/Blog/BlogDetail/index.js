@@ -9,6 +9,7 @@ import Header from "../../Header";
 import Footer from "../../Footer";
 import ImpBlogDetail from "./ImpBlogDetail";
 import { useHistory, useRouteMatch } from "react-router";
+import ScrollToTop from "~/ScrollToTop";
 
 const BlogDetailStyled = styled.div``;
 
@@ -19,7 +20,7 @@ function BlogDetail(props) {
       props
          .getPost(match?.params?.id)
          .then(({ res }) => {
-            console.log("hiendev ~ file: index.js ~ line 22 ~ .then ~ res", res)
+            console.log("hiendev ~ file: index.js ~ line 22 ~ .then ~ res", res);
             setBlogDetail(_.head(res || []));
          })
          .catch((err) => {
@@ -28,11 +29,13 @@ function BlogDetail(props) {
    }, []);
 
    return (
-      <BlogDetailStyled>
-         <Header />
-         <ImpBlogDetail blogDetail={blogDetail} />
-         <Footer />
-      </BlogDetailStyled>
+      <ScrollToTop>
+         <BlogDetailStyled>
+            <Header />
+            <ImpBlogDetail blogDetail={blogDetail} />
+            <Footer />
+         </BlogDetailStyled>
+      </ScrollToTop>
    );
 }
 

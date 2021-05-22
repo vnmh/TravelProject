@@ -12,14 +12,15 @@ import InfoTour from "../../Tour/InfoTour";
 const ImpPaymentStyled = styled.div``;
 
 function ImpPayment(props) {
+   const [infoTrue, setInfoTrue] = useState(false);
    return (
       <ImpPaymentStyled>
          <section className='booking-area padding-top-100px padding-bottom-70px'>
             <div className='container'>
                <div className='row'>
                   <div className='col-lg-8'>
-                     <YourInfo payment={props.payment} />
-                     <PaymentMethod payment={props.payment} />
+                     <YourInfo setInfoTrue={setInfoTrue} payment={props.payment} />
+                     <PaymentMethod infoTrue={infoTrue} payment={props.payment} />
                   </div>
                   <div className='col-lg-4'>
                      <BookingDetail payment={props.payment} />

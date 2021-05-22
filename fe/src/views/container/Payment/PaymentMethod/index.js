@@ -10,6 +10,7 @@ import { useRouteMatch } from "react-router";
 import TopBarTour from "../../Tour/TopBarTour";
 import Header from "../../Header";
 import Footer from "../../Footer";
+import ScrollToTop from "~/ScrollToTop";
 
 const PaymentStyled = styled.div``;
 
@@ -38,12 +39,14 @@ function Payment(props) {
    }, []);
 
    return (
-      <PaymentStyled>
-         <Header />
-         <TopBarTour />
-         <ImpPayment payment={payment} />
-         <Footer />
-      </PaymentStyled>
+      <ScrollToTop>
+         <PaymentStyled>
+            <Header />
+            <TopBarTour />
+            <ImpPayment payment={payment} />
+            <Footer />
+         </PaymentStyled>
+      </ScrollToTop>
    );
 }
 

@@ -9,6 +9,7 @@ import Header from "../../Header";
 import Footer from "../../Footer";
 import TopBarTour from "../TopBarTour";
 import ImpTourGrid from "./ImpTourGrid";
+import ScrollToTop from "~/ScrollToTop";
 
 const TourGridStyled = styled.div``;
 
@@ -25,12 +26,14 @@ function TourGrid(props) {
          });
    }, []);
    return (
-      <TourGridStyled>
-         <Header />
-         <TopBarTour />
-         <ImpTourGrid />
-         <Footer />
-      </TourGridStyled>
+      <ScrollToTop>
+         <TourGridStyled>
+            <Header />
+            <TopBarTour />
+            <ImpTourGrid />
+            <Footer />
+         </TourGridStyled>
+      </ScrollToTop>
    );
 }
 
