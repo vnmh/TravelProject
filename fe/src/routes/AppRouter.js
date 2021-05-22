@@ -18,6 +18,7 @@ import ServiceAdminPage from "~/views/container/Admin/ServiceAdmin";
 import ForgetPassword from "~/views/container/Homepage/ForgetPassword";
 import PaymentMethod from "~/views/container/Payment/PaymentMethod";
 import OrderDetail from "~/views/container/Payment/OrderDetail";
+import BookingUser from "~/views/container/BookingUser";
 
 const AppRouter = (props) => {
    return (
@@ -46,7 +47,7 @@ const AppRouter = (props) => {
             <Route path={PATH.ADMIN_SERVICE} exact component={() => <ServiceAdminPage />} />
 
             <Route path={PATH.FORGET_PASSWORD} exact component={() => <ForgetPassword />} />
-            
+            <Route path={PATH.USER_BOOKING} exact component={() => <BookingUser />} />
             <Redirect to={PATH.HOME_PAGE} />
          </Switch>
       </Router>

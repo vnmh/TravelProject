@@ -13,9 +13,9 @@ import _ from "lodash";
 import { ORDER_STATUS } from "~/configs/status";
 import { message } from "antd";
 
-const BookingTableListAdminPageStyled = styled.div``;
+const BookingTableListUserPageStyled = styled.div``;
 
-const BookingTableListAdminPage = (props) => {
+const BookingTableListUserPage = (props) => {
    const [bookingDetail, setBookingDetail] = useState([]);
 
    const onSubmit = () => {
@@ -32,7 +32,7 @@ const BookingTableListAdminPage = (props) => {
          .catch((err) => {
             props.setNeedLoading(false);
             message.error("Cập nhật thất bại");
-            console.log("maidev ~ file: BookingTableListAdminPage.js ~ line 26 ~ onFinsh ~ err", err);
+            console.log("maidev ~ file: BookingTableListUserPage.js ~ line 26 ~ onFinsh ~ err", err);
          });
    };
 
@@ -50,7 +50,7 @@ const BookingTableListAdminPage = (props) => {
          .catch((err) => {
             props.setNeedLoading(false);
             message.error("Cập nhật thất bại");
-            console.log("maidev ~ file: BookingTableListAdminPage.js ~ line 26 ~ onFinsh ~ err", err);
+            console.log("maidev ~ file: BookingTableListUserPage.js ~ line 26 ~ onFinsh ~ err", err);
          });
    };
 
@@ -72,7 +72,7 @@ const BookingTableListAdminPage = (props) => {
             })
             .catch((err) => {
                props.setNeedLoading(false);
-               console.log("maidev ~ file: BookingTableListAdminPage.js ~ line 34 ~ useEffect ~ err", err);
+               console.log("maidev ~ file: BookingTableListUserPage.js ~ line 34 ~ useEffect ~ err", err);
             });
    }, [props.bookingDetail?.idTour, props.needLoading]);
 
@@ -81,7 +81,7 @@ const BookingTableListAdminPage = (props) => {
    }, [_.first(props.tourBookingFilter || [])?.idTour, _.last(props.tourBookingFilter || [])?.idTour]);
 
    return (
-      <BookingTableListAdminPageStyled>
+      <BookingTableListUserPageStyled>
          <div class='row'>
             <div class='col-lg-12'>
                <div className='form-box'>
@@ -151,7 +151,7 @@ const BookingTableListAdminPage = (props) => {
                </div>
             </div>
          </div>
-      </BookingTableListAdminPageStyled>
+      </BookingTableListUserPageStyled>
    );
 };
 
@@ -169,4 +169,4 @@ export default compose(
       }
    ),
    withRouter
-)(BookingTableListAdminPage);
+)(BookingTableListUserPage);

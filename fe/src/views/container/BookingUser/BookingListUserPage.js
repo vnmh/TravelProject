@@ -4,19 +4,19 @@ import { compose } from "recompose";
 import { connect } from "react-redux";
 import _ from "lodash";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
-import BookingTableListAdminPage from "./BookingTableListAdminPage";
+import BookingTableListUserPage from "./BookingTableListUserPage";
 import { appApisActions } from "~/state/ducks/appApis";
 import { Select } from "antd";
 import { ORDER_STATUS, renderStatusOrder } from "~/configs/status";
 
-const BookingListAdminPageStyled = styled.div``;
+const BookingListUserPageStyled = styled.div``;
 
-const BookingListAdminPage = (props) => {
+const BookingListUserPage = (props) => {
    const [isSubmit, setIsSubmit] = useState(false);
    const [pagination, setPagination] = useState({ page: 1, size: 0, total: 0 });
 
    return (
-      <BookingListAdminPageStyled>
+      <BookingListUserPageStyled>
          <div>
             <div className='row'>
                <div className='col-lg-12'>
@@ -40,7 +40,7 @@ const BookingListAdminPage = (props) => {
                      <div className='form-content'>
                         {(props.tourBookingFilter ? props.tourBookingFilter : props.tourBooking)?.map((item, index) => {
                            return (
-                              <BookingTableListAdminPage
+                              <BookingTableListUserPage
                                  key={`booking_detail${index}`}
                                  setIsSubmit={setIsSubmit}
                                  isSubmit={isSubmit}
@@ -58,7 +58,7 @@ const BookingListAdminPage = (props) => {
                </div>
             </div>
          </div>
-      </BookingListAdminPageStyled>
+      </BookingListUserPageStyled>
    );
 };
 
@@ -67,7 +67,7 @@ export default compose(
       (state) => ({
          user: state["authUser"].user,
          isAuthenticated: state["authUser"].isAuthenticated
-         // có thể check user?.role === ROLE.administrator && isAuthenticated => TourTableListAdminPage admin , không thì redirect tới homepage
+         // có thể check user?.role === ROLE.Useristrator && isAuthenticated => TourTableListUserPage User , không thì redirect tới homepage
       }),
       {
          getTour: appApisActions.getTour,
@@ -75,4 +75,4 @@ export default compose(
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,
-)(BookingListAdminPage);
+)(BookingListUserPage);
