@@ -49,5 +49,12 @@ export const deleteService = (idServices) =>
 //MOMO
 
 export const getLinkMoMo = (body) => apiAction("post")(types.COMMON, "/getLinkMomo", body, true);
+
 export const createOrder = (body) => apiAction("post")(types.COMMON, "/order", body, true);
+export const orderUpdateStatus = (body) => apiAction("put")(types.COMMON, "/orderUpdateStatus", body, true);
 export const getOrder = (params) => apiAction("get")(types.COMMON, "/order" + parseObjToQuery(params), {}, true);
+export const getOrders = (params) => apiAction("get")(types.COMMON, "/orders" + parseObjToQuery(params), {}, true);
+export const deleteOrder = (idOrder) =>
+   apiAction("delete")(types.COMMON, "/order" + parseObjToQuery({ idOrder }), {}, true);
+
+export const getOrdersWithEmail = (params) => apiAction("get")(types.COMMON, "/orderWithEmail" + parseObjToQuery(params), {}, false);

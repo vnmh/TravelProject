@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import _ from "lodash";
 import { connect } from "react-redux";
@@ -35,9 +35,9 @@ function ImpTourDetail(props) {
    const [isModalVisibleImage, setIsModalVisibleImage] = useState(false);
 
    return (
-      <ImpTourDetailStyled backgroundImage={firstImage(_.head(props.tourDetail?.images)?.url || "")}>
+      <ImpTourDetailStyled>
          <section className='py-0 position-relative'>
-            <Image className='style-image w-100' src={firstImage(_.head(props.tourDetail?.images)?.url || "")} />
+            <Image className='style-image ' src={firstImage(_.head(props.tourDetail?.images)?.url || "")} width='100%' height='100%' />
             <div className='position-absolute ' style={{ bottom: 32, left: 32 }}>
                <Button className='btn-image mx-2' onClick={() => setIsModalVisibleImage(true)}>
                   Hình ảnh
@@ -64,7 +64,6 @@ function ImpTourDetail(props) {
                </div>
             </div>
          </section>
-
          <section className='tour-detail-area padding-bottom-90px'>
             <div className='single-content-navbar-wrap menu section-bg' id='single-content-navbar'>
                <div className='container'>

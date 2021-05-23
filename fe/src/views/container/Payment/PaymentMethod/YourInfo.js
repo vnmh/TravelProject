@@ -8,10 +8,39 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 const YourInfoStyled = styled.div``;
 
 function YourInfo(props) {
-   const [name, setName] = useState("");
-   const [email, setEmail] = useState("");
-   const [phone, setPhone] = useState("");
-   const [address, setAddress] = useState("");
+   const [name, setName] = useState(props.user?.name);
+   const [email, setEmail] = useState(props.user?.email);
+   const [phone, setPhone] = useState(props.user?.phone);
+   const [address, setAddress] = useState(props.user?.address);
+
+   useEffect(() => {
+      setName(props.user?.name);
+      setEmail(props.user?.email);
+      setPhone(props.user?.phone);
+      setAddress(props.user?.address);
+      props.user?.email && props.setInfoTrue(true);
+   }, [props.user?.email]);
+
+   const onChangeFields = (e, field) => {
+      switch (field) {
+         case "name":
+            setName(e?.target?.value);
+            break;
+         case "email":
+            setEmail(e?.target?.value);
+            break;
+         case "phone":
+            setPhone(e?.target?.value);
+            break;
+         case "address":
+            setAddress(e?.target?.value);
+            break;
+         default:
+            break;
+      }
+      if (name && email && phone && address) props.setInfoTrue(true);
+      else props.setInfoTrue(false);
+   };
 
    return (
       <YourInfoStyled>
@@ -33,6 +62,7 @@ function YourInfo(props) {
                                     type='text'
                                     placeholder='Họ và tên'
                                     value={name}
+                                    onChange={(e) => onChangeFields(e, "name")}
                                  />
                               </div>
                            </div>
@@ -42,7 +72,13 @@ function YourInfo(props) {
                               <label className='label-text'>Email</label>
                               <div className='form-group'>
                                  <span className='la la-envelope-o form-icon' />
-                                 <input className='form-control' type='email' placeholder='Email' />
+                                 <input
+                                    className='form-control'
+                                    type='email'
+                                    placeholder='Email'
+                                    value={email}
+                                    onChange={(e) => onChangeFields(e, "email")}
+                                 />
                               </div>
                            </div>
                         </div>
@@ -51,7 +87,14 @@ function YourInfo(props) {
                               <label className='label-text'>Số điện thoại</label>
                               <div className='form-group'>
                                  <span className='la la-phone form-icon' />
-                                 <input className='form-control' type='text' placeholder='Số điện thoại' />
+                                 <input
+                                    className='form-control'
+                                    type='text'
+                                    state
+                                    placeholder='Số điện thoại'
+                                    value={phone}
+                                    onChange={(e) => onChangeFields(e, "phone")}
+                                 />
                               </div>
                            </div>
                         </div>
@@ -60,7 +103,13 @@ function YourInfo(props) {
                               <label className='label-text'>Địa chỉ</label>
                               <div className='form-group'>
                                  <span className='la la-map-marked form-icon' />
-                                 <input className='form-control' type='text' placeholder='Địa chỉ' />
+                                 <input
+                                    className='form-control'
+                                    type='text'
+                                    placeholder='Địa chỉ'
+                                    value={address}
+                                    onChange={(e) => onChangeFields(e, "address")}
+                                 />
                               </div>
                            </div>
                         </div>

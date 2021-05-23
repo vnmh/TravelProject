@@ -9,13 +9,14 @@ import Header from "../../Header";
 import Footer from "../../Footer";
 import ImpTourDetail from "./ImpTourDetail";
 import { useRouteMatch } from "react-router";
+import ScrollToTop from "~/ScrollToTop";
 
 const TourDetailStyled = styled.div``;
 
 function TourDetail(props) {
    const [tourDetail, setTourDetail] = useState({});
    const match = useRouteMatch();
-   
+
    useEffect(() => {
       let tourDetailAssign = {};
       props
@@ -43,11 +44,13 @@ function TourDetail(props) {
    }, []);
 
    return (
-      <TourDetailStyled>
-         <Header />
-         <ImpTourDetail tourDetail={tourDetail} />
-         <Footer />
-      </TourDetailStyled>
+      <ScrollToTop>
+         <TourDetailStyled>
+            <Header />
+            <ImpTourDetail tourDetail={tourDetail} />
+            <Footer />
+         </TourDetailStyled>
+      </ScrollToTop>
    );
 }
 

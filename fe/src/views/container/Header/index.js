@@ -11,6 +11,7 @@ import RegisterModal from "./RegisterModal";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
 import logo from "~/static/images/logo.png";
+import { ROLES } from "~/configs";
 
 const HeaderTopStyled = styled.div``;
 
@@ -18,7 +19,7 @@ const HeaderTop = (props) => {
    const [isModalVisibleLogin, setIsModalVisibleLogin] = useState(false);
    const [isModalVisibleRegister, setIsModalVisibleRegister] = useState(false);
    const history = useHistory();
-   console.log("maidev ~ file: index.js ~ line 22 ~ HeaderTop ~ history", history);
+
    const menu = (
       <Menu>
          <Menu.Item key='0' onClick={() => history.push(PATH.PROFILE)}>
@@ -29,6 +30,12 @@ const HeaderTop = (props) => {
             {" "}
             <i className='fa fa-history mr-1' aria-hidden='true'></i>Lịch sử booking
          </Menu.Item>
+         {props.user?.role === ROLES.administrator && (
+            <Menu.Item key='1' onClick={() => history.push(PATH.ADMIN_DASHBOARD)}>
+               {" "}
+               <i className="fa fa-cog mr-1" aria-hidden='true'></i>Quản lý
+            </Menu.Item>
+         )}
          <Menu.Divider />
          <Menu.Item key='3' onClick={props.logout}>
             {" "}

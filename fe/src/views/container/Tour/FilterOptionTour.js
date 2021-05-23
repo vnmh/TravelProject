@@ -4,7 +4,8 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import { Select } from "antd";
+import { Form, Select } from "antd";
+import { PROVINCES } from "~/configs/VNprovinces";
 
 const { Option } = Select;
 
@@ -13,6 +14,10 @@ const FilterOptionBlogStyled = styled.div``;
 function FilterOptionBlog(props) {
    const handleChange = (value) => {
       props.setSortType(value);
+      console.log(`selected ${value}`);
+   };
+   const handleChangeAddress = (value) => {
+      props.setAddressType(value);
       console.log(`selected ${value}`);
    };
    return (
@@ -191,9 +196,23 @@ function FilterOptionBlog(props) {
                   {/* end dropdown */}
                </div>
             </div>
+
             {/* end filter-bar-filter */}
-            <div className='select-contain'>
-               <Select defaultValue='Mặc định' style={{ width: 200 }} onChange={handleChange}>
+
+            <div className=''>
+               <Select
+                  onChange={handleChangeAddress}
+                  showSearch
+                  className='mr-3'
+                  style={{ width: 150 }}
+                  placeholder='Chọn địa chỉ'
+                  optionFilterProp='children'
+                  filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
+                  {PROVINCES.map((province) => {
+                     return <Option value={province}>{province}</Option>;
+                  })}
+               </Select>
+               <Select defaultValue='Mặc định' style={{ width: 150 }} onChange={handleChange}>
                   <Option value='filter-default'>Mặc định</Option>
                   <Option value='new-tour'>Tour mới</Option>
                   <Option value='price-low-to-high'>Giá: thấp đến cao</Option>
@@ -201,9 +220,7 @@ function FilterOptionBlog(props) {
                   <Option value='a-to-z'>A đến Z</Option>
                </Select>
             </div>
-            {/* end select-contain */}
          </div>
-         {/* end filter-bar */}
       </FilterOptionBlogStyled>
    );
 }

@@ -80,12 +80,6 @@ const SideBar = (props) => {
                            Cài đặt
                         </Link>
                      </li>
-                     <li>
-                        <Link to='/' onClick={props.logout}>
-                           <i className='la la-power-off mr-2 text-color-11' />
-                           Đăng xuất
-                        </Link>
-                     </li>
                   </ul>
                </div>
                {/* end sidebar-menu-wrap */}

@@ -10,6 +10,7 @@ import { firstImage, removeVietnameseTones } from "~/views/utilities/helpers/uti
 import { currencyFormat } from "~/views/utilities/helpers/currency";
 import { TYPE_TOUR } from "~/configs/const";
 import * as PATH from "~/configs/routesConfig";
+import queryString from "query-string";
 
 const CardItemListTourStyled = styled.div``;
 
@@ -25,6 +26,7 @@ const CardItemListTour = (props) => {
    };
 
    useEffect(() => {
+      const params = queryString.parse(window.location.search);
       props
          .getTours()
          .then(({ res }) => {
@@ -44,8 +46,17 @@ const CardItemListTour = (props) => {
                      size: 10,
                      total: tourWithImage.length
                   });
-                  setTours(tourWithImage);
                   setToursDefault(tourWithImage);
+
+                  if (params.address) {
+                     let toursTemp = Array.from(tourWithImage);
+                     toursTemp = toursTemp.filter((o) => {
+                        return _.lowerCase(removeVietnameseTones(o.address)).includes(
+                           _.lowerCase(removeVietnameseTones(props.addressType ? props.addressType : params.address))
+                        );
+                     });
+                     setTours(toursTemp);
+                  } else setTours(tourWithImage);
                })
                .catch((err) => {
                   console.log("hiendev ~ file: CardItemListTour.js ~ line 34 ~ .then ~ err", err);
@@ -77,6 +88,18 @@ const CardItemListTour = (props) => {
             break;
       }
    }, [props.sortType]);
+
+   useEffect(() => {
+      let toursTemp = Array.from(toursDefault);
+      if (props.addressType) {
+         toursTemp = toursTemp.filter((o) => {
+            return _.lowerCase(removeVietnameseTones(o.address)).includes(
+               _.lowerCase(removeVietnameseTones(props.addressType))
+            );
+         });
+      }
+      setTours(toursTemp); //tours
+   }, [props.addressType]);
 
    useEffect(() => {
       let toursTemp = Array.from(toursDefault);

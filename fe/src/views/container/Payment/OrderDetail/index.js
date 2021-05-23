@@ -9,7 +9,9 @@ import InfoBooking from "./InfoBooking";
 import Header from "../../Header";
 import { message } from "antd";
 import { appApisActions } from "~/state/ducks/appApis";
-import queryString from 'query-string'
+import queryString from "query-string";
+import { ORDER_STATUS } from "~/configs/status";
+import ScrollToTop from "~/ScrollToTop";
 
 const OrderDetailStyled = styled.div``;
 
@@ -19,58 +21,90 @@ function OrderDetail(props) {
 
    useEffect(() => {
       let tourDetail = {};
-      props
-         .getOrder({ idOrder: params.idOrder, PIN: params.orderId })
-         .then(({ res }) => {
-            tourDetail = Object.assign(tourDetail, { order: res });
-
-            props.getTour(res.idTour).then(({ res }) => {
-               props.getAllImagesTour().then((resImg) => {
-                  tourDetail = Object.assign(tourDetail, {
-                     ...res,
-                     images: resImg.res.filter((image) => {
-                        return res.idTour === image.idTour;
-                     })
+      if (params.orderId) {
+         props
+            .orderUpdateStatus({
+               PIN: params.orderId,
+               status: params?.message === "Success" ? ORDER_STATUS.Paid : ORDER_STATUS.New
+            })
+            .then(({ res }) => {
+               props
+                  .getOrder({ idOrder: params.idOrder, PIN: params.orderId })
+                  .then(({ res }) => {
+                     tourDetail = Object.assign(tourDetail, { order: res });
+                     props.getTour(res.idTour).then(({ res }) => {
+                        props.getAllImagesTour().then((resImg) => {
+                           tourDetail = Object.assign(tourDetail, {
+                              ...res,
+                              images: resImg.res.filter((image) => {
+                                 return res.idTour === image.idTour;
+                              })
+                           });
+                           setOrderDetail(tourDetail);
+                        });
+                     });
+                  })
+                  .catch((err) => {
+                     message.error("Lỗi load dữ liệu tour rồi nha");
                   });
-                  setOrderDetail(tourDetail);
-               });
+            })
+            .catch((err) => {
+               message.error("Lỗi load dữ liệu tour rồi nha");
             });
-         })
-         .catch((err) => {
-            message.error("Lỗi load dữ liệu tour rồi nha");
-         });
+      } else
+         props
+            .getOrder({ idOrder: params.idOrder, PIN: params.orderId })
+            .then(({ res }) => {
+               tourDetail = Object.assign(tourDetail, { order: res });
+               props.getTour(res.idTour).then(({ res }) => {
+                  props.getAllImagesTour().then((resImg) => {
+                     tourDetail = Object.assign(tourDetail, {
+                        ...res,
+                        images: resImg.res.filter((image) => {
+                           return res.idTour === image.idTour;
+                        })
+                     });
+                     setOrderDetail(tourDetail);
+                  });
+               });
+            })
+            .catch((err) => {
+               message.error("Lỗi load dữ liệu tour rồi nha");
+            });
    }, []);
    return (
-      <OrderDetailStyled>
-         <Header />
-         <section className='payment-area section-bg section-padding'>
-            <div className='container'>
-               <div className='row'>
-                  <div className='col-lg-12'>
-                     <div className='form-box payment-received-wrap mb-0'>
-                        <StatusPayment />
-                        <div className='form-content'>
-                           <div className='row'>
-                              <div className='col-lg-12'>
-                                 <InfoBooking orderDetail={orderDetail}/>
+      <ScrollToTop>
+         <OrderDetailStyled>
+            <Header />
+            <section className='payment-area section-bg section-padding'>
+               <div className='container'>
+                  <div className='row'>
+                     <div className='col-lg-12'>
+                        <div className='form-box payment-received-wrap mb-0'>
+                           <StatusPayment />
+                           <div className='form-content'>
+                              <div className='row'>
+                                 <div className='col-lg-12'>
+                                    <InfoBooking orderDetail={orderDetail} />
+                                 </div>
                               </div>
-                           </div>
-                           <div className='section-block' />
-                           <PaymentDetail orderDetail={orderDetail} />
-                           <div className='col-lg-12'>
-                              <div className='btn-box text-center pt-2'>
-                                 <a href='payment-complete.html' className='theme-btn'>
-                                    Thanh toán thành công
-                                 </a>
+                              <div className='section-block' />
+                              <PaymentDetail orderDetail={orderDetail} />
+                              <div className='col-lg-12'>
+                                 <div className='btn-box text-center pt-2'>
+                                    <a href='payment-complete.html' className='theme-btn'>
+                                       Hoàn tất
+                                    </a>
+                                 </div>
                               </div>
                            </div>
                         </div>
                      </div>
                   </div>
                </div>
-            </div>
-         </section>
-      </OrderDetailStyled>
+            </section>
+         </OrderDetailStyled>
+      </ScrollToTop>
    );
 }
 
@@ -81,6 +115,7 @@ export default connect(
    {
       getTour: appApisActions.getTour,
       getAllImagesTour: appApisActions.getAllImagesTour,
-      getOrder: appApisActions.getOrder
+      getOrder: appApisActions.getOrder,
+      orderUpdateStatus: appApisActions.orderUpdateStatus
    }
 )(OrderDetail);

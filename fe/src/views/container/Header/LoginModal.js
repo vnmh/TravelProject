@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import { connect } from "react-redux";
-import { Form, Input, Button, Checkbox, Modal, message } from "antd";
+import { Form, Input, Button, Checkbox, Modal, message, Row } from "antd";
 
 import { authActions } from "~/state/ducks/authUser";
 import { ROLES } from "~/configs/index";
@@ -18,6 +18,8 @@ const layout = {
 };
 
 const LoginModal = (props) => {
+   const [form] = Form.useForm();
+
    const onFinish = (values) => {
       console.log("hiendev ~ file: LoginModal.js ~ line 22 ~ onFinish ~ values", values);
       // đã validate dữ liệu - map, check dữ liệu
@@ -66,6 +68,10 @@ const LoginModal = (props) => {
       console.log("Failed:", errorInfo);
    };
 
+   useEffect(() => {
+      form.resetFields();
+   });
+
    return (
       <LoginModalStyled
          onCancel={props.onCancel} // Dấu X bên phải được click
@@ -79,6 +85,7 @@ const LoginModal = (props) => {
             initialValues={{
                remember: true
             }}
+            form={form}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}>
             <Form.Item
@@ -110,9 +117,14 @@ const LoginModal = (props) => {
                <Input.Password size='large' />
             </Form.Item>
 
-            <Form.Item name='remember' valuePropName='checked'>
-               <Checkbox>Nhớ mật khẩu</Checkbox>
-            </Form.Item>
+            <Row>
+               <Form.Item name='remember' valuePropName='checked'>
+                  <Checkbox>Nhớ mật khẩu</Checkbox>
+               </Form.Item>
+               <Form.Item className='d-flex justify-content-flex-end align-items-flex-end'>
+                  <Link to='/forgetpassword'>Quên mật khẩu</Link>
+               </Form.Item>
+            </Row>
 
             <Form.Item>
                <Button size='large' style={{ width: "100%" }} type='primary' htmlType='submit'>

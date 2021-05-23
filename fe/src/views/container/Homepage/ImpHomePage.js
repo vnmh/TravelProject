@@ -2,10 +2,7 @@ import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import { connect } from "react-redux";
-
-import { DatePicker } from "antd";
 import { authActions } from "~/state/ducks/authUser";
-
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import SearchTour from "./SearchTour";
 import SliderHomePage from "./SliderHomePage";
@@ -32,30 +29,19 @@ const ImpHomePageStyled = styled.div`
 const ImpHomePage = (props) => {
    return (
       <ImpHomePageStyled>
-         {/* ================================
-            START HERO-WRAPPER AREA
-         ================================= */}
          <section className='hero-wrapper container-search-tour'>
             <SliderHomePage />
-            <div className='search-tour'>
+            <div className='search-tour' style={{marginTop : 270}}>
                <div className='container'>
                   <div className='row'>
                      <div className='col-lg-12'>
-                        <TitleTourHomePage />
+                        {/* <TitleTourHomePage /> */}
                         <SearchTour />
                      </div>
                   </div>
                </div>
             </div>
          </section>
-         {/* end hero-wrapper */}
-         {/* ================================
-            END HERO-WRAPPER AREA
-         ================================= */}
-
-         {/* ================================
-            START TRENDING AREA
-         ================================= */}
          <section className='trending-area position-relative section-bg padding-top-100px pb-0'>
             <div className='container'>
                <div className='row'>
