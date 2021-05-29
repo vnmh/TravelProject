@@ -136,7 +136,7 @@ router.put('/post/tags', authenticated, post.putTags);
 router.delete('/post', authenticated, post.delete);
  
 // //report
-// router.get('/report', authenticated, report.getReport);
+router.get('/report', authenticated, report.getReport);
 // router.get('/report-number-of-tourists', authenticated, report.getReportNumberOfTourists);
 // router.get('/report-number-people-follow-destination', authenticated, report.getReportNumberPeopleFollowDestination);
 router.get('/report-revenue', authenticated, report.spReportFollowMonth);

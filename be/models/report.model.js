@@ -14,13 +14,13 @@ const databaseProduction =
  * resolve - rows SELECT được;
  * reject -  err of sql
  */
-Report.getReport = function() {
-  return new Promise(function(resolve, reject) {
-    database
-      .query("call " + databaseProduction + `.spGetReport(); `)
-      .then(rows => resolve(rows))
-      .catch(err => reject(err));
-  });
+Report.getReport = function () {
+   return new Promise(function (resolve, reject) {
+      database
+         .query('call ' + databaseProduction + `.spReportOrder(); `)
+         .then((rows) => resolve(rows))
+         .catch((err) => reject(err));
+   });
 };
  
 Report.getReportNumberOfTourists = function() {
@@ -40,28 +40,23 @@ Report.getYearFirstNewTour = function() {
       .catch(err => reject(err));
   });
 };
-Report.getYearFirstNewOrder = function() {
-  return new Promise(function(resolve, reject) {
-    database
-      .query("call " + databaseProduction + `.spGetYearFirstNewOrder(); `)
-      .then(rows => resolve(rows))
-      .catch(err => reject(err));
-  });
+Report.getYearFirstNewOrder = function () {
+   return new Promise(function (resolve, reject) {
+      database
+         .query('call ' + databaseProduction + `.spGetYearFirstNewOrder(); `)
+         .then((rows) => resolve(rows))
+         .catch((err) => reject(err));
+   });
 };
-Report.getReportNumberPeopleFollowDestinationAll = function(
-  yearOldest,
-  yearLatest
-) {
-  return new Promise(function(resolve, reject) {
-    database
-      .query(
-        "call " +
-          databaseProduction +
-          `.spReportNumberPeopleFollowDestinationAll(${yearOldest}, ${yearLatest}); `
-      )
-      .then(rows => resolve(rows))
-      .catch(err => reject(err));
-  });
+Report.getReportNumberPeopleFollowDestinationAll = function (yearOldest, yearLatest) {
+   return new Promise(function (resolve, reject) {
+      database
+         .query(
+            'call ' + databaseProduction + `.spReportNumberPeopleFollowDestinationAll(${yearOldest}, ${yearLatest}); `
+         )
+         .then((rows) => resolve(rows))
+         .catch((err) => reject(err));
+   });
 };
  
 Report.spReportFollowMonth = function(dateOldest, dateLatest) {
@@ -80,17 +75,13 @@ Report.spReportFollowMonth = function(dateOldest, dateLatest) {
 /**
  * Hàm này trả về các điểm đến theo thời gian
  */
-Report.getDestinationByTime = function(month) {
-  return new Promise(function(resolve, reject) {
-    database
-      .query(
-        "call " +
-          databaseProduction +
-          `.spGetReportDestinationByTime('${month}'); `
-      )
-      .then(rows => resolve(rows))
-      .catch(err => reject(err));
-  });
+Report.getDestinationByTime = function (month) {
+   return new Promise(function (resolve, reject) {
+      database
+         .query('call ' + databaseProduction + `.spGetReportDestinationByTime('${month}'); `)
+         .then((rows) => resolve(rows))
+         .catch((err) => reject(err));
+   });
 };
  
 module.exports = Report;
