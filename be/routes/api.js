@@ -1,3 +1,4 @@
+
 const express = require('express');
  
 // const { check } = require("express-validator");
@@ -28,7 +29,7 @@ const service = require('../controllers/service.controller');
 //passport
 // const passport = require('passport');
 //report
-// const report = require('../controllers/report.controller');
+const report = require('../controllers/report.controller');
  
 //for authencation
 router.post('/login', auth.login);
@@ -138,7 +139,7 @@ router.delete('/post', authenticated, post.delete);
 // router.get('/report', authenticated, report.getReport);
 // router.get('/report-number-of-tourists', authenticated, report.getReportNumberOfTourists);
 // router.get('/report-number-people-follow-destination', authenticated, report.getReportNumberPeopleFollowDestination);
-// router.get('/report-revenue-follow-month', authenticated, report.getReportRevenueFollowMonthAll);
+router.get('/report-revenue', authenticated, report.spReportFollowMonth);
 // router.get('/report/destination-by-time', report.getDestinationByTime);
  
 // router.get('/report/destination-by-time', report.getDestinationByTime);
@@ -170,3 +171,4 @@ router.delete('/service', authenticated, service.delete);
 router.get('/env', config.env);
 router.get('/envs', config.envs);
 module.exports = router;
+ 

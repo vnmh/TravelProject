@@ -1,13 +1,14 @@
+
 const { config } = require("../config");
 const database = require("../dbconnectMySql");
-
+ 
 const Report = function(report) {};
 const databaseLocal = config.database;
 const databaseProduction =
   process.env.NODE_ENV === "production"
     ? process.env.JAWSDB_DATABASE
     : databaseLocal;
-
+ 
 /**
  * Hàm này trả về một Promise;
  * resolve - rows SELECT được;
@@ -21,7 +22,7 @@ Report.getReport = function() {
       .catch(err => reject(err));
   });
 };
-
+ 
 Report.getReportNumberOfTourists = function() {
   return new Promise(function(resolve, reject) {
     database
@@ -30,7 +31,7 @@ Report.getReportNumberOfTourists = function() {
       .catch(err => reject(err));
   });
 };
-
+ 
 Report.getYearFirstNewTour = function() {
   return new Promise(function(resolve, reject) {
     database
@@ -62,20 +63,20 @@ Report.getReportNumberPeopleFollowDestinationAll = function(
       .catch(err => reject(err));
   });
 };
-
-Report.getReportRevenueFollowMonthAll = function(dateOldest, dateLatest) {
+ 
+Report.spReportFollowMonth = function(dateOldest, dateLatest) {
   return new Promise(function(resolve, reject) {
     database
       .query(
         "call " +
           databaseProduction +
-          `.spReportRevenueFollowMonthAll('${dateOldest}', '${dateLatest}' ); `
+          `.spReportFollowMonth(); `
       )
       .then(rows => resolve(rows))
       .catch(err => reject(err));
   });
 };
-
+ 
 /**
  * Hàm này trả về các điểm đến theo thời gian
  */
@@ -91,5 +92,5 @@ Report.getDestinationByTime = function(month) {
       .catch(err => reject(err));
   });
 };
-
+ 
 module.exports = Report;
