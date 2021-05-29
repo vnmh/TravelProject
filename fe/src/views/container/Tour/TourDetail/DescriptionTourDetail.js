@@ -44,7 +44,7 @@ const DescriptionTourDetail = (props) => {
                         return (
                            <li>
                               <i className='la la-check text-success mr-2' />
-                              {item.titleService}
+                              {item?.titleService}
                            </li>
                         );
                      })}

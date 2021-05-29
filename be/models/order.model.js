@@ -1,6 +1,6 @@
 const { config } = require('../config.js');
 const mysql = require('../dbconnection.js');
-
+ 
 //Task object constructor
 const Order = function (order) {
    this.idOrder = order.idOrder || 0;
@@ -12,15 +12,15 @@ const Order = function (order) {
    this.phone = order.phone || ' ';
    this.email = order.email || ' ';
    this.notes = order.notes || ' ';
-   this.idAccount = order.idAccount || 8;
+   this.idAccount = order.idAccount;
    this.buyer = order.buyer || ' ';
    this.paymentMethod = order.paymentMethod || ' ';
    this.idTour = order.idTour || ' ';
 };
-
+ 
 const databaseLocal = config.database;
 const databaseProduction = process.env.NODE_ENV === 'production' ? process.env.JAWSDB_DATABASE : databaseLocal;
-
+ 
 Order.getAllOrder = function (funcResult) {
    mysql.query('SELECT * FROM ' + databaseProduction + ".orders WHERE statusAction <> 'deleted';", function (err, res) {
       if (err) {
@@ -30,7 +30,7 @@ Order.getAllOrder = function (funcResult) {
       }
    });
 };
-
+ 
 Order.getAllOrderForUser = function (idAccount, funcResult) {
    mysql.query(
       'SELECT * FROM ' + databaseProduction + ".orders where idAccount = ? AND WHERE statusAction <> 'deleted'; ",
@@ -44,7 +44,7 @@ Order.getAllOrderForUser = function (idAccount, funcResult) {
       }
    );
 };
-
+ 
 Order.createOrder = function (newOrder, funcResult) {
    this.PIN = newOrder.PIN;
    this.status = newOrder.status;
@@ -58,12 +58,14 @@ Order.createOrder = function (newOrder, funcResult) {
    this.idAccount = newOrder.idAccount;
    this.buyer = newOrder.buyer;
    this.idTour = newOrder.idTour;
-
+ 
    mysql.query(
       'INSERT INTO ' +
          databaseProduction +
          '.orders (`PIN`, `status`, `totalPrice`, `numberPeople`,' +
-         " `address`, `phone`,`email`,`notes`, `idAccount`, `buyer`, `idTour`, `paymentMethod` ) VALUES ('" +
+         ' `address`, `phone`,`email`,`notes`,' +
+         (this.idAccount ? ' `idAccount`,' : ' ') +
+         " `buyer`, `idTour`, `paymentMethod` ) VALUES ('" +
          this.PIN +
          "', '" +
          this.status +
@@ -79,9 +81,9 @@ Order.createOrder = function (newOrder, funcResult) {
          this.email +
          "', '" +
          this.notes +
-         "', '" +
-         this.idAccount +
-         "', '" +
+         "', " +
+         (this.idAccount ? " '" + this.idAccount + "'," : '') +
+         " '" +
          this.buyer +
          "', '" +
          this.idTour +
@@ -97,7 +99,7 @@ Order.createOrder = function (newOrder, funcResult) {
       }
    );
 };
-
+ 
 Order.getOrderById = function (idOrder, funcResult) {
    mysql.query(
       'SELECT * FROM ' + databaseProduction + ".orders  WHERE idOrder = ? AND statusAction <> 'deleted';",
@@ -125,7 +127,7 @@ Order.getOrderByPIN = function (PIN, funcResult) {
    );
 };
 Order.getOrderByEmail = function (email, funcResult) {
-console.log("maidev ~ file: order.model.js ~ line 128 ~ email", email)
+   console.log('maidev ~ file: order.model.js ~ line 128 ~ email', email);
    mysql.query(
       'SELECT * FROM ' +
          databaseProduction +
@@ -140,7 +142,7 @@ console.log("maidev ~ file: order.model.js ~ line 128 ~ email", email)
       }
    );
 };
-
+ 
 Order.getOrderByIdWithIdAccount = function (idOrder, idAccount, funcResult) {
    mysql.query(
       'SELECT * FROM ' +
@@ -156,7 +158,7 @@ Order.getOrderByIdWithIdAccount = function (idOrder, idAccount, funcResult) {
       }
    );
 };
-
+ 
 Order.updateById = function (updateOrder, funcResult) {
    updateOrder = { ...updateOrder, statusAction: 'edited' };
    mysql.query(
@@ -171,7 +173,7 @@ Order.updateById = function (updateOrder, funcResult) {
       }
    );
 };
-
+ 
 Order.updateByPIN = function (updateOrder, funcResult) {
    updateOrder = { ...updateOrder, statusAction: 'edited' };
    mysql.query(
@@ -186,7 +188,7 @@ Order.updateByPIN = function (updateOrder, funcResult) {
       }
    );
 };
-
+ 
 Order.remove = function (idOrder, funcResult) {
    mysql.query(
       'UPDATE ' + databaseProduction + ".orders SET `statusAction` = 'deleted' WHERE idOrder = ?",
@@ -200,5 +202,5 @@ Order.remove = function (idOrder, funcResult) {
       }
    );
 };
-
+ 
 module.exports = Order;
