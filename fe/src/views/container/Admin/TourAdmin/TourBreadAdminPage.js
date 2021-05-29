@@ -1,11 +1,8 @@
-import React, { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { compose, lifecycle } from "recompose";
+import React from "react";
+import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
 import { connect } from "react-redux";
-
 import { authActions } from "~/state/ducks/authUser";
-import * as PATH from "~/configs/routesConfig";
-
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 
 const TourBreadAdminPageStyled = styled.div``;
@@ -19,12 +16,10 @@ const TourBreadAdminPage = () => {
                   <div className='col-lg-6'>
                      <div className='breadcrumb-content'>
                         <div className='section-heading'>
-                           <h2 className='sec__title font-size-30 text-white'>Travel Agents</h2>
+                           {/* <h2 className='sec__title font-size-30 text-white'>Travel Agents</h2> */}
                         </div>
                      </div>
-                     {/* end breadcrumb-content */}
                   </div>
-                  {/* end col-lg-6 */}
                   <div className='col-lg-6'>
                      <div className='breadcrumb-list text-right'>
                         <ul className='list-items'>
@@ -36,14 +31,10 @@ const TourBreadAdminPage = () => {
                            <li>Tour</li>
                         </ul>
                      </div>
-                     {/* end breadcrumb-list */}
                   </div>
-                  {/* end col-lg-6 */}
                </div>
-               {/* end row */}
             </div>
          </div>
-         {/* end dashboard-bread */}
       </TourBreadAdminPageStyled>
    );
 };

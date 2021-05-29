@@ -28,9 +28,10 @@ function BookingFormTourDetail(props) {
                      <span className='text-value ml-2 mr-1'>
                         {currencyFormat(
                            props.tourDetail?.price * numberPeople -
-                           props.tourDetail?.price * props.tourDetail?.sale * 0.01 * numberPeople
-                           )}
+                              props.tourDetail?.price * props.tourDetail?.sale * 0.01 * numberPeople
+                        )}
                      </span>{" "}
+                     <span>({props.tourDetail?.sale} %)</span> {" "}
                      {props.tourDetail?.sale > 0 ? (
                         <span className='before-price'>{currencyFormat(props.tourDetail?.price * numberPeople)}</span>
                      ) : (

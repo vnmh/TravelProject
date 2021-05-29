@@ -19,7 +19,7 @@ const DashBoard = () => {
                   <div className='col-lg-6'>
                      <div className='breadcrumb-content'>
                         <div className='section-heading'>
-                           <h2 className='sec__title font-size-30 text-white'>Dashboard</h2>
+                           {/* <h2 className='sec__title font-size-30 text-white'>Trang chủ</h2> */}
                         </div>
                      </div>
                      {/* end breadcrumb-content */}

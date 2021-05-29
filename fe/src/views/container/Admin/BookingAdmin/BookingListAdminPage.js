@@ -8,12 +8,13 @@ import BookingTableListAdminPage from "./BookingTableListAdminPage";
 import { appApisActions } from "~/state/ducks/appApis";
 import { Select } from "antd";
 import { ORDER_STATUS, renderStatusOrder } from "~/configs/status";
+import { authActions } from "~/state/ducks/authUser";
 
 const BookingListAdminPageStyled = styled.div``;
 
 const BookingListAdminPage = (props) => {
    const [isSubmit, setIsSubmit] = useState(false);
-   const [pagination, setPagination] = useState({ page: 1, size: 0, total: 0 });
+   // const [pagination, setPagination] = useState({ page: 1, size: 0, total: 0 });
 
    return (
       <BookingListAdminPageStyled>
@@ -25,8 +26,8 @@ const BookingListAdminPage = (props) => {
                         <h3 className='title'>Danh sách booking</h3>
                         <div className='d-flex justify-content-between'>
                            <p className='font-size-14'>
-                              Hiển thị {pagination.page} trong tổng số {Math.ceil(pagination.total / pagination.size)}{" "}
-                              trang của {pagination.total} phần tử
+                              {/* Hiển thị {pagination.page} trong tổng số {Math.ceil(pagination.total / pagination.size)}{" "}
+                              trang của {pagination.total} phần tử */}
                            </p>
                            <Select style={{ width: 200 }} placeholder='Trạng thái' allowClear onChange={props.setStatus}>
                               {Object.keys(ORDER_STATUS).map((status) => {
@@ -44,8 +45,8 @@ const BookingListAdminPage = (props) => {
                                  key={`booking_detail${index}`}
                                  setIsSubmit={setIsSubmit}
                                  isSubmit={isSubmit}
-                                 pagination={pagination}
-                                 setPagination={setPagination}
+                                 // pagination={pagination}
+                                 // setPagination={setPagination}
                                  bookingDetail={item}
                                  needLoading={props.needLoading}
                                  setNeedLoading={props.setNeedLoading}
@@ -71,7 +72,7 @@ export default compose(
       }),
       {
          getTour: appApisActions.getTour,
-         getAllImagesTour: appApisActions.getAllImagesTour
+         getAllImagesTour: appApisActions.getAllImagesTour,
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,

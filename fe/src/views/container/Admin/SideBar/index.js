@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import { compose, lifecycle } from "recompose";
+import { compose } from "recompose";
 import { connect } from "react-redux";
-
 import { authActions } from "~/state/ducks/authUser";
-import * as PATH from "~/configs/routesConfig";
-
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 
-const SideBarStyled = styled.div``;
+const SideBarStyled = styled.div`
+   .text-shadow {
+      color: #444444;
+      font-size: 35px;
+      text-shadow: 1px 0px 1px #cccccc, 0px 1px 1px #eeeeee, 2px 1px 1px #cccccc, 1px 2px 1px #eeeeee,
+         3px 2px 1px #cccccc, 2px 3px 1px #eeeeee, 4px 3px 1px #cccccc, 3px 4px 1px #eeeeee, 5px 4px 1px #cccccc,
+         4px 5px 1px #eeeeee, 6px 5px 1px #cccccc, 5px 6px 1px #eeeeee, 7px 6px 1px #cccccc;
+   }
+`;
 
 const SideBar = (props) => {
    return (
@@ -18,15 +23,10 @@ const SideBar = (props) => {
                <div className='side-menu-close'>
                   <i className='la la-times' />
                </div>
-               {/* end menu-toggler */}
                <div className='author-content'>
-                  <div className='d-flex align-items-center'>
-                     <div className='author-img avatar-sm'>
-                        <img src='images/team9.jpg' alt='testimonial image' />
-                     </div>
+                  <div className='d-flex justify-content-center align-items-center'>
                      <div className='author-bio'>
-                        <h4 className='author__title'>Tour Booking</h4>
-                        <span className='author__meta'>Welcome to Admin Page</span>
+                        <h4 className='text-shadow'>Trang Quản lý</h4>
                      </div>
                   </div>
                </div>
@@ -57,15 +57,15 @@ const SideBar = (props) => {
                         </Link>
                      </li>
                      <li>
-                        <Link to='admin-dashboard-reviews.html'>
-                           <i className='la la-star mr-2 text-color-6' />
-                           Đánh giá
-                        </Link>
-                     </li>
-                     <li>
                         <Link to='/admin-blog'>
                            <i className='la la-text-width mr-2' />
                            Danh sách bài viết
+                        </Link>
+                     </li>
+                     <li>
+                        <Link to='admin-dashboard-reviews.html'>
+                           <i className='la la-star mr-2 text-color-6' />
+                           Đánh giá
                         </Link>
                      </li>
                      <li>
@@ -82,7 +82,6 @@ const SideBar = (props) => {
                      </li>
                   </ul>
                </div>
-               {/* end sidebar-menu-wrap */}
             </div>
          </div>
       </SideBarStyled>

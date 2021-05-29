@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { compose, lifecycle } from "recompose";
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
 import { connect } from "react-redux";
 import _ from "lodash";
-import { Table, Tag, Space, Button, Image } from "antd";
-
+import { Button } from "antd";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
 import BlogTableListAdminPage from "./BlogTableListAdminPage";
@@ -25,19 +24,19 @@ const BlogListAdminPage = (props) => {
                      <div className='form-title-wrap'>
                         <h3 className='title'>Danh sách bài viết</h3>
                         {!isCreatePost && !currentEdit && (
-                        <Button
-                           type='primary'
-                           className='float-right'
-                           onClick={() => {
-                              setIsCreatePost(true);
-                              isCreatePost && setIsSubmit(true); // chỉ submit khi isCreateTour
-                           }}>
-                           Thêm
-                        </Button>
-                          )}
+                           <Button
+                              type='primary'
+                              className='float-right'
+                              onClick={() => {
+                                 setIsCreatePost(true);
+                                 isCreatePost && setIsSubmit(true); // chỉ submit khi isCreateTour
+                              }}>
+                              Thêm
+                           </Button>
+                        )}
                         <p className='font-size-14'>
-                           Showing {pagination.page} to {Math.ceil(pagination.total / pagination.size)} of{" "}
-                           {pagination.total} entries
+                           Hiển thị {pagination.page} trong tổng số {Math.ceil(pagination.total / pagination.size)}{" "}
+                           trang của {pagination.total} phần tử
                         </p>
                      </div>
                      <div className='form-content'>

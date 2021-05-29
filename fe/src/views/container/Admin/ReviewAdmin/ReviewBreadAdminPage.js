@@ -28,7 +28,7 @@ const ProfileBread = () => {
           <div className="breadcrumb-list text-right">
             <ul className="list-items">
               <li><a href="index.html" className="text-white">Home</a></li>
-              <li>Dashboard</li>
+              <li>Trang chủ</li>
               <li>Settings</li>
             </ul>F]
           </div>{/* end breadcrumb-list */}

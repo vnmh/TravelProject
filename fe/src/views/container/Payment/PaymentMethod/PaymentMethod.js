@@ -210,7 +210,12 @@ function PaymentMethod(props) {
                            <span className='d-block pt-2'>MOMO</span>
                         </a>
                      </li>
-                     <li className='nav-item' onClick={() => setPaymentMethod("Transfer")}>
+                     <li
+                        className='nav-item'
+                        onClick={() => {
+                           if (props.infoTrue) setPaymentMethod("Transfer");
+                           else message.error("Vui lòng điền thông tin thanh toán");
+                        }}>
                         <a
                            className={`nav-link ${paymentMethod === "Transfer" ? "active" : ""} `}
                            id='paypal-tab'
@@ -224,7 +229,12 @@ function PaymentMethod(props) {
                            <span className='d-block pt-2'>Chuyển khoản</span>
                         </a>
                      </li>
-                     <li className='nav-item' onClick={() => setPaymentMethod("Cash")}>
+                     <li
+                        className='nav-item'
+                        onClick={() => {
+                           if (props.infoTrue) setPaymentMethod("Cash");
+                           else message.error("Vui lòng điền thông tin thanh toán");
+                        }}>
                         <a
                            className={`nav-link ${paymentMethod === "Cash" ? "active" : ""} `}
                            id='payoneer-tab'

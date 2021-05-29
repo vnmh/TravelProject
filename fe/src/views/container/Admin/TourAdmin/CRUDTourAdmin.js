@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { compose, lifecycle } from "recompose";
+import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
 import { connect } from "react-redux";
 import _ from "lodash";
-
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
-import { Form, Input, Button, Checkbox, Row, Select, DatePicker, InputNumber, Cascader, message } from "antd";
+import { Form, Input, Button, Select, DatePicker, InputNumber, Cascader, message } from "antd";
 import { PROVINCES } from "~/configs/VNprovinces";
 import moment from "moment";
 import { mapAddressNotWardToOptionAntd } from "~/configs/addressVN";
-import { SERVICES } from "~/configs/servicesConfig";
 import { TYPE_TOUR } from "~/configs/const";
 import { PEOPLE_NUM } from "~/configs/const";
-import { getServices } from "~/state/ducks/appApis/actions";
 const { Option } = Select;
 const CRUDTourAdminStyled = styled.div``;
 

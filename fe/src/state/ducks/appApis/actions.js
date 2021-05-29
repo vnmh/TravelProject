@@ -35,7 +35,7 @@ export const deleteImage = (idImage) =>
 export const getPosts = (params) => apiAction("get")(types.COMMON, "/posts" + parseObjToQuery(params), {}, true);
 export const getPost = (idPost) => apiAction("get")(types.COMMON, "/post" + parseObjToQuery({ idPost }), {}, true);
 export const postPost = (body) => apiAction("post")(types.COMMON, "/post", body, true);
-export const putPost = (body) => apiAction("put")(types.COMMON, "/put", body, true);
+export const putPost = (body) => apiAction("put")(types.COMMON, "/post", body, true);
 export const deletePost = (idPost) =>
    apiAction("delete")(types.COMMON, "/post" + parseObjToQuery({ idPost }), {}, true);
 
