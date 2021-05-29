@@ -161,7 +161,7 @@ router.delete('/timeline', authenticated, timeline.delete);
  
 //for service
 router.get('/service', service.read);
-router.get('/services', authenticated, service.listAll);
+router.get('/services', service.listAll);
 router.post('/service/search', authenticated, service.listServiceSearch);
 router.post('/service', authenticated, service.create);
 router.put('/service', authenticated, service.update);
