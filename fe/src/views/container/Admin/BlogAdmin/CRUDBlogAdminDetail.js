@@ -8,9 +8,9 @@ import { appApisActions } from "~/state/ducks/appApis";
 import { Button, message } from "antd";
 import MyCKEditor from "~/views/container/commons/MyCKEditor";
 
-const CRUDTourAdminDetailStyled = styled.div``;
+const CRUDBlogAdminDetailStyled = styled.div``;
 
-const CRUDTourAdminDetail = (props) => {
+const CRUDBlogAdminDetail = (props) => {
    const [data, setData] = useState("");
    // LOAD data timelines
    useEffect(() => {
@@ -40,7 +40,7 @@ const CRUDTourAdminDetail = (props) => {
       setData(editor.getData());
    };
    return (
-      <CRUDTourAdminDetailStyled>
+      <CRUDBlogAdminDetailStyled>
          {props.currentEdit && (
             <>
                <div className='d-flex justify-content-end w-100 mb-3'>
@@ -59,7 +59,7 @@ const CRUDTourAdminDetail = (props) => {
             </>
          )}
          {!props.currentEdit && "Chỉ có thể sửa chi tiết tour sau khi tạo tour thành công!"}
-      </CRUDTourAdminDetailStyled>
+      </CRUDBlogAdminDetailStyled>
    );
 };
 
@@ -68,7 +68,7 @@ export default compose(
       (state) => ({
          user: state["authUser"].user,
          isAuthenticated: state["authUser"].isAuthenticated
-         // có thể check user?.role === ROLE.administrator && isAuthenticated => CRUDTourAdminDetail admin , không thì redirect tới homepage
+         // có thể check user?.role === ROLE.administrator && isAuthenticated => CRUDBlogAdminDetail admin , không thì redirect tới homepage
       }),
       {
          // postLogin: appApisActions.postLogin
@@ -83,4 +83,4 @@ export default compose(
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,
-)(CRUDTourAdminDetail);
+)(CRUDBlogAdminDetail);

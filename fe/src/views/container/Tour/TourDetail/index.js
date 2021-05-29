@@ -10,6 +10,7 @@ import Footer from "../../Footer";
 import ImpTourDetail from "./ImpTourDetail";
 import { useRouteMatch } from "react-router";
 import ScrollToTop from "~/ScrollToTop";
+import { authActions } from "~/state/ducks/authUser";
 
 const TourDetailStyled = styled.div``;
 
@@ -62,6 +63,7 @@ export default connect(
       getTour: appApisActions.getTour,
       getScheduleTour: appApisActions.getScheduleTour,
       getTimelineTour: appApisActions.getTimelineTour,
-      getAllImagesTour: appApisActions.getAllImagesTour
+      getAllImagesTour: appApisActions.getAllImagesTour,
+      logout: authActions.logout
    }
 )(TourDetail);

@@ -12,6 +12,7 @@ import { appApisActions } from "~/state/ducks/appApis";
 import queryString from "query-string";
 import { ORDER_STATUS } from "~/configs/status";
 import ScrollToTop from "~/ScrollToTop";
+import { Link } from "react-router-dom";
 
 const OrderDetailStyled = styled.div``;
 
@@ -92,9 +93,9 @@ function OrderDetail(props) {
                               <PaymentDetail orderDetail={orderDetail} />
                               <div className='col-lg-12'>
                                  <div className='btn-box text-center pt-2'>
-                                    <a href='payment-complete.html' className='theme-btn'>
+                                    <Link to='/user-booking' className='theme-btn'>
                                        Hoàn tất
-                                    </a>
+                                    </Link>
                                  </div>
                               </div>
                            </div>

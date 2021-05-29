@@ -19,10 +19,10 @@ const ProfileSystem = (props) => {
    const handleSubmit = () => {
       const body = {
          idAccount: props.profile?.idAccount,
-         avatar: avatar ? avatar : props.profile.avatar,
-         name: name ? name : props.profile.name,
-         phone: phone ? phone : props.profile.phone,
-         address: address ? address : props.profile.address
+         avatar: avatar ? avatar : props.profile?.avatar,
+         name: name ? name : props.profile?.name,
+         phone: phone ? phone : props.profile?.phone,
+         address: address ? address : props.profile?.address
       };
       props
          .updateProfile(body)
@@ -113,7 +113,7 @@ const ProfileSystem = (props) => {
                                     <input
                                        className='form-control'
                                        type='text'
-                                       value={`${phone}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
+                                       value={phone}
                                        onChange={(e) => handleChange(e, "phone")}
                                     />
                                  </div>

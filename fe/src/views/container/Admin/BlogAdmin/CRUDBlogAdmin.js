@@ -1,28 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import { connect } from "react-redux";
 import _ from "lodash";
-
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
-import { Form, Input, Button, Checkbox, Row, Select, DatePicker, InputNumber, Cascader, message } from "antd";
+import { Form, Input, Button, Select, message } from "antd";
+import MyCKEditor from "../../commons/MyCKEditor";
 const { Option } = Select;
 const CRUDBlogAdminStyled = styled.div``;
 
 const { TextArea } = Input;
 
 const layout = {
-   labelCol: { span: 8 },
-   wrapperCol: { span: 12 }
+   labelCol: { span: 4 },
+   wrapperCol: { span: 16 }
 };
 
 const CRUDBlogAdmin = (props) => {
+   const [dataContentPost, setDataContentPost] = useState(props.currentEdit?.contentPost);
+
    const onFinish = (values) => {
       if (props.currentEdit) {
          const bodyUpdate = {
             ...values,
             idPost: props.currentEdit?.idPost,
+            contentPost: dataContentPost
          };
          props
             .putPost(bodyUpdate)
@@ -34,11 +37,12 @@ const CRUDBlogAdmin = (props) => {
                message.error(JSON.stringify(err));
             });
       } else {
-         const bodyCreate = { ...values, idAccount: props.user?.idAccount };
+         const bodyCreate = { ...values, idAccount: props.user?.idAccount, contentPost: dataContentPost };
          props
             .postPost(bodyCreate)
             .then((res) => {
                message.success("Tạo bài viết thành công!");
+               // props.setCurrentEdit(bodyCreate);
                props.setIsCreatePost(false);
             })
             .catch((err) => {
@@ -49,7 +53,11 @@ const CRUDBlogAdmin = (props) => {
    };
 
    const onFinishFailed = (errorInfo) => {
-      console.log("Failed:", errorInfo);
+      console.log("maidev ~ file: CRUDBlogAdmin.js ~ line 57 ~ onFinishFailed ~ errorInfo", errorInfo);
+   };
+
+   const onChangeDetail = (event, editor) => {
+      setDataContentPost(editor.getData());
    };
 
    return (
@@ -76,6 +84,9 @@ const CRUDBlogAdmin = (props) => {
             <Form.Item label='Mô tả' name='describe' rules={[{ required: true, message: "Hãy nhập mô tả!" }]}>
                <TextArea rows={6} />
             </Form.Item>
+            <Form.Item label='Mô tả chi tiết'>
+               <MyCKEditor data={dataContentPost} onChange={onChangeDetail} />
+            </Form.Item>
             <div className='w-100 d-flex justify-content-center align-items-center'>
                <Button type='primary' htmlType='submit' className='mr-4'>
                   {props.currentEdit ? "Sửa" : "Thêm"}
@@ -101,12 +112,11 @@ export default compose(
          // có thể check user?.role === ROLE.administrator && isAuthenticated => CRUDBlogAdmin admin , không thì redirect tới homepage
       }),
       {
-         // postLogin: appApisActions.postLogin
          getPosts: appApisActions.getPosts,
+         getPost: appApisActions.getPost,
          getAllImagesPost: appApisActions.getAllImagesPost,
          putPost: appApisActions.putPost,
          postPost: appApisActions.postPost
-         // patchPost: appApisActions.patchTour
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,

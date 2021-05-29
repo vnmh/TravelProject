@@ -1,11 +1,8 @@
-import React, { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { compose, lifecycle } from "recompose";
+import React from "react";
+import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
 import { connect } from "react-redux";
-
 import { authActions } from "~/state/ducks/authUser";
-import * as PATH from "~/configs/routesConfig";
-
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import BlogBreadAdminPage from "./BlogBreadAdminPage";
 import BlogListAdminPage from "./BlogListAdminPage";

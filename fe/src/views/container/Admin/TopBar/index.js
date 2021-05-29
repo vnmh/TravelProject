@@ -1,16 +1,13 @@
-import React, { useState } from "react";
-import { Link, useHistory, withRouter } from "react-router-dom";
-import { compose, lifecycle } from "recompose";
+import React from "react";
+import { useHistory, withRouter } from "react-router-dom";
+import { compose } from "recompose";
 import { connect } from "react-redux";
-
 import { authActions } from "~/state/ducks/authUser";
 import * as PATH from "~/configs/routesConfig";
-
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { Avatar, Dropdown, Image, Menu } from "antd";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
-import { ROLES } from "~/configs";
 
 const TopBarStyled = styled.div``;
 
@@ -45,11 +42,9 @@ const TopBar = (props) => {
                               <i className='la la-bars' />
                               <i className='la la-times' />
                            </div>
-                           {/* end menu-toggler */}
                            <div className='user-menu-open'>
                               <i className='la la-user' />
                            </div>
-                           {/* end user-menu-open */}
                         </div>
                         <div className='nav-btn ml-auto'>
                            <div className='notification-wrap d-flex align-items-center'>
@@ -78,20 +73,13 @@ const TopBar = (props) => {
                                     </a>
                                  </Dropdown>
                               </div>
-                              {/* end notification-item */}
                            </div>
                         </div>
-                        {/* end nav-btn */}
                      </div>
-                     {/* end menu-wrapper */}
                   </div>
-                  {/* end col-lg-12 */}
                </div>
-               {/* end row */}
             </div>
-            {/* end container-fluid */}
          </div>
-         {/* end dashboard-nav */}
       </TopBarStyled>
    );
 };
@@ -105,7 +93,8 @@ export default compose(
       }),
       {
          // postLogin: appApisActions.postLogin
-         login: authActions.login
+         login: authActions.login,
+         logout: authActions.logout
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,

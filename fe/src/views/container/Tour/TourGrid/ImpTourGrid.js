@@ -23,7 +23,7 @@ function ImpTourGrid(props) {
                   <div className='col-lg-12'>
                      <div className='filter-wrap margin-bottom-30px'>
                         <FilterTopTour />
-                        <FilterOptionTour />
+                        {/* <FilterOptionTour /> */}
                      </div>
                   </div>
                </div>

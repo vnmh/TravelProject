@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { compose, lifecycle } from "recompose";
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
 import { connect } from "react-redux";
 import _ from "lodash";
-import { Button} from "antd";
+import { Button } from "antd";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
 import TourTableListAdminPage from "./TourTableListAdminPage";
@@ -35,8 +35,8 @@ const TourListAdminPage = (props) => {
                            </Button>
                         )}
                         <p className='font-size-14'>
-                           Showing {pagination.page} to {Math.ceil(pagination.total / pagination.size)} of{" "}
-                           {pagination.total} entries
+                           Hiển thị {pagination.page} trong tổng số {Math.ceil(pagination.total / pagination.size)}{" "}
+                           trang của {pagination.total} phần tử
                         </p>
                      </div>
                      <div className='form-content'>
@@ -49,7 +49,7 @@ const TourListAdminPage = (props) => {
                            currentEdit={currentEdit}
                            pagination={pagination}
                            setPagination={setPagination}
-                           />
+                        />
                      </div>
                   </div>
                </div>

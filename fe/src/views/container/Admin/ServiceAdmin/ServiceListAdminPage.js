@@ -24,19 +24,19 @@ const ServiceListAdminPage = (props) => {
                      <div className='form-title-wrap'>
                         <h3 className='title'>Danh sách dịch vụ</h3>
                         {!isCreateService && !currentEdit && (
-                        <Button
-                           type='primary'
-                           className='float-right'
-                           onClick={() => {
-                              setIsCreateService(true);
-                              isCreateService && setIsSubmit(true); // chỉ submit khi isCreateTour
-                           }}>
-                           Thêm
-                        </Button>
+                           <Button
+                              type='primary'
+                              className='float-right'
+                              onClick={() => {
+                                 setIsCreateService(true);
+                                 isCreateService && setIsSubmit(true); // chỉ submit khi isCreateTour
+                              }}>
+                              Thêm
+                           </Button>
                         )}
                         <p className='font-size-14'>
-                           Showing {pagination.page} to {Math.ceil(pagination.total / pagination.size)} of{" "}
-                           {pagination.total} entries
+                           Hiển thị {pagination.page} trong tổng số {Math.ceil(pagination.total / pagination.size)}{" "}
+                           trang của {pagination.total} phần tử
                         </p>
                      </div>
                      <div className='form-content'>

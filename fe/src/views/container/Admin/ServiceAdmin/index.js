@@ -37,7 +37,8 @@ export default compose(
       }),
       {
          // postLogin: appApisActions.postLogin
-         login: authActions.login
+         login: authActions.login,
+         logout: authActions.logout
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,
