@@ -31,7 +31,6 @@ const AppRouter = (props) => {
             <Route path={PATH.TOUR_DETAIL} exact component={() => <TourDetail />} />
             <Route path={PATH.TOUR_BOOKING} exact component={() => <PaymentMethod />} />
             <Route path={PATH.ORDER_DETAIL} exact component={() => <OrderDetail />} />
-
             <Route path={PATH.BLOG_GRID} exact component={() => <BlogGrid />} />
             <Route path={PATH.BLOG_DETAIL} exact component={() => <BlogDetail />} />
 
@@ -45,7 +44,6 @@ const AppRouter = (props) => {
             <Route path={PATH.PROFILE} exact component={() => <ProfilePage />} />
             <Route path={PATH.ADMIN_BLOG} exact component={() => <BlogAdminPage />} />
             <Route path={PATH.ADMIN_SERVICE} exact component={() => <ServiceAdminPage />} />
-
             <Route path={PATH.FORGET_PASSWORD} exact component={() => <ForgetPassword />} />
             <Route path={PATH.USER_BOOKING} exact component={() => <BookingUser />} />
             <Redirect to={PATH.HOME_PAGE} />

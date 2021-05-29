@@ -14,7 +14,6 @@ import EvaluateTourDetail from "./EvaluateTourDetail.js";
 import ReviewTourDetail from "./ReviewTourDetail.js";
 import CommentTourDetail from "./CommentTourDetail.js";
 import BookingFormTourDetail from "./BookingFormTourDetail.js";
-import EnquiryFormTourDetail from "./EnquiryFormTourDetail.js";
 import { firstImage } from "~/views/utilities/helpers/utilObject.js";
 import VideoComponent from "./VideoComponent.js";
 import ImageComponent from "./ImageComponent.js";
@@ -131,36 +130,36 @@ function ImpTourDetail(props) {
                         <div className='sidebar single-content-sidebar mb-0'>
                            <BookingFormTourDetail tourDetail={props.tourDetail} />
                            <br></br>
-                           <EnquiryFormTourDetail />
+                           {/* <EnquiryFormTourDetail /> */}
                            <br></br>
                            <div className='sidebar-widget single-content-widget'>
-                              <h3 className='title stroke-shape'>Why Book With Us?</h3>
+                              <h3 className='title stroke-shape'>Tại sao đặt tour với chúng tôi?</h3>
                               <div className='sidebar-list'>
                                  <ul className='list-items'>
                                     <li>
                                        <i className='la la-dollar icon-element mr-2' />
-                                       No-hassle best price guarantee
+                                       Đảm bảo giá tốt nhất không rắc rối
                                     </li>
                                     <li>
                                        <i className='la la-microphone icon-element mr-2' />
-                                       Customer care available 24/7
+                                       Chăm sóc khách hàng có sẵn 24/7
                                     </li>
                                     <li>
                                        <i className='la la-thumbs-up icon-element mr-2' />
-                                       Hand-picked Tours &amp; Activities
+                                       Các chuyến tham quan &amp; Hoạt động được chọn lọc thủ công 
                                     </li>
                                     <li>
                                        <i className='la la-file-text icon-element mr-2' />
-                                       Free Travel Insureance
+                                       Bảo hiểm du lịch miễn phí
                                     </li>
                                  </ul>
                               </div>
                            </div>
                            <div className='sidebar-widget single-content-widget'>
-                              <h3 className='title stroke-shape'>Get a Question?</h3>
+                              <h3 className='title stroke-shape'>Nhận một câu hỏi?</h3>
                               <p className='font-size-14 line-height-24'>
-                                 Do not hesitate to give us a call. We are an expert team and we are happy to talk to
-                                 you.
+                                 Đừng ngần ngại cho chúng tôi một cuộc gọi. Chúng tôi là một đội ngũ chuyên gia và chúng tôi rất vui được nói chuyện với
+                                 bạn.
                               </p>
                               <div className='sidebar-list pt-3'>
                                  <ul className='list-items'>
@@ -170,7 +169,7 @@ function ImpTourDetail(props) {
                                     </li>
                                     <li>
                                        <i className='la la-envelope icon-element mr-2' />
-                                       <a href='mailto:info@trizen.com'>info@trizen.com</a>
+                                       <a href='mailto:info@trizen.com'>travelproject@gmail.com</a>
                                     </li>
                                  </ul>
                               </div>

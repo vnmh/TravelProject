@@ -22,7 +22,7 @@ function TopBarBlog(props) {
                      <div className='col-lg-6'>
                         <div className='breadcrumb-content'>
                            <div className='section-heading'>
-                              <h2 className='sec__title text-white'>Blog List</h2>
+                              <h2 className='sec__title text-white'>Danh sách blog</h2>
                            </div>
                         </div>
                         {/* end breadcrumb-content */}
@@ -32,10 +32,10 @@ function TopBarBlog(props) {
                         <div className='breadcrumb-list text-right'>
                            <ul className='list-items'>
                               <li>
-                                 <Link to='/homepage'>Home</Link>
+                                 <Link to='/homepage'>Trang Chủ</Link>
                               </li>
                               <li>Blog</li>
-                              <li>Blog List</li>
+                              <li>Danh sách blog</li>
                            </ul>
                         </div>
                         {/* end breadcrumb-list */}

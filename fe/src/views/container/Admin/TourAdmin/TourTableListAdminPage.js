@@ -98,6 +98,14 @@ const TourTableListAdminPage = (props) => {
          }
       },
       {
+         title: "Dịch vụ",
+         dataIndex: "services",
+         key: "services",
+         render: (services) => {
+            return services.join(", ");
+         }
+      },
+      {
          title: "Mô tả",
          dataIndex: "describe",
          key: "describe",

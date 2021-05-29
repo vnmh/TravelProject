@@ -6,15 +6,13 @@ import { Link } from "react-router-dom";
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { currencyFormat } from "~/views/utilities/helpers/currency";
-import _, { values } from "lodash";
+import _ from "lodash";
 import { appApisActions } from "~/state/ducks/appApis";
 import * as PATH from "~/configs/routesConfig";
-
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { message, Tooltip, Typography } from "antd";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
 import { LeftCircleOutlined, RightCircleOutlined } from "@ant-design/icons";
-import { parseObjToQuery } from "~/views/utilities/helpers";
 
 const CarouselProviderWrapper = styled(CarouselProvider)`
    position: relative;

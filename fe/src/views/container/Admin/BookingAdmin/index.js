@@ -130,7 +130,8 @@ export default compose(
       {
          // postLogin: appApisActions.postLogin
          login: authActions.login,
-         getOrders: appApisActions.getOrders
+         getOrders: appApisActions.getOrders,
+         logout: authActions.logout
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,

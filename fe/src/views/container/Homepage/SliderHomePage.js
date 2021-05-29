@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import { connect } from "react-redux";
 import _ from "lodash";
@@ -9,6 +9,7 @@ import { Carousel } from "antd";
 import { Typography, Button } from "antd";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
+import * as PATH from "~/configs/routesConfig";
 
 const SliderHomePageStyled = styled.div`
    position: relative;
@@ -91,9 +92,9 @@ const SliderHomePage = (props) => {
                            style={{ color: "white" }}>
                            {item.describe}
                         </Typography.Paragraph>
-                        <Button type="primary" size='large' className="float-right">
+                        <Link to={PATH.TOUR_DETAIL.replace(":id", item.idTour)} type="primary" size='large' className="btn btn-primary float-right">
                            Xem chi tiết
-                        </Button>
+                        </Link>
                      </div>
                      <img
                         style={{ objectFit: "cover", width: "100%" }}

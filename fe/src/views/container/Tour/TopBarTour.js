@@ -22,7 +22,7 @@ function TopBarTour(props) {
                      <div className='col-lg-6'>
                         <div className='breadcrumb-content'>
                            <div className='section-heading'>
-                              <h2 className='sec__title text-white'>Tour List</h2>
+                              <h2 className='sec__title text-white'>Danh sách tour</h2>
                            </div>
                         </div>
                         {/* end breadcrumb-content */}
@@ -32,10 +32,10 @@ function TopBarTour(props) {
                         <div className='breadcrumb-list text-right'>
                            <ul className='list-items'>
                               <li>
-                                 <Link to='/homepage'>Home</Link>
+                                 <Link to='/homepage'>Trang Chủ</Link>
                               </li>
                               <li>Tour</li>
-                              <li>Tour List</li>
+                              <li>Danh sách tour</li>
                            </ul>
                         </div>
                         {/* end breadcrumb-list */}

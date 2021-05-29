@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { compose, lifecycle } from "recompose";
+import React from "react";
+import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
 import { connect } from "react-redux";
-
 import { authActions } from "~/state/ducks/authUser";
-
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import SignUpEmail from "./SignUpEmail";
+import logo from "~/static/images/logo.png";
 
 const FooterStyled = styled.div``;
 
@@ -14,10 +13,6 @@ const Footer = (props) => {
    return (
       <FooterStyled>
          <SignUpEmail />
-
-         {/* ================================
-            START FOOTER AREA
-         ================================= */}
          <section className='footer-area section-bg padding-top-100px padding-bottom-30px'>
             <div className='container'>
                <div className='row'>
@@ -25,131 +20,105 @@ const Footer = (props) => {
                      <div className='footer-item'>
                         <div className='footer-logo padding-bottom-30px'>
                            <a href='index.html' className='foot__logo'>
-                              <img src='images/logo.png' alt='logo' />
+                              <img src={logo} alt='logo' />
                            </a>
                         </div>
-                        {/* end logo */}
-                        <p className='footer__desc'>Morbi convallis bibendum urna ut viverra. Maecenas consequat</p>
                         <ul className='list-items pt-3'>
                            <li>
-                              3015 Grand Ave, Coconut Grove,
-                              <br /> Cerrick Way, FL 12345
+                              Số 1 Võ Văn Ngân,
+                              <br /> Thủ Đức, Thành Phố Hồ Chí Minh
                            </li>
                            <li>+123-456-789</li>
                            <li>
-                              <a href='#'>trizen@yourwebsite.com</a>
+                              <a href='#'>travelproject@gmail.com</a>
                            </li>
                         </ul>
                      </div>
-                     {/* end footer-item */}
                   </div>
                   {/* end col-lg-3 */}
                   <div className='col-lg-3 responsive-column'>
                      <div className='footer-item'>
                         <h4 className='title curve-shape pb-3 margin-bottom-20px' data-text='curvs'>
-                           Company
+                           Trang web
                         </h4>
                         <ul className='list-items list--items'>
                            <li>
-                              <a href='about.html'>About us</a>
+                              <a href='about.html'>Tour</a>
                            </li>
                            <li>
-                              <a href='services.html'>Services</a>
+                              <a href='#'>Blog</a>
                            </li>
                            <li>
-                              <a href='#'>Jobs</a>
+                              <a href='services.html'>Dịch vụ</a>
                            </li>
                            <li>
-                              <a href='blog-grid.html'>News</a>
-                           </li>
-                           <li>
-                              <a href='contact.html'>Support</a>
-                           </li>
-                           <li>
-                              <a href='#'>Advertising</a>
+                              <a href='blog-grid.html'>About us</a>
                            </li>
                         </ul>
                      </div>
-                     {/* end footer-item */}
                   </div>
-                  {/* end col-lg-3 */}
                   <div className='col-lg-3 responsive-column'>
                      <div className='footer-item'>
                         <h4 className='title curve-shape pb-3 margin-bottom-20px' data-text='curvs'>
-                           Other Services
+                           Chính sách & Quy định
                         </h4>
                         <ul className='list-items list--items'>
                            <li>
-                              <a href='#'>Investor Relations</a>
+                              <a href='#'>Chính sách và quy định chung</a>
                            </li>
                            <li>
-                              <a href='#'>Trizen.com Rewards</a>
+                              <a href='#'>Quy định về thanh toán</a>
                            </li>
                            <li>
-                              <a href='#'>Partners</a>
+                              <a href='#'>Quy định về xác nhận thông tin đặt tour</a>
                            </li>
                            <li>
-                              <a href='#'>List My Hotel</a>
+                              <a href='#'>Chính sách bảo mật thông tin</a>
                            </li>
                            <li>
-                              <a href='#'>All Hotels</a>
+                              <a href='#'>Quy chế hoạt động</a>
                            </li>
                            <li>
-                              <a href='#'>TV Ads</a>
+                              <a href='#'>Chính sách bảo mật</a>
                            </li>
                         </ul>
                      </div>
-                     {/* end footer-item */}
                   </div>
-                  {/* end col-lg-3 */}
                   <div className='col-lg-3 responsive-column'>
                      <div className='footer-item'>
                         <h4 className='title curve-shape pb-3 margin-bottom-20px' data-text='curvs'>
-                           Other Links
+                           Khách hàng và đối tác
                         </h4>
                         <ul className='list-items list--items'>
                            <li>
-                              <a href='#'>USA Vacation Packages</a>
+                              <a href='#'>Đăng nhập</a>
                            </li>
                            <li>
-                              <a href='#'>USA Flights</a>
+                              <a href='#'>Tuyển dụng</a>
                            </li>
                            <li>
-                              <a href='#'>USA Hotels</a>
-                           </li>
-                           <li>
-                              <a href='#'>USA Car Hire</a>
-                           </li>
-                           <li>
-                              <a href='#'>Create an Account</a>
-                           </li>
-                           <li>
-                              <a href='#'>Trizen Reviews</a>
+                              <a href='#'>Liên hệ</a>
                            </li>
                         </ul>
                      </div>
-                     {/* end footer-item */}
                   </div>
-                  {/* end col-lg-3 */}
                </div>
-               {/* end row */}
                <div className='row align-items-center'>
                   <div className='col-lg-8'>
                      <div className='term-box footer-item'>
                         <ul className='list-items list--items d-flex align-items-center'>
                            <li>
-                              <a href='#'>Terms &amp; Conditions</a>
+                              <a href='#'>Chính sách &amp; Điều kiện</a>
                            </li>
                            <li>
-                              <a href='#'>Privacy Policy</a>
+                              <a href='#'>Chính sách bảo mật</a>
                            </li>
                            <li>
-                              <a href='#'>Help Center</a>
+                              <a href='#'>Trung tâm trợ giúp</a>
                            </li>
                         </ul>
                      </div>
                   </div>
-                  {/* end col-lg-8 */}
                   <div className='col-lg-4'>
                      <div className='footer-social-box text-right'>
                         <ul className='social-profile'>
@@ -176,11 +145,8 @@ const Footer = (props) => {
                         </ul>
                      </div>
                   </div>
-                  {/* end col-lg-4 */}
                </div>
-               {/* end row */}
             </div>
-            {/* end container */}
             <div className='section-block mt-4' />
             <div className='container'>
                <div className='row align-items-center'>
@@ -192,26 +158,16 @@ const Footer = (props) => {
                            <a href='https://themeforest.net/user/techydevs/portfolio'>TechyDevs</a>
                         </p>
                      </div>
-                     {/* end copy-right */}
                   </div>
-                  {/* end col-lg-7 */}
                   <div className='col-lg-5'>
                      <div className='copy-right-content d-flex align-items-center justify-content-end padding-top-30px'>
                         <h3 className='title font-size-15 pr-2'>We Accept</h3>
                         <img src='images/payment-img.png' alt='' />
                      </div>
-                     {/* end copy-right-content */}
                   </div>
-                  {/* end col-lg-5 */}
                </div>
-               {/* end row */}
             </div>
-            {/* end container */}
          </section>
-         {/* end footer-area */}
-         {/* ================================
-            START FOOTER AREA
-         ================================= */}
       </FooterStyled>
    );
 };
