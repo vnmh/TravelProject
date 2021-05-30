@@ -16,6 +16,7 @@ const TourTableListAdminPageStyled = styled.div``;
 const TourTableListAdminPage = (props) => {
    const [deleteTour, setDeleteTour] = useState(false);
    const [tours, setTours] = useState([]);
+   const [loading, setLoading] = useState(false);
 
    const onDeleteTour = (tour) => {
       props
@@ -110,9 +111,7 @@ const TourTableListAdminPage = (props) => {
          dataIndex: "describe",
          key: "describe",
          render: (describe) => {
-            return (
-               <div style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{describe}</div>
-            );
+            return <div style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{describe}</div>;
          }
       },
       {
@@ -164,7 +163,8 @@ const TourTableListAdminPage = (props) => {
    };
 
    useEffect(() => {
-      if (!props.currentEdit || props.isCreateTour === false || deleteTour)
+      if (!props.currentEdit || props.isCreateTour === false || deleteTour) {
+         setLoading(true);
          props
             .getTours()
             .then(({ res }) => {
@@ -189,15 +189,18 @@ const TourTableListAdminPage = (props) => {
                         total: tourWithImage.length
                      });
                      setTours(tourWithImage);
+                     setLoading(false);
                      setDeleteTour(false);
                   })
                   .catch((err) => {
+                     setLoading(false);
                      console.log("hiendev ~ file: CardItemListTour.js ~ line 34 ~ .then ~ err", err);
                   });
             })
             .catch((err) => {
                console.log("hiendev ~ file: CardItemListTour.js ~ line 24 ~ useEffect ~ err", err);
             });
+      }
    }, [props.currentEdit, props.isCreateTour, deleteTour]);
 
    return (
@@ -215,6 +218,7 @@ const TourTableListAdminPage = (props) => {
          )}
          {!props.currentEdit && !props.isCreateTour && (
             <Table
+               loading={loading}
                onChange={handleChangeTable}
                columns={columns}
                dataSource={tours}

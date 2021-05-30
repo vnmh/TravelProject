@@ -10,7 +10,7 @@ const ScheduleTourDetailStyled = styled.div``;
 
 function ScheduleTourDetail(props) {
    return (
-      <ScheduleTourDetailStyled>
+      <ScheduleTourDetailStyled data-aos='fade-up'>
          <div id='photo' className='page-scroll'>
             <div className='single-content-item padding-top-40px padding-bottom-40px'>
                <h3 className='title font-size-20'>Mô tả chi tiết</h3>

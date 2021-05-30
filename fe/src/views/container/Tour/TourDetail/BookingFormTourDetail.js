@@ -19,7 +19,7 @@ const BookingFormTourDetailStyled = styled.div``;
 function BookingFormTourDetail(props) {
    const [numberPeople, setNumberPeople] = useState(1);
    return (
-      <BookingFormTourDetailStyled>
+      <BookingFormTourDetailStyled data-aos='fade-up'>
          <div className='sidebar-widget single-content-widget'>
             <div className='sidebar-widget-item'>
                <div className='sidebar-book-title-wrap mb-3'>

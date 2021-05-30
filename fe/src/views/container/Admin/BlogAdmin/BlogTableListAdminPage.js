@@ -13,18 +13,18 @@ const BlogTableListAdminPageStyled = styled.div``;
 
 const BlogTableListAdminPage = (props) => {
    const [deleteBlog, setDeleteBlog] = useState(false);
-
+   const [loading, setLoading] = useState(false);
    const onDeletePost = (blog) => {
       props
          .deletePost(blog.idPost)
-         .then((res)=> {
+         .then((res) => {
             setDeleteBlog(true);
             message.success("Xóa thành công!");
          })
          .catch((err) => {
             message.error("Xóa thất bại!");
          });
-   }
+   };
    const columns = [
       {
          title: "Hình ảnh",
@@ -79,7 +79,7 @@ const BlogTableListAdminPage = (props) => {
          width: 100,
          render: (text, record) => (
             <Space size='middle'>
-               <Button  
+               <Button
                   className='btn-primary'
                   icon={<i className='fa fa-pencil-square-o' aria-hidden='true'></i>}
                   onClick={() => {
@@ -112,6 +112,7 @@ const BlogTableListAdminPage = (props) => {
    const [posts, setPosts] = useState([]);
 
    useEffect(() => {
+      setLoading(true);
       props
          .getPosts()
          .then(({ res }) => {
@@ -132,8 +133,10 @@ const BlogTableListAdminPage = (props) => {
                      total: postWithImage.length
                   });
                   setPosts(postWithImage);
+                  setLoading(false);
                })
                .catch((err) => {
+                  setLoading(false);
                   console.log("hiendev ~ file: CardItemListTour.js ~ line 34 ~ .then ~ err", err);
                });
          })
@@ -141,7 +144,6 @@ const BlogTableListAdminPage = (props) => {
             console.log("hiendev ~ file: CardItemListTour.js ~ line 24 ~ useEffect ~ err", err);
          });
    }, [props.currentEdit, props.isCreatePost, deleteBlog]);
-
 
    return (
       <BlogTableListAdminPageStyled>
@@ -154,6 +156,7 @@ const BlogTableListAdminPage = (props) => {
          )}
          {!props.currentEdit && !props.isCreatePost && (
             <Table
+               loading={loading}
                onChange={handleChangeTable}
                columns={columns}
                dataSource={posts}

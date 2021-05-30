@@ -14,13 +14,13 @@ const databaseProduction =
  * resolve - rows SELECT được;
  * reject -  err of sql
  */
-Report.getReport = function () {
-   return new Promise(function (resolve, reject) {
-      database
-         .query('call ' + databaseProduction + `.spReportOrder(); `)
-         .then((rows) => resolve(rows))
-         .catch((err) => reject(err));
-   });
+Report.spReportOrder = function() {
+  return new Promise(function(resolve, reject) {
+    database
+      .query("call " + databaseProduction + `.spReportOrder(); `)
+      .then(rows => resolve(rows))
+      .catch(err => reject(err));
+  });
 };
  
 Report.getReportNumberOfTourists = function() {
@@ -58,7 +58,6 @@ Report.getReportNumberPeopleFollowDestinationAll = function (yearOldest, yearLat
          .catch((err) => reject(err));
    });
 };
- 
 Report.spReportFollowMonth = function(dateOldest, dateLatest) {
   return new Promise(function(resolve, reject) {
     database

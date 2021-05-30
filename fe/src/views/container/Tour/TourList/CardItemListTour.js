@@ -47,13 +47,31 @@ const CardItemListTour = (props) => {
                      total: tourWithImage.length
                   });
                   setToursDefault(tourWithImage);
-
+                  props.setTourCount(tourWithImage.length);
                   if (params.address) {
                      let toursTemp = Array.from(tourWithImage);
                      toursTemp = toursTemp.filter((o) => {
                         return _.lowerCase(removeVietnameseTones(o.address)).includes(
                            _.lowerCase(removeVietnameseTones(props.addressType ? props.addressType : params.address))
                         );
+                     });
+                     setTours(toursTemp);
+                  } else if (+params.price) {
+                     let toursTemp = Array.from(tourWithImage);
+                     toursTemp = toursTemp.filter((o) => {
+                        switch (+params.price) {
+                           case 1000000:
+                              // <Option value={1000000}>0 - 1,000,000</Option>
+                              return o.price > 0 && o.price < 1000000;
+                           case 5000000:
+                              // <Option value={5000000}>1,000,001 - 5,000,000</Option>
+                              return o.price > 1000000 && o.price < 5000000;
+                           case 10000000:
+                              // <Option value={10000000}>> 10.000.000</Option>
+                              return o.price > 10000000;
+                           default:
+                              break;
+                        }
                      });
                      setTours(toursTemp);
                   } else setTours(tourWithImage);
@@ -135,6 +153,31 @@ const CardItemListTour = (props) => {
          toursTemp = Array.from(toursDefault);
       setTours(toursTemp); //tours
    }, [props.timeSubmit]);
+
+   // PRice
+   useEffect(() => {
+      let toursTemp = Array.from(toursDefault);
+      if (props.price) {
+         toursTemp = toursTemp.filter((o) => {
+            switch (props.price) {
+               case 1000000:
+                  // <Option value={1000000}>0 - 1,000,000</Option>
+                  return o.price > 0 && o.price < 1000000;
+               case 5000000:
+                  // <Option value={5000000}>1,000,001 - 5,000,000</Option>
+                  return o.price > 1000000 && o.price < 5000000;
+               case 10000000:
+                  // <Option value={10000000}>> 10.000.000</Option>
+                  return o.price > 10000000;
+               default:
+                  break;
+            }
+         });
+         console.log(`ithoangtan -  ~ file: CardItemListTour.js ~ line 193 ~ useEffect ~ toursTemp`, toursTemp);
+
+         setTours(toursTemp); //tours
+      }
+   }, [props.price]);
 
    return (
       <CardItemListTourStyled>

@@ -11,6 +11,7 @@ import ImpTourDetail from "./ImpTourDetail";
 import { useRouteMatch } from "react-router";
 import ScrollToTop from "~/ScrollToTop";
 import { authActions } from "~/state/ducks/authUser";
+import HOC from "~/HOC";
 
 const TourDetailStyled = styled.div``;
 
@@ -45,13 +46,15 @@ function TourDetail(props) {
    }, []);
 
    return (
-      <ScrollToTop>
-         <TourDetailStyled>
-            <Header />
-            <ImpTourDetail tourDetail={tourDetail} />
-            <Footer />
-         </TourDetailStyled>
-      </ScrollToTop>
+      <HOC>
+         <ScrollToTop>
+            <TourDetailStyled>
+               <Header />
+               <ImpTourDetail tourDetail={tourDetail} />
+               <Footer />
+            </TourDetailStyled>
+         </ScrollToTop>
+      </HOC>
    );
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
@@ -7,55 +7,54 @@ import { authActions } from "~/state/ducks/authUser";
 import * as PATH from "~/configs/routesConfig";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
+import ChartBiz from "./ChartBiz";
+import { Typography } from "antd";
+import { appApisActions } from "~/state/ducks/appApis";
+import { currencyFormat } from "~/views/utilities/helpers/currency";
 
 const ChartStyled = styled.div``;
 
-const Chart = () => {
+const Chart = (props) => {
+   const [reportChart, setReportChart] = useState();
+   useEffect(() => {
+      props
+         .getReportChart()
+         .then(({ res }) => {
+            console.log(`ithoangtan -  ~ file: Chart.js ~ line 21 ~ .then ~ res`, res);
+
+            setReportChart(res);
+         })
+         .catch((err) => {
+            console.log(`file: DashBoardPage.js ~ line 23 ~ props.getReportChart ~ err`, err);
+         });
+   }, []);
    return (
       <ChartStyled>
          <div className='form-box'>
             <div className='form-title-wrap'>
-               <div className='d-flex align-items-center justify-content-between'>
-                  <ul className='chart-pagination d-flex'>
-                     <li>
-                        <a href='#' className='theme-btn theme-btn-small mr-2'>
-                           Day
-                        </a>
-                     </li>
-                     <li>
-                        <a href='#' className='theme-btn theme-btn-small theme-btn-transparent mr-2'>
-                           Week
-                        </a>
-                     </li>
-                     <li>
-                        <a href='#' className='theme-btn theme-btn-small theme-btn-transparent'>
-                           This year
-                        </a>
-                     </li>
+               <div className=''>
+                  <ul className='chart-pagination d-flex w-100'>
+                     <Typography.Paragraph strong className='mr-5'>
+                        {" "}
+                        Thống kê:{" "}
+                     </Typography.Paragraph>
+
+                     <Typography.Paragraph strong className='mr-3'>
+                        {" "}
+                        Doanh thu: {currencyFormat(props.reports?.totalRevenue)}{" "}
+                     </Typography.Paragraph>
+                     <Typography.Paragraph strong className='mr-3'>
+                        {" "}
+                        Doanh số: {currencyFormat(props.reports?.totalSales)}{" "}
+                     </Typography.Paragraph>
                   </ul>
-                  <div className='select-contain'>
-                     <select className='select-contain-select'>
-                        <option value='January'>January</option>
-                        <option value='February'>February</option>
-                        <option value='March'>March</option>
-                        <option value='April'>April</option>
-                        <option value='May'>May</option>
-                        <option value='June'>June</option>
-                        <option value='July'>July</option>
-                        <option value='August'>August</option>
-                        <option value='September'>September</option>
-                        <option value='October'>October</option>
-                        <option value='November'>November</option>
-                        <option value='December'>December</option>
-                     </select>
-                  </div>
+                  <div className='select-contain'></div>
                </div>
             </div>
             <div className='form-content'>
-               <canvas id='line-chart' />
+               <ChartBiz reportChart={reportChart} />
             </div>
          </div>
-         {/* end form-box */}
       </ChartStyled>
    );
 };
@@ -69,7 +68,9 @@ export default compose(
       }),
       {
          // postLogin: appApisActions.postLogin
-         login: authActions.login
+         login: authActions.login,
+         getReport: appApisActions.getReport,
+         getReportChart: appApisActions.getReportChart
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,

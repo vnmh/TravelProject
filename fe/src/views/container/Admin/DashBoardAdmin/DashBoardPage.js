@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
@@ -10,23 +10,36 @@ import styled from "styled-components"; // Dùng để ghi đè style bên trong
 import DashBoardBread from "./DashBoardBread";
 import Notification from "./Notification";
 import Chart from "./Chart";
+import { appApisActions } from "~/state/ducks/appApis";
 
 const TourAdminStyled = styled.div``;
 
-const TourAdmin = () => {
+const TourAdmin = (props) => {
+   const [reports, setReports] = useState();
+   useEffect(() => {
+      props
+         .getReport()
+         .then(({ res }) => {
+            setReports(res);
+         })
+         .catch((err) => {
+            console.log(`file: DashBoardPage.js ~ line 23 ~ props.getReport ~ err`, err);
+         });
+   }, []);
+
    return (
       <TourAdminStyled>
-            <div class='dashboard-content-wrap'>
-            <DashBoardBread />
+         <div class='dashboard-content-wrap'>
+            <DashBoardBread reports={reports} />
             <div class='dashboard-main-content'>
                <div class='container-fluid'>
                   <div class='row'>
-                     <div class="col-lg-7 responsive-column--m">
-                     <Chart />
+                     <div class='col-lg-12 responsive-column--m'>
+                        <Chart reports={reports}/>
                      </div>
-                     <div class="col-lg-5 responsive-column--m">
+                     {/* <div class="col-lg-5 responsive-column--m">
                         <Notification />
-                     </div>
+                     </div> */}
                   </div>
                </div>
             </div>
@@ -44,7 +57,9 @@ export default compose(
       }),
       {
          // postLogin: appApisActions.postLogin
-         login: authActions.login
+         login: authActions.login,
+         getReport: appApisActions.getReport,
+         getReportChart: appApisActions.getReportChart
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,

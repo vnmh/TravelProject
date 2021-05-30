@@ -10,6 +10,7 @@ import Footer from "../../Footer";
 import TopBarTour from "../TopBarTour";
 import ImpTourList from "./ImpTourList";
 import ScrollToTop from "~/ScrollToTop";
+import HOC from "~/HOC";
 
 const TourListStyled = styled.div``;
 
@@ -26,14 +27,16 @@ function TourList(props) {
          });
    }, []);
    return (
-      <ScrollToTop>
-         <TourListStyled>
-            <Header />
-            <TopBarTour />
-            <ImpTourList />
-            <Footer />
-         </TourListStyled>
-      </ScrollToTop>
+      <HOC>
+         <ScrollToTop>
+            <TourListStyled>
+               <Header />
+               <TopBarTour />
+               <ImpTourList />
+               <Footer />
+            </TourListStyled>
+         </ScrollToTop>
+      </HOC>
    );
 }
 

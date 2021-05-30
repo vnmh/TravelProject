@@ -7,10 +7,11 @@ import { authActions } from "~/state/ducks/authUser";
 import * as PATH from "~/configs/routesConfig";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
+import { appApisActions } from "~/state/ducks/appApis";
 
 const DashBoardStyled = styled.div``;
 
-const DashBoard = () => {
+const DashBoard = (props) => {
    return (
       <DashBoardStyled>
          <div className='dashboard-bread dashboard-bread-2'>
@@ -29,9 +30,9 @@ const DashBoard = () => {
                      <div className='breadcrumb-list text-right'>
                         <ul className='list-items'>
                            <li>
-                              <a href='index.html' className='text-white'>
+                              <Link to={PATH.HOME_PAGE} className='text-white'>
                                  Trang chủ
-                              </a>
+                              </Link>
                            </li>
                         </ul>
                      </div>
@@ -46,7 +47,7 @@ const DashBoard = () => {
                         <div className='d-flex pb-3 justify-content-between'>
                            <div className='info-content'>
                               <p className='info__desc'>Total Booking!</p>
-                              <h4 className='info__title'>55</h4>
+                              <h4 className='info__title'>{props.reports?.allCountOrder || 0}</h4>
                            </div>
                            {/* end info-content */}
                            <div className='info-icon icon-element bg-4'>
@@ -55,11 +56,11 @@ const DashBoard = () => {
                            {/* end info-icon*/}
                         </div>
                         <div className='section-block' />
-                        <a
-                           href='admin-dashboard-booking.html'
+                        <Link
+                           to={PATH.ADMIN_BOOKING}
                            className='d-flex align-items-center justify-content-between view-all'>
                            View All <i className='la la-angle-right' />
-                        </a>
+                        </Link>
                      </div>
                   </div>
                   {/* end col-lg-3 */}
@@ -67,8 +68,8 @@ const DashBoard = () => {
                      <div className='icon-box icon-layout-2 dashboard-icon-box pb-0'>
                         <div className='d-flex pb-3 justify-content-between'>
                            <div className='info-content'>
-                              <p className='info__desc'>New Reviews!</p>
-                              <h4 className='info__title'>22</h4>
+                              <p className='info__desc'>New Orders!</p>
+                              <h4 className='info__title'>{props.reports?.countOrderNeedAction}</h4>
                            </div>
                            {/* end info-content */}
                            <div className='info-icon icon-element bg-3'>
@@ -77,11 +78,11 @@ const DashBoard = () => {
                            {/* end info-icon*/}
                         </div>
                         <div className='section-block' />
-                        <a
-                           href='admin-dashboard-reviews.html'
+                        <Link
+                           to={PATH.ADMIN_BOOKING}
                            className='d-flex align-items-center justify-content-between view-all'>
                            View All <i className='la la-angle-right' />
-                        </a>
+                        </Link>
                      </div>
                   </div>
                   {/* end col-lg-3 */}
@@ -89,8 +90,8 @@ const DashBoard = () => {
                      <div className='icon-box icon-layout-2 dashboard-icon-box pb-0'>
                         <div className='d-flex pb-3 justify-content-between'>
                            <div className='info-content'>
-                              <p className='info__desc'>Total Subscribers!</p>
-                              <h4 className='info__title'>27</h4>
+                              <p className='info__desc'>Total Tours!</p>
+                              <h4 className='info__title'>{props.reports?.allCountTour}</h4>
                            </div>
                            {/* end info-content */}
                            <div className='info-icon icon-element bg-2'>
@@ -99,11 +100,11 @@ const DashBoard = () => {
                            {/* end info-icon*/}
                         </div>
                         <div className='section-block' />
-                        <a
-                           href='admin-dashboard-subscribers.html'
+                        <Link
+                           to={PATH.ADMIN_TOUR_LIST}
                            className='d-flex align-items-center justify-content-between view-all'>
                            View All <i className='la la-angle-right' />
-                        </a>
+                        </Link>
                      </div>
                   </div>
                   {/* end col-lg-3 */}
@@ -111,8 +112,8 @@ const DashBoard = () => {
                      <div className='icon-box icon-layout-2 dashboard-icon-box pb-0'>
                         <div className='d-flex pb-3 justify-content-between'>
                            <div className='info-content'>
-                              <p className='info__desc'>New Bookmarks!</p>
-                              <h4 className='info__title'>25</h4>
+                              <p className='info__desc'>Total Blogs!</p>
+                              <h4 className='info__title'>{props.reports?.allCountBlog}</h4>
                            </div>
                            {/* end info-content */}
                            <div className='info-icon icon-element bg-1'>
@@ -121,11 +122,11 @@ const DashBoard = () => {
                            {/* end info-icon*/}
                         </div>
                         <div className='section-block' />
-                        <a
-                           href='admin-dashboard-wishlist.html'
+                        <Link
+                           to={PATH.ADMIN_BLOG}
                            className='d-flex align-items-center justify-content-between view-all'>
                            View All <i className='la la-angle-right' />
-                        </a>
+                        </Link>
                      </div>
                   </div>
                   {/* end col-lg-3 */}
@@ -147,7 +148,9 @@ export default compose(
       }),
       {
          // postLogin: appApisActions.postLogin
-         login: authActions.login
+         login: authActions.login,
+         getReport: appApisActions.getReport,
+         getReportChart: appApisActions.getReportChart
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,

@@ -9,7 +9,7 @@ const EvaluateTourDetailStyled = styled.div``;
 
 function EvaluateTourDetail(props) {
    return (
-      <EvaluateTourDetailStyled>
+      <EvaluateTourDetailStyled data-aos='fade-up'>
          <div id='reviews' className='page-scroll'>
             <div className='single-content-item padding-top-40px padding-bottom-40px'>
                <h3 className='title font-size-20'>Đánh giá</h3>

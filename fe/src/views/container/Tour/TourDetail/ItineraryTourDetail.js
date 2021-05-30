@@ -10,7 +10,7 @@ const ItineraryTourDetailStyled = styled.div``;
 
 function ItineraryTourDetail(props) {
    return (
-      <ItineraryTourDetailStyled>
+      <ItineraryTourDetailStyled data-aos='fade-up'>
          <Accordion defaultActiveKey='0'>
             {(props.tourDetail?.timelines || []).map((item, index) => {
                return (

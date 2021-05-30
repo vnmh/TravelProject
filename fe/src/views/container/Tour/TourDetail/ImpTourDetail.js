@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
-import { Button, Image } from "antd";
+import { Button, Image, Typography } from "antd";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import SingleContentTourDetail from "./SingleContentTourDetail.js";
 import DescriptionTourDetail from "./DescriptionTourDetail.js";
@@ -17,7 +17,10 @@ import BookingFormTourDetail from "./BookingFormTourDetail.js";
 import { firstImage } from "~/views/utilities/helpers/utilObject.js";
 import VideoComponent from "./VideoComponent.js";
 import ImageComponent from "./ImageComponent.js";
-
+import * as PATH from "~/configs/routesConfig";
+import qs from "query-string";
+import { currencyFormat } from "~/views/utilities/helpers/currency";
+import { Link, useParams } from "react-router-dom";
 const ImpTourDetailStyled = styled.div`
    .style-image {
       max-height: 300px;
@@ -32,11 +35,53 @@ const ImpTourDetailStyled = styled.div`
 function ImpTourDetail(props) {
    const [isModalVisible, setIsModalVisible] = useState(false);
    const [isModalVisibleImage, setIsModalVisibleImage] = useState(false);
+   const params = useParams();
+   const [tours, setTours] = useState([]);
+
+   useEffect(() => {
+      props
+         .getTours()
+         .then(({ res }) => {
+            props
+               .getAllImagesTour()
+               .then((resImg) => {
+                  const tourWithImage = res.map((tour) => {
+                     return {
+                        ...tour,
+                        images: resImg.res
+                           .filter((image) => {
+                              return tour.idTour === image.idTour;
+                           })
+                           .map((im) => im.url)
+                           .join("|")
+                     };
+                  });
+                  tourWithImage.length = 6;
+                  setTours(
+                     tourWithImage.filter((o) => {
+                        return o.idTour + "" !== params.id + "";
+                     })
+                  );
+               })
+               .catch((err) => {
+                  console.log("hiendev ~ file: CardItemListTour.js ~ line 34 ~ .then ~ err", err);
+               });
+         })
+         .catch((err) => {
+            console.log("hiendev ~ file: CardItemListTour.js ~ line 24 ~ useEffect ~ err", err);
+         });
+   }, []);
+   console.log(`ithoangtan -  ~ file: ImpTourDetail.js ~ line 246 ~ {tours.map ~ tour?.images`, tours);
 
    return (
       <ImpTourDetailStyled>
          <section className='py-0 position-relative'>
-            <Image className='style-image ' src={firstImage(_.head(props.tourDetail?.images)?.url || "")} width='100%' height='100%' />
+            <Image
+               className='style-image '
+               src={firstImage(_.head(props.tourDetail?.images)?.url || "")}
+               width='100%'
+               height='100%'
+            />
             <div className='position-absolute ' style={{ bottom: 32, left: 32 }}>
                <Button className='btn-image mx-2' onClick={() => setIsModalVisibleImage(true)}>
                   Hình ảnh
@@ -63,6 +108,7 @@ function ImpTourDetail(props) {
                </div>
             </div>
          </section>
+
          <section className='tour-detail-area padding-bottom-90px'>
             <div className='single-content-navbar-wrap menu section-bg' id='single-content-navbar'>
                <div className='container'>
@@ -106,7 +152,7 @@ function ImpTourDetail(props) {
                   <div className='row'>
                      <div className='col-lg-8'>
                         <div className='single-content-wrap padding-top-60px'>
-                           <div id='description' className='page-scroll'>
+                           <div data-aos='fade-up' id='description' className='page-scroll'>
                               <SingleContentTourDetail tourDetail={props.tourDetail} />
                               <div className='section-block' />
                               <div className='single-content-item padding-top-40px padding-bottom-40px'>
@@ -118,8 +164,8 @@ function ImpTourDetail(props) {
                            <ScheduleTourDetail tourDetail={props.tourDetail} />
                            <LocationTourDetail />
                            <EvaluateTourDetail />
-                           <div className='review-box'>
-                              <div className='single-content-item padding-top-40px'>
+                           <div className='review-box' data-aos='fade-up'>
+                              <div className='single-content-item padding-top-40px' data-aos='fade-right'>
                                  <ReviewTourDetail />
                                  <CommentTourDetail />
                               </div>
@@ -132,10 +178,10 @@ function ImpTourDetail(props) {
                            <br></br>
                            {/* <EnquiryFormTourDetail /> */}
                            <br></br>
-                           <div className='sidebar-widget single-content-widget'>
+                           <div className='sidebar-widget single-content-widget' data-aos='fade-up'>
                               <h3 className='title stroke-shape'>Tại sao đặt tour với chúng tôi?</h3>
                               <div className='sidebar-list'>
-                                 <ul className='list-items'>
+                                 <ul className='list-items' data-aos='fade-right'>
                                     <li>
                                        <i className='la la-dollar icon-element mr-2' />
                                        Đảm bảo giá tốt nhất không rắc rối
@@ -146,7 +192,7 @@ function ImpTourDetail(props) {
                                     </li>
                                     <li>
                                        <i className='la la-thumbs-up icon-element mr-2' />
-                                       Các chuyến tham quan &amp; Hoạt động được chọn lọc thủ công 
+                                       Các chuyến tham quan &amp; Hoạt động được chọn lọc thủ công
                                     </li>
                                     <li>
                                        <i className='la la-file-text icon-element mr-2' />
@@ -158,8 +204,8 @@ function ImpTourDetail(props) {
                            <div className='sidebar-widget single-content-widget'>
                               <h3 className='title stroke-shape'>Nhận một câu hỏi?</h3>
                               <p className='font-size-14 line-height-24'>
-                                 Đừng ngần ngại cho chúng tôi một cuộc gọi. Chúng tôi là một đội ngũ chuyên gia và chúng tôi rất vui được nói chuyện với
-                                 bạn.
+                                 Đừng ngần ngại cho chúng tôi một cuộc gọi. Chúng tôi là một đội ngũ chuyên gia và chúng
+                                 tôi rất vui được nói chuyện với bạn.
                               </p>
                               <div className='sidebar-list pt-3'>
                                  <ul className='list-items'>
@@ -183,104 +229,49 @@ function ImpTourDetail(props) {
 
          <section className='related-tour-area section--padding'>
             <div className='container'>
-               <div className='row'>
+               <div className='row' data-aos='fade-right'>
                   <div className='col-lg-12'>
                      <div className='section-heading text-center'>
-                        <h2 className='sec__title'>You might also like</h2>
+                        <h2 className='sec__title'>Có thể bản cũng thích</h2>
                      </div>
                   </div>
                </div>
-               <div className='row padding-top-50px'>
-                  <div className='col-lg-4 responsive-column'>
-                     <div className='card-item trending-card'>
-                        <div className='card-img'>
-                           <a href='tour-details.html' className='d-block'>
-                              <img src='images/img9.jpg' alt='Destination-img' />
-                           </a>
-                        </div>
-                        <div className='card-body'>
-                           <h3 className='card-title'>
-                              <a href='tour-details.html'>Empire State Building Admission</a>
-                           </h3>
-                           <p className='card-meta'>124 E Huron St, New york</p>
-                           <div className='card-rating'>
-                              <span className='badge text-white'>4.4/5</span>
-                              <span className='review__text'>Average</span>
-                              <span className='rating__text'>(30 Reviews)</span>
-                           </div>
-                           <div className='card-price d-flex align-items-center justify-content-between'>
-                              <p>
-                                 <span className='price__num'>$124.00</span>
-                              </p>
-                              <a href='tour-details.html' className='btn-text'>
-                                 View details
-                                 <i className='la la-angle-right' />
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div className='col-lg-4 responsive-column'>
-                     <div className='card-item trending-card'>
-                        <div className='card-img'>
-                           <a href='tour-details.html' className='d-block'>
-                              <img src='images/img10.jpg' alt='Destination-img' />
-                              <span className='badge badge-ribbon'>Save 24%</span>
-                           </a>
-                        </div>
-                        <div className='card-body'>
-                           <h3 className='card-title'>
-                              <a href='tour-details.html'>Hut on Blue Water Beach Tour</a>
-                           </h3>
-                           <p className='card-meta'>124 Nevada, Las Vegas</p>
-                           <div className='card-rating'>
-                              <span className='badge text-white'>4.4/5</span>
-                              <span className='review__text'>Superb</span>
-                              <span className='rating__text'>(30 Reviews)</span>
-                           </div>
-                           <div className='card-price d-flex align-items-center justify-content-between'>
-                              <p>
-                                 <span className='price__num'>$100.00</span>
-                                 <span className='price__num before-price color-text-3'>$124.00</span>
-                              </p>
-                              <a href='tour-details.html' className='btn-text'>
-                                 View details
-                                 <i className='la la-angle-right' />
-                              </a>
+               <div className='row padding-top-50px' data-aos='fade-up'>
+                  {tours.map((tour) => {
+                     return (
+                        <div key={tour.idTour} className='col-lg-4 responsive-column'>
+                           <div className='card-item trending-card'>
+                              <div className='card-img' data-aos='fade-right'>
+                                 <Link href={PATH.TOUR_DETAIL.replace(":id", tour.idTour)} className='d-block'>
+                                    <img src={firstImage(tour?.images)} alt='Destination-img' />
+                                 </Link>
+                              </div>
+                              <div className='card-body'>
+                                 <h3 className='card-title' data-aos='fade-right'>
+                                    <Typography.Title level={5} ellipsis={{ rows: 3 }}>
+                                       <Link href={PATH.TOUR_DETAIL.replace(":id", tour.idTour)}>{tour.titleTour}</Link>
+                                    </Typography.Title>
+                                 </h3>
+                                 <p className='card-meta'>{tour.address}</p>
+                                 <div className='card-rating' data-aos='fade-right'>
+                                    <span className='badge text-white'>4.4/5</span>
+                                    <span className='review__text'>{tour.type}</span>
+                                    <span className='rating__text'>(30 Reviews)</span>
+                                 </div>
+                                 <div className='card-price d-flex align-items-center justify-content-between'>
+                                    <p>
+                                       <span className='price__num'>{currencyFormat(tour.price)}</span>
+                                    </p>
+                                    <Link href={PATH.TOUR_DETAIL.replace(":id", tour.idTour)} className='btn-text'>
+                                       View details
+                                       <i className='la la-angle-right' />
+                                    </Link>
+                                 </div>
+                              </div>
                            </div>
                         </div>
-                     </div>
-                  </div>
-                  <div className='col-lg-4 responsive-column'>
-                     <div className='card-item trending-card'>
-                        <div className='card-img'>
-                           <a href='tour-details.html' className='d-block'>
-                              <img src='images/img11.jpg' alt='Destination-img' />
-                           </a>
-                           <span className='badge'>Featured</span>
-                        </div>
-                        <div className='card-body'>
-                           <h3 className='card-title'>
-                              <a href='tour-details.html'>Golden Gate Seaplane Tour</a>
-                           </h3>
-                           <p className='card-meta'>124 E Huron St, New york</p>
-                           <div className='card-rating'>
-                              <span className='badge text-white'>4.4/5</span>
-                              <span className='review__text'>Good</span>
-                              <span className='rating__text'>(30 Reviews)</span>
-                           </div>
-                           <div className='card-price d-flex align-items-center justify-content-between'>
-                              <p>
-                                 <span className='price__num'>$124.00</span>
-                              </p>
-                              <a href='tour-details.html' className='btn-text'>
-                                 View details
-                                 <i className='la la-angle-right' />
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
+                     );
+                  })}
                </div>
             </div>
          </section>
@@ -293,6 +284,9 @@ export default connect(
       user: state["authUser"].user
    }),
    {
-      getTours: appApisActions.getTours
+      getTours: appApisActions.getTours,
+      getAllImagesTour: appApisActions.getAllImagesTour,
+      postTour: appApisActions.postTour,
+      putTour: appApisActions.putTour
    }
 )(ImpTourDetail);

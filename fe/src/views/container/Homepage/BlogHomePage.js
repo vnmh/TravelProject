@@ -60,7 +60,7 @@ const BlogHomePage = (props) => {
             {posts.map((item, index) => {
                return (
                   <Slide index={index}>
-                     <div className='row padding-top-50px mx-1'>
+                     <div className='row padding-top-50px mx-1' data-aos='fade-up'>
                         <div className='col-lg-12 responsive-column'>
                            <div className='card-item blog-card'>
                               <div className='card-img'>
