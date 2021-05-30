@@ -12,7 +12,7 @@ const Order = function (order) {
    this.phone = order.phone || ' ';
    this.email = order.email || ' ';
    this.notes = order.notes || ' ';
-   this.idAccount = order.idAccount || 8;
+   this.idAccount = order.idAccount;
    this.buyer = order.buyer || ' ';
    this.paymentMethod = order.paymentMethod || ' ';
    this.idTour = order.idTour || ' ';
@@ -63,7 +63,9 @@ Order.createOrder = function (newOrder, funcResult) {
       'INSERT INTO ' +
          databaseProduction +
          '.orders (`PIN`, `status`, `totalPrice`, `numberPeople`,' +
-         " `address`, `phone`,`email`,`notes`, `idAccount`, `buyer`, `idTour`, `paymentMethod` ) VALUES ('" +
+         ' `address`, `phone`,`email`,`notes`,' +
+         (this.idAccount ? ' `idAccount`,' : ' ') +
+         " `buyer`, `idTour`, `paymentMethod` ) VALUES ('" +
          this.PIN +
          "', '" +
          this.status +
@@ -79,9 +81,9 @@ Order.createOrder = function (newOrder, funcResult) {
          this.email +
          "', '" +
          this.notes +
-         "', '" +
-         this.idAccount +
-         "', '" +
+         "', " +
+         (this.idAccount ? " '" + this.idAccount + "'," : '') +
+         " '" +
          this.buyer +
          "', '" +
          this.idTour +
@@ -125,7 +127,7 @@ Order.getOrderByPIN = function (PIN, funcResult) {
    );
 };
 Order.getOrderByEmail = function (email, funcResult) {
-console.log("maidev ~ file: order.model.js ~ line 128 ~ email", email)
+   console.log('maidev ~ file: order.model.js ~ line 128 ~ email', email);
    mysql.query(
       'SELECT * FROM ' +
          databaseProduction +

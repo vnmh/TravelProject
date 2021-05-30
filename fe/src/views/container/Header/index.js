@@ -88,10 +88,19 @@ const HeaderTop = (props) => {
                                           <Link to='/blog-grid'>Blog</Link>
                                        </li>
                                        <li>
-                                          <Link to='#'>
+                                          <Link to='/'>Blog</Link>
+                                       </li>
+                                       <li>
+                                          <Link to='/'>Tự ghi nha</Link>
+                                       </li>
+                                       <li>
+                                          <Link to='/'>Liên hệ</Link>
+                                       </li>
+                                       <li>
+                                          {/* <Link to='#'>
                                              Pages <i className='la la-angle-down' />
-                                          </Link>
-                                          <div className='dropdown-menu-item mega-menu'>
+                                          </Link> */}
+                                          {/* <div className='dropdown-menu-item mega-menu'>
                                              <ul className='row no-gutters'>
                                                 <li className='col-lg-3 mega-menu-item'>
                                                    <ul>
@@ -143,7 +152,7 @@ const HeaderTop = (props) => {
                                                    </ul>
                                                 </li>
                                              </ul>
-                                          </div>
+                                          </div> */}
                                        </li>
                                     </ul>
                                  </nav>

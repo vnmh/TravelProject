@@ -57,4 +57,10 @@ export const getOrders = (params) => apiAction("get")(types.COMMON, "/orders" + 
 export const deleteOrder = (idOrder) =>
    apiAction("delete")(types.COMMON, "/order" + parseObjToQuery({ idOrder }), {}, true);
 
-export const getOrdersWithEmail = (params) => apiAction("get")(types.COMMON, "/orderWithEmail" + parseObjToQuery(params), {}, false);
+export const getOrdersWithEmail = (params) =>
+   apiAction("get")(types.COMMON, "/orderWithEmail" + parseObjToQuery(params), {}, false);
+
+export const getReport = (params) => apiAction("get")(types.COMMON, "/report" + parseObjToQuery(params), {}, true);
+
+export const getReportChart = (params) =>
+   apiAction("get")(types.COMMON, "/report-revenue" + parseObjToQuery(params), {}, true);

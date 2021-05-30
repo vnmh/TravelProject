@@ -5,21 +5,23 @@ import { connect } from "react-redux";
 import { authActions } from "~/state/ducks/authUser";
 import { FAMOUS_PROVINCES } from "~/configs/FamousVNprovinces";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
-import * as PATH from '~/configs/routesConfig'
+import * as PATH from "~/configs/routesConfig";
 import { parseObjToQuery } from "~/views/utilities/helpers";
 const FamousPlaceHomePageStyled = styled.div``;
 
 const FamousPlaceHomePage = (props) => {
    return (
       <FamousPlaceHomePageStyled>
-         <div className='row padding-top-50px'>
+         <div className='row padding-top-50px' data-aos='fade-up'>
             {FAMOUS_PROVINCES.map((province) => {
                return (
                   <div className='col-lg-3 responsive-column'>
                      <div className='flip-box'>
                         <div className='flip-box-front'>
                            <img src={province.image} alt='' className='flip-img' width='100px' height='160px' />
-                           <Link to={PATH.TOUR_LIST + parseObjToQuery({address : province.name})} className='flip-content d-flex align-items-end justify-content-start'>
+                           <Link
+                              to={PATH.TOUR_LIST + parseObjToQuery({ address: province.name })}
+                              className='flip-content d-flex align-items-end justify-content-start'>
                               {" "}
                               <h3 className='flip-title' value={province}>
                                  {province.name}
@@ -30,7 +32,9 @@ const FamousPlaceHomePage = (props) => {
                         {/* end flip-box-front */}
                         <div className='flip-box-back'>
                            <img src={province.image} alt='' className='flip-img' width='100px' height='160px' />
-                           <Link to={PATH.TOUR_LIST + parseObjToQuery({address : province.name})} className='flip-content d-flex align-items-center justify-content-center'>
+                           <Link
+                              to={PATH.TOUR_LIST + parseObjToQuery({ address: province.name })}
+                              className='flip-content d-flex align-items-center justify-content-center'>
                               <div>
                                  <div className='icon-element mx-auto mb-3 bg-white text-color-2'>
                                     <i className='la la-arrow-right' />

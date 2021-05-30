@@ -19,21 +19,46 @@ function YourInfo(props) {
       setPhone(props.user?.phone);
       setAddress(props.user?.address);
       props.user?.email && props.setInfoTrue(true);
+      props.setInfo(props.user);
    }, [props.user?.email]);
 
    const onChangeFields = (e, field) => {
       switch (field) {
          case "name":
             setName(e?.target?.value);
+            props.setInfo({
+               name: e?.target?.value,
+               email,
+               phone,
+               address
+            });
             break;
          case "email":
             setEmail(e?.target?.value);
+            props.setInfo({
+               name,
+               email: e?.target?.value,
+               phone,
+               address
+            });
             break;
          case "phone":
             setPhone(e?.target?.value);
+            props.setInfo({
+               name,
+               email,
+               phone: e?.target?.value,
+               address
+            });
             break;
          case "address":
             setAddress(e?.target?.value);
+            props.setInfo({
+               name,
+               email,
+               phone,
+               address: e?.target?.value
+            });
             break;
          default:
             break;

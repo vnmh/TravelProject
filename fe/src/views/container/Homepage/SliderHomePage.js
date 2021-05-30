@@ -52,24 +52,19 @@ const SliderHomePage = (props) => {
       props
          .getTours()
          .then(({ res }) => {
-            props
-               .getAllImagesTour()
-               .then((resImg) => {
-                  // setImages(res);
-                  const tourWithImage = res.map((tour) => {
-                     return {
-                        ...tour,
-                        images: resImg.res.filter((image) => {
-                           return tour.idTour === image.idTour;
-                        })
-                     };
-                  });
-                  tourWithImage.length = 3;
-                  setTours(tourWithImage);
-               })
-               .catch((err) => {
-                  console.log("hiendev ~ file: CardItemHomePage.js ~ line 27 ~ useEffect ~ err", err);
+            props.getAllImagesTour().then((resImg) => {
+               // setImages(res);
+               const tourWithImage = res.map((tour) => {
+                  return {
+                     ...tour,
+                     images: resImg.res.filter((image) => {
+                        return tour.idTour === image.idTour;
+                     })
+                  };
                });
+               tourWithImage.length = 3;
+               setTours(tourWithImage);
+            });
          })
          .catch((err) => {
             console.log("hiendev ~ file: CardItemHomePage.js ~ line 27 ~ useEffect ~ err", err);
@@ -92,7 +87,11 @@ const SliderHomePage = (props) => {
                            style={{ color: "white" }}>
                            {item.describe}
                         </Typography.Paragraph>
-                        <Link to={PATH.TOUR_DETAIL.replace(":id", item.idTour)} type="primary" size='large' className="btn btn-primary float-right">
+                        <Link
+                           to={PATH.TOUR_DETAIL.replace(":id", item.idTour)}
+                           type='primary'
+                           size='large'
+                           className='btn btn-primary float-right'>
                            Xem chi tiết
                         </Link>
                      </div>

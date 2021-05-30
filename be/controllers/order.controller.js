@@ -2,6 +2,7 @@ const MD5 = require('md5');
 const crypto = require('crypto');
 const Order = require('../models/order.model');
 const reqwest = require('reqwest');
+const mailerGmail = require('../mics/mailer.gmail');
 
 exports.listAll = function (req, res) {
    //Nên dùng express-validator để validator dữ liệu trước
@@ -31,8 +32,21 @@ exports.create = function (req, res) {
    let newOrder = new Order(req.body);
 
    //60% giá vé đối với trẻ em
-   Order.createOrder(newOrder, function (err, order) {
+   Order.createOrder(newOrder, async (err, order) => {
       if (err) res.send(err);
+      const html = `Hi there,
+                        <br/>
+                        Thank you for booking!
+                        <br/><br/>
+                        We are Travel Project:
+                        <br/><br/>
+                        On the following page:
+                        <a href="${process.env.FRONT_END}order-detail?idOrder=${order.insertId}&idTour=${newOrder.idTour}">
+                        Info your order here!</a>
+                        <br/><br/>
+                        Have a pleasant day.`;
+      // micro service gmail
+      await mailerGmail.sendEmail(process.env.MY_GMAIL, newOrder.email, 'Travel Project - Thông tin đơn hàng', html);
       res.json(order);
    });
 };
@@ -50,14 +64,14 @@ exports.read = function (req, res) {
          res.json(order[0]); //Đã là API thì trả về phải chuẩn
          //Chỉ có một phần tử thì không lý do gì phải res về một mảng
       });
-   } else if(req.query.PIN){
+   } else if (req.query.PIN) {
       //Cú pháp cũ với callback - các controller khác sẽ dùng với Promisez
       Order.getOrderByPIN(req.query.PIN, function (err, order) {
          if (err) res.send(err);
          res.json(order[0]); //Đã là API thì trả về phải chuẩn
          //Chỉ có một phần tử thì không lý do gì phải res về một mảng
       });
-   }else {
+   } else {
       //Cú pháp cũ với callback - các controller khác sẽ dùng với Promisez
       Order.getOrderById(req.query.idOrder, function (err, order) {
          if (err) res.send(err);

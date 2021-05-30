@@ -12,6 +12,7 @@ import InfoTour from "../InfoTour";
 const ImpTourGridStyled = styled.div``;
 
 function ImpTourGrid(props) {
+   const [tourCount, setTourCount] = useState(0);
    return (
       <ImpTourGridStyled>
          {/* ================================
@@ -22,13 +23,13 @@ function ImpTourGrid(props) {
                <div className='row'>
                   <div className='col-lg-12'>
                      <div className='filter-wrap margin-bottom-30px'>
-                        <FilterTopTour />
+                        <FilterTopTour tourCount={tourCount} />
                         {/* <FilterOptionTour /> */}
                      </div>
                   </div>
                </div>
                {/* end row */}
-               <CardItemGridTour />
+               <CardItemGridTour setTourCount={setTourCount} />
                <div className='row'>
                   <div className='col-lg-12'>
                      <div className='btn-box mt-3 text-center'>

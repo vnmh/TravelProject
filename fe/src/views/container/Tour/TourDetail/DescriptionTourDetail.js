@@ -9,25 +9,28 @@ const DescriptionTourDetailStyled = styled.div``;
 
 const DescriptionTourDetail = (props) => {
    const [services, setServices] = useState([]);
-
+   const [serviceTourTrue, setServiceTourTrue] = useState([]);
    useEffect(() => {
       props
          .getServices()
          .then(({ res }) => {
-            setServices(res);
+            setServices(res || []);
          })
          .catch((err) => {
             console.log("maidev ~ file: DescriptionTourDetail.js ~ line 20 ~ useEffect ~ err", err);
          });
    }, []);
 
-   const serviceTour = props.tourDetail?.services?.split(",") || [];
-
-   const serviceTourTrue = serviceTour.map((item, index) => {
-      return _.find(services, (s) => {
-         return s.idServices + "" === item + "";
+   useEffect(() => {
+      const serviceTour = props.tourDetail?.services?.split(",") || [];
+      const temp = serviceTour.map((item, index) => {
+         return _.find(services, (s) => {
+            return s.idServices + "" === item + "";
+         });
       });
-   });
+      console.log(`ithoangtan -  ~ file: DescriptionTourDetail.js ~ line 31 ~ temp ~ temp`, temp);
+      setServiceTourTrue(temp);
+   }, [props.tourDetail?.services?.split(",").length, services.length]);
 
    return (
       <DescriptionTourDetailStyled>
@@ -44,7 +47,7 @@ const DescriptionTourDetail = (props) => {
                         return (
                            <li>
                               <i className='la la-check text-success mr-2' />
-                              {item.titleService}
+                              {item?.titleService}
                            </li>
                         );
                      })}

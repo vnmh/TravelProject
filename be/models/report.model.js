@@ -13,10 +13,10 @@ const databaseProduction =
  * resolve - rows SELECT được;
  * reject -  err of sql
  */
-Report.getReport = function() {
+Report.spReportOrder = function() {
   return new Promise(function(resolve, reject) {
     database
-      .query("call " + databaseProduction + `.spGetReport(); `)
+      .query("call " + databaseProduction + `.spReportOrder(); `)
       .then(rows => resolve(rows))
       .catch(err => reject(err));
   });
@@ -63,13 +63,13 @@ Report.getReportNumberPeopleFollowDestinationAll = function(
   });
 };
 
-Report.getReportRevenueFollowMonthAll = function(dateOldest, dateLatest) {
+Report.spReportFollowMonth = function(dateOldest, dateLatest) {
   return new Promise(function(resolve, reject) {
     database
       .query(
         "call " +
           databaseProduction +
-          `.spReportRevenueFollowMonthAll('${dateOldest}', '${dateLatest}' ); `
+          `.spReportFollowMonth(); `
       )
       .then(rows => resolve(rows))
       .catch(err => reject(err));

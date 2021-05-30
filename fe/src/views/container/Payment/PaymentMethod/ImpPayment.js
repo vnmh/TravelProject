@@ -13,14 +13,15 @@ const ImpPaymentStyled = styled.div``;
 
 function ImpPayment(props) {
    const [infoTrue, setInfoTrue] = useState(false);
+   const [info, setInfo] = useState();
    return (
       <ImpPaymentStyled>
          <section className='booking-area padding-top-100px padding-bottom-70px'>
             <div className='container'>
                <div className='row'>
                   <div className='col-lg-8'>
-                     <YourInfo setInfoTrue={setInfoTrue} payment={props.payment} />
-                     <PaymentMethod infoTrue={infoTrue} payment={props.payment} />
+                     <YourInfo setInfoTrue={setInfoTrue} setInfo={setInfo} payment={props.payment} />
+                     <PaymentMethod info={info} infoTrue={infoTrue} payment={props.payment} />
                   </div>
                   <div className='col-lg-4'>
                      <BookingDetail payment={props.payment} />

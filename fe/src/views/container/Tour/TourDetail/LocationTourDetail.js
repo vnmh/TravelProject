@@ -9,7 +9,7 @@ const LocationTourDetailStyled = styled.div``;
 
 function LocationTourDetail(props) {
    return (
-      <LocationTourDetailStyled>
+      <LocationTourDetailStyled data-aos='fade-up'>
          <div id='location-map' className='page-scroll'>
             <div className='single-content-item padding-top-40px padding-bottom-40px'>
                <h3 className='title font-size-20'>Bản đồ</h3>

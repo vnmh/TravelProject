@@ -245,7 +245,7 @@ const CRUDTourAdmin = (props) => {
                      optionFilterProp='children'
                      filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
                      {services.map((service) => {
-                        return <Option value={service?.idServices + ""}>{service.titleService}</Option>;
+                        return <Option value={service?.idServices + ""}>{service?.titleService}</Option>;
                      })}
                   </Select>
                </Form.Item>

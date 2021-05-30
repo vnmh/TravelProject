@@ -79,7 +79,9 @@ const SearchTour = (props) => {
                   <div className='col-lg-4'>
                      <Form.Item name='price' className='input-box' label={<label className='label-text'>Giá</label>}>
                         <Select size='large' placeholder='Chọn giá' style={{ width: "100%" }}>
-                           <Option value={1000000}>0 - 1000000</Option>
+                           <Option value={1000000}>0 - 1,000,000</Option>
+                           <Option value={5000000}>1,000,001 - 5,000,000</Option>
+                           <Option value={10000000}>> 10.000.000</Option>
                         </Select>
                      </Form.Item>
                   </div>

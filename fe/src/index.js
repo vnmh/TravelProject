@@ -24,9 +24,11 @@ import "~/static/css/style.css";
 
 import "font-awesome/css/font-awesome.min.css";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import "~/static/css/customStyle.css";
+
+import 'aos/dist/aos.css'; // You can also use <link> for styles
 
 import App from "./App";
 

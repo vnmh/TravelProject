@@ -20,9 +20,11 @@ const ImpTourListStyled = styled.div``;
 function ImpTourList(props) {
    const [sortType, setSortType] = useState();
    const [addressType, setAddressType] = useState();
+   const [price, setPrice] = useState();
    const [searchTour, setSearchTour] = useState();
    const [timeSubmit, setTimeSubmit] = useState();
    const [pagination, setPagination] = useState({ page: 1, size: 0, total: 0 });
+   const [tourCount, setTourCount] = useState(0);
 
    return (
       <ImpTourListStyled>
@@ -34,7 +36,7 @@ function ImpTourList(props) {
                <div className='row'>
                   <div className='col-lg-12'>
                      <div className='filter-wrap margin-bottom-30px'>
-                        <FilterTopTour />
+                        <FilterTopTour tourCount={tourCount} />
                         <FilterOptionTour setSortType={setSortType} setAddressType={setAddressType} />
                      </div>
                      {/* end filter-wrap */}
@@ -48,7 +50,7 @@ function ImpTourList(props) {
                      <div className='sidebar mt-0'>
                         <SearchListTour setSearchTour={setSearchTour} setTimeSubmit={setTimeSubmit} />
                         <hr></hr>
-                        <FilterByPrice />
+                        <FilterByPrice setPrice={setPrice} />
                         <hr></hr>
                         <FilterByReviewScore />
                         <hr></hr>
@@ -64,7 +66,9 @@ function ImpTourList(props) {
                   {/* end col-lg-4 */}
                   <div className='col-lg-8'>
                      <CardItemListTour
+                        setTourCount={setTourCount}
                         sortType={sortType}
+                        price={price}
                         addressType={addressType}
                         searchTour={searchTour}
                         timeSubmit={timeSubmit}
