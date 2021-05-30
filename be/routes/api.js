@@ -1,3 +1,4 @@
+
 const express = require('express');
 
 // const { check } = require("express-validator");
@@ -29,7 +30,6 @@ const service = require('../controllers/service.controller');
 // const passport = require('passport');
 //report
 const report = require('../controllers/report.controller');
-
 //for authencation
 router.post('/login', auth.login);
 router.post('/login/google', auth.loginByGoogle);
@@ -170,3 +170,4 @@ router.delete('/service', authenticated, service.delete);
 router.get('/env', config.env);
 router.get('/envs', config.envs);
 module.exports = router;
+ 

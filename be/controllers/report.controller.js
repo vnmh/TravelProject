@@ -1,16 +1,17 @@
-const Report = require('../models/report.model');
 
+const Report = require('../models/report.model');
+ 
 exports.getReport = async (req, res, next) => {
    try {
       let listReport = await Report.getReport();
-
+ 
       // Custom listReport
       let report = [];
       for (let i = 0; i < listReport.length - 1; i++) {
          report.push(listReport[i][0]);
       }
       await Object.assign(...report);
-
+ 
       res.status(200).json(report[0]);
    } catch (err) {
       if (!err.statusCode) {
@@ -19,11 +20,11 @@ exports.getReport = async (req, res, next) => {
       res.status(500).json(err);
    }
 };
-
+ 
 exports.getReportNumberOfTourists = async (req, res, next) => {
    try {
       const listReport = await Report.getReportNumberOfTourists();
-
+ 
       // Custom listReport
       let report = [];
       for (let i = 0; i < listReport.length - 1; i++) {
@@ -31,7 +32,7 @@ exports.getReportNumberOfTourists = async (req, res, next) => {
          report.push(listReport[i][0]);
       }
       await Object.assign(...report);
-
+ 
       res.status(200).json(report[0]);
    } catch (err) {
       if (!err.statusCode) {
@@ -40,48 +41,48 @@ exports.getReportNumberOfTourists = async (req, res, next) => {
       res.status(500).json(err);
    }
 };
-
+ 
 exports.getAverage = (arr) => {
    let numbersPeople = 0;
    let numbersYoung = 0;
    let numbersChildren = 0;
    let numbersBaby = 0;
-
+ 
    let avg = {};
-
+ 
    for (let i = 1; i < arr.length; i++) {
       numbersPeople += arr[i].numbersPeople;
       numbersYoung += arr[i].numbersYoung;
       numbersChildren += arr[i].numbersChildren;
       numbersBaby += arr[i].numbersBaby;
    }
-
+ 
    avg.numbersPeople = numbersPeople / (arr.length - 1);
    avg.numbersYoung = numbersYoung / (arr.length - 1);
    avg.numbersChildren = numbersChildren / (arr.length - 1);
    avg.numbersBaby = numbersBaby / (arr.length - 1);
    return avg;
 };
-
+ 
 exports.getReportNumberPeopleFollowDestination = async (req, res, next) => {
    try {
       // Lấy thông số của tour đầu tiên được tạo
       const years = await Report.getYearFirstNewTour();
       const yearOldest = await parseInt(years[0][0].dateOldest, 10);
       const yearLatest = await parseInt(years[1][0].dateLatest, 10);
-
+ 
       let arrYears = [];
-
+ 
       for (let i = yearOldest; i <= yearLatest; i++) {
          arrYears.push(i);
       }
-
+ 
       const listReport = await Report.getReportNumberPeopleFollowDestinationAll(yearOldest, yearLatest);
-
+ 
       let reports = [];
       for (let index = 0; index < arrYears.length; index++) {
          let report = [];
-
+ 
          let VietNam = [];
          let NorthernVietnam = [];
          let NorthCentral = [];
@@ -92,7 +93,7 @@ exports.getReportNumberPeopleFollowDestination = async (req, res, next) => {
          let Asian = [];
          let Europe = [];
          let America = [];
-
+ 
          NorthernVietnam = ['NorthernVietnam', ...listReport[0 + 8 * index]];
          for (let i = 1; i < NorthernVietnam.length; i++) {
             if (NorthernVietnam[i].numbersPeople === null) NorthernVietnam[i].numbersPeople = 0;
@@ -164,7 +165,7 @@ exports.getReportNumberPeopleFollowDestination = async (req, res, next) => {
             VietNamSum.push(sum);
          }
          VietNam.push(VietNamSum);
-
+ 
          Asian = ['Asian', ...listReport[6 + 8 * index]];
          for (let i = 1; i < Asian.length; i++) {
             if (Asian[i].numbersPeople === null) Asian[i].numbersPeople = 0;
@@ -187,7 +188,7 @@ exports.getReportNumberPeopleFollowDestination = async (req, res, next) => {
             if (America[i].numbersBaby === null) America[i].numbersBaby = 0;
          }
          report.push(arrYears[index], VietNam, Asian, Europe, America);
-
+ 
          // Tính sum của VietNam
          let allSum = ['AllSum'];
          for (let i = 1; i < 13; i++) {
@@ -225,7 +226,7 @@ exports.getReportNumberPeopleFollowDestination = async (req, res, next) => {
       res.status(500).json(err);
    }
 };
-
+ 
 exports.spReportFollowMonth = async (req, res, next) => {
    try {
       let listReport = await Report.spReportFollowMonth();
@@ -237,7 +238,7 @@ exports.spReportFollowMonth = async (req, res, next) => {
       res.status(500).json(err);
    }
 };
-
+ 
 exports.getDestinationByTime = async (req, res, next) => {
    try {
       const { month } = req.query;
