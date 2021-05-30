@@ -1,7 +1,7 @@
 module.exports = {
    apps: [
       {
-         name: "3000_travel_project_admin",
+         name: "8888_travel_project_admin",
          script: "server.js",
          max_memory_restart: "256M",
          ignore_watch: ["node_modules"],
@@ -9,7 +9,7 @@ module.exports = {
             followSymlinks: false
          },
          env: {
-            PORT: 300,
+            PORT: 8888,
             NODE_ENV: "production"
          }
       }
