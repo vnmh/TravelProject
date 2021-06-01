@@ -71,6 +71,9 @@ const HeaderTop = (props) => {
                               <div className='main-menu-content pr-0 ml-0'>
                                  <nav>
                                     <ul>
+                                    <li>
+                                          <Link to='/homepage'>Trang chủ</Link>
+                                       </li>
                                        <li>
                                           <Link to='#'>
                                              Tour <i className='la la-angle-down' />
@@ -85,13 +88,10 @@ const HeaderTop = (props) => {
                                           </ul>
                                        </li>
                                        <li>
-                                          <Link to='/blog-grid'>Blog</Link>
+                                          <Link to='/blog-grid'>Cẩm nang du lịch</Link>
                                        </li>
                                        <li>
-                                          <Link to='/'>Blog</Link>
-                                       </li>
-                                       <li>
-                                          <Link to='/'>Tự ghi nha</Link>
+                                          <Link to='/'>Địa điểm yêu thích</Link>
                                        </li>
                                        <li>
                                           <Link to='/'>Liên hệ</Link>

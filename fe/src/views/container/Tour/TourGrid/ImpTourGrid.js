@@ -15,9 +15,6 @@ function ImpTourGrid(props) {
    const [tourCount, setTourCount] = useState(0);
    return (
       <ImpTourGridStyled>
-         {/* ================================
-            START CARD AREA
-         ================================= */}
          <section className='card-area section--padding'>
             <div className='container'>
                <div className='row'>
@@ -28,7 +25,6 @@ function ImpTourGrid(props) {
                      </div>
                   </div>
                </div>
-               {/* end row */}
                <CardItemGridTour setTourCount={setTourCount} />
                <div className='row'>
                   <div className='col-lg-12'>
@@ -39,18 +35,10 @@ function ImpTourGrid(props) {
                         </button>
                         <p className='font-size-13 pt-2'>Showing 1 - 6 of 2292 Tours</p>
                      </div>
-                     {/* end btn-box */}
                   </div>
-                  {/* end col-lg-12 */}
                </div>
-               {/* end row */}
             </div>
-            {/* end container */}
          </section>
-         {/* end card-area */}
-         {/* ================================
-            END CARD AREA
-         ================================= */}
          <InfoTour />
       </ImpTourGridStyled>
    );
