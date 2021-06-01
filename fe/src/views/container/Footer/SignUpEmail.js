@@ -35,11 +35,11 @@ const SignUpEmail = (props) => {
                                        placeholder='Địa chỉ email'
                                     />
                                     <button className='theme-btn theme-btn-small submit-btn' type='submit'>
-                                       Đăng ký.
+                                       Đăng ký
                                     </button>
                                     <span className='font-size-14 pt-1 text-white-50'>
                                        <i className='la la-lock mr-1' />
-                                       Đừng lo lắng thông tin của bạn là an toàn với chúng tôi.
+                                       Đừng lo lắng, thông tin của bạn là an toàn với chúng tôi.
                                     </span>
                                  </div>
                               </div>

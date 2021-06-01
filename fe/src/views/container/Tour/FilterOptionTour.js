@@ -24,14 +24,13 @@ function FilterOptionBlog(props) {
       <FilterOptionBlogStyled>
          <div className='filter-bar d-flex align-items-center justify-content-between'>
             <div className='filter-bar-filter d-flex flex-wrap align-items-center'>
-               <div className='filter-option'>
+               <div className='filter-option pt-2'>
                   <h3 className='title font-size-16'>Lọc theo:</h3>
                </div>
                <div className='filter-option'>
                   <Select
                      onChange={handleChangeAddress}
                      showSearch
-                     className='mr-3'
                      style={{ width: 150 }}
                      placeholder='Chọn địa chỉ'
                      optionFilterProp='children'

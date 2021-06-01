@@ -12,22 +12,17 @@ const TopBarBlogStyled = styled.div``;
 function TopBarBlog(props) {
    return (
       <TopBarBlogStyled>
-         {/* ================================
-            START BREADCRUMB AREA
-         ================================= */}
-         <section className='breadcrumb-area bread-bg'>
+         <section className='breadcrumb-area bread-bg-2'>
             <div className='breadcrumb-wrap'>
                <div className='container'>
                   <div className='row align-items-center'>
                      <div className='col-lg-6'>
                         <div className='breadcrumb-content'>
                            <div className='section-heading'>
-                              <h2 className='sec__title text-white'>Danh sách blog</h2>
+                              <h2 className='sec__title text-white'>Danh sách bài viết</h2>
                            </div>
                         </div>
-                        {/* end breadcrumb-content */}
                      </div>
-                     {/* end col-lg-6 */}
                      <div className='col-lg-6'>
                         <div className='breadcrumb-list text-right'>
                            <ul className='list-items'>
@@ -35,18 +30,13 @@ function TopBarBlog(props) {
                                  <Link to='/homepage'>Trang Chủ</Link>
                               </li>
                               <li>Blog</li>
-                              <li>Danh sách blog</li>
+                              <li>Danh sách bài viết</li>
                            </ul>
                         </div>
-                        {/* end breadcrumb-list */}
                      </div>
-                     {/* end col-lg-6 */}
                   </div>
-                  {/* end row */}
                </div>
-               {/* end container */}
             </div>
-            {/* end breadcrumb-wrap */}
             <div className='bread-svg-box'>
                <svg
                   className='bread-svg'
@@ -56,12 +46,7 @@ function TopBarBlog(props) {
                   <polygon points='100 0 50 10 0 0 0 10 100 10' />
                </svg>
             </div>
-            {/* end bread-svg */}
          </section>
-         {/* end breadcrumb-area */}
-         {/* ================================
-            END BREADCRUMB AREA
-         ================================= */}
       </TopBarBlogStyled>
    );
 }

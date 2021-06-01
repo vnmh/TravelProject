@@ -11,7 +11,7 @@ const InfoTourStyled = styled.div``;
 function InfoTour(props) {
    return (
       <InfoTourStyled>
-         <section className='info-area info-bg padding-top-90px padding-bottom-70px'>
+         <section className='info-area info-bg padding-top-50px padding-bottom-70px'>
             <div className='container'>
                <div className='row'>
                   <div className='col-lg-4 responsive-column'>

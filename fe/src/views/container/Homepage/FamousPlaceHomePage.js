@@ -27,9 +27,7 @@ const FamousPlaceHomePage = (props) => {
                                  {province.name}
                               </h3>
                            </Link>
-                           {/* end flip-content */}
                         </div>
-                        {/* end flip-box-front */}
                         <div className='flip-box-back'>
                            <img src={province.image} alt='' className='flip-img' width='100px' height='160px' />
                            <Link

@@ -28,9 +28,6 @@ function ImpTourList(props) {
 
    return (
       <ImpTourListStyled>
-         {/* ================================
-            START CARD AREA
-         ================================= */}
          <section className='card-area section--padding'>
             <div className='container'>
                <div className='row'>
@@ -39,11 +36,8 @@ function ImpTourList(props) {
                         <FilterTopTour tourCount={tourCount} />
                         <FilterOptionTour setSortType={setSortType} setAddressType={setAddressType} />
                      </div>
-                     {/* end filter-wrap */}
                   </div>
-                  {/* end col-lg-12 */}
                </div>
-               {/* end row */}
 
                <div className='row'>
                   <div className='col-lg-4'>
@@ -61,9 +55,7 @@ function ImpTourList(props) {
                         <FilterByDuration />
                         <hr></hr>
                      </div>
-                     {/* end sidebar */}
                   </div>
-                  {/* end col-lg-4 */}
                   <div className='col-lg-8'>
                      <CardItemListTour
                         setTourCount={setTourCount}
@@ -76,34 +68,9 @@ function ImpTourList(props) {
                         setPagination={setPagination}
                      />
                   </div>
-                  {/* end col-lg-8 */}
                </div>
-               {/* end row */}
-
-               <div className='row'>
-                  <div className='col-lg-12'>
-                     <div className='btn-box mt-3 text-center'>
-                        <button type='button' className='theme-btn'>
-                           <i className='la la-refresh mr-1' />
-                           Load More
-                        </button>
-                        <p className='font-size-13 pt-2'>
-                           Showing {pagination.page} to {Math.ceil(pagination.total / pagination.size)} of{" "}
-                           {pagination.total} entries
-                        </p>
-                     </div>
-                     {/* end btn-box */}
-                  </div>
-                  {/* end col-lg-12 */}
-               </div>
-               {/* end row */}
             </div>
-            {/*end container*/}
          </section>
-         {/*end card-area*/}
-         {/* ================================
-            END CARD AREA
-         ================================= */}
          <InfoTour />
       </ImpTourListStyled>
    );

@@ -15,42 +15,19 @@ function ImpTourGrid(props) {
    const [tourCount, setTourCount] = useState(0);
    return (
       <ImpTourGridStyled>
-         {/* ================================
-            START CARD AREA
-         ================================= */}
          <section className='card-area section--padding'>
             <div className='container'>
                <div className='row'>
                   <div className='col-lg-12'>
-                     <div className='filter-wrap margin-bottom-30px'>
+                     <div className='filter-wrap'>
                         <FilterTopTour tourCount={tourCount} />
                         {/* <FilterOptionTour /> */}
                      </div>
                   </div>
                </div>
-               {/* end row */}
                <CardItemGridTour setTourCount={setTourCount} />
-               <div className='row'>
-                  <div className='col-lg-12'>
-                     <div className='btn-box mt-3 text-center'>
-                        <button type='button' className='theme-btn'>
-                           <i className='la la-refresh mr-1' />
-                           Load More
-                        </button>
-                        <p className='font-size-13 pt-2'>Showing 1 - 6 of 2292 Tours</p>
-                     </div>
-                     {/* end btn-box */}
-                  </div>
-                  {/* end col-lg-12 */}
-               </div>
-               {/* end row */}
             </div>
-            {/* end container */}
          </section>
-         {/* end card-area */}
-         {/* ================================
-            END CARD AREA
-         ================================= */}
          <InfoTour />
       </ImpTourGridStyled>
    );

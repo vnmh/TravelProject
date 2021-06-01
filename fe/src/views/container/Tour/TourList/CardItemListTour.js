@@ -128,16 +128,7 @@ const CardItemListTour = (props) => {
             );
          });
       }
-      // if (props.searchTour?.from) {
-      //    toursTemp = _.filter(tours, (o) => {
-      //       return true;
-      //    });
-      // }
-      // if (props.searchTour?.to) {
-      //    toursTemp = _.filter(tours, (o) => {
-      //       return true;
-      //    });
-      // }
+
       if (props.searchTour?.type && props.searchTour?.type !== "all") {
          toursTemp = toursTemp.filter((o) => {
             return o.type === props.searchTour.type;
@@ -154,7 +145,7 @@ const CardItemListTour = (props) => {
       setTours(toursTemp); //tours
    }, [props.timeSubmit]);
 
-   // PRice
+   // Price
    useEffect(() => {
       let toursTemp = Array.from(toursDefault);
       if (props.price) {
@@ -237,16 +228,6 @@ const CardItemListTour = (props) => {
       </CardItemListTourStyled>
    );
 };
-
-// export default connect(
-//    (state) => ({
-//       user: state["authUser"].user
-//    }),
-//    {
-//       getTours: appApisActions.getTours,
-//       getAllImagesTour: appApisActions.getAllImagesTour
-//    }
-// )(CardItemListTour);
 
 export default compose(
    connect(
