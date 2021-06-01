@@ -6,7 +6,7 @@ import _ from "lodash";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
-import {  message } from "antd";
+import {  Button, message } from "antd";
 import { API_URL } from "~/configs";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
 
@@ -89,6 +89,15 @@ const CRUDBlogAdminImage = (props) => {
 
    return (
       <CRUDBlogAdminImageStyled>
+           <div className='d-flex justify-content-end w-100'>
+            <Button
+               onClick={() => {
+                  props.setCurrentEdit(undefined);
+                  props.setIsCreatePost && props.setIsCreatePost(undefined);
+               }}>
+               Đóng
+            </Button>
+         </div>
          {props.currentEdit && (
             <ImgCrop rotate aspect={16 / 9} grid modalWidth={650}>
                <Upload
