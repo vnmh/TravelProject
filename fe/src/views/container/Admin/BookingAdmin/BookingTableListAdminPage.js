@@ -127,7 +127,7 @@ const BookingTableListAdminPage = (props) => {
                               </li>
                            </ul>
                         </div>
-                        {props.bookingDetail?.status !== ORDER_STATUS.Done && (
+                        {((props.bookingDetail?.status !== ORDER_STATUS.Done) && (props.bookingDetail?.status !== ORDER_STATUS.Cancel)) && (
                            <div className='action-btns position-relative'>
                               <button
                                  className='d-flex justify-content-center align-items-center theme-btn theme-btn-small mr-4 position-absolute'

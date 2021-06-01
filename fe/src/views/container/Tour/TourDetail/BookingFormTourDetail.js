@@ -31,12 +31,16 @@ function BookingFormTourDetail(props) {
                               props.tourDetail?.price * props.tourDetail?.sale * 0.01 * numberPeople
                         )}
                      </span>{" "}
+                     
                      {props.tourDetail?.sale > 0 ? (
-                        <span className='before-price'>{currencyFormat(props.tourDetail?.price * numberPeople)}</span>
+                        <div>
+                           <span className='before-price'>{currencyFormat(props.tourDetail?.price * numberPeople)}</span>
+                           {" "} <span>({props.tourDetail?.sale} %)</span>
+                        </div>
                      ) : (
                         <React.Fragment></React.Fragment>
                      )}
-                     {" "} <span>({props.tourDetail?.sale} %)</span>
+                     
                   </p>
                </div>
             </div>
