@@ -14,7 +14,7 @@ const databaseProduction =
  * resolve - rows SELECT được;
  * reject -  err of sql
  */
-Report.spReportOrder = function() {
+Report.getReportOrder = function() {
   return new Promise(function(resolve, reject) {
     database
       .query("call " + databaseProduction + `.spReportOrder(); `)
