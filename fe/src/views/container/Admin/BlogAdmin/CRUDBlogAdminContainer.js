@@ -7,6 +7,7 @@ import { appApisActions } from "~/state/ducks/appApis";
 import { Tabs } from "antd";
 import styled from "styled-components";
 import CRUDBlogAdmin from "./CRUDBlogAdmin";
+import CRUDBlogAdminImage from "./CRUDBlogAdminImage";
 
 const { TabPane } = Tabs;
 const CRUDBlogAdminContainerStyled = styled.div``;
@@ -21,6 +22,9 @@ const CRUDBlogAdminContainer = (props) => {
          <Tabs defaultActiveKey='1' onChange={onChangeTab}>
             <TabPane tab='Thông tin' key='1'>
                <CRUDBlogAdmin {...props} />
+            </TabPane>
+            <TabPane tab='Hình ảnh' key='2'>
+               <CRUDBlogAdminImage {...props} />
             </TabPane>
          </Tabs>
       </CRUDBlogAdminContainerStyled>
