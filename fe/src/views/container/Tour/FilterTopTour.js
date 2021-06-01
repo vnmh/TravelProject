@@ -13,8 +13,8 @@ function FilterTopTour(props) {
       <FilterTopTourStyled>
          <div className='filter-top d-flex align-items-center justify-content-between pb-4'>
             <div>
-               <h3 className='title font-size-24'>{props.tourCount} Tours found</h3>
-               <p className='font-size-14 line-height-20 pt-1'>Book with confidence: No tour booking fees</p>
+               <h3 className='title font-size-24'>Hiện có: {props.tourCount} Tours</h3>
+               <p className='font-size-14 line-height-20 pt-1'>Tour chọn lọc chất lượng nhất!</p>
             </div>
             <div className='layout-view d-flex align-items-center'>
                <Link to='/tour-grid' data-toggle='tooltip' data-placement='top' title='Grid View'>

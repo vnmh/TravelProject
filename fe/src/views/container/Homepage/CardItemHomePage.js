@@ -90,7 +90,7 @@ const CardItemHomePage = (props) => {
                                  alt='Destination-img'
                               />
                            </Link>
-                           <span className='badge'>Bestseller</span>
+                           {item?.sale > 0 ? <span className='badge'>Tour bán chạy</span> : ""}
                         </div>
                         <div className='card-body'>
                            <h3 className='card-title'>

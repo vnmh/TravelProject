@@ -11,6 +11,9 @@ const ItineraryTourDetailStyled = styled.div``;
 function ItineraryTourDetail(props) {
    return (
       <ItineraryTourDetailStyled data-aos='fade-up'>
+         <h3 className='title font-size-20 mb-4' name='titleTour'>
+            Lịch trình đi
+         </h3>
          <Accordion defaultActiveKey='0'>
             {(props.tourDetail?.timelines || []).map((item, index) => {
                return (

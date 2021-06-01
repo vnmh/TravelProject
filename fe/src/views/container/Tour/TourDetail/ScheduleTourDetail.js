@@ -13,7 +13,7 @@ function ScheduleTourDetail(props) {
       <ScheduleTourDetailStyled data-aos='fade-up'>
          <div id='photo' className='page-scroll'>
             <div className='single-content-item padding-top-40px padding-bottom-40px'>
-               <h3 className='title font-size-20'>Mô tả chi tiết</h3>
+               <h3 className='title font-size-20 mb-4'>Mô tả chi tiết</h3>
                <div className='ck-content'>{parseHtml(props.tourDetail?.schedule?.data || "")}</div>
             </div>
             <div className='section-block' />
