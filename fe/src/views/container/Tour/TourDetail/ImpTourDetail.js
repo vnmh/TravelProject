@@ -71,7 +71,6 @@ function ImpTourDetail(props) {
             console.log("hiendev ~ file: CardItemListTour.js ~ line 24 ~ useEffect ~ err", err);
          });
    }, []);
-   console.log(`ithoangtan -  ~ file: ImpTourDetail.js ~ line 246 ~ {tours.map ~ tour?.images`, tours);
 
    return (
       <ImpTourDetailStyled>

@@ -5,7 +5,7 @@ import ReactPlayer from "react-player";
 const VideoComponent = (props) => {
    return (
       <>
-         <Modal title='Video' visible={props.isModalVisible} onCancel={props.onCancel} width="700px">
+         <Modal title='Video' visible={props.isModalVisible} onCancel={props.onCancel} footer={null} width="700px">
             <ReactPlayer url={props.urlVideo} />
          </Modal>
       </>

@@ -81,7 +81,7 @@ const SliderHomePage = (props) => {
                         style={{ marginLeft: 220, marginTop: 25, maxWidth: window.innerWidth * 0.7 }}>
                         <Typography.Title className='title-tour'>{item.titleTour}</Typography.Title>
                         <Typography.Paragraph
-                           ellipsis={{ rows: 3 }}
+                           ellipsis={{ rows: 2 }}
                            strong
                            className='text-wrap text-describe'
                            style={{ color: "white" }}>
@@ -108,8 +108,6 @@ const SliderHomePage = (props) => {
                );
             })}
          </Carousel>
-
-         {/* <div className='mask'></div> */}
       </SliderHomePageStyled>
    );
 };
