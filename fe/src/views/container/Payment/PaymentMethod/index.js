@@ -7,10 +7,10 @@ import { message } from "antd";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import ImpPayment from "./ImpPayment";
 import { useRouteMatch } from "react-router";
-import TopBarTour from "../../Tour/TopBarTour";
 import Header from "../../Header";
 import Footer from "../../Footer";
 import ScrollToTop from "~/ScrollToTop";
+import TopBarPayment from "./TopBarPayment";
 
 const PaymentStyled = styled.div``;
 
@@ -42,7 +42,7 @@ function Payment(props) {
       <ScrollToTop>
          <PaymentStyled>
             <Header />
-            <TopBarTour />
+            <TopBarPayment />
             <ImpPayment payment={payment} />
             <Footer />
          </PaymentStyled>

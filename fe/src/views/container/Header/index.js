@@ -91,68 +91,12 @@ const HeaderTop = (props) => {
                                           <Link to='/blog-grid'>Cẩm nang du lịch</Link>
                                        </li>
                                        <li>
-                                          <Link to='/'>Địa điểm yêu thích</Link>
+                                          <a data-scroll='location' href='#location' className='scroll-link'>Địa điểm yêu thích</a>
                                        </li>
                                        <li>
                                           <Link to='/'>Liên hệ</Link>
                                        </li>
                                        <li>
-                                          {/* <Link to='#'>
-                                             Pages <i className='la la-angle-down' />
-                                          </Link> */}
-                                          {/* <div className='dropdown-menu-item mega-menu'>
-                                             <ul className='row no-gutters'>
-                                                <li className='col-lg-3 mega-menu-item'>
-                                                   <ul>
-                                                      <li>
-                                                         <Link to='add-hotel.html'>add hotel </Link>
-                                                      </li>
-                                                      <li>
-                                                         <Link to='add-flight.html'>add flight </Link>
-                                                      </li>
-
-                                                      <li>
-                                                         <Link to='career.html'>
-                                                            career <span className='badge bg-2 text-white'>New</span>
-                                                         </Link>
-                                                      </li>
-                                                   </ul>
-                                                </li>
-                                                <li className='col-lg-3 mega-menu-item'>
-                                                   <ul>
-                                                      <li>
-                                                         <Link to='career-details.html'>
-                                                            career details
-                                                            <span className='badge bg-2 text-white'>New</span>
-                                                         </Link>
-                                                      </li>
-                                                      <li>
-                                                         <Link to='user-profile.html'>User profile</Link>
-                                                      </li>
-                                                   </ul>
-                                                </li>
-                                                <li className='col-lg-3 mega-menu-item'>
-                                                   <ul>
-                                                      <li>
-                                                         <Link to='payment-complete.html'>payment complete</Link>
-                                                      </li>
-                                                      <li>
-                                                         <Link to='destinations.html'>Destinations</Link>
-                                                      </li>
-                                                   </ul>
-                                                </li>
-                                                <li className='col-lg-3 mega-menu-item'>
-                                                   <ul>
-                                                      <li>
-                                                         <Link to='add-new-post.html'>add new post</Link>
-                                                      </li>
-                                                      <li>
-                                                         <Link to='blog-full-width.html'>blog full width</Link>
-                                                      </li>
-                                                   </ul>
-                                                </li>
-                                             </ul>
-                                          </div> */}
                                        </li>
                                     </ul>
                                  </nav>
