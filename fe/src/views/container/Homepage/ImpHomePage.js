@@ -88,7 +88,7 @@ const ImpHomePage = (props) => {
             </section>
             <div>
                <div className='section-block' />
-               <section className='top-activity-area section--padding'>
+               <section className='top-activity-area section--padding' id='location'>
                   <div className='container'>
                      <div className='row' data-aos='fade-up'>
                         <div className='col-lg-12'>

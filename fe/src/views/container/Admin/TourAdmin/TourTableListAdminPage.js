@@ -17,6 +17,8 @@ const TourTableListAdminPage = (props) => {
    const [deleteTour, setDeleteTour] = useState(false);
    const [tours, setTours] = useState([]);
    const [loading, setLoading] = useState(false);
+   const [services, setServices] = useState([]);
+   const [serviceTourTrue, setServiceTourTrue] = useState([]);
 
    const onDeleteTour = (tour) => {
       props
@@ -29,6 +31,29 @@ const TourTableListAdminPage = (props) => {
             message.error("Xóa thất bại!");
          });
    };
+
+   useEffect(() => {
+      props
+         .getServices()
+         .then(({ res }) => {
+            setServices(res || []);
+         })
+         .catch((err) => {
+            console.log("maidev ~ file: DescriptionTourDetail.js ~ line 20 ~ useEffect ~ err", err);
+         });
+   }, []);
+
+   useEffect(() => {
+      const serviceTour = props.tourDetail?.services?.split(",") || [];
+      const temp = serviceTour.map((item, index) => {
+         return _.find(services, (s) => {
+            return s.idServices + "" === item + "";
+         });
+      });
+      console.log(`ithoangtan -  ~ file: DescriptionTourDetail.js ~ line 31 ~ temp ~ temp`, temp);
+      setServiceTourTrue(temp);
+   }, [props.tourDetail?.services?.split(",").length, services.length]);
+
 
    const columns = [
       {
@@ -240,7 +265,8 @@ export default compose(
          // postLogin: appApisActions.postLogin
          getTours: appApisActions.getTours,
          getAllImagesTour: appApisActions.getAllImagesTour,
-         deleteTour: appApisActions.deleteTour
+         deleteTour: appApisActions.deleteTour,
+         getServices: appApisActions.getServices
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu

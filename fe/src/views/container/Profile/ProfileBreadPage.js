@@ -17,32 +17,25 @@ const ReviewBread = () => {
                      <div className='col-lg-6'>
                         <div className='breadcrumb-content'>
                            <div className='section-heading'>
-                              <h2 className='sec__title font-size-30 text-white'>Reviews</h2>
+                              {/* <h2 className='sec__title font-size-30 text-white'>Thông tin cá nhân</h2> */}
                            </div>
                         </div>
-                        {/* end breadcrumb-content */}
                      </div>
-                     {/* end col-lg-6 */}
                      <div className='col-lg-6'>
                         <div className='breadcrumb-list text-right'>
                            <ul className='list-items'>
                               <li>
                                  <a href='index.html' className='text-white'>
-                                    Home
+                                    Trang chủ
                                  </a>
                               </li>
-                              <li>Dashboard</li>
-                              <li>Reviews</li>
+                              <li>Thông tin cá nhân</li>
                            </ul>
                         </div>
-                        {/* end breadcrumb-list */}
                      </div>
-                     {/* end col-lg-6 */}
                   </div>
-                  {/* end row */}
                </div>
             </div>
-            {/* end dashboard-bread */}
          </div>
       </ReviewBreadStyled>
    );

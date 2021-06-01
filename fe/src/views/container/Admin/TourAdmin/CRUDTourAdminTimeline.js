@@ -96,8 +96,8 @@ const EditableTable = (props) => {
 
          if (index > -1) {
             // update
-            const item = newData[index];
-            const body = { ...item, ...row };
+            const item = newData[index]; 
+            const body = { ...item, ...row }; //item: dữ liệu mới, dữ liệu cũ
             newData.splice(index, 1, body);
             setData(newData);
             setEditingKey("");
