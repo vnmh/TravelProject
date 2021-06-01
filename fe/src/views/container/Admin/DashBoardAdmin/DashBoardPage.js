@@ -19,14 +19,12 @@ const TourAdmin = (props) => {
       props
       .getReport()
       .then(({ res }) => {
-         console.log("hiendev ~ file: DashBoardPage.js ~ line 24 ~ .then ~ res", res)
          setReports(res);
       })
       .catch((err) => {
          console.log(`file: DashBoardPage.js ~ line 23 ~ props.getReport ~ err`, err);
       });
    }, []);
-   console.log("hiendev ~ file: DashBoardPage.js ~ line 19 ~ TourAdmin ~ reports", reports)
 
    return (
       <TourAdminStyled>

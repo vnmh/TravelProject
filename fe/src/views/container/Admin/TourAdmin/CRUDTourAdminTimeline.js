@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { compose, lifecycle } from "recompose";
+import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
 import { connect } from "react-redux";
 import _ from "lodash";
-import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
+import styled from "styled-components";
 import { appApisActions } from "~/state/ducks/appApis";
 import { Button, Form, Input, InputNumber, Popconfirm, Table, Typography, message, Upload, Image } from "antd";
 import TextArea from "antd/lib/input/TextArea";
-import { firstImage } from "~/views/utilities/helpers/utilObject";
-import { UploadOutlined } from "@ant-design/icons";
-import { API_URL } from "~/configs";
 
 const EditableCell = ({ editing, dataIndex, title, inputType, record, index, children, ...restProps }) => {
    let inputNode = undefined;
@@ -21,13 +18,13 @@ const EditableCell = ({ editing, dataIndex, title, inputType, record, index, chi
       case "textarea":
          inputNode = <TextArea />;
          break;
-      case "upload":
-         inputNode = (
-            <Upload name={"file"} action={`${API_URL}/file`} listType='picture'>
-               <Button icon={<UploadOutlined />}>Click to upload</Button>
-            </Upload>
-         );
-         break;
+      // case "upload":
+      //    inputNode = (
+      //       <Upload name={"file"} action={`${API_URL}/file`} listType='picture'>
+      //          <Button icon={<UploadOutlined />}>Click to upload</Button>
+      //       </Upload>
+      //    );
+      //    break;
       default:
          inputNode = <Input />;
          break;
@@ -44,7 +41,7 @@ const EditableCell = ({ editing, dataIndex, title, inputType, record, index, chi
                rules={[
                   {
                      required: true,
-                     message: `Please Input ${title}!`
+                     message: `Hãy nhập ${title}!`
                   }
                ]}>
                {inputNode}
@@ -109,14 +106,10 @@ const EditableTable = (props) => {
                .putTimeline(body)
                .then((res) => {
                   message.success("Thành công!");
-                  console.log(`ithoangtan -  ~ file: CRUDTourAdminTimeline.js ~ line 108 ~ .then ~ res`, res);
                })
                .catch((err) => {
                   message.error("Thất bại!");
-                  console.log(
-                     `ithoangtan -  ~ file: CRUDTourAdminTimeline.js ~ line 123 ~ props.putTimeline ~ err`,
-                     err
-                  );
+                  console.log("hiendev ~ file: CRUDTourAdminTimeline.js ~ line 115 ~ save ~ err", err);
                });
          } else {
             // new
@@ -150,7 +143,7 @@ const EditableTable = (props) => {
          })
          .catch((err) => {
             message.error("Thất bại!");
-            console.log(`ithoangtan -  ~ file: CRUDTourAdminTimeline.js ~ line 123 ~ props.putTimeline ~ err`, err);
+            console.log("hiendev ~ file: CRUDTourAdminTimeline.js ~ line 149 ~ addRow ~ err", err);
          });
    };
 
@@ -159,13 +152,12 @@ const EditableTable = (props) => {
       props
          .deleteTimeline(timeline.idTimelines)
          .then((res) => {
-            console.log(`ithoangtan -  ~ file: CRUDTourAdminTimeline.js ~ line 108 ~ .then ~ res`, res);
             message.success("Thành công!");
             setNeedFetchNewData(true);
          })
          .catch((err) => {
             message.error("Thất bại!");
-            console.log(`ithoangtan -  ~ file: CRUDTourAdminTimeline.js ~ line 123 ~ props.putTimeline ~ err`, err);
+            console.log("hiendev ~ file: CRUDTourAdminTimeline.js ~ line 163 ~ onDeleteTimeline ~ err", err);
          });
       // xóa ở BE
    };
@@ -301,10 +293,8 @@ export default compose(
       (state) => ({
          user: state["authUser"].user,
          isAuthenticated: state["authUser"].isAuthenticated
-         // có thể check user?.role === ROLE.administrator && isAuthenticated => CRUDTourAdminTimeline admin , không thì redirect tới homepage
       }),
       {
-         // postLogin: appApisActions.postLogin
          getTimelineTour: appApisActions.getTimelineTour,
          getAllImagesTour: appApisActions.getAllImagesTour,
          postTour: appApisActions.postTour,

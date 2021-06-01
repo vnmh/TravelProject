@@ -15,7 +15,7 @@ const contentStyle = {
 const ImageComponent = (props) => {
    return (
       <>
-         <Modal title='Hình ảnh' visible={props.isModalVisibleImage} onCancel={props.onCancel} width='700px'>
+         <Modal title='Hình ảnh' visible={props.isModalVisibleImage} onCancel={props.onCancel} footer={null} width='700px'>
             <Carousel
                autoplay
                naturalSlideWidth={100}
