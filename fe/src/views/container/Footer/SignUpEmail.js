@@ -12,7 +12,7 @@ const SignUpEmailStyled = styled.div``;
 const SignUpEmail = (props) => {
    return (
       <SignUpEmailStyled>
-         <section className='cta-area subscriber-area section-bg-2 padding-top-60px padding-bottom-60px'>
+         <section className='cta-area subscriber-area section-bg-2 padding-top-60px padding-bottom-60px' data-aos="fade-down">
             <div className='container'>
                <div className='row align-items-center'>
                   <div className='col-lg-7'>

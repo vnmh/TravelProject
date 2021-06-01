@@ -12,9 +12,6 @@ const TopBarTourStyled = styled.div``;
 function TopBarTour(props) {
    return (
       <TopBarTourStyled>
-         {/* ================================
-            START BREADCRUMB AREA
-         ================================= */}
          <section className='breadcrumb-area bread-bg'>
             <div className='breadcrumb-wrap'>
                <div className='container'>
@@ -25,9 +22,7 @@ function TopBarTour(props) {
                               <h2 className='sec__title text-white'>Danh sách tour</h2>
                            </div>
                         </div>
-                        {/* end breadcrumb-content */}
                      </div>
-                     {/* end col-lg-6 */}
                      <div className='col-lg-6'>
                         <div className='breadcrumb-list text-right'>
                            <ul className='list-items'>
@@ -38,15 +33,10 @@ function TopBarTour(props) {
                               <li>Danh sách tour</li>
                            </ul>
                         </div>
-                        {/* end breadcrumb-list */}
                      </div>
-                     {/* end col-lg-6 */}
                   </div>
-                  {/* end row */}
                </div>
-               {/* end container */}
             </div>
-            {/* end breadcrumb-wrap */}
             <div className='bread-svg-box'>
                <svg
                   className='bread-svg'
@@ -56,12 +46,7 @@ function TopBarTour(props) {
                   <polygon points='100 0 50 10 0 0 0 10 100 10' />
                </svg>
             </div>
-            {/* end bread-svg */}
          </section>
-         {/* end breadcrumb-area */}
-         {/* ================================
-            END BREADCRUMB AREA
-         ================================= */}
       </TopBarTourStyled>
    );
 }

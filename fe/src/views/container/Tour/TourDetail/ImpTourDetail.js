@@ -158,8 +158,8 @@ function ImpTourDetail(props) {
                               <div className='single-content-item padding-top-40px padding-bottom-40px'>
                                  <DescriptionTourDetail tourDetail={props.tourDetail} />
                               </div>
-                              <div className='section-block' />
                            </div>
+
                            <ItineraryTourDetail tourDetail={props.tourDetail} />
                            <ScheduleTourDetail tourDetail={props.tourDetail} />
                            <LocationTourDetail />
@@ -232,7 +232,7 @@ function ImpTourDetail(props) {
                <div className='row' data-aos='fade-right'>
                   <div className='col-lg-12'>
                      <div className='section-heading text-center'>
-                        <h2 className='sec__title'>Có thể bản cũng thích</h2>
+                        <h2 className='sec__title'>Có thể bạn cũng thích</h2>
                      </div>
                   </div>
                </div>

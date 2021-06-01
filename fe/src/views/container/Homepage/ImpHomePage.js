@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import { connect } from "react-redux";
@@ -11,9 +11,7 @@ import ReviewHomePage from "./ReviewHomePage";
 import BlogHomePage from "./BlogHomePage";
 import FamousPlaceHomePage from "./FamousPlaceHomePage";
 import Footer from "../Footer";
-import TitleTourHomePage from "./TitleTourHomePage";
 import HOC from "~/HOC";
-import { Skeleton } from "antd";
 
 const ImpHomePageStyled = styled.div`
    height: 100vh;
@@ -54,23 +52,16 @@ const ImpHomePage = (props) => {
                               Tour nổi bật
                            </h2>
                         </div>
-                        {/* end section-heading */}
                      </div>
-                     {/* end col-lg-12 */}
                   </div>
-                  {/* end row */}
                   <div className='row padding-top-50px' data-aos='fade-left'>
                      <div className='col-lg-12'>
                         <div className='trending-carousel carousel-action'>
                            <CardItemHomePage />
                         </div>
-                        {/* end car-carousel */}
                      </div>
-                     {/* end col-lg-12 */}
                   </div>
-                  {/* end row */}
                </div>
-               {/* end container */}
                <svg
                   className='hero-svg'
                   xmlns='http://www.w3.org/2000/svg'
@@ -79,14 +70,6 @@ const ImpHomePage = (props) => {
                   <path d='M0 10 0 0 A 90 59, 0, 0, 0, 100 0 L 100 10 Z' />
                </svg>
             </section>
-            {/* end trending-area */}
-            {/* ================================
-            END TRENDING AREA
-         ================================= */}
-
-            {/* ================================
-            START TESTIMONIAL AREA
-         ================================= */}
             <section className='testimonial-area section-padding pt-5'>
                <div className='container'>
                   <div className='row' data-aos='fade-right'>
@@ -96,27 +79,15 @@ const ImpHomePage = (props) => {
                               Đánh giá Tour
                            </h2>
                         </div>
-                        {/* end section-heading */}
                      </div>
-                     {/* end col-lg-12 */}
                   </div>
-                  {/* end row  */}
                   <div className='row padding-top-50px' data-aos='zoom-in'>
                      <ReviewHomePage />
                   </div>
-                  {/* end row */}
                </div>
-               {/* end container */}
             </section>
-            {/* end testimonial-area */}
-            {/* ================================
-            START TESTIMONIAL AREA
-         ================================= */}
             <div>
                <div className='section-block' />
-               {/* ================================
- START TOP ACTIVITY AREA
-================================= */}
                <section className='top-activity-area section--padding'>
                   <div className='container'>
                      <div className='row' data-aos='fade-up'>
@@ -126,27 +97,13 @@ const ImpHomePage = (props) => {
                                  Địa danh nổi tiếng
                               </h2>
                            </div>
-                           {/* end section-heading */}
                         </div>
-                        {/* end col-lg-12 */}
                      </div>
-                     {/* end row */}
 
                      <FamousPlaceHomePage />
                   </div>
-
-                  {/* end row */}
-                  {/* end container */}
                </section>
-               {/* end top-activity-area */}
-               {/* ================================
- START TOP ACTIVITY AREA
-================================= */}
             </div>
-
-            {/* ================================
-    START CTA AREA
-================================= */}
             <section className='cta-area cta-bg bg-fixed section-padding'>
                <div className='container'>
                   <div className='row'>
@@ -159,31 +116,17 @@ const ImpHomePage = (props) => {
                               Nemo enim ipsam voluptatem quia voluptas sit aspernatur
                            </p>
                         </div>
-                        {/* end section-heading */}
                         <div className='btn-box padding-top-35px' data-aos='fade-up'>
                            <a href='#' className='theme-btn border-0'>
                               Explore Now <i className='la la-arrow-right ml-1' />
                            </a>
                         </div>
                      </div>
-                     {/* end col-lg-12 */}
                   </div>
-                  {/* end row */}
                </div>
-               {/* end container */}
             </section>
-            {/* end cta-area */}
-            {/* ================================
-    END CTA AREA
-================================= */}
-
-            {/* ================================
-            START BLOG AREA
-         ================================= */}
             <section className='blog-area section--padding'>
                <div class='container'>
-                  {/* end row */}
-                  {/* end col-lg-4 */}
                   <div className='row' data-aos='fade-up'>
                      <div className='col-lg-12'>
                         <div className='section-heading'>
@@ -195,12 +138,8 @@ const ImpHomePage = (props) => {
                   </div>
 
                   <BlogHomePage />
-                  {/* end col-lg-4 */}
-                  {/* end row */}
                </div>
             </section>
-            {/* end container */}
-            {/* end blog-area */}
             <Footer />
          </ImpHomePageStyled>
       </HOC>
