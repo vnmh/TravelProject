@@ -23,7 +23,7 @@ const BookingListAdminPage = (props) => {
                <div className='col-lg-12'>
                   <div className='form-box'>
                      <div className='form-title-wrap'>
-                        <h3 className='title'>Danh sách booking</h3>
+                        {/* <h3 className='title'>Danh sách tours đã đặt</h3> */}
                         <div className='d-flex justify-content-between'>
                            <p className='font-size-14'>
                               {/* Hiển thị {pagination.page} trong tổng số {Math.ceil(pagination.total / pagination.size)}{" "}

@@ -78,7 +78,7 @@ const SliderHomePage = (props) => {
                   <div style={{ height: 500, maxWidth: "100%" }} className='position-relative'>
                      <div
                         className='position-absolute'
-                        style={{ marginLeft: 220, marginTop: 35, maxWidth: window.innerWidth * 0.7 }}>
+                        style={{ marginLeft: 220, marginTop: 25, maxWidth: window.innerWidth * 0.7 }}>
                         <Typography.Title className='title-tour'>{item.titleTour}</Typography.Title>
                         <Typography.Paragraph
                            ellipsis={{ rows: 3 }}

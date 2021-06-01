@@ -74,12 +74,6 @@ const SideBar = (props) => {
                            Danh sách yêu thích
                         </Link>
                      </li>
-                     <li>
-                        <Link to='admin-dashboard-settings.html'>
-                           <i className='la la-cog mr-2 text-color-10' />
-                           Cài đặt
-                        </Link>
-                     </li>
                   </ul>
                </div>
             </div>

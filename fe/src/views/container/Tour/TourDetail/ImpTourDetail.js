@@ -159,8 +159,9 @@ function ImpTourDetail(props) {
                                  <DescriptionTourDetail tourDetail={props.tourDetail} />
                               </div>
                            </div>
-
-                           <ItineraryTourDetail tourDetail={props.tourDetail} />
+                           <div data-aos='fade-up' id='itinerary' className='page-scroll'>
+                              <ItineraryTourDetail tourDetail={props.tourDetail} />
+                           </div>
                            <ScheduleTourDetail tourDetail={props.tourDetail} />
                            <LocationTourDetail />
                            <EvaluateTourDetail />

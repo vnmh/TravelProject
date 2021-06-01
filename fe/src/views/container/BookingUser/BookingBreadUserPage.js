@@ -16,7 +16,7 @@ const BookingBreadUserPage = () => {
                   <div className='col-lg-6'>
                      <div className='breadcrumb-content'>
                         <div className='section-heading'>
-                           <h2 className='sec__title font-size-30 text-white'>Danh sách tour đã đặt</h2>
+                           <h2 className='sec__title font-size-30 text-white'>Danh sách tours đã đặt</h2>
                         </div>
                      </div>
                      {/* end breadcrumb-content */}
@@ -30,7 +30,7 @@ const BookingBreadUserPage = () => {
                                  Trang chủ
                               </a>
                            </li>
-                           <li>Lịch sử booking</li>
+                           <li>Lịch sử đặt tours</li>
                         </ul>
                      </div>
                      {/* end breadcrumb-list */}

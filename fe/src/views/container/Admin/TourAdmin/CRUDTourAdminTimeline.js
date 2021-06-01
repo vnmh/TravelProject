@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-
 import { Link, withRouter } from "react-router-dom";
 import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
 import _ from "lodash";
-
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
 import { Button, Form, Input, InputNumber, Popconfirm, Table, Typography, message, Upload, Image } from "antd";
@@ -15,7 +13,7 @@ import { API_URL } from "~/configs";
 
 const EditableCell = ({ editing, dataIndex, title, inputType, record, index, children, ...restProps }) => {
    let inputNode = undefined;
-   
+
    switch (inputType) {
       case "number":
          inputNode = <InputNumber min={1} max={100} />;
@@ -101,13 +99,14 @@ const EditableTable = (props) => {
 
          if (index > -1) {
             // update
-            const item = newData[index];
-            newData.splice(index, 1, { ...item, ...row });
+            const item = newData[index]; 
+            const body = { ...item, ...row }; //item: dữ liệu mới, dữ liệu cũ
+            newData.splice(index, 1, body);
             setData(newData);
             setEditingKey("");
             // gọi API sửa
             props
-               .putTimeline(item)
+               .putTimeline(body)
                .then((res) => {
                   message.success("Thành công!");
                   console.log(`ithoangtan -  ~ file: CRUDTourAdminTimeline.js ~ line 108 ~ .then ~ res`, res);
@@ -232,7 +231,7 @@ const EditableTable = (props) => {
          }
       }
    ];
-   
+
    const mergedColumns = columns.map((col) => {
       if (!col.editable) {
          return col;
