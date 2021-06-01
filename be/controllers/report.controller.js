@@ -3,7 +3,7 @@ const Report = require('../models/report.model');
  
 exports.getReport = async (req, res, next) => {
    try {
-      let listReport = await Report.getReport();
+      let listReport = await Report.getReportOrder();
  
       // Custom listReport
       let report = [];
