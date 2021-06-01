@@ -99,7 +99,6 @@ const ImpHomePage = (props) => {
                            </div>
                         </div>
                      </div>
-
                      <FamousPlaceHomePage />
                   </div>
                </section>
@@ -136,7 +135,6 @@ const ImpHomePage = (props) => {
                         </div>
                      </div>
                   </div>
-
                   <BlogHomePage />
                </div>
             </section>

@@ -11,31 +11,19 @@ import FilterTopBlog from "../FilterTopBlog";
 const ImpBlogGridStyled = styled.div``;
 
 function ImpBlogGrid(props) {
-
+   const [blogCount, setBlogCount] = useState(0);
    return (
       <ImpBlogGridStyled>
          <section className='card-area section--padding'>
             <div className='container'>
                <div className='row'>
                   <div className='col-lg-12'>
-                     <div className='filter-wrap margin-bottom-30px'>
-                        <FilterTopBlog />
-                        {/* <FilterOptionBlog /> */}
+                     <div className='filter-wrap'>
+                        <FilterTopBlog blogCount={blogCount}/>
                      </div>
                   </div>
                </div>
-               <CardItemGridBlog />
-               <div className='row'>
-                  <div className='col-lg-12'>
-                     <div className='btn-box mt-3 text-center'>
-                        <button type='button' className='theme-btn'>
-                           <i className='la la-refresh mr-1' />
-                           Load More
-                        </button>
-                        <p className='font-size-13 pt-2'>Showing 1 - 6 of 2292 blogs</p>
-                     </div>
-                  </div>
-               </div>
+               <CardItemGridBlog setBlogCount={setBlogCount} />
             </div>
          </section>
          <InfoTour />

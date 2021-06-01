@@ -33,10 +33,10 @@ const ImpTourDetailStyled = styled.div`
 `;
 
 function ImpTourDetail(props) {
+   const [tours, setTours] = useState([]);
    const [isModalVisible, setIsModalVisible] = useState(false);
    const [isModalVisibleImage, setIsModalVisibleImage] = useState(false);
    const params = useParams();
-   const [tours, setTours] = useState([]);
 
    useEffect(() => {
       props
@@ -242,14 +242,14 @@ function ImpTourDetail(props) {
                         <div key={tour.idTour} className='col-lg-4 responsive-column'>
                            <div className='card-item trending-card'>
                               <div className='card-img' data-aos='fade-right'>
-                                 <Link href={PATH.TOUR_DETAIL.replace(":id", tour.idTour)} className='d-block'>
+                                 <Link to={PATH.TOUR_DETAIL.replace(":id", tour.idTour)} className='d-block'>
                                     <img src={firstImage(tour?.images)} alt='Destination-img' />
                                  </Link>
                               </div>
                               <div className='card-body'>
                                  <h3 className='card-title' data-aos='fade-right'>
                                     <Typography.Title level={5} ellipsis={{ rows: 3 }}>
-                                       <Link href={PATH.TOUR_DETAIL.replace(":id", tour.idTour)}>{tour.titleTour}</Link>
+                                       <Link to={PATH.TOUR_DETAIL.replace(":id", tour.idTour)}>{tour.titleTour}</Link>
                                     </Typography.Title>
                                  </h3>
                                  <p className='card-meta'>{tour.address}</p>
@@ -262,8 +262,8 @@ function ImpTourDetail(props) {
                                     <p>
                                        <span className='price__num'>{currencyFormat(tour.price)}</span>
                                     </p>
-                                    <Link href={PATH.TOUR_DETAIL.replace(":id", tour.idTour)} className='btn-text'>
-                                       View details
+                                    <Link to={PATH.TOUR_DETAIL.replace(":id", tour.idTour)} className='btn-text'>
+                                       Xem chi tiết
                                        <i className='la la-angle-right' />
                                     </Link>
                                  </div>

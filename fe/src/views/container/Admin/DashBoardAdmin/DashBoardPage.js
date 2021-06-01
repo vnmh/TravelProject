@@ -8,7 +8,6 @@ import * as PATH from "~/configs/routesConfig";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import DashBoardBread from "./DashBoardBread";
-import Notification from "./Notification";
 import Chart from "./Chart";
 import { appApisActions } from "~/state/ducks/appApis";
 
@@ -18,14 +17,16 @@ const TourAdmin = (props) => {
    const [reports, setReports] = useState();
    useEffect(() => {
       props
-         .getReport()
-         .then(({ res }) => {
-            setReports(res);
-         })
-         .catch((err) => {
-            console.log(`file: DashBoardPage.js ~ line 23 ~ props.getReport ~ err`, err);
-         });
+      .getReport()
+      .then(({ res }) => {
+         console.log("hiendev ~ file: DashBoardPage.js ~ line 24 ~ .then ~ res", res)
+         setReports(res);
+      })
+      .catch((err) => {
+         console.log(`file: DashBoardPage.js ~ line 23 ~ props.getReport ~ err`, err);
+      });
    }, []);
+   console.log("hiendev ~ file: DashBoardPage.js ~ line 19 ~ TourAdmin ~ reports", reports)
 
    return (
       <TourAdminStyled>

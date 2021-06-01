@@ -13,10 +13,7 @@ function FilterTopBlog(props) {
       <FilterTopBlogStyled>
          <div className='filter-top d-flex align-items-center justify-content-between pb-4'>
             <div>
-               <h3 className='title font-size-24'>2292 Blogs found</h3>
-               <p className='font-size-14 line-height-20 pt-1'>
-                  Bí quyết du lịch, những câu chuyện thú vị đang chờ đón bạn
-               </p>
+               <h3 className='title font-size-24'>{props.blogCount} bài viết được tìm thấy</h3>
             </div>
          </div>
       </FilterTopBlogStyled>

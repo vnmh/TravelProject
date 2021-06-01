@@ -46,7 +46,7 @@ const DashBoard = (props) => {
                      <div className='icon-box icon-layout-2 dashboard-icon-box pb-0'>
                         <div className='d-flex pb-3 justify-content-between'>
                            <div className='info-content'>
-                              <p className='info__desc'>Total Booking!</p>
+                              <p className='info__desc'>Tổng lượt đặt tour</p>
                               <h4 className='info__title'>{props.reports?.allCountOrder || 0}</h4>
                            </div>
                            {/* end info-content */}
@@ -59,7 +59,7 @@ const DashBoard = (props) => {
                         <Link
                            to={PATH.ADMIN_BOOKING}
                            className='d-flex align-items-center justify-content-between view-all'>
-                           View All <i className='la la-angle-right' />
+                           Xem thêm <i className='la la-angle-right' />
                         </Link>
                      </div>
                   </div>
@@ -68,7 +68,7 @@ const DashBoard = (props) => {
                      <div className='icon-box icon-layout-2 dashboard-icon-box pb-0'>
                         <div className='d-flex pb-3 justify-content-between'>
                            <div className='info-content'>
-                              <p className='info__desc'>New Orders!</p>
+                              <p className='info__desc'>Đơn đặt hàng mới</p>
                               <h4 className='info__title'>{props.reports?.countOrderNeedAction}</h4>
                            </div>
                            {/* end info-content */}
@@ -81,7 +81,7 @@ const DashBoard = (props) => {
                         <Link
                            to={PATH.ADMIN_BOOKING}
                            className='d-flex align-items-center justify-content-between view-all'>
-                           View All <i className='la la-angle-right' />
+                           Xem thêm <i className='la la-angle-right' />
                         </Link>
                      </div>
                   </div>
@@ -90,7 +90,7 @@ const DashBoard = (props) => {
                      <div className='icon-box icon-layout-2 dashboard-icon-box pb-0'>
                         <div className='d-flex pb-3 justify-content-between'>
                            <div className='info-content'>
-                              <p className='info__desc'>Total Tours!</p>
+                              <p className='info__desc'>Tổng số tour</p>
                               <h4 className='info__title'>{props.reports?.allCountTour}</h4>
                            </div>
                            {/* end info-content */}
@@ -103,7 +103,7 @@ const DashBoard = (props) => {
                         <Link
                            to={PATH.ADMIN_TOUR_LIST}
                            className='d-flex align-items-center justify-content-between view-all'>
-                           View All <i className='la la-angle-right' />
+                           Xem thêm <i className='la la-angle-right' />
                         </Link>
                      </div>
                   </div>
@@ -112,7 +112,7 @@ const DashBoard = (props) => {
                      <div className='icon-box icon-layout-2 dashboard-icon-box pb-0'>
                         <div className='d-flex pb-3 justify-content-between'>
                            <div className='info-content'>
-                              <p className='info__desc'>Total Blogs!</p>
+                              <p className='info__desc'>Tổng số bài viết</p>
                               <h4 className='info__title'>{props.reports?.allCountBlog}</h4>
                            </div>
                            {/* end info-content */}
@@ -125,7 +125,7 @@ const DashBoard = (props) => {
                         <Link
                            to={PATH.ADMIN_BLOG}
                            className='d-flex align-items-center justify-content-between view-all'>
-                           View All <i className='la la-angle-right' />
+                           Xem thêm <i className='la la-angle-right' />
                         </Link>
                      </div>
                   </div>

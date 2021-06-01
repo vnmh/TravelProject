@@ -68,20 +68,6 @@ function ImpTourList(props) {
                      />
                   </div>
                </div>
-               <div className='row'>
-                  <div className='col-lg-12'>
-                     <div className='btn-box mt-3 text-center'>
-                        <button type='button' className='theme-btn'>
-                           <i className='la la-refresh mr-1' />
-                           Load More
-                        </button>
-                        <p className='font-size-13 pt-2'>
-                           Showing {pagination.page} to {Math.ceil(pagination.total / pagination.size)} of{" "}
-                           {pagination.total} entries
-                        </p>
-                     </div>
-                  </div>
-               </div>
             </div>
          </section>
          <InfoTour />

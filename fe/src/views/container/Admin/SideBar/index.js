@@ -26,7 +26,7 @@ const SideBar = (props) => {
                <div className='author-content'>
                   <div className='d-flex justify-content-center align-items-center'>
                      <div className='author-bio'>
-                        <h4 className='text-shadow'>Trang Quản lý</h4>
+                        <h4 className='text-shadow'>Trang quản lý</h4>
                      </div>
                   </div>
                </div>

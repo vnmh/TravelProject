@@ -25,7 +25,6 @@ const CardItemGridBlog = (props) => {
             props
                .getAllImagesPost()
                .then((resImg) => {
-                  // setImages(res);
                   const postWithImage = res.map((post) => {
                      return {
                         ...post,
@@ -35,15 +34,17 @@ const CardItemGridBlog = (props) => {
                      };
                   });
                   setPosts(postWithImage);
+                  props.setBlogCount(postWithImage.length);
                })
                .catch((err) => {
                   console.log("hiendev ~ file: CardItemHomePage.js ~ line 27 ~ useEffect ~ err", err);
                });
          })
          .catch((err) => {
-            console.log("🚀 ~ file: BlogHomePage.js ~ line 40 ~ useEffect ~ err", err);
+            console.log("hiendev ~ file: CardItemBlog.js ~ line 44 ~ useEffect ~ err", err);
          });
    }, []);
+   
    return (
       <CardItemGridBlogStyled>
          <div className='row'>
@@ -80,7 +81,11 @@ const CardItemGridBlog = (props) => {
                                  </Link>
                               </Tooltip>
                            </h3>
-                           <p className='card-meta'>{item.describe}</p>
+                           <p className='card-meta'>
+                              <Typography.Paragraph className='text-link' ellipsis={{ rows: 2 }}>
+                                 {item.describe}
+                              </Typography.Paragraph>
+                           </p>
                            <div className='card-rating'>
                               <span className='badge text-white'>4.4/5</span>{" "}
                               <span className='rating__text'>30 Reviews</span>
