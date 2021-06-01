@@ -38,7 +38,6 @@ function ImpTourList(props) {
                      </div>
                   </div>
                </div>
-
                <div className='row'>
                   <div className='col-lg-4'>
                      <div className='sidebar mt-0'>

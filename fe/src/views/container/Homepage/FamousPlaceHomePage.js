@@ -12,7 +12,7 @@ const FamousPlaceHomePageStyled = styled.div``;
 const FamousPlaceHomePage = (props) => {
    return (
       <FamousPlaceHomePageStyled>
-         <div className='row padding-top-50px' data-aos='fade-up'>
+         <div className='row padding-top-50px' data-aos="zoom-in">
             {FAMOUS_PROVINCES.map((province) => {
                return (
                   <div className='col-lg-3 responsive-column'>

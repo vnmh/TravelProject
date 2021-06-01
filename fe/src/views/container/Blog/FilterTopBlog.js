@@ -15,7 +15,6 @@ function FilterTopBlog(props) {
             <div>
                <h3 className='title font-size-24'>{props.blogCount} bài viết được tìm thấy</h3>
             </div>
-         
          </div>
       </FilterTopBlogStyled>
    );

@@ -158,8 +158,8 @@ function ImpTourDetail(props) {
                               <div className='single-content-item padding-top-40px padding-bottom-40px'>
                                  <DescriptionTourDetail tourDetail={props.tourDetail} />
                               </div>
-                              <div className='section-block' />
                            </div>
+
                            <ItineraryTourDetail tourDetail={props.tourDetail} />
                            <ScheduleTourDetail tourDetail={props.tourDetail} />
                            <LocationTourDetail />

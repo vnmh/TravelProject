@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import { connect } from "react-redux";
@@ -124,7 +124,6 @@ const ImpHomePage = (props) => {
                   </div>
                </div>
             </section>
-
             <section className='blog-area section--padding'>
                <div class='container'>
                   <div className='row' data-aos='fade-up'>
