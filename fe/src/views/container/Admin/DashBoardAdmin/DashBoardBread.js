@@ -51,7 +51,7 @@ const DashBoard = (props) => {
                            </div>
                            {/* end info-content */}
                            <div className='info-icon icon-element bg-4'>
-                              <i className='la la-shopping-cart' />
+                              <i className='la la-list' />
                            </div>
                            {/* end info-icon*/}
                         </div>
@@ -73,7 +73,7 @@ const DashBoard = (props) => {
                            </div>
                            {/* end info-content */}
                            <div className='info-icon icon-element bg-3'>
-                              <i className='la la-star' />
+                              <i className='la la-shopping-cart' />
                            </div>
                            {/* end info-icon*/}
                         </div>
@@ -95,7 +95,7 @@ const DashBoard = (props) => {
                            </div>
                            {/* end info-content */}
                            <div className='info-icon icon-element bg-2'>
-                              <i className='la la-envelope' />
+                              <i className='la la-plane' />
                            </div>
                            {/* end info-icon*/}
                         </div>
@@ -117,7 +117,7 @@ const DashBoard = (props) => {
                            </div>
                            {/* end info-content */}
                            <div className='info-icon icon-element bg-1'>
-                              <i className='la la-bookmark-o' />
+                              <i className='la la-text-width' />
                            </div>
                            {/* end info-icon*/}
                         </div>

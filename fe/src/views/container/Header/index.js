@@ -71,7 +71,7 @@ const HeaderTop = (props) => {
                               <div className='main-menu-content pr-0 ml-0'>
                                  <nav>
                                     <ul>
-                                    <li>
+                                       <li>
                                           <Link to='/homepage'>Trang chủ</Link>
                                        </li>
                                        <li>
@@ -80,10 +80,10 @@ const HeaderTop = (props) => {
                                           </Link>
                                           <ul className='dropdown-menu-item'>
                                              <li>
-                                                <Link to='/tour-grid'>Lưới tour</Link>
+                                                <Link to='/tour-grid'>Dạng lưới</Link>
                                              </li>
                                              <li>
-                                                <Link to='/tour-list'>Danh sách tour</Link>
+                                                <Link to='/tour-list'>Dạng danh sách</Link>
                                              </li>
                                           </ul>
                                        </li>
@@ -91,13 +91,14 @@ const HeaderTop = (props) => {
                                           <Link to='/blog-grid'>Cẩm nang du lịch</Link>
                                        </li>
                                        <li>
-                                          <a data-scroll='location' href='#location' className='scroll-link'>Địa điểm yêu thích</a>
+                                          <a data-scroll='location' href='#location' className='scroll-link'>
+                                             Địa điểm yêu thích
+                                          </a>
                                        </li>
                                        <li>
                                           <Link to='/'>Liên hệ</Link>
                                        </li>
-                                       <li>
-                                       </li>
+                                       <li></li>
                                     </ul>
                                  </nav>
                               </div>

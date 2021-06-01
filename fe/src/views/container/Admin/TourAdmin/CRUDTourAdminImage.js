@@ -47,7 +47,7 @@ const CRUDTourAdminImage = (props) => {
    const beforeUpload = (file) => {
       const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
       if (!isJpgOrPng) {
-         message.error("You can only upload JPG/PNG file!");
+         message.error("Chỉ có thể thêm file JPG/PNG!");
       }
       return isJpgOrPng;
    };
@@ -56,12 +56,11 @@ const CRUDTourAdminImage = (props) => {
       props
          .deleteImage(file.idImage ? file.idImage : file.response?.insertId)
          .then((res) => {
-            console.log(`ithoangtan -  ~ file: CRUDTourAdminImage.js ~ line 68 ~ .deleteImage ~ res`, res);
             message.success("Thành công!");
          })
          .catch((err) => {
             message.error("Thất bại!");
-            console.log(`ithoangtan -  ~ file: CRUDTourAdminImage.js ~ line 69 ~ onRemove ~ err`, err);
+            console.log("hiendev ~ file: CRUDTourAdminImage.js ~ line 62 ~ onRemove ~ err", err);
          });
       // xóa phần tử image và gọi API xóa image khỏi tour
    };
@@ -77,7 +76,7 @@ const CRUDTourAdminImage = (props) => {
       const key = "updatable";
       return (
          message.loading({
-            content: `${file.name} is uploading.....`,
+            content: `${file.name} đang tải lên...`,
             key,
             duration: 1
          }),
@@ -122,7 +121,6 @@ export default compose(
       (state) => ({
          user: state["authUser"].user,
          isAuthenticated: state["authUser"].isAuthenticated
-         // có thể check user?.role === ROLE.administrator && isAuthenticated => CRUDTourAdminImage admin , không thì redirect tới homepage
       }),
       {
          // postLogin: appApisActions.postLogin
