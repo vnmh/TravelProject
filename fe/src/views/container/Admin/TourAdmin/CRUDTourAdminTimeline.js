@@ -185,16 +185,6 @@ const EditableTable = (props) => {
          editable: true
       },
       {
-         title: "Hình ảnh",
-         dataIndex: "image",
-         width: "15%",
-         inputType: "upload",
-         editable: true,
-         render: (row, record) => {
-            return <Image src={firstImage(row || "")} />;
-         }
-      },
-      {
          title: "Mô tả",
          dataIndex: "description",
          width: "40%",
