@@ -11,7 +11,7 @@ const FilterTopTourStyled = styled.div``;
 function FilterTopTour(props) {
    return (
       <FilterTopTourStyled>
-         <div className='filter-top d-flex align-items-center justify-content-between pb-4'>
+         <div className='filter-top d-flex align-items-center justify-content-between pb-3'>
             <div>
                <h3 className='title font-size-24'>Hiện có: {props.tourCount} Tours</h3>
                <p className='font-size-14 line-height-20 pt-1'>Tour chọn lọc chất lượng nhất!</p>
