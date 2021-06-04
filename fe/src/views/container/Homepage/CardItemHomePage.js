@@ -103,15 +103,15 @@ const CardItemHomePage = (props) => {
                               </Tooltip>
                            </h3>
                            <div className='card-rating'>
-                              <span className='badge text-white'>4.4/5</span>
-                              <span className='rating__text'>30 Reviews</span>
+                              <span className='badge text-white'>4.4/5</span>{" "}
+                              <span className='rating__text'>30 đánh giá</span>
                            </div>
                            <div className='card-price d-flex align-items-center justify-content-between'>
                               <span>
-                                 <i className='la la-clock mr-1' />5 Days
+                                 <i className='la la-clock mr-1' />{item.vocationTime} ngày
                               </span>
                               <p>
-                                 <span className='price__from'>from </span>
+                                 <span className='price__from'>Chỉ từ </span>
                                  <span className='price__num'>{currencyFormat(item.price)}</span>
                               </p>
                            </div>

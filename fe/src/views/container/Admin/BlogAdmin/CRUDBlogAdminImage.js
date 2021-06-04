@@ -49,7 +49,7 @@ const CRUDBlogAdminImage = (props) => {
    const beforeUpload = (file) => {
       const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
       if (!isJpgOrPng) {
-         message.error("You can only upload JPG/PNG file!");
+         message.error("Bạn chỉ có thể thêm file JPG/PNG!");
       }
       return isJpgOrPng;
    };
@@ -58,12 +58,11 @@ const CRUDBlogAdminImage = (props) => {
       props
          .deleteImage(file.idImage ? file.idImage : file.response?.insertId)
          .then((res) => {
-            console.log(`ithoangtan -  ~ file: CRUDBlogAdminImage.js ~ line 68 ~ .deleteImage ~ res`, res);
             message.success("Thành công!");
          })
          .catch((err) => {
             message.error("Thất bại!");
-            console.log(`ithoangtan -  ~ file: CRUDBlogAdminImage.js ~ line 69 ~ onRemove ~ err`, err);
+            console.log("hiendev ~ file: CRUDBlogAdminImage.js ~ line 64 ~ onRemove ~ err", err);
          });
       // xóa phần tử image và gọi API xóa image khỏi tour
    };
@@ -79,7 +78,7 @@ const CRUDBlogAdminImage = (props) => {
       const key = "updatable";
       return (
          message.loading({
-            content: `${file.name} is uploading.....`,
+            content: `${file.name} đang tải lên...`,
             key,
             duration: 1
          }),
@@ -89,7 +88,7 @@ const CRUDBlogAdminImage = (props) => {
 
    return (
       <CRUDBlogAdminImageStyled>
-           <div className='d-flex justify-content-end w-100'>
+         <div className='d-flex justify-content-end w-100'>
             <Button
                onClick={() => {
                   props.setCurrentEdit(undefined);
@@ -124,14 +123,8 @@ export default compose(
       (state) => ({
          user: state["authUser"].user,
          isAuthenticated: state["authUser"].isAuthenticated
-         // có thể check user?.role === ROLE.administrator && isAuthenticated => CRUDBlogAdminImage admin , không thì redirect tới homepage
       }),
       {
-         // postLogin: appApisActions.postLogin
-         // getTours: appApisActions.getTours,
-         // getAllImagesTour: appApisActions.getAllImagesTour,
-         // postTour: appApisActions.postTour,
-         // putTour: appApisActions.putTour,
          deleteImage: appApisActions.deleteImage
       }
    ),
