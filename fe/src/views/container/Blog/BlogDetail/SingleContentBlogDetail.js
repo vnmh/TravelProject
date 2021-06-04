@@ -10,7 +10,7 @@ const SingleContentBlogDetailStyled = styled.div``;
 function SingleContentBlogDetail(props) {
    return (
       <SingleContentBlogDetailStyled>
-         <div className='single-content-item pb-4'>
+         <div className='single-content-item'>
             <h3 className='title font-size-35'>{props.blogDetail?.titlePost}</h3>
             <div className='d-flex flex-wrap align-items-center pt-2'>
                <p>

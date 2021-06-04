@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import { Form, Select } from "antd";
+import { Select } from "antd";
 import { PROVINCES } from "~/configs/VNprovinces";
 
 const { Option } = Select;
@@ -41,8 +41,6 @@ function FilterOptionBlog(props) {
                   </Select>
                </div>
             </div>
-
-            {/* end filter-bar-filter */}
 
             <div className=''>
                <Select defaultValue='Mặc định' style={{ width: 150 }} onChange={handleChange}>

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
-import { message } from "antd";
 import "pure-react-carousel/dist/react-carousel.es.css";
 
 const TopBarTourStyled = styled.div``;

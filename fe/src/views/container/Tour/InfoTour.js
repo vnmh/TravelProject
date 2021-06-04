@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
-import { message } from "antd";
 import "pure-react-carousel/dist/react-carousel.es.css";
 
 const InfoTourStyled = styled.div``;
@@ -20,7 +19,7 @@ function InfoTour(props) {
                            <i className='la la-phone' />
                         </div>
                         <div className='info-content'>
-                           <h4 className='info__title'>Need Help? Contact us</h4>
+                           <h4 className='info__title'>Cần giúp đỡ? Liên hệ chúng tôi</h4>
                            <p className='info__desc'>Lorem ipsum dolor sit amet, consectetur adipisicing</p>
                         </div>
                      </a>
@@ -31,7 +30,7 @@ function InfoTour(props) {
                            <i className='la la-money' />
                         </div>
                         <div className='info-content'>
-                           <h4 className='info__title'>Payments</h4>
+                           <h4 className='info__title'>Thanh toán</h4>
                            <p className='info__desc'>Lorem ipsum dolor sit amet, consectetur adipisicing</p>
                         </div>
                      </a>
@@ -42,7 +41,7 @@ function InfoTour(props) {
                            <i className='la la-times' />
                         </div>
                         <div className='info-content'>
-                           <h4 className='info__title'>Cancel Policy</h4>
+                           <h4 className='info__title'>Chính sách hủy</h4>
                            <p className='info__desc'>Lorem ipsum dolor sit amet, consectetur adipisicing</p>
                         </div>
                      </a>

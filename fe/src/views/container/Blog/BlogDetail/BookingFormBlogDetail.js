@@ -21,7 +21,6 @@ function BookingFormBlogDetail(props) {
                   </p>
                </div>
             </div>
-            {/* end sidebar-widget-item */}
             <div className='sidebar-widget-item'>
                <div className='contact-form-action'>
                   <form action='#'>
@@ -35,7 +34,6 @@ function BookingFormBlogDetail(props) {
                   </form>
                </div>
             </div>
-            {/* end sidebar-widget-item */}
             <div className='sidebar-widget-item'>
                <div className='qty-box mb-2 d-flex align-items-center justify-content-between'>
                   <label className='font-size-16'>
@@ -51,7 +49,6 @@ function BookingFormBlogDetail(props) {
                      </div>
                   </div>
                </div>
-               {/* end qty-box */}
                <div className='qty-box mb-2 d-flex align-items-center justify-content-between'>
                   <label className='font-size-16'>
                      Children <span>2-12 years old</span>
@@ -66,7 +63,6 @@ function BookingFormBlogDetail(props) {
                      </div>
                   </div>
                </div>
-               {/* end qty-box */}
                <div className='qty-box mb-2 d-flex align-items-center justify-content-between'>
                   <label className='font-size-16'>
                      Infants <span>0-2 years old</span>
@@ -81,9 +77,7 @@ function BookingFormBlogDetail(props) {
                      </div>
                   </div>
                </div>
-               {/* end qty-box */}
             </div>
-            {/* end sidebar-widget-item */}
             <div className='btn-box pt-2'>
                <Link to='/tour-booking' className='theme-btn text-center w-100 mb-2'>
                   <i className='la la-shopping-cart mr-2 font-size-18' />

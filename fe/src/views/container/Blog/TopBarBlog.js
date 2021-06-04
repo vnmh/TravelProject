@@ -29,7 +29,6 @@ function TopBarBlog(props) {
                               <li>
                                  <Link to='/homepage'>Trang Chủ</Link>
                               </li>
-                              <li>Blog</li>
                               <li>Danh sách bài viết</li>
                            </ul>
                         </div>
