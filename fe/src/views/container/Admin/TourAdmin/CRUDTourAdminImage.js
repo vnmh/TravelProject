@@ -47,7 +47,7 @@ const CRUDTourAdminImage = (props) => {
    const beforeUpload = (file) => {
       const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
       if (!isJpgOrPng) {
-         message.error("Chỉ có thể thêm file JPG/PNG!");
+         message.error("Bạn chỉ có thể thêm file JPG/PNG!");
       }
       return isJpgOrPng;
    };
