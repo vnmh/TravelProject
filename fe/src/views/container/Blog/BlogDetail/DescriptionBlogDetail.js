@@ -11,7 +11,6 @@ const DescriptionBlogDetail = (props) => {
    return (
       <DescriptionBlogDetailStyled>
          <div>
-            <h3 className='title font-size-25' name='titlePost'>Mô tả ngắn</h3>
             <p className='py-3'>{props.blogDetail?.describe}</p>
          </div>
       </DescriptionBlogDetailStyled>

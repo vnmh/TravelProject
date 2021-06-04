@@ -22,25 +22,6 @@ function ImpBlogDetail(props) {
                   <div className='row'>
                      <div className='col-lg-12'>
                         <div className='breadcrumb-btn'>
-                           <div className='btn-box'>
-                              <a
-                                 className='theme-btn text-dark'
-                                 data-fancybox='video'
-                                 data-src='https://www.youtube.com/watch?v=0GZSfBuhf6Y'
-                                 data-speed={700}>
-                                 <i className='la la-video-camera mr-2' />
-                                 Video
-                              </a>
-                              <a
-                                 className='theme-btn text-dark'
-                                 data-src='images/destination-img.jpg'
-                                 data-fancybox='gallery'
-                                 data-caption='Showing image - 01'
-                                 data-speed={700}>
-                                 <i className='la la-photo mr-2' />
-                                 More Photos
-                              </a>
-                           </div>
                            <a
                               className='d-none'
                               data-fancybox='gallery'
@@ -76,11 +57,11 @@ function ImpBlogDetail(props) {
                         <div className='single-content-wrap padding-top-60px'>
                            <div id='description' className='page-scroll'>
                               <SingleContentBlogDetail blogDetail={props.blogDetail} />
-                              <div className='single-content-item padding-top-20px padding-bottom-20px'>
+                              <div className='single-content-item'>
                                  <DescriptionBlogDetail blogDetail={props.blogDetail} />
                               </div>
                            </div>
-                           <div className='single-content-item padding-top-20px padding-bottom-20px'>
+                           <div className='single-content-item'>
                               <DetailedDescription blogDetail={props.blogDetail} />
                            </div>
                            <EvaluateBlogDetail />

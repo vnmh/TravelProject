@@ -11,7 +11,6 @@ const DetailedDescriptionStyled = styled.div``;
 function DetailedDescription(props) {
    return (
       <DetailedDescriptionStyled>
-         <h1 className='title font-size-25 mb-4'>Mô tả chi tiết</h1>
          <div className='ck-content'>{parseHtml(props.blogDetail?.contentPost || "")}</div>
       </DetailedDescriptionStyled>
    );
