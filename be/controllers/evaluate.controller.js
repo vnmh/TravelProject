@@ -2,6 +2,18 @@ const { check, validationResult } = require("express-validator");
 
 const Evaluate = require("../models/evaluate.model");
 
+exports.listAll = async (req, res, next) => {
+  try {
+    listEvaluate = await Evaluate.getAllEvaluate();
+    res.status(200).json(listEvaluate);
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    res.status(500).json(err);
+  }
+};
+
 exports.read = async (req, res, next) => {
   try {
     const { idEvaluate } = req.query;
