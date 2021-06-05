@@ -11,21 +11,24 @@ import ReviewAdmin from "./ReviewAdmin";
 import TopBar from "../TopBar";
 import SideBar from "../SideBar";
 import ScrollToTop from "~/ScrollToTop";
+import HOCAdmin from "~/HOCAdmin";
 
 const ReviewAdminPageStyled = styled.div``;
 
 const ReviewAdminPage = () => {
    return (
       <ScrollToTop>
-         <ReviewAdminPageStyled>
-            <body className='section-bg'>
-               <section class='dashboard-area'>
-                  <SideBar />
-                  <TopBar />
-                  <ReviewAdmin />
-               </section>
-            </body>
-         </ReviewAdminPageStyled>
+         <HOCAdmin>
+            <ReviewAdminPageStyled>
+               <body className='section-bg'>
+                  <section class='dashboard-area'>
+                     <SideBar />
+                     <TopBar />
+                     <ReviewAdmin />
+                  </section>
+               </body>
+            </ReviewAdminPageStyled>
+         </HOCAdmin>
       </ScrollToTop>
    );
 };

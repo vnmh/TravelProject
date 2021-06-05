@@ -6,15 +6,9 @@ import Homepage from "~/views/container/Homepage";
 import TourDetail from "~/views/container/Tour/TourDetail";
 import TourList from "~/views/container/Tour/TourList";
 import TourGrid from "~/views/container/Tour/TourGrid";
-import DashBoard from "~/views/container/Admin/DashBoardAdmin";
-import BookingAdminPage from "~/views/container/Admin/BookingAdmin";
-import TourAdminPage from "~/views/container/Admin/TourAdmin";
-import ReviewAdminPage from "~/views/container/Admin/ReviewAdmin";
-import ProfilePage from "~/views/container/Profile";
-import BlogAdminPage from "~/views/container/Admin/BlogAdmin";
+
 import BlogGrid from "~/views/container/Blog/BlogGrid";
 import BlogDetail from "~/views/container/Blog/BlogDetail";
-import ServiceAdminPage from "~/views/container/Admin/ServiceAdmin";
 import ForgetPassword from "~/views/container/Homepage/ForgetPassword";
 import PaymentMethod from "~/views/container/Payment/PaymentMethod";
 import OrderDetail from "~/views/container/Payment/OrderDetail";
@@ -33,19 +27,19 @@ const AppRouter = (props) => {
             <Route path={PATH.ORDER_DETAIL} exact component={() => <OrderDetail />} />
             <Route path={PATH.BLOG_GRID} exact component={() => <BlogGrid />} />
             <Route path={PATH.BLOG_DETAIL} exact component={() => <BlogDetail />} />
-
+            <Route path={PATH.FORGET_PASSWORD} exact component={() => <ForgetPassword />} />
+            <Route path={PATH.USER_BOOKING} exact component={() => <BookingUser />} />
             {/* Trang nào (Routing) CẦN phải đăng nhập mới vào được thì dùng AuthorizedRoute */}
             <AuthorizedRoute path={PATH.TOUR_BOOKING} />
 
-            <Route path={PATH.ADMIN_DASHBOARD} exact component={() => <DashBoard />} />
-            <Route path={PATH.ADMIN_BOOKING} exact component={() => <BookingAdminPage />} />
-            <Route path={PATH.ADMIN_TOUR_LIST} exact component={() => <TourAdminPage />} />
-            <Route path={PATH.ADMIN_REVIEW} exact component={() => <ReviewAdminPage />} />
-            <Route path={PATH.PROFILE} exact component={() => <ProfilePage />} />
-            <Route path={PATH.ADMIN_BLOG} exact component={() => <BlogAdminPage />} />
-            <Route path={PATH.ADMIN_SERVICE} exact component={() => <ServiceAdminPage />} />
-            <Route path={PATH.FORGET_PASSWORD} exact component={() => <ForgetPassword />} />
-            <Route path={PATH.USER_BOOKING} exact component={() => <BookingUser />} />
+            <AuthorizedRoute path={PATH.ADMIN_DASHBOARD} exact />
+            <AuthorizedRoute path={PATH.ADMIN_BOOKING} exact />
+            <AuthorizedRoute path={PATH.ADMIN_TOUR_LIST} exact />
+            <AuthorizedRoute path={PATH.ADMIN_REVIEW} exact />
+            <AuthorizedRoute path={PATH.PROFILE} exact />
+            <AuthorizedRoute path={PATH.ADMIN_BLOG} exact />
+            <AuthorizedRoute path={PATH.ADMIN_SERVICE} exact />
+
             <Redirect to={PATH.HOME_PAGE} />
          </Switch>
       </Router>

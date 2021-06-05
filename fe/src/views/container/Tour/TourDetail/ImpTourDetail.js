@@ -37,8 +37,8 @@ function ImpTourDetail(props) {
    const [isModalVisible, setIsModalVisible] = useState(false);
    const [isModalVisibleImage, setIsModalVisibleImage] = useState(false);
    const params = useParams();
-   console.log("hiendev ~ file: ImpTourDetail.js ~ line 41 ~ ImpTourDetail ~ params", params)
-   
+   console.log("hiendev ~ file: ImpTourDetail.js ~ line 41 ~ ImpTourDetail ~ params", params);
+
    useEffect(() => {
       props
          .getTours()

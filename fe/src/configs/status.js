@@ -67,3 +67,45 @@ export const renderStatusOrder = (status, type) => {
             break;
       }
 };
+
+export const REVIEW_STATUS = {
+   New: "New",
+   Approve: "Approve",
+   Cancel: "Cancel"
+};
+export const renderStatusReview = (status, type) => {
+   if (type === "String") {
+      switch (status) {
+         case REVIEW_STATUS.New:
+            return "Chờ duyệt";
+         case REVIEW_STATUS.Approve:
+            return "Đã duyệt";
+         case REVIEW_STATUS.Cancel:
+            return "Đã hủy";
+         default:
+            break;
+      }
+   } else
+      switch (status) {
+         case REVIEW_STATUS.New:
+            return (
+               <span style={{ color: "#ffffff", background: "#69c0ff", borderRadius: "10px", textAlign: "center" }}>
+                  Chờ duyệt
+               </span>
+            );
+         case REVIEW_STATUS.Approve:
+            return (
+               <span style={{ color: "#ffffff", background: "#95de64", borderRadius: "10px", textAlign: "center" }}>
+                  Đã duyệt
+               </span>
+            );
+         case REVIEW_STATUS.Cancel:
+            return (
+               <span style={{ color: "#ffffff", background: "#bfbfbf", borderRadius: "10px", textAlign: "center" }}>
+                  Đã hủy
+               </span>
+            );
+         default:
+            break;
+      }
+};

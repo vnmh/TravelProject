@@ -33,13 +33,13 @@ function PaymentMethod(props) {
                sale: props.payment?.sale
             }
          };
-         props
-            .getLinkMoMo(body)
-            .then(({ res }) => {
-               setLinkMomo(res);
-            })
+         // props
+         //    .getLinkMoMo(body)
+         //    .then(({ res }) => {
+         //       setLinkMomo(res);
+         //    })
 
-            .catch((err) => {});
+         //    .catch((err) => {});
       }
    }, [props.payment?.price]);
 

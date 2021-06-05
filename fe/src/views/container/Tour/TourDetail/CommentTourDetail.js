@@ -4,10 +4,61 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import { message, Rate, Button } from "antd";
+import { useParams } from "react-router";
 
 const CommentTourDetailStyled = styled.div``;
 
 function CommentTourDetail(props) {
+   const params = useParams();
+   const [email, setEmail] = useState("");
+   const [title, setName] = useState("");
+   const [contentEvaluate, setContentEvaluate] = useState("");
+   const [numberStarService, setServiceRate] = useState(5);
+   const [numberStarLocation, setLocationRate] = useState(5);
+   const [numberStarMoney, setMoneyRate] = useState(5);
+   const [numberStarCleanliness, setCleanlinessRate] = useState(5);
+   const [numberStarFacilities, setFacilitiesRate] = useState(5);
+   const [loading, setLoading] = useState(false);
+   const submitReview = () => {
+      const body = {
+         email,
+         title,
+         contentEvaluate,
+         numberStarService,
+         numberStarLocation,
+         numberStarMoney,
+         numberStarCleanliness,
+         numberStarFacilities,
+         idTour: params.id
+      };
+      const verifyArray = _.compact(Object.keys(body).map((o) => body[o]));
+
+      if (verifyArray.length !== Object.keys(body).length) {
+         message.error("Vui lòng điền đầy đủ thông tin review");
+         return;
+      }
+      setLoading(true);
+      props
+         .createEvaluate(body)
+         .then(({ res }) => {
+            setLoading(false);
+            setEmail("");
+            setName("");
+            setContentEvaluate("");
+            setServiceRate(5);
+            setLocationRate(5);
+            setMoneyRate(5);
+            setCleanlinessRate(5);
+            setFacilitiesRate(5);
+            message.success("Cảm ơn bạn đã đánh giá tour, chúng tôi sẽ xử lý đánh giá trước khi hiển thị lên");
+         })
+         .catch((err) => {
+            setLoading(false);
+            console.log("hiendev ~ file: CardItemListTour.js ~ line 24 ~ useEffect ~ err", err);
+         });
+   };
+
    return (
       <CommentTourDetailStyled>
          <div className='comment-forum padding-top-40px'>
@@ -23,16 +74,12 @@ function CommentTourDetail(props) {
                            <div className='rate-option-item'>
                               <label>Service</label>
                               <div className='rate-stars-option'>
-                                 <input type='checkbox' id='lst1' defaultValue={1} />
-                                 <label htmlFor='lst1' />
-                                 <input type='checkbox' id='lst2' defaultValue={2} />
-                                 <label htmlFor='lst2' />
-                                 <input type='checkbox' id='lst3' defaultValue={3} />
-                                 <label htmlFor='lst3' />
-                                 <input type='checkbox' id='lst4' defaultValue={4} />
-                                 <label htmlFor='lst4' />
-                                 <input type='checkbox' id='lst5' defaultValue={5} />
-                                 <label htmlFor='lst5' />
+                                 <Rate
+                                    allowHalf
+                                    value={numberStarService}
+                                    onChange={(value) => {
+                                       setServiceRate(value);
+                                    }}></Rate>
                               </div>
                            </div>
                         </div>
@@ -41,16 +88,12 @@ function CommentTourDetail(props) {
                            <div className='rate-option-item'>
                               <label>Location</label>
                               <div className='rate-stars-option'>
-                                 <input type='checkbox' id='l1' defaultValue={1} />
-                                 <label htmlFor='l1' />
-                                 <input type='checkbox' id='l2' defaultValue={2} />
-                                 <label htmlFor='l2' />
-                                 <input type='checkbox' id='l3' defaultValue={3} />
-                                 <label htmlFor='l3' />
-                                 <input type='checkbox' id='l4' defaultValue={4} />
-                                 <label htmlFor='l4' />
-                                 <input type='checkbox' id='l5' defaultValue={5} />
-                                 <label htmlFor='l5' />
+                                 <Rate
+                                    allowHalf
+                                    value={numberStarLocation}
+                                    onChange={(value) => {
+                                       setLocationRate(value);
+                                    }}></Rate>
                               </div>
                            </div>
                         </div>
@@ -59,16 +102,12 @@ function CommentTourDetail(props) {
                            <div className='rate-option-item'>
                               <label>Value for Money</label>
                               <div className='rate-stars-option'>
-                                 <input type='checkbox' id='vm1' defaultValue={1} />
-                                 <label htmlFor='vm1' />
-                                 <input type='checkbox' id='vm2' defaultValue={2} />
-                                 <label htmlFor='vm2' />
-                                 <input type='checkbox' id='vm3' defaultValue={3} />
-                                 <label htmlFor='vm3' />
-                                 <input type='checkbox' id='vm4' defaultValue={4} />
-                                 <label htmlFor='vm4' />
-                                 <input type='checkbox' id='vm5' defaultValue={5} />
-                                 <label htmlFor='vm5' />
+                                 <Rate
+                                    allowHalf
+                                    value={numberStarMoney}
+                                    onChange={(value) => {
+                                       setMoneyRate(value);
+                                    }}></Rate>
                               </div>
                            </div>
                         </div>
@@ -77,16 +116,12 @@ function CommentTourDetail(props) {
                            <div className='rate-option-item'>
                               <label>Cleanliness</label>
                               <div className='rate-stars-option'>
-                                 <input type='checkbox' id='cln1' defaultValue={1} />
-                                 <label htmlFor='cln1' />
-                                 <input type='checkbox' id='cln2' defaultValue={2} />
-                                 <label htmlFor='cln2' />
-                                 <input type='checkbox' id='cln3' defaultValue={3} />
-                                 <label htmlFor='cln3' />
-                                 <input type='checkbox' id='cln4' defaultValue={4} />
-                                 <label htmlFor='cln4' />
-                                 <input type='checkbox' id='cln5' defaultValue={5} />
-                                 <label htmlFor='cln5' />
+                                 <Rate
+                                    allowHalf
+                                    value={numberStarCleanliness}
+                                    onChange={(value) => {
+                                       setCleanlinessRate(value);
+                                    }}></Rate>
                               </div>
                            </div>
                         </div>
@@ -95,16 +130,12 @@ function CommentTourDetail(props) {
                            <div className='rate-option-item'>
                               <label>Facilities</label>
                               <div className='rate-stars-option'>
-                                 <input type='checkbox' id='f1' defaultValue={1} />
-                                 <label htmlFor='f1' />
-                                 <input type='checkbox' id='f2' defaultValue={2} />
-                                 <label htmlFor='f2' />
-                                 <input type='checkbox' id='f3' defaultValue={3} />
-                                 <label htmlFor='f3' />
-                                 <input type='checkbox' id='f4' defaultValue={4} />
-                                 <label htmlFor='f4' />
-                                 <input type='checkbox' id='f5' defaultValue={5} />
-                                 <label htmlFor='f5' />
+                                 <Rate
+                                    allowHalf
+                                    value={numberStarFacilities}
+                                    onChange={(value) => {
+                                       setFacilitiesRate(value);
+                                    }}></Rate>
                               </div>
                            </div>
                         </div>
@@ -118,10 +149,19 @@ function CommentTourDetail(props) {
                         <div className='row'>
                            <div className='col-lg-6 responsive-column'>
                               <div className='input-box'>
-                                 <label className='label-text'>Name</label>
+                                 <label className='label-text'>Title</label>
                                  <div className='form-group'>
                                     <span className='la la-user form-icon' />
-                                    <input className='form-control' type='text' name='text' placeholder='Your name' />
+                                    <input
+                                       className='form-control'
+                                       type='text'
+                                       name='text'
+                                       placeholder='Title review'
+                                       value={title}
+                                       onChange={(e) => {
+                                          setName(e?.target?.value);
+                                       }}
+                                    />
                                  </div>
                               </div>
                            </div>
@@ -135,6 +175,10 @@ function CommentTourDetail(props) {
                                        type='email'
                                        name='email'
                                        placeholder='Email address'
+                                       value={email}
+                                       onChange={(e) => {
+                                          setEmail(e?.target?.value);
+                                       }}
                                     />
                                  </div>
                               </div>
@@ -149,15 +193,19 @@ function CommentTourDetail(props) {
                                        name='message'
                                        placeholder='Write message'
                                        defaultValue={""}
+                                       value={contentEvaluate}
+                                       onChange={(e) => {
+                                          setContentEvaluate(e?.target?.value);
+                                       }}
                                     />
                                  </div>
                               </div>
                            </div>
                            <div className='col-lg-12'>
                               <div className='btn-box'>
-                                 <button type='button' className='theme-btn'>
+                                 <Button type='primary' onClick={submitReview} loading={loading}>
                                     Leave a Review
-                                 </button>
+                                 </Button>
                               </div>
                            </div>
                         </div>
@@ -178,6 +226,6 @@ export default connect(
       user: state["authUser"].user
    }),
    {
-      getTours: appApisActions.getTours
+      createEvaluate: appApisActions.createEvaluate
    }
 )(CommentTourDetail);

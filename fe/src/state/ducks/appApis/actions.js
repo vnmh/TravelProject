@@ -64,3 +64,11 @@ export const getReport = (params) => apiAction("get")(types.COMMON, "/report" + 
 
 export const getReportChart = (params) =>
    apiAction("get")(types.COMMON, "/report-revenue" + parseObjToQuery(params), {}, true);
+
+// EVALUATE
+export const getEvaluates = () => apiAction("get")(types.COMMON, "/evaluates" + parseObjToQuery(), {}, true);
+export const getEvaluateByIdTour = (idTour) =>
+   apiAction("get")(types.COMMON, "/evaluate/bytour" + parseObjToQuery({ idTour }), {}, false);
+// EVALUATE
+export const createEvaluate = (body) => apiAction("post")(types.COMMON, "/evaluate", body, true);
+export const updateEvaluate = (body) => apiAction("put")(types.COMMON, "/evaluate", body, true);

@@ -4,10 +4,31 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import { useParams } from "react-router";
+import { Rate } from "antd";
 
 const EvaluateTourDetailStyled = styled.div``;
 
 function EvaluateTourDetail(props) {
+   const [evaluateReport, setEvaluateReport] = useState({});
+   const params = useParams();
+
+   useEffect(() => {
+      if (params.id)
+         props
+            .getEvaluateByIdTour(params.id)
+            .then(({ res }) => {
+               setEvaluateReport(_.head(res[1] || []));
+            })
+            .catch((err) => {
+               console.log("hiendev ~ file: CardItemListTour.js ~ line 24 ~ useEffect ~ err", err);
+            });
+   }, [params?.id]);
+
+   const calRating = (value) => {
+      return Math.floor(value) + (Math.round(value - Math.floor(value)) ? 0.5 : 0.0);
+   };
+
    return (
       <EvaluateTourDetailStyled data-aos='fade-up'>
          <div id='reviews' className='page-scroll'>
@@ -18,10 +39,17 @@ function EvaluateTourDetail(props) {
                      <div className='col-lg-4'>
                         <div className='review-summary'>
                            <h2>
-                              4.5<span>/5</span>
+                              {calRating(
+                                 (evaluateReport.numberStarCleanliness +
+                                    evaluateReport.numberStarFacilities +
+                                    evaluateReport.numberStarLocation +
+                                    evaluateReport.numberStarMoney +
+                                    evaluateReport.numberStarService) /
+                                    5
+                              )}
+                              <span>/5</span>
                            </h2>
-                           <p>Excellent</p>
-                           <span>Based on 4 reviews</span>
+                           <span>Có {evaluateReport.countAll} reviews</span>
                         </div>
                      </div>
                      {/* end col-lg-4 */}
@@ -33,12 +61,15 @@ function EvaluateTourDetail(props) {
                                     <h3 className='progressbar-title'>Service</h3>
                                     <div className='progressbar-content line-height-20 d-flex align-items-center justify-content-between'>
                                        <div className='progressbar-box flex-shrink-0'>
-                                          <div className='progressbar-line' data-percent='70%'>
-                                             <div className='progressbar-line-item bar-bg-1' />
-                                          </div>{" "}
-                                          {/* End Skill Bar */}
+                                          <Rate
+                                             size='small'
+                                             disabled
+                                             allowHalf
+                                             value={calRating(evaluateReport.numberStarService)}></Rate>
                                        </div>
-                                       <div className='bar-percent'>4.6</div>
+                                       <div className='bar-percent'>
+                                          {calRating(evaluateReport.numberStarService)}
+                                       </div>
                                     </div>
                                  </div>
                                  {/* end progress-item */}
@@ -49,12 +80,15 @@ function EvaluateTourDetail(props) {
                                     <h3 className='progressbar-title'>Location</h3>
                                     <div className='progressbar-content line-height-20 d-flex align-items-center justify-content-between'>
                                        <div className='progressbar-box flex-shrink-0'>
-                                          <div className='progressbar-line' data-percent='55%'>
-                                             <div className='progressbar-line-item bar-bg-2' />
-                                          </div>{" "}
-                                          {/* End Skill Bar */}
+                                          <Rate
+                                             size='small'
+                                             disabled
+                                             allowHalf
+                                             value={calRating(evaluateReport.numberStarLocation)}></Rate>
                                        </div>
-                                       <div className='bar-percent'>4.7</div>
+                                       <div className='bar-percent'>
+                                          {calRating(evaluateReport.numberStarLocation)}
+                                       </div>
                                     </div>
                                  </div>
                                  {/* end progress-item */}
@@ -65,12 +99,15 @@ function EvaluateTourDetail(props) {
                                     <h3 className='progressbar-title'>Value for Money</h3>
                                     <div className='progressbar-content line-height-20 d-flex align-items-center justify-content-between'>
                                        <div className='progressbar-box flex-shrink-0'>
-                                          <div className='progressbar-line' data-percent='40%'>
-                                             <div className='progressbar-line-item bar-bg-3' />
-                                          </div>{" "}
-                                          {/* End Skill Bar */}
+                                          <Rate
+                                             size='small'
+                                             disabled
+                                             allowHalf
+                                             value={calRating(evaluateReport.numberStarMoney)}></Rate>
                                        </div>
-                                       <div className='bar-percent'>2.6</div>
+                                       <div className='bar-percent'>
+                                          {calRating(evaluateReport.numberStarMoney)}
+                                       </div>
                                     </div>
                                  </div>
                                  {/* end progress-item */}
@@ -81,12 +118,15 @@ function EvaluateTourDetail(props) {
                                     <h3 className='progressbar-title'>Cleanliness</h3>
                                     <div className='progressbar-content line-height-20 d-flex align-items-center justify-content-between'>
                                        <div className='progressbar-box flex-shrink-0'>
-                                          <div className='progressbar-line' data-percent='60%'>
-                                             <div className='progressbar-line-item bar-bg-4' />
-                                          </div>{" "}
-                                          {/* End Skill Bar */}
+                                          <Rate
+                                             size='small'
+                                             disabled
+                                             allowHalf
+                                             value={calRating(evaluateReport.numberStarCleanliness)}></Rate>
                                        </div>
-                                       <div className='bar-percent'>3.6</div>
+                                       <div className='bar-percent'>
+                                          {calRating(evaluateReport.numberStarCleanliness)}
+                                       </div>
                                     </div>
                                  </div>
                                  {/* end progress-item */}
@@ -97,12 +137,15 @@ function EvaluateTourDetail(props) {
                                     <h3 className='progressbar-title'>Facilities</h3>
                                     <div className='progressbar-content line-height-20 d-flex align-items-center justify-content-between'>
                                        <div className='progressbar-box flex-shrink-0'>
-                                          <div className='progressbar-line' data-percent='50%'>
-                                             <div className='progressbar-line-item bar-bg-5' />
-                                          </div>{" "}
-                                          {/* End Skill Bar */}
+                                          <Rate
+                                             size='small'
+                                             disabled
+                                             allowHalf
+                                             value={calRating(evaluateReport.numberStarFacilities)}></Rate>
                                        </div>
-                                       <div className='bar-percent'>2.6</div>
+                                       <div className='bar-percent'>
+                                          {calRating(evaluateReport.numberStarFacilities)}
+                                       </div>
                                     </div>
                                  </div>
                                  {/* end progress-item */}
@@ -128,6 +171,6 @@ export default connect(
       user: state["authUser"].user
    }),
    {
-      getTours: appApisActions.getTours
+      getEvaluateByIdTour: appApisActions.getEvaluateByIdTour
    }
 )(EvaluateTourDetail);

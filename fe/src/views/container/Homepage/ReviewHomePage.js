@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
@@ -6,37 +6,68 @@ import { connect } from "react-redux";
 import { authActions } from "~/state/ducks/authUser";
 
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
+import { appApisActions } from "~/state/ducks/appApis";
+import UtilDate from "~/views/utilities/helpers/UtilDate";
+import { Rate } from "antd";
 
 const ReviewHomePageStyled = styled.div``;
 
 const ReviewHomePage = (props) => {
+   const [evaluates, setEvaluates] = useState([]);
+
+   useEffect(() => {
+      props
+         .getEvaluates()
+         .then(({ res }) => {
+            const data = res || [];
+            if (data.length > 4) data.length = 4;
+            setEvaluates(data);
+         })
+         .catch((err) => {
+            console.log("hiendev ~ file: CardItemListTour.js ~ line 24 ~ useEffect ~ err", err);
+         });
+   }, []);
+
+   const calRating = (value) => {
+      return Math.floor(value) + (Math.round(value - Math.floor(value)) ? 0.5 : 0.0);
+   };
    return (
       <ReviewHomePageStyled>
          <div className='col-lg-12'>
             <div className='testimonial-carousel carousel-action'></div>
-            <div className='testimonial-card'>
-               <div className='testi-desc-box'>
-                  <p className='testi__desc'>
-                     Excepteur sint occaecat cupidatat non proident sunt in culpa officia deserunt mollit anim laborum
-                     sint occaecat cupidatat non proident. Occaecat cupidatat non proident des.
-                  </p>
-               </div>
-               <div className='author-content d-flex align-items-center'>
-                  <div className='author-img'>
-                     <img src='images/team8.jpg' alt='testimonial image' />
-                  </div>
-                  <div className='author-bio'>
-                     <h4 className='author__title'>Leroy Bell</h4>
-                     <span className='author__meta'>United States</span>
-                     <span className='ratings d-flex align-items-center'>
-                        <i className='la la-star' />
-                        <i className='la la-star' />
-                        <i className='la la-star' />
-                        <i className='la la-star' />
-                        <i className='la la-star' />
-                     </span>
-                  </div>
-               </div>
+            <div className='row '>
+               {(evaluates || []).map((o) => {
+                  return (
+                     <div className='col-6'>
+                        <div className='testimonial-card mb-4 '>
+                           <div className=''>
+                              <p className='mt-3'>{o.contentEvaluate}</p>
+                           </div>
+                           <div className='author-content d-flex align-items-center'>
+                              <div className='author-bio'>
+                                 <h4 className='author__title'>{o.title}</h4>
+                                 <span className='author__meta'>
+                                    {o.email} ({UtilDate.toDateLocal(o?.dateAdded)})
+                                 </span>
+                                 <span className='ratings d-flex align-items-center mt-1'>
+                                    <Rate
+                                       disabled
+                                       allowHalf
+                                       value={calRating(
+                                          (o.numberStarCleanliness +
+                                             o.numberStarFacilities +
+                                             o.numberStarLocation +
+                                             o.numberStarMoney +
+                                             o.numberStarService) /
+                                             5
+                                       )}></Rate>
+                                 </span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  );
+               })}
             </div>
          </div>
          {/* end testimonial-card */}
@@ -44,14 +75,12 @@ const ReviewHomePage = (props) => {
    );
 };
 
-export default compose(
-   connect(
-      (state) => ({
-         user: state["authUser"].user
-      }),
-      {
-         
-      }
-   ),
-   withRouter //để push(nhảy qua trang khác) là chủ yếu,
+export default connect(
+   (state) => ({
+      user: state["authUser"].user
+   }),
+   {
+      getEvaluates: appApisActions.getEvaluates,
+      updateEvaluate: appApisActions.updateEvaluate
+   }
 )(ReviewHomePage);

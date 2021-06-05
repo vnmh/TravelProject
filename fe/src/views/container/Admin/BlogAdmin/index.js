@@ -12,27 +12,24 @@ import TopBar from "../TopBar";
 import SideBar from "../SideBar";
 import { ROLES } from "~/configs";
 import ScrollToTop from "~/ScrollToTop";
+import HOCAdmin from "~/HOCAdmin";
 
 const BlogAdminPageStyled = styled.div``;
 
 const BlogAdminPage = (props) => {
-   const history = useHistory();
-   useEffect(() => {
-      if (props.user?.role !== ROLES.administrator) {
-         history.push(PATH.APP_DEFAULT_PATH);
-      }
-   }, [props.user?.role]);
    return (
       <ScrollToTop>
-         <BlogAdminPageStyled>
-            <body className='section-bg'>
-               <section class='dashboard-area'>
-                  <SideBar />
-                  <TopBar />
-                  <BlogAdmin />
-               </section>
-            </body>
-         </BlogAdminPageStyled>
+         <HOCAdmin>
+            <BlogAdminPageStyled>
+               <body className='section-bg'>
+                  <section class='dashboard-area'>
+                     <SideBar />
+                     <TopBar />
+                     <BlogAdmin />
+                  </section>
+               </body>
+            </BlogAdminPageStyled>
+         </HOCAdmin>
       </ScrollToTop>
    );
 };
