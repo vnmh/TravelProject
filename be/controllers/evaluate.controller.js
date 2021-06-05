@@ -2,6 +2,18 @@ const { check, validationResult } = require("express-validator");
 
 const Evaluate = require("../models/evaluate.model");
 
+exports.listAll = async (req, res, next) => {
+  try {
+    listEvaluate = await Evaluate.getAllEvaluate();
+    res.status(200).json(listEvaluate);
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    res.status(500).json(err);
+  }
+};
+
 exports.read = async (req, res, next) => {
   try {
     const { idEvaluate } = req.query;
@@ -30,11 +42,11 @@ exports.readByIdTour = async (req, res, next) => {
 
 function calAverageRateEvaluate(evaluate) {
   const rate = (
-    (evaluate.numberStarHotel +
-      evaluate.numberStarFood +
-      evaluate.numberStarVehicle +
-      evaluate.numberStarTourGuide +
-      evaluate.numberStarSchedule) /
+    (evaluate.numberStarService +
+      evaluate.numberStarLocation+
+      evaluate.numberStarMoney +
+      evaluate.numberStarCleanliness +
+      evaluate.numberStarFacilities) /
     5
   ).toFixed(0);
   let rateTitle = "Rất tệ";
@@ -59,12 +71,10 @@ function calAverageRateEvaluate(evaluate) {
 
 exports.create = async (req, res, next) => {
   try {
-    const { idAccount } = req;
     const rateAverage = calAverageRateEvaluate(req.body);
     const newEvaluate = new Evaluate({
       ...req.body,
       ...rateAverage,
-      idAccount,
     });
     resultCreate = await Evaluate.createEvaluate(newEvaluate);
     res.status(200).json(resultCreate);

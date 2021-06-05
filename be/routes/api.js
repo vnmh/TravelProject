@@ -1,4 +1,3 @@
-
 const express = require('express');
 
 // const { check } = require("express-validator");
@@ -119,9 +118,10 @@ router.delete('/order', authenticated, order.delete);
 
 // //for evaluate
 router.get('/evaluate', evaluate.read);
+router.get('/evaluates', evaluate.listAll);
 router.get('/evaluate/bytour', evaluate.readByIdTour);
-router.post('/evaluate', authenticated, evaluate.create);
-router.put('/evaluate', authenticated, evaluate.update);
+router.post('/evaluate', evaluate.create);
+router.put('/evaluate', evaluate.update);
 router.delete('/evaluate', authenticated, evaluate.delete);
 
 // //for post
@@ -135,7 +135,7 @@ router.put('/post/tags', authenticated, post.putTags);
 router.delete('/post', authenticated, post.delete);
 
 // //report
-router.get('/report',  report.getReport);
+router.get('/report', report.getReport);
 // router.get('/report-number-of-tourists', authenticated, report.getReportNumberOfTourists);
 // router.get('/report-number-people-follow-destination', authenticated, report.getReportNumberPeopleFollowDestination);
 router.get('/report-revenue', authenticated, report.spReportFollowMonth);
@@ -170,4 +170,3 @@ router.delete('/service', authenticated, service.delete);
 router.get('/env', config.env);
 router.get('/envs', config.envs);
 module.exports = router;
- 
