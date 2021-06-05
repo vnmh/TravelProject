@@ -29,9 +29,8 @@ const AppRouter = (props) => {
             <Route path={PATH.BLOG_DETAIL} exact component={() => <BlogDetail />} />
             <Route path={PATH.FORGET_PASSWORD} exact component={() => <ForgetPassword />} />
             <Route path={PATH.USER_BOOKING} exact component={() => <BookingUser />} />
-            {/* Trang nào (Routing) CẦN phải đăng nhập mới vào được thì dùng AuthorizedRoute */}
-            <AuthorizedRoute path={PATH.TOUR_BOOKING} />
 
+            {/* Trang nào (Routing) CẦN phải đăng nhập mới vào được thì dùng AuthorizedRoute */}
             <AuthorizedRoute path={PATH.ADMIN_DASHBOARD} exact />
             <AuthorizedRoute path={PATH.ADMIN_BOOKING} exact />
             <AuthorizedRoute path={PATH.ADMIN_TOUR_LIST} exact />
