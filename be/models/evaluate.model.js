@@ -10,6 +10,7 @@ const Evaluate = function (evaluate) {
    this.numberStarCleanliness = evaluate.numberStarCleanliness;
    this.numberStarFacilities = evaluate.numberStarFacilities;
    this.title = evaluate.title;
+   this.status = evaluate.status;
    this.contentEvaluate = evaluate.contentEvaluate;
    this.email = evaluate.email;
    this.idTour = evaluate.idTour;
