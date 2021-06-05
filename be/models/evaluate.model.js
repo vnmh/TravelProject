@@ -11,7 +11,7 @@ const Evaluate = function(evaluate) {
   this.numberStarFacilities = evaluate.numberStarFacilities;
   this.title = evaluate.title;
   this.contentEvaluate = evaluate.contentEvaluate;
-  this.idAccount = evaluate.idAccount;
+  this.email = evaluate.email;
   this.idTour = evaluate.idTour;
   this.rateAverage = evaluate.rateAverage;
   this.rateTitle = evaluate.rateTitle;
@@ -52,7 +52,7 @@ Evaluate.createEvaluate = function(newEvaluate) {
       .query(
         "INSERT INTO " +
           databaseProduction +
-          ".evaluates (`numberStarService`, `numberStarLocation`, `numberStarMoney`, `numberStarCleanliness`, `numberStarFacilities`, `title`, `contentEvaluate`, `idAccount`, `idTour`, `rateAverage`, `rateTitle`, `typeEvaluate`) VALUES ('" +
+          ".evaluates (`numberStarService`, `numberStarLocation`, `numberStarMoney`, `numberStarCleanliness`, `numberStarFacilities`, `title`, `contentEvaluate`, `email`, `idTour`, `rateAverage`, `rateTitle`, `typeEvaluate`) VALUES ('" +
           newEvaluate.numberStarService +
           "', '" +
           newEvaluate.numberStarLocation+
@@ -67,7 +67,7 @@ Evaluate.createEvaluate = function(newEvaluate) {
           "', '" +
           newEvaluate.contentEvaluate +
           "', '" +
-          newEvaluate.idAccount +
+          newEvaluate.email +
           "', '" +
           newEvaluate.idTour +
           "', '" +
