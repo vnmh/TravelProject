@@ -4,10 +4,11 @@ import styled from "styled-components";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
-import { Card, Tooltip, Typography } from "antd";
+import { Tooltip, Typography } from "antd";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
 import { currencyFormat } from "~/views/utilities/helpers/currency";
 import * as PATH from "~/configs/routesConfig";
+import Rating from "../../Homepage/Rating";
 
 const CardItemGridTourStyled = styled.div``;
 
@@ -82,19 +83,15 @@ const CardItemGridTour = (props) => {
                            </Tooltip>
                         </h3>
                         <p className='card-meta'>{item?.address}</p>
-                        <div className='card-rating'>
-                           <span className='badge text-white'>4.4/5</span>
-                           <span className='review__text'>Average</span>
-                           <span className='rating__text'>(30 Reviews)</span>
-                        </div>
+                        <Rating item={item}></Rating>
                         <div className='card-price d-flex align-items-center justify-content-between'>
                            <p>
-                              <span className='price__from'>From</span>
+                              <span className='price__from'>Chỉ từ </span>
                               <span className='price__num'>{currencyFormat(item?.price || 0)}</span>
                            </p>
                            <span className='tour-hour'>
                               <i className='la la-clock-o mr-1' />
-                              {item?.vocationTime} days
+                              {item?.vocationTime} ngày
                            </span>
                         </div>
                      </div>

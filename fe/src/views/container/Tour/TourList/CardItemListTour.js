@@ -11,6 +11,7 @@ import { currencyFormat } from "~/views/utilities/helpers/currency";
 import { TYPE_TOUR } from "~/configs/const";
 import * as PATH from "~/configs/routesConfig";
 import queryString from "query-string";
+import Rating from "../../Homepage/Rating";
 
 const CardItemListTourStyled = styled.div``;
 
@@ -206,11 +207,7 @@ const CardItemListTour = (props) => {
                      </h3>
                      <p className='card-meta'>{item.address}</p>
                      <p className='card-meta'>Loại tour: {TYPE_TOUR[item.type] || ""}</p>
-                     <div className='card-rating'>
-                        <span className='badge text-white'>4.4/5</span>
-                        <span className='review__text'>Average</span>
-                        <span className='rating__text'>(30 Reviews)</span>
-                     </div>
+                     <Rating item={item}></Rating>
                      <div className='card-price d-flex align-items-center justify-content-between'>
                         <p>
                            <span className='price__from'>Chỉ từ </span>

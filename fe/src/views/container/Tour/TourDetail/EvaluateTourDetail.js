@@ -49,16 +49,15 @@ function EvaluateTourDetail(props) {
                               )}
                               <span>/5</span>
                            </h2>
-                           <span>Có {evaluateReport.countAll} reviews</span>
+                           <span>Dựa trên {evaluateReport.countAll} đánh giá</span>
                         </div>
                      </div>
-                     {/* end col-lg-4 */}
                      <div className='col-lg-8'>
                         <div className='review-bars'>
                            <div className='row'>
                               <div className='col-lg-6'>
                                  <div className='progress-item'>
-                                    <h3 className='progressbar-title'>Service</h3>
+                                    <h3 className='progressbar-title'>Dịch vụ</h3>
                                     <div className='progressbar-content line-height-20 d-flex align-items-center justify-content-between'>
                                        <div className='progressbar-box flex-shrink-0'>
                                           <Rate
@@ -72,12 +71,10 @@ function EvaluateTourDetail(props) {
                                        </div>
                                     </div>
                                  </div>
-                                 {/* end progress-item */}
                               </div>
-                              {/* end col-lg-6 */}
                               <div className='col-lg-6'>
                                  <div className='progress-item'>
-                                    <h3 className='progressbar-title'>Location</h3>
+                                    <h3 className='progressbar-title'>Vị trí</h3>
                                     <div className='progressbar-content line-height-20 d-flex align-items-center justify-content-between'>
                                        <div className='progressbar-box flex-shrink-0'>
                                           <Rate
@@ -91,12 +88,10 @@ function EvaluateTourDetail(props) {
                                        </div>
                                     </div>
                                  </div>
-                                 {/* end progress-item */}
                               </div>
-                              {/* end col-lg-6 */}
                               <div className='col-lg-6'>
                                  <div className='progress-item'>
-                                    <h3 className='progressbar-title'>Value for Money</h3>
+                                    <h3 className='progressbar-title'>Giá tiền</h3>
                                     <div className='progressbar-content line-height-20 d-flex align-items-center justify-content-between'>
                                        <div className='progressbar-box flex-shrink-0'>
                                           <Rate
@@ -110,12 +105,10 @@ function EvaluateTourDetail(props) {
                                        </div>
                                     </div>
                                  </div>
-                                 {/* end progress-item */}
                               </div>
-                              {/* end col-lg-6 */}
                               <div className='col-lg-6'>
                                  <div className='progress-item'>
-                                    <h3 className='progressbar-title'>Cleanliness</h3>
+                                    <h3 className='progressbar-title'>Sạch sẽ</h3>
                                     <div className='progressbar-content line-height-20 d-flex align-items-center justify-content-between'>
                                        <div className='progressbar-box flex-shrink-0'>
                                           <Rate
@@ -129,12 +122,10 @@ function EvaluateTourDetail(props) {
                                        </div>
                                     </div>
                                  </div>
-                                 {/* end progress-item */}
                               </div>
-                              {/* end col-lg-6 */}
                               <div className='col-lg-6'>
                                  <div className='progress-item'>
-                                    <h3 className='progressbar-title'>Facilities</h3>
+                                    <h3 className='progressbar-title'>Tiện nghi</h3>
                                     <div className='progressbar-content line-height-20 d-flex align-items-center justify-content-between'>
                                        <div className='progressbar-box flex-shrink-0'>
                                           <Rate
@@ -148,18 +139,13 @@ function EvaluateTourDetail(props) {
                                        </div>
                                     </div>
                                  </div>
-                                 {/* end progress-item */}
                               </div>
-                              {/* end col-lg-6 */}
                            </div>
-                           {/* end row */}
                         </div>
                      </div>
-                     {/* end col-lg-8 */}
                   </div>
                </div>
             </div>
-            {/* end single-content-item */}
             <div className='section-block' />
          </div>
       </EvaluateTourDetailStyled>
