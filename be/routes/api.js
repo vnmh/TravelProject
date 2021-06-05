@@ -118,7 +118,7 @@ router.delete('/order', authenticated, order.delete);
 
 // //for evaluate
 router.get('/evaluate', evaluate.read);
-router.get('/evaluates', authenticated, evaluate.listAll);
+router.get('/evaluates', evaluate.listAll);
 router.get('/evaluate/bytour', evaluate.readByIdTour);
 router.post('/evaluate', evaluate.create);
 router.put('/evaluate', evaluate.update);
