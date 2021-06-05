@@ -14,14 +14,6 @@ import ScrollToTop from "~/ScrollToTop";
 const ProfilePageStyled = styled.div``;
 
 const ProfilePage = (props) => {
-   const [profile, setProfile] = useState({});
-
-   useEffect(() => {
-      props.getProfile(props.user?.idAccount).then(({ res }) => {
-         setProfile(res);
-      });
-   }, []);
-
    return (
       <ScrollToTop>
          <ProfilePageStyled>
@@ -31,7 +23,7 @@ const ProfilePage = (props) => {
                      <Header />
                   </div>
                   <div>
-                     <Profile profile={profile} />
+                     <Profile profile={props.user} />
                   </div>
                </>
             ) : (
@@ -41,7 +33,7 @@ const ProfilePage = (props) => {
                         <TopBar />
                         <SideBar />
                         <ProfileBreadPage />
-                        <Profile profile={profile} />
+                        <Profile profile={props.user} />
                      </section>
                   </body>
                </>
