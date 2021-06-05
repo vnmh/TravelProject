@@ -30,11 +30,11 @@ exports.readByIdTour = async (req, res, next) => {
 
 function calAverageRateEvaluate(evaluate) {
   const rate = (
-    (evaluate.numberStarHotel +
-      evaluate.numberStarFood +
-      evaluate.numberStarVehicle +
-      evaluate.numberStarTourGuide +
-      evaluate.numberStarSchedule) /
+    (evaluate.numberStarService +
+      evaluate.numberStarLocation+
+      evaluate.numberStarMoney +
+      evaluate.numberStarCleanliness +
+      evaluate.numberStarFacilities) /
     5
   ).toFixed(0);
   let rateTitle = "Rất tệ";
@@ -59,12 +59,10 @@ function calAverageRateEvaluate(evaluate) {
 
 exports.create = async (req, res, next) => {
   try {
-    const { idAccount } = req;
     const rateAverage = calAverageRateEvaluate(req.body);
     const newEvaluate = new Evaluate({
       ...req.body,
       ...rateAverage,
-      idAccount,
     });
     resultCreate = await Evaluate.createEvaluate(newEvaluate);
     res.status(200).json(resultCreate);

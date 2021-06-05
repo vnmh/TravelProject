@@ -120,8 +120,8 @@ router.delete('/order', authenticated, order.delete);
 // //for evaluate
 router.get('/evaluate', evaluate.read);
 router.get('/evaluate/bytour', evaluate.readByIdTour);
-router.post('/evaluate', authenticated, evaluate.create);
-router.put('/evaluate', authenticated, evaluate.update);
+router.post('/evaluate', evaluate.create);
+router.put('/evaluate', evaluate.update);
 router.delete('/evaluate', authenticated, evaluate.delete);
 
 // //for post
