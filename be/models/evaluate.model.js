@@ -4,11 +4,11 @@ const database = require("../dbconnectMySql");
 //Task object constructor
 const Evaluate = function(evaluate) {
   this.idEvaluate = evaluate.idEvaluate | 0;
-  this.numberStarHotel = evaluate.numberStarHotel;
-  this.numberStarFood = evaluate.numberStarFood;
-  this.numberStarVehicle = evaluate.numberStarVehicle;
-  this.numberStarTourGuide = evaluate.numberStarTourGuide;
-  this.numberStarSchedule = evaluate.numberStarSchedule;
+  this.numberStarService = evaluate.numberStarService;
+  this.numberStarLocation= evaluate.numberStarLocation;
+  this.numberStarMoney = evaluate.numberStarMoney;
+  this.numberStarCleanliness = evaluate.numberStarCleanliness;
+  this.numberStarFacilities = evaluate.numberStarFacilities;
   this.title = evaluate.title;
   this.contentEvaluate = evaluate.contentEvaluate;
   this.idAccount = evaluate.idAccount;
@@ -52,16 +52,16 @@ Evaluate.createEvaluate = function(newEvaluate) {
       .query(
         "INSERT INTO " +
           databaseProduction +
-          ".evaluates (`numberStarHotel`, `numberStarFood`, `numberStarVehicle`, `numberStarTourGuide`, `numberStarSchedule`, `title`, `contentEvaluate`, `idAccount`, `idTour`, `rateAverage`, `rateTitle`, `typeEvaluate`) VALUES ('" +
-          newEvaluate.numberStarHotel +
+          ".evaluates (`numberStarService`, `numberStarLocation`, `numberStarMoney`, `numberStarCleanliness`, `numberStarFacilities`, `title`, `contentEvaluate`, `idAccount`, `idTour`, `rateAverage`, `rateTitle`, `typeEvaluate`) VALUES ('" +
+          newEvaluate.numberStarService +
           "', '" +
-          newEvaluate.numberStarFood +
+          newEvaluate.numberStarLocation+
           "', '" +
-          newEvaluate.numberStarVehicle +
+          newEvaluate.numberStarMoney +
           "', '" +
-          newEvaluate.numberStarTourGuide +
+          newEvaluate.numberStarCleanliness +
           "', '" +
-          newEvaluate.numberStarSchedule +
+          newEvaluate.numberStarFacilities +
           "', '" +
           newEvaluate.title +
           "', '" +
