@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import { currencyFormat } from "~/views/utilities/helpers/currency";
 import _ from "lodash";
 import { appApisActions } from "~/state/ducks/appApis";
-import * as PATH from "~/configs/routesConfig";
-import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
-import { message, Tooltip, Typography } from "antd";
-import { firstImage } from "~/views/utilities/helpers/utilObject";
-import { LeftCircleOutlined, RightCircleOutlined } from "@ant-design/icons";
 
 const RatingHomepage = (props) => {
    const [evaluateReport, setEvaluateReport] = useState({});
@@ -61,5 +53,5 @@ export default compose(
          getEvaluateByIdTour: appApisActions.getEvaluateByIdTour
       }
    ),
-   withRouter //để push(nhảy qua trang khác) là chủ yếu,
+   withRouter
 )(RatingHomepage);

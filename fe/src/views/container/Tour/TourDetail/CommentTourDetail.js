@@ -64,15 +64,14 @@ function CommentTourDetail(props) {
          <div className='comment-forum padding-top-40px'>
             <div className='form-box'>
                <div className='form-title-wrap'>
-                  <h3 className='title'>Write a Review</h3>
+                  <h3 className='title'>Viết đánh giá</h3>
                </div>
-               {/* form-title-wrap */}
                <div className='form-content'>
                   <div className='rate-option p-2'>
                      <div className='row'>
                         <div className='col-lg-4 responsive-column'>
                            <div className='rate-option-item'>
-                              <label>Service</label>
+                              <label>Dịch vụ</label>
                               <div className='rate-stars-option'>
                                  <Rate
                                     allowHalf
@@ -86,7 +85,7 @@ function CommentTourDetail(props) {
                         {/* col-lg-4 */}
                         <div className='col-lg-4 responsive-column'>
                            <div className='rate-option-item'>
-                              <label>Location</label>
+                              <label>Vị trí</label>
                               <div className='rate-stars-option'>
                                  <Rate
                                     allowHalf
@@ -100,7 +99,7 @@ function CommentTourDetail(props) {
                         {/* col-lg-4 */}
                         <div className='col-lg-4 responsive-column'>
                            <div className='rate-option-item'>
-                              <label>Value for Money</label>
+                              <label>Giá tiền</label>
                               <div className='rate-stars-option'>
                                  <Rate
                                     allowHalf
@@ -114,7 +113,7 @@ function CommentTourDetail(props) {
                         {/* col-lg-4 */}
                         <div className='col-lg-4 responsive-column'>
                            <div className='rate-option-item'>
-                              <label>Cleanliness</label>
+                              <label>Sạch sẽ</label>
                               <div className='rate-stars-option'>
                                  <Rate
                                     allowHalf
@@ -128,7 +127,7 @@ function CommentTourDetail(props) {
                         {/* col-lg-4 */}
                         <div className='col-lg-4 responsive-column'>
                            <div className='rate-option-item'>
-                              <label>Facilities</label>
+                              <label>Tiện nghi</label>
                               <div className='rate-stars-option'>
                                  <Rate
                                     allowHalf
@@ -149,14 +148,14 @@ function CommentTourDetail(props) {
                         <div className='row'>
                            <div className='col-lg-6 responsive-column'>
                               <div className='input-box'>
-                                 <label className='label-text'>Title</label>
+                                 <label className='label-text'>Tiêu đề</label>
                                  <div className='form-group'>
                                     <span className='la la-user form-icon' />
                                     <input
                                        className='form-control'
                                        type='text'
                                        name='text'
-                                       placeholder='Title review'
+                                       placeholder='Nhập tiêu đề'
                                        value={title}
                                        onChange={(e) => {
                                           setName(e?.target?.value);
@@ -174,7 +173,7 @@ function CommentTourDetail(props) {
                                        className='form-control'
                                        type='email'
                                        name='email'
-                                       placeholder='Email address'
+                                       placeholder='Nhập email'
                                        value={email}
                                        onChange={(e) => {
                                           setEmail(e?.target?.value);
@@ -185,13 +184,13 @@ function CommentTourDetail(props) {
                            </div>
                            <div className='col-lg-12'>
                               <div className='input-box'>
-                                 <label className='label-text'>Message</label>
+                                 <label className='label-text'>Nội dung</label>
                                  <div className='form-group'>
                                     <span className='la la-pencil form-icon' />
                                     <textarea
                                        className='message-control form-control'
                                        name='message'
-                                       placeholder='Write message'
+                                       placeholder='Nhập nội dung'
                                        defaultValue={""}
                                        value={contentEvaluate}
                                        onChange={(e) => {
@@ -201,10 +200,10 @@ function CommentTourDetail(props) {
                                  </div>
                               </div>
                            </div>
-                           <div className='col-lg-12'>
+                           <div className='col-lg-12 d-flex justify-content-center'>
                               <div className='btn-box'>
-                                 <Button type='primary' onClick={submitReview} loading={loading}>
-                                    Leave a Review
+                                 <Button size='large' type='primary' onClick={submitReview} loading={loading}>
+                                    Đánh giá
                                  </Button>
                               </div>
                            </div>

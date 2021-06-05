@@ -37,8 +37,8 @@ function ReviewTourDetail(props) {
 
    return (
       <ReviewTourDetailStyled>
-         <h3 className='title font-size-20'>Có {evaluates.length} lượt review</h3>
-         <div className='comments-list padding-top-50px'>
+         <h3 className='title font-size-20'>Có {evaluates.length} lượt đánh giá</h3>
+         <div className='comments-list '>
             <div className='comment d-flex flex-wrap'>
                {(evaluatesView || []).map((o) => {
                   return (
@@ -71,7 +71,6 @@ function ReviewTourDetail(props) {
                   );
                })}
             </div>
-            {/* end comments */}
             {!viewAll && (
                <div className='btn-box load-more text-center'>
                   <button
@@ -81,7 +80,7 @@ function ReviewTourDetail(props) {
                      }}
                      className='theme-btn theme-btn-small theme-btn-transparent'
                      type='button'>
-                     Load More Review
+                     Xem thêm đánh giá
                   </button>
                </div>
             )}
