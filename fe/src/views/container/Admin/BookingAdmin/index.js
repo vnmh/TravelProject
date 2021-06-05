@@ -14,6 +14,7 @@ import { appApisActions } from "~/state/ducks/appApis";
 import ScrollToTop from "~/ScrollToTop";
 import { ORDER_STATUS } from "~/configs/status";
 import _ from "lodash";
+import HOCAdmin from "~/HOCAdmin";
 
 const BookingAdminPageStyled = styled.div``;
 
@@ -34,9 +35,6 @@ const BookingAdminPage = (props) => {
    };
 
    useEffect(() => {
-      if (props.user?.role !== ROLES.administrator && needLoading) {
-         history.push(PATH.APP_DEFAULT_PATH);
-      }
       props
          .getOrders()
          .then(({ res }) => {
@@ -65,30 +63,38 @@ const BookingAdminPage = (props) => {
             break;
          case ORDER_STATUS.Waiting:
             setTourBookingFilter(
-               Array.from(_.filter(tourBooking, (o) => {
-                  return o.status === ORDER_STATUS.Waiting;
-               }))
+               Array.from(
+                  _.filter(tourBooking, (o) => {
+                     return o.status === ORDER_STATUS.Waiting;
+                  })
+               )
             );
             break;
          case ORDER_STATUS.Paid:
             setTourBookingFilter(
-               Array.from(_.filter(tourBooking, (o) => {
-                  return o.status === ORDER_STATUS.Paid;
-               }))
+               Array.from(
+                  _.filter(tourBooking, (o) => {
+                     return o.status === ORDER_STATUS.Paid;
+                  })
+               )
             );
             break;
          case ORDER_STATUS.Done:
             setTourBookingFilter(
-               Array.from(_.filter(tourBooking, (o) => {
-                  return o.status === ORDER_STATUS.Done;
-               }))
+               Array.from(
+                  _.filter(tourBooking, (o) => {
+                     return o.status === ORDER_STATUS.Done;
+                  })
+               )
             );
             break;
          case ORDER_STATUS.Cancel:
             setTourBookingFilter(
-               Array.from(_.filter(tourBooking, (o) => {
-                  return o.status === ORDER_STATUS.Cancel;
-               }))
+               Array.from(
+                  _.filter(tourBooking, (o) => {
+                     return o.status === ORDER_STATUS.Cancel;
+                  })
+               )
             );
             break;
          default:
@@ -99,23 +105,25 @@ const BookingAdminPage = (props) => {
 
    return (
       <ScrollToTop>
-         <BookingAdminPageStyled>
-            <body className='section-bg'>
-               <section class='dashboard-area'>
-                  <SideBar />
-                  <TopBar />
-                  <BookingAdmin
-                     onChange={handleChangeTable}
-                     tourBooking={tourBooking}
-                     needLoading={needLoading}
-                     setNeedLoading={setNeedLoading}
-                     setStatus={setStatus}
-                     status={status}
-                     tourBookingFilter={tourBookingFilter}
-                  />
-               </section>
-            </body>
-         </BookingAdminPageStyled>
+         <HOCAdmin>
+            <BookingAdminPageStyled>
+               <body className='section-bg'>
+                  <section class='dashboard-area'>
+                     <SideBar />
+                     <TopBar />
+                     <BookingAdmin
+                        onChange={handleChangeTable}
+                        tourBooking={tourBooking}
+                        needLoading={needLoading}
+                        setNeedLoading={setNeedLoading}
+                        setStatus={setStatus}
+                        status={status}
+                        tourBookingFilter={tourBookingFilter}
+                     />
+                  </section>
+               </body>
+            </BookingAdminPageStyled>
+         </HOCAdmin>
       </ScrollToTop>
    );
 };

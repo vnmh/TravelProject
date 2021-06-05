@@ -12,28 +12,24 @@ import TopBar from "../TopBar";
 import SideBar from "../SideBar";
 import { ROLES } from "~/configs";
 import ScrollToTop from "~/ScrollToTop";
+import HOCAdmin from "~/HOCAdmin";
 
 const DashBoardStyled = styled.div``;
 
 const DashBoard = (props) => {
-   const history = useHistory();
-   useEffect(() => {
-      if (props.user?.role !== ROLES.administrator) {
-         history.push(PATH.APP_DEFAULT_PATH);
-      }
-   }, [props.user?.role]);
-
    return (
       <ScrollToTop>
-         <DashBoardStyled>
-            <body className='section-bg'>
-               <section class='dashboard-area'>
-                  <SideBar />
-                  <TopBar />
-                  <DashBoardPage />
-               </section>
-            </body>
-         </DashBoardStyled>
+         <HOCAdmin>
+            <DashBoardStyled>
+               <body className='section-bg'>
+                  <section class='dashboard-area'>
+                     <SideBar />
+                     <TopBar />
+                     <DashBoardPage />
+                  </section>
+               </body>
+            </DashBoardStyled>
+         </HOCAdmin>
       </ScrollToTop>
    );
 };

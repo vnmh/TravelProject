@@ -4,7 +4,7 @@ import { compose } from "recompose";
 import { connect } from "react-redux";
 import { authActions } from "~/state/ducks/authUser";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
-
+import * as PATH from "~/configs/routesConfig";
 const SideBarStyled = styled.div`
    .text-shadow {
       color: #444444;
@@ -33,47 +33,47 @@ const SideBar = (props) => {
                <div className='sidebar-menu-wrap'>
                   <ul className='sidebar-menu toggle-menu list-items'>
                      <li>
-                        <Link to='/admin-dashboard'>
+                        <Link to={PATH.ADMIN_DASHBOARD}>
                            <i className='la la-dashboard mr-2 text-color' />
                            Trang chủ
                         </Link>
                      </li>
                      <li>
-                        <Link to='/admin-booking'>
+                        <Link to={PATH.ADMIN_BOOKING}>
                            <i className='la la-shopping-cart mr-2 text-color-2' />
                            Quản lý booking
                         </Link>
                      </li>
                      <li>
-                        <Link to='/admin-tour-list'>
+                        <Link to={PATH.ADMIN_TOUR_LIST}>
                            <i class='la la-plane mr-2 text-color-3' />
                            Danh sách tour
                         </Link>
                      </li>
                      <li>
-                        <Link to='/admin-service'>
+                        <Link to={PATH.ADMIN_SERVICE}>
                            <i className='la la-list mr-2 text-color-4' />
                            Danh sách dịch vụ
                         </Link>
                      </li>
                      <li>
-                        <Link to='/admin-blog'>
+                        <Link to={PATH.ADMIN_BLOG}>
                            <i className='la la-text-width mr-2' />
                            Danh sách bài viết
                         </Link>
                      </li>
                      <li>
-                        <Link to='admin-dashboard-reviews.html'>
+                        <Link to={PATH.ADMIN_REVIEW}>
                            <i className='la la-star mr-2 text-color-6' />
                            Đánh giá
                         </Link>
                      </li>
-                     <li>
+                     {/* <li>
                         <Link to='admin-dashboard-wishlist.html'>
                            <i className='la la-heart mr-2 text-color-7' />
                            Danh sách yêu thích
                         </Link>
-                     </li>
+                     </li> */}
                   </ul>
                </div>
             </div>

@@ -13,6 +13,7 @@ import styled from "styled-components"; // Dùng để ghi đè style bên trong
 import { message, Tooltip, Typography } from "antd";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
 import { LeftCircleOutlined, RightCircleOutlined } from "@ant-design/icons";
+import Rating from "./Rating";
 
 const CarouselProviderWrapper = styled(CarouselProvider)`
    position: relative;
@@ -102,13 +103,11 @@ const CardItemHomePage = (props) => {
                                  </Link>
                               </Tooltip>
                            </h3>
-                           <div className='card-rating'>
-                              <span className='badge text-white'>4.4/5</span>{" "}
-                              <span className='rating__text'>30 đánh giá</span>
-                           </div>
+                           <Rating item={item}></Rating>
                            <div className='card-price d-flex align-items-center justify-content-between'>
                               <span>
-                                 <i className='la la-clock mr-1' />{item.vocationTime} ngày
+                                 <i className='la la-clock mr-1' />
+                                 {item.vocationTime} ngày
                               </span>
                               <p>
                                  <span className='price__from'>Chỉ từ </span>

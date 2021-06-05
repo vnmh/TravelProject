@@ -9,21 +9,24 @@ import SideBar from "../SideBar";
 import ServiceAdmin from "./ServiceAdmin";
 import * as PATH from "~/configs/routesConfig";
 import ScrollToTop from "~/ScrollToTop";
+import HOCAdmin from "~/HOCAdmin";
 
 const ServiceAdminPageStyled = styled.div``;
 
 const ServiceAdminPage = () => {
    return (
       <ScrollToTop>
-         <ServiceAdminPageStyled>
-            <body className='section-bg'>
-               <section class='dashboard-area'>
-                  <SideBar />
-                  <TopBar />
-                  <ServiceAdmin />
-               </section>
-            </body>
-         </ServiceAdminPageStyled>
+         <HOCAdmin>
+            <ServiceAdminPageStyled>
+               <body className='section-bg'>
+                  <section class='dashboard-area'>
+                     <SideBar />
+                     <TopBar />
+                     <ServiceAdmin />
+                  </section>
+               </body>
+            </ServiceAdminPageStyled>
+         </HOCAdmin>
       </ScrollToTop>
    );
 };
