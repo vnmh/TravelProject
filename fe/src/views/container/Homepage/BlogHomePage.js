@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
-import { compose, lifecycle } from "recompose";
+import { compose } from "recompose";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import _ from "lodash";
-
-import { authActions } from "~/state/ducks/authUser";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
-
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
 import { CarouselProvider, Slider, Slide } from "pure-react-carousel";
-import { Tooltip, Typography, Switch } from "antd";
+import { Tooltip, Typography } from "antd";
 import * as PATH from "~/configs/routesConfig";
 const { Paragraph, Text } = Typography;
 
@@ -20,7 +17,6 @@ const BlogHomePageStyled = styled(CarouselProvider)``;
 const BlogHomePage = (props) => {
    const [posts, setPosts] = useState([]);
    const [ellipsis, setEllipsis] = useState(true);
-   const colors = ["blue"];
 
    useEffect(() => {
       props

@@ -8,10 +8,6 @@ import FilterTopTour from "../FilterTopTour";
 import FilterOptionTour from "../FilterOptionTour";
 import SearchListTour from "./SearchListTour";
 import FilterByPrice from "./FilterByPrice";
-import FilterByReviewScore from "./FilterByReviewScore";
-import FilterByRating from "./FilterByRating";
-import FilterByCategory from "./FilterByCategory";
-import FilterByDuration from "./FilterByDuration";
 import CardItemListTour from "./CardItemListTour";
 import InfoTour from "../InfoTour";
 
@@ -44,15 +40,15 @@ function ImpTourList(props) {
                         <SearchListTour setSearchTour={setSearchTour} setTimeSubmit={setTimeSubmit} />
                         <hr></hr>
                         <FilterByPrice setPrice={setPrice} />
-                        <hr></hr>
-                        <FilterByReviewScore />
+                        {/* <hr></hr> */}
+                        {/* <FilterByReviewScore />
                         <hr></hr>
                         <FilterByRating />
                         <hr></hr>
                         <FilterByCategory />
                         <hr></hr>
                         <FilterByDuration />
-                        <hr></hr>
+                        <hr></hr> */}
                      </div>
                   </div>
                   <div className='col-lg-8'>
