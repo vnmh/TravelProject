@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
-import { message } from "antd";
 import qs from "query-string";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { Select } from "antd";
@@ -16,12 +15,12 @@ function FilterByPrice(props) {
    return (
       <FilterByPriceStyled>
          <div className='sidebar-widget'>
-            <h3 className='title stroke-shape'>Filter by Price</h3>
+            <h3 className='title stroke-shape'>Lọc theo giá</h3>
             <div className='sidebar-price-range'>
                <div className='main-search-input-item'>
                   <div className='price-slider-amount padding-bottom-20px'>
-                     <label htmlFor='amount2' className='filter__label'>
-                        Price:
+                     <label htmlFor='amount2' className='filter__label mb-2'>
+                        Giá bán:
                      </label>
                      <Select
                         value={price}

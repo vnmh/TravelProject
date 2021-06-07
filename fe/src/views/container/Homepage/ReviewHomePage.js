@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { withRouter } from "react-router-dom";
-import { compose, lifecycle } from "recompose";
 import { connect } from "react-redux";
-
-import { authActions } from "~/state/ducks/authUser";
-
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
 import UtilDate from "~/views/utilities/helpers/UtilDate";
-import { Rate, Typography } from "antd";
+import { Rate, Tooltip, Typography } from "antd";
 
 const ReviewHomePageStyled = styled.div``;
 
@@ -33,18 +28,18 @@ const ReviewHomePage = (props) => {
    };
    return (
       <ReviewHomePageStyled>
-         <div className='col-lg-12'>
+         <div className='col-lg-12' data-aos='flip-left'>
             <div className='testimonial-carousel carousel-action'></div>
             <div className='row '>
                {(evaluates || []).map((o) => {
                   return (
                      <div className='col-6'>
                         <div className='testimonial-card mb-4 '>
-                           <div className=''>
-                              <Typography.Paragraph ellipsis={{ rows: 2 }}>
+                           <Tooltip title={o.contentEvaluate}>
+                              <Typography.Paragraph className='mt-3' ellipsis={{ rows: 4 }}>
                                  {o.contentEvaluate}
                               </Typography.Paragraph>
-                           </div>
+                           </Tooltip>
                            <div className='author-content d-flex align-items-center'>
                               <div className='author-bio'>
                                  <h4 className='author__title'>{o.title}</h4>
