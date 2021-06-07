@@ -70,7 +70,7 @@ const ImpHomePage = (props) => {
                   <path d='M0 10 0 0 A 90 59, 0, 0, 0, 100 0 L 100 10 Z' />
                </svg>
             </section>
-            <section className='testimonial-area section-padding pt-5'>
+            <section className='testimonial-area py-5'>
                <div className='container'>
                   <div className='row' data-aos='fade-right'>
                      <div className='col-lg-12'>
@@ -88,7 +88,7 @@ const ImpHomePage = (props) => {
             </section>
             <div>
                <div className='section-block' />
-               <section className='top-activity-area section--padding' id='location'>
+               <section className='top-activity-area padding-top-50px padding-bottom-90px' id='location'>
                   <div className='container'>
                      <div className='row' data-aos='fade-up'>
                         <div className='col-lg-12'>

@@ -12,14 +12,15 @@ const SingleContentTourDetailStyled = styled.div``;
 function SingleContentTourDetail(props) {
    return (
       <SingleContentTourDetailStyled>
-         <div className='single-content-item pb-4'>
+         <div className='single-content-item pb-2'>
             <h3 className='title font-size-26'>{props.tourDetail?.titleTour}</h3>
             <div className='d-flex flex-wrap align-items-center pt-2'>
                <p className='mr-2'>{props.tourDetail?.address}</p>
-               <p>
+               {/* <p>
                   <span className='badge badge-warning text-white font-size-16'>4.6</span>
                   <span>(4,209 Reviews)</span>
-               </p>
+               </p> */}
+               
             </div>
          </div>
          <div className='section-block' />
@@ -42,7 +43,7 @@ function SingleContentTourDetail(props) {
                         <i className='la la-users' />
                      </div>
                      <div className='single-feature-titles'>
-                        <h3 className='title font-size-15 font-weight-medium'>Số lượng</h3>
+                        <h3 className='title font-size-15 font-weight-medium'>Số người tối đa</h3>
                         <span className='font-size-13'>{props.tourDetail?.groupSize}</span>
                      </div>
                   </div>

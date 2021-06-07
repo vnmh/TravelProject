@@ -17,11 +17,11 @@ function InfoBooking(props) {
       <InfoBookingStyled>
          <div className='payment-received-list my-2'>
             <h3 className='title font-size-24'>{props.orderDetail?.titleTour}</h3>
-            <div className='card-rating pt-2 pb-3'>
+            {/* <div className='card-rating pt-2 pb-3'>
                <span className='badge badge-warning text-white'>4.4/5</span>
                <span className='review__text text-warning'> Average </span>
                <span className='rating__text'>(30 Reviews)</span>
-            </div>
+            </div> */}
             <div className='section-block' />
             <div className='row'>
                <div className='col-lg-6 py-3'>

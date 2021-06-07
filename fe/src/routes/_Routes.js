@@ -7,6 +7,7 @@ import ReviewAdminPage from "~/views/container/Admin/ReviewAdmin";
 import ProfilePage from "~/views/container/Profile";
 import BlogAdminPage from "~/views/container/Admin/BlogAdmin";
 import ServiceAdminPage from "~/views/container/Admin/ServiceAdmin";
+
 export default [
    // Cần auth mới vào được thì khai báo ở đây
    { path: PATH.ADMIN_DASHBOARD, component: () => <DashBoard />, exact: true },

@@ -14,8 +14,8 @@ function SingleContentBlogDetail(props) {
             <h3 className='title font-size-35'>{props.blogDetail?.titlePost}</h3>
             <div className='d-flex flex-wrap align-items-center pt-2'>
                <p>
-                  <span className='badge badge-warning text-white font-size-16'>4.6</span>
-                  <span>(4,209 Reviews)</span>
+                  <span className='badge badge-warning text-white font-size-16'>4.6/5</span>{" "}
+                  <span>(19 lượt xem)</span>
                </p>
             </div>
          </div>
