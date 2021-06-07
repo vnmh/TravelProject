@@ -71,7 +71,7 @@ const CardItemReviewAdminPage = (props) => {
                   <div className='form-title-wrap'>
                      <div className='d-flex align-items-center justify-content-between'>
                         <div>
-                           <h3 className='title'>Review Lists</h3>
+                           <h3 className='title'>Danh sách đánh giá</h3>
                            {/* <p className='font-size-14'>Showing 1 to 4 of 20 entries</p> */}
                         </div>
                         <Select style={{ width: 200 }} placeholder='Trạng thái' allowClear onChange={setStatus}>

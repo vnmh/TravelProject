@@ -190,7 +190,7 @@ function CommentTourDetail(props) {
                                     <textarea
                                        className='message-control form-control'
                                        name='message'
-                                       placeholder='Nhập nội dung'
+                                       placeholder='Mời bạn để lại bình luận'
                                        defaultValue={""}
                                        value={contentEvaluate}
                                        onChange={(e) => {

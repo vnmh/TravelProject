@@ -98,7 +98,7 @@ function BookingFormTourDetail(props) {
                   <i className='la la-shopping-cart mr-2 font-size-18' />
                   Đặt ngay
                </Link>
-               <a href='#' className='theme-btn text-center w-100 theme-btn-transparent'>
+               {/* <a href='#' className='theme-btn text-center w-100 theme-btn-transparent'>
                   <i className='la la-heart-o mr-2' />
                   Thêm vào yêu thích
                </a>
@@ -115,7 +115,7 @@ function BookingFormTourDetail(props) {
                      <i className='la la-eye mr-1 font-size-15 color-text-2' />
                      3456
                   </p>
-               </div>
+               </div> */}
             </div>
          </div>
       </BookingFormTourDetailStyled>

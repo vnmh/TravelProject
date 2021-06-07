@@ -30,7 +30,7 @@ function FilterByPrice(props) {
                         placeholder='Chọn giá'
                         style={{ width: "100%" }}>
                         <Select.Option value={1000000}>0 - 1,000,000</Select.Option>
-                        <Select.Option value={5000000}>1,000,001 - 5,000,000</Select.Option>
+                        <Select.Option value={5000000}>1,000,000 - 5,000,000</Select.Option>
                         <Select.Option value={10000000}>> 10.000.000</Select.Option>
                      </Select>
                   </div>
@@ -47,7 +47,7 @@ function FilterByPrice(props) {
                      }}
                      className='theme-btn theme-btn-small theme-btn-transparent'
                      type='button'>
-                     Apply
+                     Tìm kiếm
                   </button>
                </div>
             </div>

@@ -8,7 +8,7 @@ import { authActions } from "~/state/ducks/authUser";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import { appApisActions } from "~/state/ducks/appApis";
 import UtilDate from "~/views/utilities/helpers/UtilDate";
-import { Rate } from "antd";
+import { Rate, Typography } from "antd";
 
 const ReviewHomePageStyled = styled.div``;
 
@@ -41,7 +41,9 @@ const ReviewHomePage = (props) => {
                      <div className='col-6'>
                         <div className='testimonial-card mb-4 '>
                            <div className=''>
-                              <p className='mt-3'>{o.contentEvaluate}</p>
+                              <Typography.Paragraph ellipsis={{ rows: 2 }}>
+                                 {o.contentEvaluate}
+                              </Typography.Paragraph>
                            </div>
                            <div className='author-content d-flex align-items-center'>
                               <div className='author-bio'>

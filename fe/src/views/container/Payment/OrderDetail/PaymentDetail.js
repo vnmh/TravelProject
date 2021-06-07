@@ -36,8 +36,7 @@ function PaymentDetail(props) {
                                        <span className='mr-2 color-text-2'>Giá gốc:</span>
                                     </p>
                                     <p className='font-size-15 text-gray line-height-20 font-weight-medium'>
-                                       <span className='mr-2 color-text-2'>Phương thức thanh toán:</span>Thu 30 Mar,
-                                       2020
+                                       <span className='mr-2 color-text-2'>Phương thức thanh toán: </span>MOMO
                                     </p>
                                  </div>
                               </th>
