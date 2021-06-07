@@ -111,14 +111,14 @@ const ImpHomePage = (props) => {
                            <h2 className='sec__title text-white font-size-50 line-height-60'>
                               Tận hưởng kỳ nghỉ <br /> của bạn với giảm giá 50%
                            </h2>
-                           <p className='sec__desc text-white pt-3'>
+                           {/* <p className='sec__desc text-white pt-3'>
                               Nemo enim ipsam voluptatem quia voluptas sit aspernatur
-                           </p>
+                           </p> */}
                         </div>
                         <div className='btn-box padding-top-35px' data-aos='fade-up'>
-                           <a href='#' className='theme-btn border-0'>
+                           {/* <a href='#' className='theme-btn border-0'>
                               Explore Now <i className='la la-arrow-right ml-1' />
-                           </a>
+                           </a> */}
                         </div>
                      </div>
                   </div>
