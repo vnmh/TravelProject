@@ -57,7 +57,7 @@ const CRUDTourAdmin = (props) => {
             .then((res) => {
                message.success("Thành công!");
                //Success: thì đóng form create lại và thông báo cho người dùng
-               props.setCurrentEdit(bodyCreate);
+               // props.setCurrentEdit(bodyCreate);
                props.setIsCreateTour(false);
             })
             .catch((err) => {
