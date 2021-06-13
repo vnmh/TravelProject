@@ -87,8 +87,8 @@ const CardItemGridBlog = (props) => {
                               </Typography.Paragraph>
                            </p>
                            <div className='card-rating'>
-                              <span className='badge text-white'>4.4/5</span>{" "}
-                              <span className='rating__text'>30 Reviews</span>
+                              <span className='badge text-white'>4.3/5</span>{" "}
+                              <span className='rating__text'>10 Reviews</span>
                            </div>
                         </div>
                      </div>
