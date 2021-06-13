@@ -21,9 +21,9 @@ const BlogListAdminPage = (props) => {
             <div className='row'>
                <div className='col-lg-12'>
                   <div className='form-box'>
-                     <div className='form-title-wrap'>
-                        <h3 className='title'>Danh sách bài viết</h3>
-                        {!isCreatePost && !currentEdit && (
+                     {!isCreatePost && !currentEdit && (
+                        <div className='form-title-wrap'>
+                           <h3 className='title'>Danh sách bài viết</h3>
                            <Button
                               type='primary'
                               className='float-right'
@@ -33,12 +33,12 @@ const BlogListAdminPage = (props) => {
                               }}>
                               Thêm
                            </Button>
-                        )}
-                        <p className='font-size-14'>
-                           Hiển thị {pagination.page} trong tổng số {Math.ceil(pagination.total / pagination.size)}{" "}
-                           trang của {pagination.total} phần tử
-                        </p>
-                     </div>
+                           <p className='font-size-14'>
+                              Hiển thị {pagination.page} trong tổng số {Math.ceil(pagination.total / pagination.size)}{" "}
+                              trang của {pagination.total} phần tử
+                           </p>
+                        </div>
+                     )}
                      <div className='form-content'>
                         <div className='table-form table-responsive'>
                            <BlogTableListAdminPage

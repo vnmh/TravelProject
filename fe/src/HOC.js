@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import AOS from "aos";
-import * as PATH from "~/configs/routesConfig";
-import { useHistory } from "react-router";
-import { ROLES } from "./configs";
+
 function HOC(props) {
    useEffect(() => {
       // below listed default settings
