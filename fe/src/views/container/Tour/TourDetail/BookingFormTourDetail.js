@@ -11,6 +11,7 @@ import moment from "moment";
 import UtilDate from "~/views/utilities/helpers/UtilDate";
 import * as PATH from "~/configs/routesConfig";
 import { parseObjToQuery } from "~/views/utilities/helpers";
+import { SCHEDULE_ENUM } from "~/configs/const";
 
 const { RangePicker } = DatePicker;
 
@@ -18,20 +19,55 @@ const BookingFormTourDetailStyled = styled.div``;
 
 function BookingFormTourDetail(props) {
    const [numberPeople, setNumberPeople] = useState(1);
+   const [departureDay, setDepartureDay] = useState(moment(props.tourDetail?.departureDay));
+   useEffect(() => {
+      setDepartureDay(moment(props.tourDetail?.departureDay))
+   }, [props.tourDetail?.departureDay])
+
+   const dateAvailable = (current) => {
+      if (props.tourDetail?.departureDay) {
+         // mỗi ngày thì dễ rồi
+      }
+      const style = {};
+      if (current.date() === 1) {
+         style.border = '1px solid #1890ff';
+         style.borderRadius = '50%';
+      }
+      return (
+         <div className="ant-picker-cell-inner" style={style}>
+            {current.date()}
+         </div>
+      );
+   }
+   const disabledDateNotUse = (current) => {
+      const departureDay = moment(props.tourDetail?.departureDay)
+      if (props.tourDetail?.scheduleLoop) {
+         return (current && current < moment().endOf('day')) || (current && current < departureDay.endOf('day')) || (current && (current.dayOfYear() - departureDay.dayOfYear()) % props.tourDetail?.scheduleLoop !== 0);
+      }
+      // Can not select days before today and today
+      if (props.tourDetail?.schedule === "daily")
+         return current && current < moment().endOf('day');
+      if (props.tourDetail?.schedule === "weekly")
+         return (current && current < moment().endOf('day')) || (current && current < departureDay.endOf('day')) || (current && current.day() !== departureDay.day());
+      if (props.tourDetail?.schedule === "monthly")
+         return (current && current < moment().endOf('day')) || (current && current < departureDay.endOf('day')) || (current && current.date() !== departureDay.date());
+      if (props.tourDetail?.schedule === "yearly")
+         return (current && current < moment().endOf('day')) || (current && current < departureDay.endOf('day')) || ((current && current.date() !== departureDay.date()) || (current && current.months() !== departureDay.months()));
+   }
    return (
       <BookingFormTourDetailStyled data-aos='fade-up'>
          <div className='sidebar-widget single-content-widget'>
             <div className='sidebar-widget-item'>
                <div className='sidebar-book-title-wrap mb-3'>
                   <p>
-                     <span className='text-form'>Chỉ từ</span>
+                     {/* <span className='text-form'>Chỉ từ</span> */}
                      <span className='text-value ml-2 mr-1'>
                         {currencyFormat(
                            props.tourDetail?.price * numberPeople -
-                              props.tourDetail?.price * props.tourDetail?.sale * 0.01 * numberPeople
+                           props.tourDetail?.price * props.tourDetail?.sale * 0.01 * numberPeople
                         )}
-                     </span>{" "}
-                     
+                     </span>/người{" "}
+
                      {props.tourDetail?.sale > 0 ? (
                         <div>
                            <span className='before-price'>{currencyFormat(props.tourDetail?.price * numberPeople)}</span>
@@ -40,7 +76,7 @@ function BookingFormTourDetail(props) {
                      ) : (
                         <React.Fragment></React.Fragment>
                      )}
-                     
+
                   </p>
                </div>
             </div>
@@ -50,16 +86,17 @@ function BookingFormTourDetail(props) {
                      <div className='input-box'>
                         <label className='label-text'>Thời gian</label>
                         <div className='form-group'>
-                           <RangePicker
+                           {props.tourDetail?.departureDay ? <DatePicker
                               size='large'
+                              disabledDate={disabledDateNotUse}
+                              // dateRender={dateAvailable}
                               format={UtilDate.formatDateLocal}
                               style={{ width: "100%" }}
-                              disabled={true}
-                              value={[
-                                 moment(props.tourDetail?.departureDay),
-                                 moment(props.tourDetail?.departureDay).add(props.tourDetail?.vocationTime, "days")
-                              ]}
-                           />
+                              value={departureDay}
+                              onChange={(value) => {
+                                 setDepartureDay(value)
+                              }}
+                           /> : ""}
                         </div>
                      </div>
                   </form>
@@ -93,7 +130,7 @@ function BookingFormTourDetail(props) {
             </div>
             <div className='btn-box pt-2'>
                <Link
-                  to={PATH.TOUR_BOOKING.replace(":id", props.tourDetail?.idTour) + parseObjToQuery({ numberPeople })}
+                  to={PATH.TOUR_BOOKING.replace(":id", props.tourDetail?.idTour) + parseObjToQuery({ numberPeople, departureDay: UtilDate.toDateTimeUtc(departureDay) })}
                   className='theme-btn text-center w-100 mb-2'>
                   <i className='la la-shopping-cart mr-2 font-size-18' />
                   Đặt ngay

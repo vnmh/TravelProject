@@ -8,6 +8,7 @@ const Timeline = function (timeline) {
    this.title = timeline.title;
    this.description = timeline.description;
    this.dayIndex = timeline.dayIndex;
+   this.image = timeline.image;
    // this.date = timeline.date.slice(0, 10).replace(/-/g, "/");
 };
 

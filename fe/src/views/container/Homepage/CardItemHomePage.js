@@ -14,6 +14,7 @@ import { message, Tooltip, Typography } from "antd";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
 import { LeftCircleOutlined, RightCircleOutlined } from "@ant-design/icons";
 import Rating from "./Rating";
+import { SCHEDULE_ENUM } from "~/configs/const";
 
 const CarouselProviderWrapper = styled(CarouselProvider)`
    position: relative;
@@ -108,10 +109,11 @@ const CardItemHomePage = (props) => {
                               <span>
                                  <i className='la la-clock mr-1' />
                                  {item.vocationTime} ngày
+                                 {item.schedule ? ` (${SCHEDULE_ENUM[item.schedule]})` : item.scheduleLoop ? " (Mỗi " + item.scheduleLoop + " ngày)" : undefined}
                               </span>
                               <p>
                                  <span className='price__from'>Chỉ từ </span>
-                                 <span className='price__num'>{currencyFormat(item.price)}</span>
+                                 <span className='price__num'>{currencyFormat(item.price)}</span>/người
                               </p>
                            </div>
                         </div>

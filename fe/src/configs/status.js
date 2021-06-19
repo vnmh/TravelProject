@@ -10,7 +10,9 @@ export const ORDER_STATUS = {
    Waiting: "Waiting",
    Paid: "Paid",
    Done: "Done",
-   Cancel: "Cancel"
+   Cancel: "Cancel",
+   Destroy: "Destroy",
+
 };
 export const renderStatusOrder = (status, type) => {
    if (type === "String") {
@@ -19,15 +21,14 @@ export const renderStatusOrder = (status, type) => {
             return "Mới";
          case ORDER_STATUS.Waiting:
             return "Chờ thanh toán";
-
          case ORDER_STATUS.Paid:
             return "Đã thanh toán";
-
          case ORDER_STATUS.Done:
             return "Đã hoàn thành";
-
          case ORDER_STATUS.Cancel:
             return "Đã hủy";
+         case ORDER_STATUS.Destroy:
+            return "Chờ xác nhận hủy";
          default:
             break;
       }
@@ -63,6 +64,12 @@ export const renderStatusOrder = (status, type) => {
                   Đã hủy
                </span>
             );
+         case ORDER_STATUS.Destroy:
+            return (
+               <span style={{ color: "#ffffff", background: "#fa541c", borderRadius: "10px", textAlign: "center" }}>
+                  Chờ xác nhận hủy
+               </span>
+            );
          default:
             break;
       }
@@ -71,7 +78,7 @@ export const renderStatusOrder = (status, type) => {
 export const REVIEW_STATUS = {
    New: "New",
    Approve: "Approve",
-   Cancel: "Cancel"
+   Cancel: "Cancel",
 };
 export const renderStatusReview = (status, type) => {
    if (type === "String") {
@@ -82,6 +89,7 @@ export const renderStatusReview = (status, type) => {
             return "Đã duyệt";
          case REVIEW_STATUS.Cancel:
             return "Đã hủy";
+
          default:
             break;
       }
@@ -105,6 +113,7 @@ export const renderStatusReview = (status, type) => {
                   Đã hủy
                </span>
             );
+
          default:
             break;
       }

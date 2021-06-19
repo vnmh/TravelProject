@@ -7,6 +7,10 @@ import styled from "styled-components";
 import { appApisActions } from "~/state/ducks/appApis";
 import { Button, Form, Input, InputNumber, Popconfirm, Table, Typography, message, Upload, Image } from "antd";
 import TextArea from "antd/lib/input/TextArea";
+import ImgCrop from "antd-img-crop";
+import { API_URL } from "~/configs";
+import { UploadOutlined } from "@ant-design/icons";
+import { firstImage } from "~/views/utilities/helpers/utilObject";
 
 const EditableCell = ({ editing, dataIndex, title, inputType, record, index, children, ...restProps }) => {
    let inputNode = undefined;
@@ -16,15 +20,23 @@ const EditableCell = ({ editing, dataIndex, title, inputType, record, index, chi
          inputNode = <InputNumber min={1} max={100} />;
          break;
       case "textarea":
-         inputNode = <TextArea />;
+         inputNode = <TextArea rows={8} />;
          break;
-      // case "upload":
-      //    inputNode = (
-      //       <Upload name={"file"} action={`${API_URL}/file`} listType='picture'>
-      //          <Button icon={<UploadOutlined />}>Click to upload</Button>
-      //       </Upload>
-      //    );
-      //    break;
+      case "upload":
+         inputNode = (
+            // <ImgCrop rotate aspect={16 / 9} grid modalWidth={650}>
+            <Upload
+               name='file'
+               listType="picture"
+               className='avatar-uploader'
+               action={`${API_URL}/file`}
+               maxCount={1}
+            >
+               <Button icon={<UploadOutlined />}>Tải ảnh mới</Button>
+            </Upload>
+            // </ImgCrop>
+         );
+         break;
       default:
          inputNode = <Input />;
          break;
@@ -65,7 +77,8 @@ const EditableTable = (props) => {
          props
             .getTimelineTour(props.currentEdit?.idTour)
             .then(({ res }) => {
-               setData(_.sortBy(_.head(res || []), "dayIndex") || []);
+               const arr = _.sortBy(_.head(res || []), "dayIndex")
+               setData(arr);
                setNeedFetchNewData(false);
             })
             .catch((err) => {
@@ -76,11 +89,7 @@ const EditableTable = (props) => {
    const isEditing = (record) => record.dayIndex === editingKey;
 
    const edit = (record) => {
-      form.setFieldsValue({
-         title: "",
-         description: "",
-         ...record
-      });
+      form.setFieldsValue(record);
       setEditingKey(record.dayIndex);
    };
 
@@ -96,8 +105,12 @@ const EditableTable = (props) => {
 
          if (index > -1) {
             // update
-            const item = newData[index]; 
-            const body = { ...item, ...row }; //item: dữ liệu mới, dữ liệu cũ
+            const item = newData[index];
+            const body = {
+               ...item,
+               ...row,
+               image: row?.image?.file?.response?.nameFile ? row?.image?.file?.response?.nameFile : item?.image
+            }; //item: dữ liệu mới, dữ liệu cũ
             newData.splice(index, 1, body);
             setData(newData);
             setEditingKey("");
@@ -125,7 +138,8 @@ const EditableTable = (props) => {
    const NEW_TIMELINE = {
       dayIndex: 1,
       title: "tiêu đề",
-      description: "mô tả"
+      description: "mô tả",
+      image: ""
    };
 
    const addRow = () => {
@@ -166,13 +180,27 @@ const EditableTable = (props) => {
       {
          title: "Ngày số",
          dataIndex: "dayIndex",
-         width: "15%",
-         inputType: "number"
+         inputType: "number",
+         width: "10%",
+      },
+      {
+         title: "Hình ảnh",
+         dataIndex: "image",
+         width: "10%",
+         editable: true,
+         inputType: "upload",
+         render: (row, record) => {
+            return _.isString(row) ? <Image
+               width={100}
+               src={firstImage("/img/" + row)}
+               alt='-img'
+            /> : ''
+         },
       },
       {
          title: "Tiêu đề",
          dataIndex: "title",
-         width: "25%",
+         width: "30%",
          editable: true
       },
       {
@@ -184,6 +212,7 @@ const EditableTable = (props) => {
       },
       {
          title: "Hoạt động",
+         width: "10%",
          dataIndex: "operation",
          render: (row, record) => {
             const editable = isEditing(record);

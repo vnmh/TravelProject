@@ -7,7 +7,7 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 
 const StatusPaymentStyled = styled.div``;
 
-function StatusPayment() {
+function StatusPayment(props) {
    return (
       <StatusPaymentStyled>
          <div className='form-title-wrap'>
@@ -23,7 +23,7 @@ function StatusPayment() {
                   </li>
                   <li className='step-bar flex-grow-1'>
                      <span className='icon-element'>3</span>
-                     <p className='pt-2 color-text-2'>Đặt tour thành công!</p>
+                     <p className='pt-2 color-text-2'>{props.isDestroy ? "Đã hủy thành công" : 'Đặt tour thành công!'}</p>
                   </li>
                </ul>
             </div>
@@ -37,6 +37,6 @@ export default connect(
       user: state["authUser"].user
    }),
    {
-      
+
    }
 )(StatusPayment);

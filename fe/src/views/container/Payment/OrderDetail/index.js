@@ -7,18 +7,23 @@ import StatusPayment from "./StatusPayment";
 import PaymentDetail from "./PaymentDetail";
 import InfoBooking from "./InfoBooking";
 import Header from "../../Header";
-import { message } from "antd";
+import { Button, message } from "antd";
 import { appApisActions } from "~/state/ducks/appApis";
 import queryString from "query-string";
 import { ORDER_STATUS } from "~/configs/status";
 import ScrollToTop from "~/ScrollToTop";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import Modal from "antd/lib/modal/Modal";
+import ModalDestroyTour from "./ModalDestroyTour";
+import { APP_DEFAULT_PATH, USER_BOOKING } from "~/configs/routesConfig";
 
 const OrderDetailStyled = styled.div``;
 
 function OrderDetail(props) {
    const [orderDetail, setOrderDetail] = useState();
    const params = queryString.parse(window.location.search);
+   const history = useHistory()
+   const [isDestroy, setIsDestroy] = useState(false)
 
    useEffect(() => {
       let tourDetail = {};
@@ -73,6 +78,18 @@ function OrderDetail(props) {
                message.error("Lỗi load dữ liệu tour rồi nha");
             });
    }, []);
+
+
+
+
+   // --------------------
+   // FOR ORDER DETAIL
+   // --------------------
+   const [visibleModalDestroy, setVisibleModalDestroy] = useState(false)
+   // --------------------
+   // FOR ORDER DETAIL
+   // --------------------
+
    return (
       <ScrollToTop>
          <OrderDetailStyled>
@@ -82,7 +99,7 @@ function OrderDetail(props) {
                   <div className='row'>
                      <div className='col-lg-12'>
                         <div className='form-box payment-received-wrap mb-0'>
-                           <StatusPayment />
+                           <StatusPayment isDestroy={isDestroy} />
                            <div className='form-content'>
                               <div className='row'>
                                  <div className='col-lg-12'>
@@ -91,13 +108,18 @@ function OrderDetail(props) {
                               </div>
                               <div className='section-block' />
                               <PaymentDetail orderDetail={orderDetail} />
-                              <div className='col-lg-12'>
-                                 <div className='btn-box text-center pt-2'>
-                                    <Link to='/user-booking' className='theme-btn'>
-                                       Hoàn tất
-                                    </Link>
-                                 </div>
-                              </div>
+                              {!isDestroy && <div className='col-lg-12 d-flex justify-content-center align-items-center'>
+                                 <Button size="large" className="mr-4" type="dashed" onClick={() => setVisibleModalDestroy(true)}>Hủy tour</Button>
+                                 <Button type="primary" size="large" onClick={() => history.push(USER_BOOKING)}>
+                                    Hoàn tất
+                                 </Button>
+                              </div>}
+                              {isDestroy && <div className='col-lg-12 d-flex justify-content-center align-items-center'>
+                                 <span>Đã hủy</span>
+                                 <Button type="primary" className="ml-4" size="large" onClick={() => history.push(APP_DEFAULT_PATH)}>
+                                    Đặt tour khác
+                                 </Button>
+                              </div>}
                            </div>
                         </div>
                      </div>
@@ -105,6 +127,9 @@ function OrderDetail(props) {
                </div>
             </section>
          </OrderDetailStyled>
+         <Modal width="800px" title="Hủy tour" visible={visibleModalDestroy} onCancel={() => setVisibleModalDestroy(false)} footer={[]}>
+            <ModalDestroyTour setIsDestroy={setIsDestroy} visibleModalDestroy={visibleModalDestroy} setVisibleModalDestroy={setVisibleModalDestroy} orderDetail={orderDetail} />
+         </Modal>
       </ScrollToTop>
    );
 }

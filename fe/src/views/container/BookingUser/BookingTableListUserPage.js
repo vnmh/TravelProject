@@ -12,6 +12,7 @@ import { firstImage } from "~/views/utilities/helpers/utilObject";
 import _ from "lodash";
 import { ORDER_STATUS } from "~/configs/status";
 import { message } from "antd";
+import { currencyFormat } from "~/views/utilities/helpers/currency";
 
 const BookingTableListUserPageStyled = styled.div``;
 
@@ -125,6 +126,10 @@ const BookingTableListUserPage = (props) => {
                                  <span>Tên khách hàng:</span>
                                  {props.bookingDetail?.buyer}
                               </li>
+                              {props.bookingDetail?.status === ORDER_STATUS.Destroy && <li>
+                                 <span>Phí hủy:</span>
+                                 {currencyFormat(props.bookingDetail?.destroyFee)}
+                              </li>}
                            </ul>
                         </div>
                      </div>

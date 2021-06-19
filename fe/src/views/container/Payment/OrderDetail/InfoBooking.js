@@ -51,12 +51,12 @@ function InfoBooking(props) {
                      </li>
                      <li>
                         <span>Check-in:</span>
-                        {UtilDate.toDateLocal(props.orderDetail?.departureDay)}
+                        {UtilDate.toDateLocal(props.orderDetail?.order?.departureDay)}
                      </li>
                      <li>
                         <span>Check-out:</span>
                         {UtilDate.toDateLocal(
-                           moment(props.orderDetail?.departureDay).add(props.orderDetail?.vocationTime, "days")
+                           moment(props.orderDetail?.order?.departureDay).add(props.orderDetail?.order?.vocationTime, "days")
                         )}
                      </li>
                      <li>

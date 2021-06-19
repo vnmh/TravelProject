@@ -9,6 +9,7 @@ import { firstImage } from "~/views/utilities/helpers/utilObject";
 import { currencyFormat } from "~/views/utilities/helpers/currency";
 import * as PATH from "~/configs/routesConfig";
 import Rating from "../../Homepage/Rating";
+import { SCHEDULE_ENUM } from "~/configs/const";
 
 const CardItemGridTourStyled = styled.div``;
 
@@ -87,10 +88,12 @@ const CardItemGridTour = (props) => {
                         <div className='card-price d-flex align-items-center justify-content-between'>
                            <p>
                               <span className='price__from'>Chỉ từ </span>
-                              <span className='price__num'>{currencyFormat(item?.price || 0)}</span>
+                              <span className='price__num'>{currencyFormat(item?.price || 0)}</span>/người
+
                            </p>
                            <span className='tour-hour'>
                               <i className='la la-clock-o mr-1' />
+                              {item.schedule ? ` (${SCHEDULE_ENUM[item.schedule]})` : item.scheduleLoop ? ", mỗi " + item.scheduleLoop + " ngày" : undefined}
                               {item?.vocationTime} ngày
                            </span>
                         </div>

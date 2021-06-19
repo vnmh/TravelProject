@@ -20,6 +20,9 @@ const Tour = function (tour) {
    this.type = tour.type;
    this.minAge = tour.minAge;
    this.groupSize = tour.groupSize;
+   this.video = tour.video;
+   this.schedule = tour.schedule;
+   this.scheduleLoop = tour.scheduleLoop;
 };
 
 const databaseLocal = config.database;
@@ -53,10 +56,9 @@ Tour.getAllTourSearch = function (searchs, funcResult) {
    if (searchs.conditional === 'name') {
       mysql.query(
          'call ' +
-            databaseProduction +
-            `.spsearchEngineTourByName( '${searchs.keySearch}', '${searchs.dayStart}', '${
-               searchs.dayEnd
-            }', ${10000000000} ); `,
+         databaseProduction +
+         `.spsearchEngineTourByName( '${searchs.keySearch}', '${searchs.dayStart}', '${searchs.dayEnd
+         }', ${10000000000} ); `,
          function (err, res) {
             if (err) {
                funcResult(err, null);
@@ -68,10 +70,9 @@ Tour.getAllTourSearch = function (searchs, funcResult) {
    } else if (searchs.conditional === 'landmark' || searchs.conditional === 'address') {
       mysql.query(
          'call ' +
-            databaseProduction +
-            `.spsearchEngineTourByAddress( '${searchs.keySearch}', '${searchs.dayStart}', '${
-               searchs.dayEnd
-            }', ${10000000000} ); `,
+         databaseProduction +
+         `.spsearchEngineTourByAddress( '${searchs.keySearch}', '${searchs.dayStart}', '${searchs.dayEnd
+         }', ${10000000000} ); `,
          function (err, res) {
             if (err) {
                funcResult(err, null);
@@ -83,10 +84,9 @@ Tour.getAllTourSearch = function (searchs, funcResult) {
    } else {
       mysql.query(
          'call ' +
-            databaseProduction +
-            `.spsearchEngineTour( '${searchs.keySearch}', '${searchs.dayStart}', '${
-               searchs.dayEnd
-            }', ${10000000000} ); `,
+         databaseProduction +
+         `.spsearchEngineTour( '${searchs.keySearch}', '${searchs.dayStart}', '${searchs.dayEnd
+         }', ${10000000000} ); `,
          function (err, res) {
             if (err) {
                funcResult(err, null);
@@ -115,42 +115,51 @@ Tour.createTour = function (newTour, funcResult) {
    this.type = newTour.type;
    this.minAge = newTour.minAge;
    this.groupSize = newTour.groupSize;
+   this.video = newTour.video;
+   this.schedule = newTour.schedule;
+   this.scheduleLoop = newTour.scheduleLoop;
    mysql.query(
       'INSERT INTO ' +
-         databaseProduction +
-         ".tours (`titleTour`, `price`, `sale`, `departureDay`, `describe`, `address`, `vocationTime`, `idAccount`, `tags`, `services`, `views`, `votes`, `reuse`, `type`, `minAge`, `groupSize`) VALUES ('" +
-         this.titleTour +
-         "', '" +
-         this.price +
-         "', '" +
-         this.sale +
-         "', '" +
-         this.departureDay +
-         "', '" +
-         this.describe +
-         "', '" +
-         this.address +
-         "', '" +
-         this.vocationTime +
-         "', '" +
-         this.idAccount +
-         "', '" +
-         this.tags +
-         "', '" +
-         this.services +
-         "', '" +
-         this.views +
-         "', '" +
-         this.votes +
-         "', '" +
-         this.reuse +
-         "', '" +
-         this.type +
-         "', '" +
-         this.minAge +
-         "', '" +
-         this.groupSize +
-         "') ",
+      databaseProduction +
+      ".tours (`titleTour`, `price`, `sale`, `departureDay`, `describe`, `address`, `vocationTime`, `idAccount`, `tags`, `services`, `views`, `votes`, `reuse`, `type`, `minAge`, `groupSize`, `schedule`, `scheduleLoop`, `video`) VALUES ('" +
+      this.titleTour +
+      "', '" +
+      this.price +
+      "', '" +
+      this.sale +
+      "', '" +
+      this.departureDay +
+      "', '" +
+      this.describe +
+      "', '" +
+      this.address +
+      "', '" +
+      this.vocationTime +
+      "', '" +
+      this.idAccount +
+      "', '" +
+      this.tags +
+      "', '" +
+      this.services +
+      "', '" +
+      this.views +
+      "', '" +
+      this.votes +
+      "', '" +
+      this.reuse +
+      "', '" +
+      this.type +
+      "', '" +
+      this.minAge +
+      "', '" +
+      this.groupSize +
+      "', '" +
+      this.schedule +
+      "', '" +
+      this.scheduleLoop +
+      "', '" +
+      this.video +
+      "') ",
       function (err, res) {
          if (err) {
             funcResult(err, null);
@@ -178,8 +187,8 @@ Tour.getTourById = function (idTour, funcResult) {
 Tour.getTourByIdWithIdAccount = function (idTour, idAccount, funcResult) {
    mysql.query(
       'SELECT * FROM ' +
-         databaseProduction +
-         ".tours  WHERE idTour = ? AND idAccount = ? AND statusAction <> 'deleted' ;",
+      databaseProduction +
+      ".tours  WHERE idTour = ? AND idAccount = ? AND statusAction <> 'deleted' ;",
       [idTour, idAccount],
       function (err, res) {
          if (err) {

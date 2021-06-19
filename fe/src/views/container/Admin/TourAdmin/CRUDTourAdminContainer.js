@@ -22,7 +22,7 @@ const CRUDTourAdminContainer = (props) => {
    return (
       <CRUDTourAdminContainerStyled>
          <Tabs defaultActiveKey='1' onChange={onChangeTab}>
-            <TabPane tab='Thông tin kaka' key='1'>
+            <TabPane tab='Thông tin' key='1'>
                <CRUDTourAdmin {...props} />
             </TabPane>
             <TabPane tab='Hình ảnh tour' key='2'>
