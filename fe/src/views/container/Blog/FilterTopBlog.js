@@ -14,9 +14,9 @@ function FilterTopBlog(props) {
       <FilterTopBlogStyled>
          <div className='filter-top d-flex align-items-center justify-content-between pb-4'>
             {!props.isCreatePost && (
-               <div className="inline">
+               <div className='inline'>
                   <h3 className='title font-size-24'>{props.blogCount} bài viết được tìm thấy</h3>
-                  <Button
+                  {/* <Button
                      type='primary'
                      className='float-right'
                      size='large'
@@ -25,7 +25,7 @@ function FilterTopBlog(props) {
                         props.isCreatePost && props.setIsSubmit(true); // chỉ submit khi isCreateTour
                      }}>
                      Tạo bài viết
-                  </Button>
+                  </Button> */}
                </div>
             )}
          </div>
