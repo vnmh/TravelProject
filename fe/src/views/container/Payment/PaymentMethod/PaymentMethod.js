@@ -54,6 +54,8 @@ function PaymentMethod(props) {
             props.payment?.price * params.numberPeople -
             props.payment?.price * props.payment?.sale * 0.01 * params.numberPeople,
          numberPeople: params.numberPeople,
+         departureDay: params.departureDay,
+         vocationTime: +props.payment?.vocationTime,
          email: props.info.email ? props.info.email : props.user?.email,
          phone: props.info.phone ? props.info.phone : props.user?.phone,
          buyer: props.info.name ? props.info.name : props.user?.name,
@@ -66,12 +68,14 @@ function PaymentMethod(props) {
       props
          .createOrder(body)
          .then(({ res }) => {
+            console.log(`ithoangtan -  ~ file: PaymentMethod.js ~ line 209 ~ .then ~ res`, res)
+
             message.success(
                props.user?.email
                   ? "Tạo đơn hàng thành công"
                   : "Thông tin đơn hàng đã được gửi tới mail của bạn!" + props.info?.email
             );
-            history.push(PATH.ORDER_DETAIL + parseObjToQuery({ idOrder: res.insertId, idTour: props.payment?.idTour }));
+            res.insertId && history.push(PATH.ORDER_DETAIL + parseObjToQuery({ idOrder: res.insertId, idTour: props.payment?.idTour }));
             setPIN(Date.now()); // Cần tạo mã PIN mới cho lần thanh toán tiếp theo
             setLoading(false);
          })

@@ -34,7 +34,7 @@ function TourDetail(props) {
                props.getTimelineTour(params?.id).then((resTimeline) => {
                   tourDetailAssign = Object.assign(tourDetailAssign, { timelines: _.head(resTimeline.res) });
                   props.getScheduleTour(params?.id).then((resSchedule) => {
-                     tourDetailAssign = Object.assign(tourDetailAssign, { schedule: resSchedule.res });
+                     tourDetailAssign = Object.assign(tourDetailAssign, { scheduleTour: resSchedule.res });
                      setTourDetail(tourDetailAssign);
                   });
                });

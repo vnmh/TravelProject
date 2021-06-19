@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { Accordion, Card } from "react-bootstrap";
+import { Image, Typography } from "antd";
+import { firstImage } from "~/views/utilities/helpers/utilObject";
 
 const ItineraryTourDetailStyled = styled.div``;
 
@@ -22,7 +24,19 @@ function ItineraryTourDetail(props) {
                         {item.dayIndex} - {item?.title}
                      </Accordion.Toggle>
                      <Accordion.Collapse eventKey={index + ""}>
-                        <Card.Body>{item?.description}</Card.Body>
+                        <Card.Body >
+                           <div className="row">
+                              <div className="col-3">
+                                 <Image
+                                    src={firstImage("/img/" + item.image)}
+                                    alt='-img'
+                                 />
+                              </div>
+                              <div className="col-9 pl-0">
+                                 <Typography.Paragraph contenteditable="true" style={{ whiteSpace: "pre-wrap" }}>{item?.description}</Typography.Paragraph>
+                              </div>
+                           </div>
+                        </Card.Body>
                      </Accordion.Collapse>
                   </Card>
                );

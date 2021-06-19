@@ -212,6 +212,7 @@ const removeSignThenLowerCaseString = (value) => {
 };
 
 export const firstImage = (strImages = "", width) => {
+   if (!strImages) return strImages
    let imgUrls = _.first(strImages.split("|"));
    return `${API_URL}${_.isNumber(width) ? `${width}/` : ""}${imgUrls}`;
 };

@@ -32,7 +32,7 @@ const BookingUserPage = (props) => {
 
    useEffect(() => {
       props
-         .getOrdersWithEmail({email : props.user?.email})
+         .getOrdersWithEmail({ email: props.user?.email })
          .then(({ res }) => {
             setTourBooking(res);
          })
@@ -85,26 +85,33 @@ const BookingUserPage = (props) => {
                }))
             );
             break;
+         case ORDER_STATUS.Destroy:
+            setTourBookingFilter(
+               Array.from(_.filter(tourBooking, (o) => {
+                  return o.status === ORDER_STATUS.Destroy;
+               }))
+            );
+            break;
          default:
             setTourBookingFilter(undefined);
             break;
       }
-   }, [status]);
+   }, [status,  tourBooking.length]);
 
    return (
       <ScrollToTop>
          <BookingUserPageStyled>
             <body className='section-bg'>
-                  <Header />
-                  <BookingUser
-                     onChange={handleChangeTable}
-                     tourBooking={tourBooking}
-                     needLoading={needLoading}
-                     setNeedLoading={setNeedLoading}
-                     setStatus={setStatus}
-                     status={status}
-                     tourBookingFilter={tourBookingFilter}
-                  />
+               <Header />
+               <BookingUser
+                  onChange={handleChangeTable}
+                  tourBooking={tourBooking}
+                  needLoading={needLoading}
+                  setNeedLoading={setNeedLoading}
+                  setStatus={setStatus}
+                  status={status}
+                  tourBookingFilter={tourBookingFilter}
+               />
             </body>
          </BookingUserPageStyled>
       </ScrollToTop>
@@ -122,7 +129,7 @@ export default compose(
          // postLogin: appApisActions.postLogin
          login: authActions.login,
          getOrders: appApisActions.getOrders,
-         getOrdersWithEmail : appApisActions.getOrdersWithEmail
+         getOrdersWithEmail: appApisActions.getOrdersWithEmail
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,

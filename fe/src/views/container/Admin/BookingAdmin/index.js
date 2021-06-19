@@ -25,7 +25,6 @@ const BookingAdminPage = (props) => {
    const [status, setStatus] = useState();
    const [tourBookingFilter, setTourBookingFilter] = useState();
    const [pagination, setPagination] = useState({ page: 1, size: 0, total: 0 });
-
    const handleChangeTable = (pagination) => {
       setPagination({
          ...props.pagination,
@@ -35,22 +34,27 @@ const BookingAdminPage = (props) => {
    };
 
    useEffect(() => {
-      props
-         .getOrders()
-         .then(({ res }) => {
-            setTourBooking(res);
-         })
-         .catch((err) => {
-            message.error("Lỗi load dữ liệu tour rồi nha");
+      if (needLoading) {
+         props
+            .getOrders()
+            .then(({ res }) => {
+               setTourBooking(res);
+               if (status) {
+                  filterAction(status, res);
+               }
+            })
+            .catch((err) => {
+               message.error("Lỗi load dữ liệu tour rồi nha");
+            });
+         setPagination({
+            page: 1,
+            size: 10,
+            total: tourBooking.length
          });
-      setPagination({
-         page: 1,
-         size: 10,
-         total: tourBooking.length
-      });
+      }
    }, [needLoading]);
 
-   useEffect(() => {
+   const filterAction = (status, tourBooking) => {
       switch (status) {
          case ORDER_STATUS.New:
             setTourBookingFilter(
@@ -97,10 +101,23 @@ const BookingAdminPage = (props) => {
                )
             );
             break;
+         case ORDER_STATUS.Destroy:
+            setTourBookingFilter(
+               Array.from(
+                  _.filter(tourBooking, (o) => {
+                     return o.status === ORDER_STATUS.Destroy;
+                  })
+               )
+            );
+            break;
          default:
             setTourBookingFilter(undefined);
             break;
       }
+   };
+
+   useEffect(() => {
+      filterAction(status, tourBooking);
    }, [status]);
 
    return (

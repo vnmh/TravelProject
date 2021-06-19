@@ -8,7 +8,7 @@ import { appApisActions } from "~/state/ducks/appApis/index";
 import { Tooltip, Typography } from "antd";
 import { firstImage, removeVietnameseTones } from "~/views/utilities/helpers/utilObject";
 import { currencyFormat } from "~/views/utilities/helpers/currency";
-import { TYPE_TOUR } from "~/configs/const";
+import { SCHEDULE_ENUM, TYPE_TOUR } from "~/configs/const";
 import * as PATH from "~/configs/routesConfig";
 import queryString from "query-string";
 import Rating from "../../Homepage/Rating";
@@ -211,10 +211,12 @@ const CardItemListTour = (props) => {
                      <div className='card-price d-flex align-items-center justify-content-between'>
                         <p>
                            <span className='price__from'>Chỉ từ </span>
-                           <span className='price__num'>{currencyFormat(item.price)}</span>
+                           <span className='price__num'>{currencyFormat(item.price)}</span>/ngườis
+
                         </p>
                         <span className='tour-hour'>
                            <i className='la la-clock-o mr-1' />
+                           {item.schedule ? ` (${SCHEDULE_ENUM[item.schedule]})` : item.scheduleLoop ? ", mỗi " + item.scheduleLoop + " ngày" : undefined}
                            {item.vocationTime} ngày
                         </span>
                      </div>

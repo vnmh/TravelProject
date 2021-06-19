@@ -10,6 +10,7 @@ import { firstImage } from "~/views/utilities/helpers/utilObject";
 import CRUDTourAdminContainer from "./CRUDTourAdminContainer";
 import UtilDate from "~/views/utilities/helpers/UtilDate";
 import { currencyFormat } from "~/views/utilities/helpers/currency";
+import { SCHEDULE_ENUM } from "~/configs/const";
 
 const TourTableListAdminPageStyled = styled.div``;
 
@@ -60,13 +61,14 @@ const TourTableListAdminPage = (props) => {
          title: "Hình ảnh",
          dataIndex: "images",
          key: "images",
+         width: 100,
          render: (images, record) => {
             return (images || []).length > 0 ? (
                <Image.PreviewGroup>
                   {(images || []).map((image, index) => {
                      return (
                         <Image
-                           width={100}
+                           width={80}
                            style={{ display: index !== 0 ? "none" : "unset" }}
                            src={
                               _.get(image, "url") ? firstImage(_.get(image, "url", "")) : "images/destination-img7.jpg"
@@ -92,7 +94,8 @@ const TourTableListAdminPage = (props) => {
       {
          title: "Tên Tour",
          dataIndex: "titleTour",
-         key: "titleTour"
+         key: "titleTour",
+         width: 300
       },
       {
          title: "Địa chỉ khởi hành",
@@ -137,7 +140,8 @@ const TourTableListAdminPage = (props) => {
          key: "describe",
          render: (describe) => {
             return <div style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{describe}</div>;
-         }
+         },
+         width: 300
       },
       {
          title: "Độ tuổi thấp nhất",
@@ -148,6 +152,16 @@ const TourTableListAdminPage = (props) => {
          title: "Số người tối đa",
          dataIndex: "groupSize",
          key: "groupSize"
+      },
+      {
+         title: "Lặp lại",
+         dataIndex: "schedule",
+         key: "schedule",
+         render: (cell, row) => {
+            let schedule = row?.schedule;
+
+            return schedule ? SCHEDULE_ENUM[schedule] : row?.scheduleLoop
+         }
       },
       {
          title: "Trạng thái",
@@ -247,7 +261,7 @@ const TourTableListAdminPage = (props) => {
                onChange={handleChangeTable}
                columns={columns}
                dataSource={tours}
-               scroll={{ scrollToFirstRowOnChange: true, x: 1200 }}
+               scroll={{ scrollToFirstRowOnChange: true, x: 1600 }}
             />
          )}
       </TourTableListAdminPageStyled>

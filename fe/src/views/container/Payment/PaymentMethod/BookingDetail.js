@@ -54,7 +54,7 @@ function BookingDetail(props) {
                               <i className='la la-calendar mr-1 text-black font-size-17' />
                               Ngày khởi hành
                            </span>
-                           {UtilDate.toDateLocal(props.payment?.departureDay)}
+                           {UtilDate.toDateLocal(moment(params?.departureDay))}
                         </li>
                         <li className='font-size-15'>
                            <span className='w-auto d-block mb-n1'>
@@ -62,7 +62,7 @@ function BookingDetail(props) {
                               Ngày kết thúc
                            </span>
                            {UtilDate.toDateLocal(
-                              moment(props.payment?.departureDay).add(props.payment?.vocationTime, "days")
+                              moment(params?.departureDay).add(props.payment?.vocationTime, "days")
                            )}
                         </li>
                         <li className='font-size-15'>
@@ -101,7 +101,7 @@ function BookingDetail(props) {
                            <span>Tổng tiền:</span>
                            {currencyFormat(
                               props.payment?.price * params.numberPeople -
-                                 props.payment?.price * props.payment?.sale * 0.01 * params.numberPeople
+                              props.payment?.price * props.payment?.sale * 0.01 * params.numberPeople
                            )}
                         </li>
                      </ul>
