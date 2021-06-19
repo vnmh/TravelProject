@@ -35,10 +35,10 @@ const CRUDTourAdmin = (props) => {
             // values.address là một mảng, khi lưu xuống CSDL cần phải chuyển thành string bằng phương thức join
             address: values?.address.join(","),
             services: values?.services.join(","),
-            idTour: props.currentEdit?.idTour,
+            idTour: props.currentEdit?.idTour
          };
          if (bodyUpdate.loop === "schedule") bodyUpdate.scheduleLoop = 0;
-         if (bodyUpdate.loop === "scheduleLoop") bodyUpdate.schedule = '';
+         if (bodyUpdate.loop === "scheduleLoop") bodyUpdate.schedule = "";
          delete bodyUpdate.loop;
          props
             .putTour(bodyUpdate)
@@ -56,7 +56,7 @@ const CRUDTourAdmin = (props) => {
          //Gọi API post tour
          const bodyCreate = values;
          if (values.loop === "schedule") bodyCreate.scheduleLoop = 0;
-         if (values.loop === "scheduleLoop") bodyCreate.schedule = '';
+         if (values.loop === "scheduleLoop") bodyCreate.schedule = "";
          props
             .postTour(bodyCreate)
             .then((res) => {
@@ -99,13 +99,12 @@ const CRUDTourAdmin = (props) => {
    }, []);
    // services
 
-
    // SCHEDULE
-   const [schedule, setSchedule] = useState()
+   const [schedule, setSchedule] = useState();
    const handleCheckLoop = (e) => {
-      form.setFieldsValue({ loop: e?.target?.value ? e?.target?.value : e })
-      setSchedule(e?.target?.value ? e?.target?.value : e)
-   }
+      form.setFieldsValue({ loop: e?.target?.value ? e?.target?.value : e });
+      setSchedule(e?.target?.value ? e?.target?.value : e);
+   };
    // SCHEDULE
    const initValue = {
       // Để load dữ liệu đã có lên
@@ -113,19 +112,21 @@ const CRUDTourAdmin = (props) => {
       departureDay: moment(props.currentEdit?.departureDay),
       address: props.currentEdit?.address ? props.currentEdit?.address : undefined, // vì đã map bên kia ròi, ở đây không cần làm lại
       services: props.currentEdit?.services ? props.currentEdit?.services : undefined, // vì đã map bên kia ròi, ở đây không cần làm lại,
-      loop: props.currentEdit?.schedule ? "schedule" : props.currentEdit?.scheduleLoop ? "scheduleLoop" : undefined,
-   }
+      loop: props.currentEdit?.schedule ? "schedule" : props.currentEdit?.scheduleLoop ? "scheduleLoop" : undefined
+   };
    useEffect(() => {
-      setSchedule(props.currentEdit?.schedule ? "schedule" : props.currentEdit?.scheduleLoop ? "scheduleLoop" : undefined)
+      setSchedule(
+         props.currentEdit?.schedule ? "schedule" : props.currentEdit?.scheduleLoop ? "scheduleLoop" : undefined
+      );
       form.setFieldsValue({
          // Để load dữ liệu đã có lên
          ...props.currentEdit,
          departureDay: moment(props.currentEdit?.departureDay),
          address: props.currentEdit?.address ? props.currentEdit?.address : undefined, // vì đã map bên kia ròi, ở đây không cần làm lại
          services: props.currentEdit?.services ? props.currentEdit?.services : undefined, // vì đã map bên kia ròi, ở đây không cần làm lại,
-         loop: props.currentEdit?.schedule ? "schedule" : props.currentEdit?.scheduleLoop ? "scheduleLoop" : undefined,
-      })
-   }, [props.currentEdit?.id])
+         loop: props.currentEdit?.schedule ? "schedule" : props.currentEdit?.scheduleLoop ? "scheduleLoop" : undefined
+      });
+   }, [props.currentEdit?.id]);
 
    return (
       <CRUDTourAdminStyled>
@@ -137,7 +138,7 @@ const CRUDTourAdmin = (props) => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}>
             <div className='row overflow-hidden'>
-               <div className="col-6">
+               <div className='col-6'>
                   <Form.Item
                      className='col-12'
                      label='Tên tour'
@@ -170,7 +171,7 @@ const CRUDTourAdmin = (props) => {
                      rules={[{ required: true, message: "Hãy nhập tên ngày khởi hành!" }]}>
                      <DatePicker
                         format='DD/MM/YYYY'
-                     // value của thằng này là một dạng moment (from momentjs)
+                        // value của thằng này là một dạng moment (from momentjs)
                      />
                   </Form.Item>
                   <Form.Item
@@ -190,7 +191,9 @@ const CRUDTourAdmin = (props) => {
                         style={{ width: "100%" }}
                         placeholder='Chọn địa chỉ'
                         optionFilterProp='children'
-                        filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
+                        filterOption={(input, option) =>
+                           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                        }>
                         {PROVINCES.map((province) => {
                            return <Option value={province}>{province}</Option>;
                         })}
@@ -207,7 +210,7 @@ const CRUDTourAdmin = (props) => {
                      <InputNumber style={{ width: "100%" }} min={0} max={80} step={1} />
                   </Form.Item>
                </div>
-               <div className="col-6">
+               <div className='col-6'>
                   <Form.Item
                      className='col-12'
                      label='Số người'
@@ -217,7 +220,9 @@ const CRUDTourAdmin = (props) => {
                         style={{ width: "100%" }}
                         placeholder='Chọn số người'
                         optionFilterProp='children'
-                        filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
+                        filterOption={(input, option) =>
+                           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                        }>
                         {PEOPLE_NUM.map((pNum) => {
                            return <Option value={pNum}>{`<${pNum}`}</Option>;
                         })}
@@ -280,7 +285,9 @@ const CRUDTourAdmin = (props) => {
                         style={{ width: "100%" }}
                         placeholder='Chọn dịch vụ'
                         optionFilterProp='children'
-                        filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
+                        filterOption={(input, option) =>
+                           option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                        }>
                         {services.map((service) => {
                            return <Option value={service?.idServices + ""}>{service?.titleService}</Option>;
                         })}
@@ -293,37 +300,35 @@ const CRUDTourAdmin = (props) => {
                      rules={[{ required: true, message: "Hãy nhập mô tả!" }]}>
                      <TextArea rows={4} />
                   </Form.Item>
-                  <Form.Item
-                     className='col-12'
-                     label='Lập kế hoạch'
-                     name='loop'
-                     valuePropName="checked"
-                  >
+                  <Form.Item className='col-12' label='Lập kế hoạch' name='loop' valuePropName='checked'>
                      <Radio.Group onChange={(e) => handleCheckLoop(e)}>
-                        <Radio value="schedule">Tuần tự</Radio>
-                        <Radio value="scheduleLoop">Sau n ngày</Radio>
+                        <Radio value='schedule'>Tuần tự</Radio>
+                        <Radio value='scheduleLoop'>Sau n ngày</Radio>
+                        <Radio value=''>Không</Radio>
                      </Radio.Group>
                   </Form.Item>
-                  {schedule === "schedule" && <Form.Item
-                     className='col-12'
-                     label='Tuần tự'
-                     name='schedule'
-                     rules={[{ required: true, message: "Hãy chọn loại lặp!" }]}>
-                     <Select style={{ width: "100%" }}>
-                        {Object.keys(SCHEDULE_ENUM).map((o) => {
-                           return <Option value={o}>{SCHEDULE_ENUM[o]}</Option>;
-                        })}
-                     </Select>
-                  </Form.Item>
-                  }
-                  {schedule === "scheduleLoop" && <Form.Item
-                     className='col-12'
-                     label='Sau n ngày'
-                     name='scheduleLoop'
-                     rules={[{ required: true, message: "Hãy nhập số ngày!" }]}>
-                     <Input />
-                  </Form.Item>
-                  }
+                  {schedule === "schedule" && (
+                     <Form.Item
+                        className='col-12'
+                        label='Tuần tự'
+                        name='schedule'
+                        rules={[{ required: true, message: "Hãy chọn loại lặp!" }]}>
+                        <Select style={{ width: "100%" }}>
+                           {Object.keys(SCHEDULE_ENUM).map((o) => {
+                              return <Option value={o}>{SCHEDULE_ENUM[o]}</Option>;
+                           })}
+                        </Select>
+                     </Form.Item>
+                  )}
+                  {schedule === "scheduleLoop" && (
+                     <Form.Item
+                        className='col-12'
+                        label='Sau n ngày'
+                        name='scheduleLoop'
+                        rules={[{ required: true, message: "Hãy nhập số ngày!" }]}>
+                        <Input />
+                     </Form.Item>
+                  )}
                </div>
             </div>
             <div className='w-100 d-flex justify-content-center align-items-center'>
@@ -339,7 +344,7 @@ const CRUDTourAdmin = (props) => {
                </Button>
             </div>
          </Form>
-      </CRUDTourAdminStyled >
+      </CRUDTourAdminStyled>
    );
 };
 

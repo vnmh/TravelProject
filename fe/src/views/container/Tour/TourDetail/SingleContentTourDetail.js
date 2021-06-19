@@ -20,7 +20,6 @@ function SingleContentTourDetail(props) {
                   <span className='badge badge-warning text-white font-size-16'>4.6</span>
                   <span>(4,209 Reviews)</span>
                </p> */}
-               
             </div>
          </div>
          <div className='section-block' />
