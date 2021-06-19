@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // app.use(cookieParser(process.env.SECRET));
 app.use(cookieParser(process.env.SECURITY));
- 
+
 app.use((req, res, next) => {
    res.setHeader('Access-Control-Allow-Origin', '*');
    res.setHeader(
@@ -25,10 +25,10 @@ app.use((req, res, next) => {
    // res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, HEAD, GET, POST, PUT, PATCH, DELETE');
    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, HEAD, GET, POST, PUT, DELETE');
    res.setHeader('credentials', true); // required to pass);
- 
+
    next();
 });
- 
+
 app.use((error, req, res, next) => {
    const status = error.statusCode || 500;
    const message = error.message;
@@ -36,17 +36,17 @@ app.use((error, req, res, next) => {
    res.status(status).json({ message: message, data: data });
    next();
 });
- 
+
 const corsOptions = {
-   origin: ['http://localhost:3000', 'http://localhost:9999', 'https://localhost:3000', 'https://localhost:9999'], // reqexp will match all prefixes
-   default: 'http://localhost:9999',
+   origin: ['http://localhost:3000', 'http://localhost:8888', 'https://localhost:3000', 'https://localhost:8888'], // reqexp will match all prefixes
+   default: 'http://localhost:8888',
    // methods: 'GET,HEAD,POST,PATCH,DELETE,OPTIONS,PUT',
    methods: 'GET,HEAD,POST,PUT,DELETE,OPTIONS',
    credentials: true // required to pass
    // allowedHeaders:
    // "Content-Type, Authorization, Content-Language, Accept-Language, Last-Event-ID, X-Requested-With"
 };
- 
+
 if (process.env.NODE_ENV === 'production') {
    app.use(
       cors({
@@ -54,9 +54,9 @@ if (process.env.NODE_ENV === 'production') {
             process.env.FRONT_END,
             process.env.ADMIN_FRONT_END,
             'http://localhost:3000',
-            'http://localhost:9999',
+            'http://localhost:8888',
             'https://localhost:3000',
-            'https://localhost:9999',
+            'https://localhost:8888',
             '*'
          ],
          // methods: 'GET,HEAD,POST,PATCH,DELETE,OPTIONS,PUT',
@@ -67,13 +67,13 @@ if (process.env.NODE_ENV === 'production') {
 } else {
    app.use(cors(corsOptions));
 }
- 
+
 app.use('/', require('./routes/api'));
- 
+
 app.listen(app.get('port'), function () {
    console.log(`Server on port ${app.get('port')}`);
 });
- 
+
 passport.use(
    new GoogleTokenStrategy(
       {
