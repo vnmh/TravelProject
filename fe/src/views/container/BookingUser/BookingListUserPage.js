@@ -28,7 +28,11 @@ const BookingListUserPage = (props) => {
                               {/* Hiển thị {pagination.page} trong tổng số {Math.ceil(pagination.total / pagination.size)}{" "}
                               trang của {pagination.total} phần tử */}
                            </p>
-                           <Select style={{ width: 200 }} placeholder='Trạng thái' allowClear onChange={props.setStatus}>
+                           <Select
+                              style={{ width: 200 }}
+                              placeholder='Trạng thái'
+                              allowClear
+                              onChange={props.setStatus}>
                               {Object.keys(ORDER_STATUS).map((status) => {
                                  return (
                                     <Select.Option value={status}>{renderStatusOrder(status, "String")}</Select.Option>
