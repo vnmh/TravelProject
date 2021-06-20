@@ -295,6 +295,18 @@ const CRUDTourAdmin = (props) => {
                   </Form.Item>
                   <Form.Item
                      className='col-12'
+                     label='Giảm giá'
+                     name='sale'
+                     rules={[
+                        {
+                           required: true,
+                           message: "Hãy nhập giảm giá!"
+                        }
+                     ]}>
+                     <Input />
+                  </Form.Item>
+                  <Form.Item
+                     className='col-12'
                      label='Mô tả'
                      name='describe'
                      rules={[{ required: true, message: "Hãy nhập mô tả!" }]}>
