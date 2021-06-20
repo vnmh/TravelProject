@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import { connect } from "react-redux";
 import { authActions } from "~/state/ducks/authUser";
@@ -11,8 +11,10 @@ import moment from "moment";
 import { firstImage } from "~/views/utilities/helpers/utilObject";
 import _ from "lodash";
 import { ORDER_STATUS } from "~/configs/status";
-import { message } from "antd";
+import { message, Tooltip, Typography } from "antd";
 import { currencyFormat } from "~/views/utilities/helpers/currency";
+import * as PATH from "~/configs/routesConfig";
+import { parseObjToQuery } from "~/views/utilities/helpers";
 
 const BookingTableListUserPageStyled = styled.div``;
 
@@ -80,7 +82,7 @@ const BookingTableListUserPage = (props) => {
    useEffect(() => {
       props.setNeedLoading(true);
    }, [_.first(props.tourBookingFilter || [])?.idTour, _.last(props.tourBookingFilter || [])?.idTour]);
-
+   
    return (
       <BookingTableListUserPageStyled>
          <div class='row'>
@@ -101,7 +103,22 @@ const BookingTableListUserPage = (props) => {
                         </div>
                         <div className='card-body'>
                            <div className='d-flex align-items-center'>
-                              <h3 className='card-title'>{bookingDetail?.titleTour}</h3>
+                              <h3 className='card-title'>
+                                 <Tooltip title={bookingDetail?.titleTour}>
+                                    <Link
+                                       to={
+                                          PATH.ORDER_DETAIL +
+                                          parseObjToQuery({
+                                             idOrder: props.bookingDetail?.idOrder,
+                                             idTour: props.bookingDetail?.idTour
+                                          })
+                                       }>
+                                       <Typography.Paragraph name='title' classname='text-link' ellipsis={{ rows: 2 }}>
+                                          {bookingDetail?.titleTour}
+                                       </Typography.Paragraph>
+                                    </Link>
+                                 </Tooltip>
+                              </h3>
                            </div>
                            <ul className='list-items list-items-2 pt-2 pb-3'>
                               <li>
@@ -126,10 +143,12 @@ const BookingTableListUserPage = (props) => {
                                  <span>Tên khách hàng:</span>
                                  {props.bookingDetail?.buyer}
                               </li>
-                              {props.bookingDetail?.status === ORDER_STATUS.Destroy && <li>
-                                 <span>Phí hủy:</span>
-                                 {currencyFormat(props.bookingDetail?.destroyFee)}
-                              </li>}
+                              {props.bookingDetail?.status === ORDER_STATUS.Destroy && (
+                                 <li>
+                                    <span>Phí hủy:</span>
+                                    {currencyFormat(props.bookingDetail?.destroyFee)}
+                                 </li>
+                              )}
                            </ul>
                         </div>
                      </div>
