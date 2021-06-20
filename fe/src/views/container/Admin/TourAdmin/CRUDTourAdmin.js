@@ -209,6 +209,18 @@ const CRUDTourAdmin = (props) => {
                      rules={[{ required: true, message: "Hãy nhập độ tuổi thấp nhất!" }]}>
                      <InputNumber style={{ width: "100%" }} min={0} max={80} step={1} />
                   </Form.Item>
+                  <Form.Item
+                     className='col-12'
+                     label='Giảm giá'
+                     name='sale'
+                     rules={[
+                        {
+                           required: true,
+                           message: "Hãy nhập giảm giá!"
+                        }
+                     ]}>
+                     <Input />
+                  </Form.Item>
                </div>
                <div className='col-6'>
                   <Form.Item
