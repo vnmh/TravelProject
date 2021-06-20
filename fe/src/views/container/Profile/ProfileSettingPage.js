@@ -67,8 +67,8 @@ const ProfileSystem = (props) => {
 
    return (
       <ProfileSystemStyled>
-         <div className='col-lg-12 d-flex justify-content-center mt-5'>
-            <div className='form-box '>
+         <div className='col-lg-12 d-flex justify-content-center' style={{marginTop:"5rem!important"}}>
+            <div className='form-box'>
                <div className='form-title-wrap'>
                   <h1 className='title d-flex justify-content-center pt-2' style={{ fontWeight: 700, fontSize: 28 }}>
                      THÔNG TIN CÁ NHÂN
