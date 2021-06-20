@@ -7,7 +7,20 @@ import styled from "styled-components"; // Dùng để ghi đè style bên trong
 import Avatar from "./Avatar";
 import { message } from "antd";
 
-const ProfileSystemStyled = styled.div``;
+const ProfileSystemStyled = styled.div`
+   .form-box-profile {
+      border: 1px solid rgba(128, 137, 150, 0.1);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  margin-top: 90px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 0 40px rgba(82, 85, 90, 0.1);
+  -moz-box-shadow: 0 0 40px rgba(82, 85, 90, 0.1);
+  box-shadow: 0 0 40px rgba(82, 85, 90, 0.1); }
+   }
+`;
 
 const ProfileSystem = (props) => {
    const [avatar, setAvatar] = useState("");
@@ -67,8 +80,8 @@ const ProfileSystem = (props) => {
 
    return (
       <ProfileSystemStyled>
-         <div className='col-lg-12 d-flex justify-content-center' style={{marginTop:"5rem!important"}}>
-            <div className='form-box'>
+         <div className='col-lg-12 d-flex justify-content-center'>
+            <div className='form-box-profile'>
                <div className='form-title-wrap'>
                   <h1 className='title d-flex justify-content-center pt-2' style={{ fontWeight: 700, fontSize: 28 }}>
                      THÔNG TIN CÁ NHÂN
