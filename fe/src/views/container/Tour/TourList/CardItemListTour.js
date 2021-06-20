@@ -212,12 +212,15 @@ const CardItemListTour = (props) => {
                         <p>
                            <span className='price__from'>Chỉ từ </span>
                            <span className='price__num'>{currencyFormat(item.price)}</span>/ngườis
-
                         </p>
-                        <span className='tour-hour'>
-                           <i className='la la-clock-o mr-1' />
-                           {item.schedule ? ` (${SCHEDULE_ENUM[item.schedule]})` : item.scheduleLoop ? ", mỗi " + item.scheduleLoop + " ngày" : undefined}
+                        <span>
+                           <i className='la la-clock mr-1' />
                            {item.vocationTime} ngày
+                           {item.schedule
+                              ? ` (${SCHEDULE_ENUM[item.schedule]})`
+                              : item.scheduleLoop
+                              ? " (Mỗi " + item.scheduleLoop + " ngày)"
+                              : undefined}
                         </span>
                      </div>
                   </div>
