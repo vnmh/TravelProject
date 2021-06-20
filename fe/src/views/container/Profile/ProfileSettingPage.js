@@ -28,6 +28,12 @@ const ProfileSystem = (props) => {
          .updateProfile(body)
          .then((res) => {
             message.success("Cập nhật thành công");
+            props
+               .getProfile(props.profile?.idAccount)
+               .then()
+               .catch((err) => {
+                  console.log("hiendev ~ file: ProfileSettingPage.js ~ line 34 ~ .then ~ err", err);
+               });
          })
          .catch((err) => {
             message.error("Cập nhật thất bại");
@@ -42,7 +48,7 @@ const ProfileSystem = (props) => {
          case "phone":
             setPhone(e.target?.value || "");
             break;
-            case "address":
+         case "address":
             setAddress(e.target?.value || "");
             break;
          default:
@@ -159,6 +165,7 @@ export default compose(
       }),
       {
          login: authActions.login,
+         getProfile: authActions.getProfile,
          updateProfile: authActions.updateProfile
       }
    ),

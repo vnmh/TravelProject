@@ -52,8 +52,7 @@ export default compose(
       }),
       {
          // postLogin: appApisActions.postLogin
-         login: authActions.login,
-         getProfile: authActions.getProfile
+         login: authActions.login
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,
