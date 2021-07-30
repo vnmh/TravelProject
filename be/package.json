@@ -1,13 +1,13 @@
 {
-  "name": "backend",
+  "name": "backend-travel-project",
   "version": "1.0.1",
-  "description": "",
+  "description": "KLTN - 2020-2021",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js"
   },
-  "author": "ithoangtan",
+  "author": "MinhHien-XuanMai",
   "license": "ISC",
   "dependencies": {
     "@babel/preset-env": "^7.13.12",
