@@ -211,7 +211,7 @@ const CardItemListTour = (props) => {
                      <div className='card-price d-flex align-items-center justify-content-between'>
                         <p>
                            <span className='price__from'>Chỉ từ </span>
-                           <span className='price__num'>{currencyFormat(item.price)}</span>/ngườis
+                           <span className='price__num'>{currencyFormat(item.price)}</span>/người
                         </p>
                         <span>
                            <i className='la la-clock mr-1' />
