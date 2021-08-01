@@ -75,25 +75,25 @@ const SliderHomePage = (props) => {
          <Carousel id='fullscreen-slide-contain' style={{ height: 500 }}>
             {tours.map((item) => {
                return (
-                  <div style={{ height: 500, maxWidth: "100%" }} className='position-relative'>
-                     <div
-                        className='position-absolute'
-                        style={{ marginLeft: 220, marginTop: 25, maxWidth: window.innerWidth * 0.7 }}>
-                        <Typography.Title className='title-tour'>{item.titleTour}</Typography.Title>
-                        <Typography.Paragraph
-                           ellipsis={{ rows: 2 }}
-                           strong
-                           className='text-wrap text-describe'
-                           style={{ color: "white" }}>
-                           {item.describe}
-                        </Typography.Paragraph>
-                        <Link
-                           to={PATH.TOUR_DETAIL.replace(":id", item.idTour)}
-                           type='primary'
-                           size='large'
-                           className='btn btn-primary float-right'>
-                           Xem chi tiết
-                        </Link>
+                  <div style={{ height: 500 }} className='position-relative '>
+                     <div className='position-absolute w-100'>
+                        <div className='container mt-4'>
+                           <Typography.Title className='title-tour'>{item.titleTour}</Typography.Title>
+                           <Typography.Paragraph
+                              ellipsis={{ rows: 2 }}
+                              strong
+                              className='text-wrap text-describe'
+                              style={{ color: "white" }}>
+                              {item.describe}
+                           </Typography.Paragraph>
+                           <Link
+                              to={PATH.TOUR_DETAIL.replace(":id", item.idTour)}
+                              type='primary'
+                              size='large'
+                              className='btn btn-primary float-right'>
+                              Xem chi tiết
+                           </Link>
+                        </div>
                      </div>
                      <img
                         style={{ objectFit: "cover", width: "100%" }}

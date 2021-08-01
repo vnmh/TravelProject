@@ -6,6 +6,7 @@ import { authActions } from "~/state/ducks/authUser";
 import styled from "styled-components"; // Dùng để ghi đè style bên trong component hoặc để code style như một css thông thường
 import BookingListAdminPage from "./BookingListAdminPage";
 import BookingBreadAdminPage from "./BookingBreadAdminPage";
+import BookingAdminTable from "./BookingAdminTable";
 
 const BookingAdminStyled = styled.div``;
 
@@ -15,15 +16,10 @@ const BookingAdmin = (props) => {
          <div class='dashboard-content-wrap'>
             <BookingBreadAdminPage />
             <div class='dashboard-main-content'>
-               <div class='container-fluid'>
-                  <BookingListAdminPage
-                     tourBooking={props.tourBooking}
-                     needLoading={props.needLoading}
-                     setNeedLoading={props.setNeedLoading}
-                     setStatus={props.setStatus}
-                     status={props.status}
-                     tourBookingFilter={props.tourBookingFilter}
-                  />
+               <div class='container-fluid row'>
+                  <div className='col-lg-12 form-box'>
+                     <BookingAdminTable />
+                  </div>
                </div>
             </div>
          </div>
@@ -40,7 +36,7 @@ export default compose(
       }),
       {
          // postLogin: appApisActions.postLogin
-         login: authActions.login,
+         login: authActions.login
       }
    ),
    withRouter //để push(nhảy qua trang khác) là chủ yếu,

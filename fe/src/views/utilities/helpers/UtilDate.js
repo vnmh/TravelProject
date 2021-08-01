@@ -11,7 +11,7 @@ export default class UtilDate {
    // Mặc định app nhận thời gian là UTC + 00
    // => *** Khi hiển thị trên giao diện sẽ cộng thời gian này GTM + 07 ***
    // Đối với các trường hợp time do app quyết định và gửi lên server thì time gửi đi phải là UTC + 00
-   static DEFAULT_UTC = true;
+   static DEFAULT_UTC = false;
 
    //Server UTC
    //static formatDateTimeServer = 'YYYY-MM-DDTHH:mm:ss'; // HH = 24h
@@ -190,7 +190,12 @@ export default class UtilDate {
          if (!UtilDate.isValid(dateTimeLocal)) {
             return "";
          }
-         return moment(dateTimeLocal).utc().format(UtilDate.formatDateTimeServer);
+         return moment(dateTimeLocal)
+            .set("h", 7)
+            .set("m", 0)
+            .set("s", 0)
+            .set("millisecond", 0)
+            .format(UtilDate.formatDateTimeServer);
       } catch (e) {
          return "";
       }
@@ -201,7 +206,7 @@ export default class UtilDate {
          if (!UtilDate.isValid(dateTimeLocal)) {
             return "";
          }
-         return moment(dateTimeLocal).utc().format(UtilDate.formatTimeServer);
+         return moment(dateTimeLocal).format(UtilDate.formatTimeServer);
       } catch (e) {
          return "";
       }

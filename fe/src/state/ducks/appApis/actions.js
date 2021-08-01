@@ -4,8 +4,10 @@ import parseObjToQuery from "~/views/utilities/helpers/parseObjToQuery";
 
 // TOUR
 export const getTours = (params) => apiAction("get")(types.COMMON, "/tours" + parseObjToQuery(params), {}, true);
+export const getToursAll = (params) => apiAction("get")(types.COMMON, "/tours-all" + parseObjToQuery(params), {}, true);
 export const putTour = (body) => apiAction("put")(types.COMMON, "/tour", body, true);
 export const getTour = (idTour) => apiAction("get")(types.COMMON, "/tour" + parseObjToQuery({ idTour }), {}, true);
+export const getTourAll = (idTour) => apiAction("get")(types.COMMON, "/tour-all" + parseObjToQuery({ idTour }), {}, true);
 export const postTour = (body) => apiAction("post")(types.COMMON, "/tour", body, true);
 export const deleteTour = (idTour) =>
    apiAction("delete")(types.COMMON, "/tour" + parseObjToQuery({ idTour }), {}, true);
@@ -54,6 +56,7 @@ export const createOrder = (body) => apiAction("post")(types.COMMON, "/order", b
 export const orderUpdateStatus = (body) => apiAction("put")(types.COMMON, "/orderUpdateStatus", body, true);
 export const getOrder = (params) => apiAction("get")(types.COMMON, "/order" + parseObjToQuery(params), {}, true);
 export const getOrders = (params) => apiAction("get")(types.COMMON, "/orders" + parseObjToQuery(params), {}, true);
+export const getOrdersWithIdTour = (params) => apiAction("get")(types.COMMON, "/ordersWithIdTour" + parseObjToQuery(params), {}, true);
 export const deleteOrder = (idOrder) =>
    apiAction("delete")(types.COMMON, "/order" + parseObjToQuery({ idOrder }), {}, true);
 

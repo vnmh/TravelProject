@@ -155,9 +155,9 @@ const Footer = (props) => {
                      <div className='col-lg-7'>
                         <div className='copy-right padding-top-30px'>
                            <p className='copy__desc'>
-                              © Copyright Trizen 2020. Made with
-                              <span className='la la-heart' /> by{" "}
-                              <a href='https://themeforest.net/user/techydevs/portfolio'>TechyDevs</a>
+                              © Copyright Trizen 2020.
+                              {/* <span className='la la-heart' /> by{" "} */}
+                              {/* <a href='https://themeforest.net/user/techydevs/portfolio'>TechyDevs</a> */}
                            </p>
                         </div>
                      </div>

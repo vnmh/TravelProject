@@ -84,6 +84,7 @@ const CardItemHomePage = (props) => {
                         <div className='card-img'>
                            <Link to={PATH.TOUR_DETAIL.replace(":id", item.idTour)} className='d-block'>
                               <img
+                                 style={{ maxHeight: 203.65, objectFit: "cover" }}
                                  src={
                                     _.get(_.head(item.images), "url")
                                        ? firstImage(_.get(_.head(item.images), "url", ""))
@@ -94,11 +95,14 @@ const CardItemHomePage = (props) => {
                            </Link>
                            {item?.sale > 0 ? <span className='badge'>Tour bán chạy</span> : ""}
                         </div>
-                        <div className='card-body'>
+                        <div className='card-body' style={{ minHeight: 207 }}>
                            <h3 className='card-title'>
                               <Tooltip title={item.titleTour}>
                                  <Link to={PATH.TOUR_DETAIL.replace(":id", item.idTour)}>
-                                    <Typography.Paragraph className='text_link' ellipsis={{ rows: 2 }}>
+                                    <Typography.Paragraph
+                                       className='text_link mb-2'
+                                       style={{ minHeight: 45 }}
+                                       ellipsis={{ rows: 2 }}>
                                        {item.titleTour}
                                     </Typography.Paragraph>
                                  </Link>
@@ -106,13 +110,23 @@ const CardItemHomePage = (props) => {
                            </h3>
                            <Rating item={item}></Rating>
                            <div className='card-price d-flex align-items-center justify-content-between'>
-                              <span>
-                                 <i className='la la-clock mr-1' />
-                                 {item.vocationTime} ngày
-                                 {item.schedule ? ` (${SCHEDULE_ENUM[item.schedule]})` : item.scheduleLoop ? " (Mỗi " + item.scheduleLoop + " ngày)" : undefined}
-                              </span>
+                              <div>
+                                 <p className='m-0'>
+                                    <span>
+                                       <i className='la la-clock mr-1' />
+                                       {item.vocationTime} ngày
+                                    </span>
+                                 </p>
+                                 <p className='m-0'>
+                                    {item.schedule
+                                       ? ` (${SCHEDULE_ENUM[item.schedule]})`
+                                       : item.scheduleLoop
+                                       ? " (Mỗi " + item.scheduleLoop + " ngày)"
+                                       : undefined}
+                                 </p>
+                              </div>
                               <p>
-                                 <span className='price__from'>Chỉ từ </span>
+                                 <span className='price__from'>Từ </span>
                                  <span className='price__num'>{currencyFormat(item.price)}</span>/người
                               </p>
                            </div>

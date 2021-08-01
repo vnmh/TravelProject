@@ -11,8 +11,7 @@ export const ORDER_STATUS = {
    Paid: "Paid",
    Done: "Done",
    Cancel: "Cancel",
-   Destroy: "Destroy",
-
+   Destroy: "Destroy"
 };
 export const renderStatusOrder = (status, type) => {
    if (type === "String") {
@@ -23,8 +22,6 @@ export const renderStatusOrder = (status, type) => {
             return "Chờ thanh toán";
          case ORDER_STATUS.Paid:
             return "Đã thanh toán";
-         case ORDER_STATUS.Done:
-            return "Đã hoàn thành";
          case ORDER_STATUS.Cancel:
             return "Đã hủy";
          case ORDER_STATUS.Destroy:
@@ -52,12 +49,6 @@ export const renderStatusOrder = (status, type) => {
                   Đã thanh toán
                </span>
             );
-         case ORDER_STATUS.Done:
-            return (
-               <span style={{ color: "#ffffff", background: "#95de64", borderRadius: "10px", textAlign: "center" }}>
-                  Đã hoàn thành
-               </span>
-            );
          case ORDER_STATUS.Cancel:
             return (
                <span style={{ color: "#ffffff", background: "#bfbfbf", borderRadius: "10px", textAlign: "center" }}>
@@ -78,7 +69,7 @@ export const renderStatusOrder = (status, type) => {
 export const REVIEW_STATUS = {
    New: "New",
    Approve: "Approve",
-   Cancel: "Cancel",
+   Cancel: "Cancel"
 };
 export const renderStatusReview = (status, type) => {
    if (type === "String") {

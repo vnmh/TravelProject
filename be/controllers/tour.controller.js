@@ -51,7 +51,25 @@ exports.listTourSearch = function (req, res) {
     res.json(tour);
   });
 };
-
+exports.listAllAll = function (req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
+  const idAccount = req.query.idAccount;
+  if (idAccount !== null && idAccount !== undefined && idAccount !== "") {
+    //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
+    Tour.getAllTourForUserAll(req.query.idAccount, function (err, tour) {
+      if (err) res.send(err);
+      res.json(tour);
+    });
+  } else {
+    //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
+    Tour.getAllTourAll(function (err, tour) {
+      if (err) res.send(err);
+      res.json(tour);
+    });
+  }
+};
 exports.listAll = function (req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm
@@ -110,7 +128,32 @@ exports.read = function (req, res) {
     });
   }
 };
+exports.readAll = function (req, res) {
+  //Nên dùng express-validator để validator dữ liệu trước
+  //Nhưng vì không có thời gian nên khoan làm
+  //https://express-validator.github.io/docs/
 
+  const idAccount = req.query.idAccount;
+  if (idAccount !== null && idAccount !== undefined && idAccount !== "") {
+    //Cú pháp cũ với callback - các controller khác sẽ dùng với Promisez
+    Tour.getTourByIdWithIdAccountAll(
+      req.query.idTour,
+      req.query.idAccount,
+      function (err, tour) {
+        if (err) res.send(err);
+        res.json(tour[0]); //Đã là API thì trả về phải chuẩn
+        //Chỉ có một phần tử thì không lý do gì phải res về một mảng
+      }
+    );
+  } else {
+    //Cú pháp cũ với callback - các controller khác sẽ dùng với Promisez
+    Tour.getTourByIdAll(req.query.idTour, function (err, tour) {
+      if (err) res.send(err);
+      res.json(tour[0]); //Đã là API thì trả về phải chuẩn
+      //Chỉ có một phần tử thì không lý do gì phải res về một mảng
+    });
+  }
+};
 exports.update = function (req, res) {
   //Nên dùng express-validator để validator dữ liệu trước
   //Nhưng vì không có thời gian nên khoan làm

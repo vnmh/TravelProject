@@ -65,39 +65,39 @@ Order.createOrder = function (newOrder, funcResult) {
 
    mysql.query(
       'INSERT INTO ' +
-      databaseProduction +
-      '.orders (`PIN`, `status`, `totalPrice`, `numberPeople`,' +
-      ' `address`, `phone`,`email`,`notes`,' +
-      (this.idAccount ? ' `idAccount`,' : ' ') +
-      " `buyer`, `idTour`, `departureDay`, `vocationTime`, `paymentMethod` ) VALUES ('" +
-      this.PIN +
-      "', '" +
-      this.status +
-      "', '" +
-      this.totalPrice +
-      "', '" +
-      this.numberPeople +
-      "', '" +
-      this.address +
-      "', '" +
-      this.phone +
-      "', '" +
-      this.email +
-      "', '" +
-      this.notes +
-      "', " +
-      (this.idAccount ? " '" + this.idAccount + "'," : ' ') +
-      " '" +
-      this.buyer +
-      "', '" +
-      this.idTour +
-      "', '" +
-      this.departureDay +
-      "', '" +
-      this.vocationTime +
-      "', '" +
-      this.paymentMethod +
-      "') ",
+         databaseProduction +
+         '.orders (`PIN`, `status`, `totalPrice`, `numberPeople`,' +
+         ' `address`, `phone`,`email`,`notes`,' +
+         (this.idAccount ? ' `idAccount`,' : ' ') +
+         " `buyer`, `idTour`, `departureDay`, `vocationTime`, `paymentMethod` ) VALUES ('" +
+         this.PIN +
+         "', '" +
+         this.status +
+         "', '" +
+         this.totalPrice +
+         "', '" +
+         this.numberPeople +
+         "', '" +
+         this.address +
+         "', '" +
+         this.phone +
+         "', '" +
+         this.email +
+         "', '" +
+         this.notes +
+         "', " +
+         (this.idAccount ? " '" + this.idAccount + "'," : ' ') +
+         " '" +
+         this.buyer +
+         "', '" +
+         this.idTour +
+         "', '" +
+         this.departureDay +
+         "', '" +
+         this.vocationTime +
+         "', '" +
+         this.paymentMethod +
+         "') ",
       function (err, res) {
          if (err) {
             funcResult(err, null);
@@ -135,11 +135,10 @@ Order.getOrderByPIN = function (PIN, funcResult) {
    );
 };
 Order.getOrderByEmail = function (email, funcResult) {
-   console.log('maidev ~ file: order.model.js ~ line 128 ~ email', email);
    mysql.query(
       'SELECT * FROM ' +
-      databaseProduction +
-      ".orders inner join tours on tours.idTour = orders.idTour WHERE email = ? AND orders.statusAction <> 'deleted'",
+         databaseProduction +
+         ".orders inner join tours on tours.idTour = orders.idTour WHERE email = ? AND orders.statusAction <> 'deleted'",
       [email],
       function (err, res) {
          if (err) {
@@ -150,12 +149,26 @@ Order.getOrderByEmail = function (email, funcResult) {
       }
    );
 };
-
+Order.getOrdersWithIdTour = function (idTour, funcResult) {
+   mysql.query(
+      'SELECT * FROM ' +
+         databaseProduction +
+         ".tours inner join orders on tours.idTour = orders.idTour WHERE orders.idTour = ? AND orders.statusAction <> 'deleted'",
+      [idTour],
+      function (err, res) {
+         if (err) {
+            funcResult(err, null);
+         } else {
+            funcResult(null, res);
+         }
+      }
+   );
+};
 Order.getOrderByIdWithIdAccount = function (idOrder, idAccount, funcResult) {
    mysql.query(
       'SELECT * FROM ' +
-      databaseProduction +
-      ".orders  WHERE idOrder = ? AND idAccount = ? AND WHERE statusAction <> 'deleted';",
+         databaseProduction +
+         ".orders  WHERE idOrder = ? AND idAccount = ? AND WHERE statusAction <> 'deleted';",
       [idOrder, idAccount],
       function (err, res) {
          if (err) {

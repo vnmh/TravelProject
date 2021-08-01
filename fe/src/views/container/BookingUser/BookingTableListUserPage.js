@@ -60,7 +60,7 @@ const BookingTableListUserPage = (props) => {
    useEffect(() => {
       if (props.bookingDetail?.idTour > 0 && props.needLoading)
          props
-            .getTour(props.bookingDetail?.idTour)
+            .getTourAll(props.bookingDetail?.idTour)
             .then(({ res }) => {
                props.getAllImagesTour().then((resImg) => {
                   const tourWithImage = {
@@ -82,7 +82,11 @@ const BookingTableListUserPage = (props) => {
    useEffect(() => {
       props.setNeedLoading(true);
    }, [_.first(props.tourBookingFilter || [])?.idTour, _.last(props.tourBookingFilter || [])?.idTour]);
-   
+   console.log(
+      "maidev ~ file: BookingTableListUserPage.js ~ line 135 ~ BookingTableListUserPage ~ bookingDetail",
+      bookingDetail
+   );
+
    return (
       <BookingTableListUserPageStyled>
          <div class='row'>
@@ -127,7 +131,7 @@ const BookingTableListUserPage = (props) => {
                               </li>
                               <li>
                                  <span>Ngày khởi hành:</span>
-                                 {UtilDate.toDateLocal(bookingDetail?.departureDay)}
+                                 {UtilDate.toDateLocal(props.bookingDetail?.departureDay)}
                               </li>
                               <li>
                                  <span>Ngày kết thúc:</span>
@@ -142,6 +146,14 @@ const BookingTableListUserPage = (props) => {
                               <li>
                                  <span>Tên khách hàng:</span>
                                  {props.bookingDetail?.buyer}
+                              </li>
+                              <li>
+                                 <span>Tổng tiền:</span>
+                                 {currencyFormat(props.bookingDetail?.totalPrice)}
+                              </li>
+                              <li>
+                                 <span>PTTT:</span>
+                                 {props.bookingDetail?.paymentMethod}
                               </li>
                               {props.bookingDetail?.status === ORDER_STATUS.Destroy && (
                                  <li>
@@ -170,6 +182,7 @@ export default compose(
       {
          login: authActions.login,
          getTour: appApisActions.getTour,
+         getTourAll: appApisActions.getTourAll,
          getAllImagesTour: appApisActions.getAllImagesTour,
          orderUpdateStatus: appApisActions.orderUpdateStatus
       }

@@ -91,7 +91,17 @@ exports.readByEmail = function (req, res) {
       //Chỉ có một phần tử thì không lý do gì phải res về một mảng
    });
 };
- 
+ exports.readOrdersWithIdTour = function (req, res) {
+   const idTour = req.idTour ? req.idTour : req.query.idTour;
+   //Nên dùng express-validator để validator dữ liệu trước
+   //Nhưng vì không có thời gian nên khoan làm
+   //https://express-validator.github.io/docs/
+   Order.getOrdersWithIdTour(idTour, function (err, order) {
+      if (err) res.send(err);
+      res.json(order); //Đã là API thì trả về phải chuẩn
+      //Chỉ có một phần tử thì không lý do gì phải res về một mảng
+   });
+};
 exports.update = function (req, res) {
    //Nên dùng express-validator để validator dữ liệu trước
    //Nhưng vì không có thời gian nên khoan làm

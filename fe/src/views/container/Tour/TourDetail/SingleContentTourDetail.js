@@ -64,8 +64,8 @@ function SingleContentTourDetail(props) {
                         <i className='la la-calendar' />
                      </div>
                      <div className='single-feature-titles'>
-                        <h3 className='title font-size-15 font-weight-medium'>Ngày khởi hành</h3>
-                        <span className='font-size-13'> {UtilDate.toDateLocal(props.tourDetail?.departureDay)}</span>
+                        <h3 className='title font-size-15 font-weight-medium'>Ngày k.hành gần nhất</h3>
+                        <span className='font-size-13'> {UtilDate.toDateLocal(props.tourDetail?.departureDate)}</span>
                      </div>
                   </div>
                </div>
