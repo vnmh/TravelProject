@@ -29,7 +29,7 @@ const BlogBreadAdminPage = () => {
                      <div className='breadcrumb-list text-right'>
                         <ul className='list-items'>
                            <li>
-                              <a href='index.html' className='text-white'>
+                              <a href='/' className='text-white'>
                                  Trang chủ
                               </a>
                            </li>

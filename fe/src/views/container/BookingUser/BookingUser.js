@@ -14,17 +14,15 @@ const BookingUser = (props) => {
       <BookingUserStyled>
          <div class='dashboard-content-wrap'>
             <BookingBreadUserPage />
-            <div class='dashboard-main-content'>
-               <div class='container-fluid'>
-                  <BookingListUserPage
-                     tourBooking={props.tourBooking}
-                     needLoading={props.needLoading}
-                     setNeedLoading={props.setNeedLoading}
-                     setStatus={props.setStatus}
-                     status={props.status}
-                     tourBookingFilter={props.tourBookingFilter}
-                  />
-               </div>
+            <div class='dashboard-main-content container'>
+               <BookingListUserPage
+                  tourBooking={props.tourBooking}
+                  needLoading={props.needLoading}
+                  setNeedLoading={props.setNeedLoading}
+                  setStatus={props.setStatus}
+                  status={props.status}
+                  tourBookingFilter={props.tourBookingFilter}
+               />
             </div>
          </div>
       </BookingUserStyled>

@@ -65,7 +65,7 @@ Favorite.getByEmail = function(email) {
     database
       .query(
         "SELECT favorites.idTour, accounts.email, accounts.idAccount, tours.titleTour, tours.price, tours.sale, tours.departureAddress, " +
-          "tours.departureDay, tours.describe, tours.address, tours.vocationTime, tours.type " +
+          "tours.departureDate, tours.describe, tours.address, tours.vocationTime, tours.type " +
           "FROM " +
           databaseProduction +
           ".favorites " +

@@ -5,13 +5,12 @@ import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { currencyFormat } from "~/views/utilities/helpers/currency";
-import queryString from 'query-string'
+import queryString from "query-string";
 
 const PaymentDetailStyled = styled.div``;
 
 function PaymentDetail(props) {
    const params = queryString.parse(window.location.search);
-
    return (
       <PaymentDetailStyled>
          <div className='row pt-3'>
@@ -36,7 +35,8 @@ function PaymentDetail(props) {
                                        <span className='mr-2 color-text-2'>Giá gốc:</span>
                                     </p>
                                     <p className='font-size-15 text-gray line-height-20 font-weight-medium'>
-                                       <span className='mr-2 color-text-2'>Phương thức thanh toán: </span>MOMO
+                                       <span className='mr-2 color-text-2'>Phương thức thanh toán: </span>
+                                       {props.orderDetail?.order?.paymentMethod}
                                     </p>
                                  </div>
                               </th>

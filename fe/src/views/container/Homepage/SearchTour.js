@@ -11,6 +11,7 @@ import styled from "styled-components"; // Dùng để ghi đè style bên trong
 import UtilDate from "~/views/utilities/helpers/UtilDate";
 import * as PATH from "~/configs/routesConfig";
 import { parseObjToQuery } from "~/views/utilities/helpers";
+import { SearchOutlined } from "@ant-design/icons";
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -50,7 +51,12 @@ const SearchTour = (props) => {
                         name='destination'
                         className='input-box'
                         label={<label className='label-text'>Điểm đến</label>}>
-                        <Input size='large' type='text' placeholder='Bạn muốn đi đâu?' width='100%' />
+                        <Input
+                           size='large'
+                           type='text'
+                           placeholder='Bình Ba, Hội An, Nha Trang, đảo, hoa,...'
+                           width='100%'
+                        />
                      </Form.Item>
                   </div>
                   {/* end col-lg-4 */}
@@ -78,7 +84,7 @@ const SearchTour = (props) => {
                   {/* end col-lg-4 */}
                   <div className='col-lg-4'>
                      <Form.Item name='price' className='input-box' label={<label className='label-text'>Giá</label>}>
-                        <Select size='large' placeholder='Chọn giá' style={{ width: "100%" }}>
+                        <Select size='large' placeholder='Khoảng giá cho một người' style={{ width: "100%" }}>
                            <Option value={1000000}>0 - 1,000,000</Option>
                            <Option value={5000000}>1,000,000 - 5,000,000</Option>
                            <Option value={10000000}>> 10.000.000</Option>
@@ -86,8 +92,11 @@ const SearchTour = (props) => {
                      </Form.Item>
                   </div>
                   {/* end col-lg-3 */}
-                  <div className='d-flex justify-content-end w-100 col-12'>
-                     <Button type='primary' size='large' className='btn-box pt-2' htmlType='submit'>
+                  <div className='d-flex justify-content-between w-100 col-12 align-items-center'>
+                     <p className='m-0'>
+                        Danh lam thắng cảnh và những cảnh đẹp đang chờ bạn khám phá. Xách ba lô lên và đi nào!
+                     </p>
+                     <Button type='primary' size='large' className='btn-box px-5' htmlType='submit'>
                         Tìm kiếm
                      </Button>
                   </div>

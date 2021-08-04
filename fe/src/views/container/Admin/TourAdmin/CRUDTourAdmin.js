@@ -12,6 +12,7 @@ import { mapAddressNotWardToOptionAntd } from "~/configs/addressVN";
 import { SCHEDULE_ENUM, TYPE_TOUR } from "~/configs/const";
 import { PEOPLE_NUM } from "~/configs/const";
 import Checkbox from "antd/lib/checkbox/Checkbox";
+import UtilDate from "~/views/utilities/helpers/UtilDate";
 const { Option } = Select;
 const CRUDTourAdminStyled = styled.div``;
 
@@ -33,6 +34,7 @@ const CRUDTourAdmin = (props) => {
          const bodyUpdate = {
             ...values,
             // values.address là một mảng, khi lưu xuống CSDL cần phải chuyển thành string bằng phương thức join
+            departureDate: UtilDate.toDateTimeUtc(values.departureDate),
             address: values?.address.join(","),
             services: values?.services.join(","),
             idTour: props.currentEdit?.idTour
@@ -57,6 +59,7 @@ const CRUDTourAdmin = (props) => {
          const bodyCreate = values;
          if (values.loop === "schedule") bodyCreate.scheduleLoop = 0;
          if (values.loop === "scheduleLoop") bodyCreate.schedule = "";
+         bodyCreate.departureDate = UtilDate.toDateTimeUtc(bodyCreate.departureDate);
          props
             .postTour(bodyCreate)
             .then((res) => {
@@ -105,11 +108,12 @@ const CRUDTourAdmin = (props) => {
       form.setFieldsValue({ loop: e?.target?.value ? e?.target?.value : e });
       setSchedule(e?.target?.value ? e?.target?.value : e);
    };
+
    // SCHEDULE
    const initValue = {
       // Để load dữ liệu đã có lên
       ...props.currentEdit,
-      departureDay: moment(props.currentEdit?.departureDay),
+      departureDate: moment(props.currentEdit?.departureDate),
       address: props.currentEdit?.address ? props.currentEdit?.address : undefined, // vì đã map bên kia ròi, ở đây không cần làm lại
       services: props.currentEdit?.services ? props.currentEdit?.services : undefined, // vì đã map bên kia ròi, ở đây không cần làm lại,
       loop: props.currentEdit?.schedule ? "schedule" : props.currentEdit?.scheduleLoop ? "scheduleLoop" : undefined
@@ -121,7 +125,7 @@ const CRUDTourAdmin = (props) => {
       form.setFieldsValue({
          // Để load dữ liệu đã có lên
          ...props.currentEdit,
-         departureDay: moment(props.currentEdit?.departureDay),
+         departureDate: moment(props.currentEdit?.departureDate),
          address: props.currentEdit?.address ? props.currentEdit?.address : undefined, // vì đã map bên kia ròi, ở đây không cần làm lại
          services: props.currentEdit?.services ? props.currentEdit?.services : undefined, // vì đã map bên kia ròi, ở đây không cần làm lại,
          loop: props.currentEdit?.schedule ? "schedule" : props.currentEdit?.scheduleLoop ? "scheduleLoop" : undefined
@@ -167,7 +171,7 @@ const CRUDTourAdmin = (props) => {
                   <Form.Item
                      className='col-12'
                      label='Ngày khởi hành'
-                     name='departureDay'
+                     name='departureDate'
                      rules={[{ required: true, message: "Hãy nhập tên ngày khởi hành!" }]}>
                      <DatePicker
                         format='DD/MM/YYYY'

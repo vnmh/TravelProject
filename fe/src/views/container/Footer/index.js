@@ -21,7 +21,7 @@ const Footer = (props) => {
                      <div className='col-lg-3 responsive-column'>
                         <div className='footer-item'>
                            <div className='footer-logo padding-bottom-30px'>
-                              <a href='index.html' className='foot__logo'>
+                              <a href='/' className='foot__logo'>
                                  <img src={logo} alt='logo' />
                               </a>
                            </div>
@@ -155,9 +155,9 @@ const Footer = (props) => {
                      <div className='col-lg-7'>
                         <div className='copy-right padding-top-30px'>
                            <p className='copy__desc'>
-                              © Copyright Trizen 2020. Made with
-                              <span className='la la-heart' /> by{" "}
-                              <a href='https://themeforest.net/user/techydevs/portfolio'>TechyDevs</a>
+                              © Copyright Trizen 2020.
+                              {/* <span className='la la-heart' /> by{" "} */}
+                              {/* <a href='https://themeforest.net/user/techydevs/portfolio'>TechyDevs</a> */}
                            </p>
                         </div>
                      </div>

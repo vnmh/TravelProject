@@ -3,7 +3,7 @@ const crypto = require('crypto');
 const Order = require('../models/order.model');
 const reqwest = require('reqwest');
 const mailerGmail = require('../mics/mailer.gmail');
- 
+
 exports.listAll = function (req, res) {
    //Nên dùng express-validator để validator dữ liệu trước
    //Nhưng vì không có thời gian nên khoan làm
@@ -27,10 +27,10 @@ exports.create = function (req, res) {
    //Nên dùng express-validator để validator dữ liệu trước
    //Nhưng vì không có thời gian nên khoan làm
    //https://express-validator.github.io/docs/
- 
+
    //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
    let newOrder = new Order(req.body);
- 
+
    //60% giá vé đối với trẻ em
    Order.createOrder(newOrder, async (err, order) => {
       if (err) res.send(err);
@@ -50,12 +50,12 @@ exports.create = function (req, res) {
       res.json(order);
    });
 };
- 
+
 exports.read = function (req, res) {
    //Nên dùng express-validator để validator dữ liệu trước
    //Nhưng vì không có thời gian nên khoan làm
    //https://express-validator.github.io/docs/
- 
+
    const idAccount = req.query.idAccount;
    if (idAccount !== null && idAccount !== undefined && idAccount !== '') {
       //Cú pháp cũ với callback - các controller khác sẽ dùng với Promisez
@@ -91,12 +91,22 @@ exports.readByEmail = function (req, res) {
       //Chỉ có một phần tử thì không lý do gì phải res về một mảng
    });
 };
- 
+exports.readOrdersWithIdTour = function (req, res) {
+   const idTour = req.idTour ? req.idTour : req.query.idTour;
+   //Nên dùng express-validator để validator dữ liệu trước
+   //Nhưng vì không có thời gian nên khoan làm
+   //https://express-validator.github.io/docs/
+   Order.getOrdersWithIdTour(idTour, function (err, order) {
+      if (err) res.send(err);
+      res.json(order); //Đã là API thì trả về phải chuẩn
+      //Chỉ có một phần tử thì không lý do gì phải res về một mảng
+   });
+};
 exports.update = function (req, res) {
    //Nên dùng express-validator để validator dữ liệu trước
    //Nhưng vì không có thời gian nên khoan làm
    //https://express-validator.github.io/docs/
- 
+
    //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
    // Phải truyền vào như v kh thì dăn lỗi ...
    updateOrder = new Order(req.body);
@@ -105,12 +115,12 @@ exports.update = function (req, res) {
       res.send(updateOrder);
    });
 };
- 
+
 exports.updateStatus = function (req, res) {
    //Nên dùng express-validator để validator dữ liệu trước
    //Nhưng vì không có thời gian nên khoan làm
    //https://express-validator.github.io/docs/
- 
+
    //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
    // Phải truyền vào như v kh thì dăn lỗi ...
    updateOrder = req.body;
@@ -119,19 +129,19 @@ exports.updateStatus = function (req, res) {
       res.send(updateOrder);
    });
 };
- 
+
 exports.delete = function (req, res) {
    //Nên dùng express-validator để validator dữ liệu trước
    //Nhưng vì không có thời gian nên khoan làm
    //https://express-validator.github.io/docs/
- 
+
    //Cú pháp cũ với callback - các controller khác sẽ dùng với Promise
    Order.remove(req.query.idOrder, function (err, idOrder) {
       if (err) res.send(err);
       res.send(idOrder);
    });
 };
- 
+
 /**
  * Tính toán và trả về link dẫn đến trang thanh toán của ngânlượng.vn
  */
@@ -145,11 +155,11 @@ exports.getLinkPayment = function (req, res) {
    const officalPrice = tour.price * (1 - tour.sale * 0.01); // tính giá tiền đã sale
    newOrder.totalPrice = newOrder.numberPeople * officalPrice + newOrder.numberChildren * officalPrice * 0.5;
    console.log(newOrder);
- 
+
    Order.createOrder(newOrder, function (err, order) {
       if (err) res.send(err);
       // Tính tổng price dựa trên số người lớn và trẻ nhỏ (giá bằng 60% người lớn)
- 
+
       const arrayAddress = JSON.parse(newOrder.address);
       const address = `${arrayAddress[0]}, ${arrayAddress[1]}, ${arrayAddress[2]}`;
       let secureCode = MD5(
@@ -183,7 +193,7 @@ exports.getLinkPayment = function (req, res) {
          .replace(/\s/g, '')}&affiliate_code=&lang=vi&secure_code=${secureCode}&cancel_url=${process.env.CANCEL_URL}/${
          tour.idTour
       }`;
- 
+
       // Trả về: tour, order(gồm mã PIN và tổng tiền, người mua tour), link(theo format đã cho trước),
       //  message đã sẵn sàng thanh toán!!!!
       const message = 'Hóa đơn đã sẵn sàng để thanh toán!';
@@ -196,18 +206,18 @@ exports.getLinkPayment = function (req, res) {
       res.json(infoPayment);
    });
 };
- 
+
 exports.resultPayment = function (req, res) {
    //Thanh toán thành công thì phải cho status thanh toán từ verify thành paid
    //updateByPIN
    updateOrder = { PIN: req.body.PIN, status: 'paid' };
- 
+
    Order.updateByPIN(updateOrder, function (err, results) {
       if (err) res.send(err);
       res.send({ updateOrder });
    });
 };
- 
+
 exports.cancelPayment = function (req, res) {
    //Cancel thì status: verify , đơn hàng ở trạng thái chờ thanh toán paying
    //updateByPIN
@@ -217,11 +227,11 @@ exports.cancelPayment = function (req, res) {
       res.send({ updateOrder });
    });
 };
- 
+
 exports.notifyPayment = function (req, res) {
    // thông báo cho admin, gửi mail cho admin,.....
 };
- 
+
 exports.getLinkMoMo = function (req, res) {
    // Nhận các tham số:
    // Thông tin tour req.body.tour
@@ -229,10 +239,10 @@ exports.getLinkMoMo = function (req, res) {
    // Tạo order
    let newOrder = req.body.order;
    let tour = req.body.tour;
- 
+
    const officalPrice = tour.price * (1 - tour.sale * 0.01); // tính giá tiền đã sale
    newOrder.totalPrice = newOrder.numberPeople * officalPrice;
- 
+
    let MoMoRequest = {
       partnerCode: process.env.MOMO_PARTNER_CODE, //need env
       accessKey: process.env.MOMO_ACCESS_KEY, //need env
@@ -242,11 +252,11 @@ exports.getLinkMoMo = function (req, res) {
       orderInfo: newOrder.email.toString(),
       returnUrl: process.env.MOMO_RETURN_URL, //need env
       notifyUrl: process.env.MOMO_NOTIFY_URL, //need env
-      extraData: '',
+      extraData: tour.idTour.toString(),
       requestType: process.env.MOMO_REQUEST_TYPE, //need env
       signature: ''
    };
- 
+
    var rawSignature =
       'partnerCode=' +
       MoMoRequest.partnerCode +
@@ -271,7 +281,7 @@ exports.getLinkMoMo = function (req, res) {
       .update(rawSignature)
       .digest('hex');
    MoMoRequest.signature = signature;
- 
+
    reqwest({
       url: process.env.MOMO_API_ENDPOINT,
       method: 'POST',
@@ -283,7 +293,7 @@ exports.getLinkMoMo = function (req, res) {
       // Order.createOrder(newOrder, function (err, order) {
       // if (err) res.send(err);
       // Tính tổng price dựa trên số người lớn và trẻ nhỏ (giá bằng 60% người lớn)
- 
+
       // Trả về: tour, order(gồm mã PIN và tổng tiền, người mua tour), link(theo format đã cho trước),
       //  message đã sẵn sàng thanh toán!!!!
       const message = 'Hóa đơn đã sẵn sàng để thanh toán!';

@@ -46,7 +46,9 @@ router.delete('/config', authenticated, config.delete);
 
 //for tour
 router.get('/tour', tour.read);
+router.get('/tour-all', tour.readAll);
 router.get('/tours', tour.listAll);
+router.get('/tours-all', tour.listAllAll);
 router.post('/tours/search', tour.listTourSearch);
 router.post('/tour', authenticated, tour.create); //sẽ tạo luôn một schedule tương ứng với idTour mới tạo
 // router.patch('/tour', authenticated, tour.update);
@@ -92,6 +94,7 @@ router.post('/getLinkMoMo', order.getLinkMoMo);
 // //for order
 router.get('/order', order.read);
 router.get('/orderWithEmail', order.readByEmail);
+router.get('/ordersWithIdTour', order.readOrdersWithIdTour);
 router.get('/orders', order.listAll);
 router.post('/order', order.create);
 router.put('/orderUpdateStatus', order.updateStatus);

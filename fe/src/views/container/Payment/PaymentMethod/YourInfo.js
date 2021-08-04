@@ -4,69 +4,44 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { appApisActions } from "~/state/ducks/appApis/index";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import { Form, Input } from "antd";
+import { phoneRegex } from "~/views/utilities/validation/input";
 
 const YourInfoStyled = styled.div``;
 
 function YourInfo(props) {
-   const [name, setName] = useState(props.user?.name);
-   const [email, setEmail] = useState(props.user?.email);
-   const [phone, setPhone] = useState(props.user?.phone);
-   const [address, setAddress] = useState(props.user?.address);
-
+   const [form] = Form.useForm();
    useEffect(() => {
-      setName(props.user?.name);
-      setEmail(props.user?.email);
-      setPhone(props.user?.phone);
-      setAddress(props.user?.address);
+      form.setFieldsValue(props.user);
       props.user?.email && props.setInfoTrue(true);
       props.setInfo(props.user);
    }, [props.user?.email]);
 
-   const onChangeFields = (e, field) => {
-      switch (field) {
-         case "name":
-            setName(e?.target?.value);
-            props.setInfo({
-               name: e?.target?.value,
-               email,
-               phone,
-               address
-            });
-            break;
-         case "email":
-            setEmail(e?.target?.value);
-            props.setInfo({
-               name,
-               email: e?.target?.value,
-               phone,
-               address
-            });
-            break;
-         case "phone":
-            setPhone(e?.target?.value);
-            props.setInfo({
-               name,
-               email,
-               phone: e?.target?.value,
-               address
-            });
-            break;
-         case "address":
-            setAddress(e?.target?.value);
-            props.setInfo({
-               name,
-               email,
-               phone,
-               address: e?.target?.value
-            });
-            break;
-         default:
-            break;
-      }
-      if (name && email && phone && address) props.setInfoTrue(true);
-      else props.setInfoTrue(false);
+   const onFieldsChange = async (changedFields, allFields) => {
+      const checkFields = allFields.map((f) => {
+         if (f.errors?.length > 0) return "";
+         return f.value;
+      });
+      const values = await form.getFieldsValue();
+      if (_.compact(checkFields).length === allFields.length) {
+         props.setInfoTrue(true);
+         props.setInfo({
+            name: values.name,
+            email: values.email,
+            phone: values.phone,
+            address: values.address
+         });
+      } else props.setInfoTrue(false);
    };
 
+   const onFinish = (values) => {
+      console.log(`file: YourInfo.js ~ line 29 ~ onFinish ~ values`, values);
+   };
+
+   const formItemLayout = {
+      labelCol: { span: 6 },
+      wrapperCol: { span: 14 }
+   };
    return (
       <YourInfoStyled>
          <div className='form-box'>
@@ -75,71 +50,65 @@ function YourInfo(props) {
             </div>
             <div className='form-content '>
                <div className='contact-form-action'>
-                  <form method='post'>
-                     <div className='row'>
-                        <div className='col-lg-6 responsive-column'>
-                           <div className='input-box'>
-                              <label className='label-text'>Họ và tên</label>
-                              <div className='form-group'>
-                                 <span className='la la-user form-icon' />
-                                 <input
-                                    className='form-control'
-                                    type='text'
-                                    placeholder='Họ và tên'
-                                    value={name}
-                                    onChange={(e) => onChangeFields(e, "name")}
-                                 />
-                              </div>
-                           </div>
-                        </div>
-                        <div className='col-lg-6 responsive-column'>
-                           <div className='input-box'>
-                              <label className='label-text'>Email</label>
-                              <div className='form-group'>
-                                 <span className='la la-envelope-o form-icon' />
-                                 <input
-                                    className='form-control'
-                                    type='email'
-                                    placeholder='Email'
-                                    value={email}
-                                    onChange={(e) => onChangeFields(e, "email")}
-                                 />
-                              </div>
-                           </div>
-                        </div>
-                        <div className='col-lg-6 responsive-column'>
-                           <div className='input-box'>
-                              <label className='label-text'>Số điện thoại</label>
-                              <div className='form-group'>
-                                 <span className='la la-phone form-icon' />
-                                 <input
-                                    className='form-control'
-                                    type='text'
-                                    state
-                                    placeholder='Số điện thoại'
-                                    value={phone}
-                                    onChange={(e) => onChangeFields(e, "phone")}
-                                 />
-                              </div>
-                           </div>
-                        </div>
-                        <div className='col-lg-6 responsive-column'>
-                           <div className='input-box'>
-                              <label className='label-text'>Địa chỉ</label>
-                              <div className='form-group'>
-                                 <span className='la la-map-marked form-icon' />
-                                 <input
-                                    className='form-control'
-                                    type='text'
-                                    placeholder='Địa chỉ'
-                                    value={address}
-                                    onChange={(e) => onChangeFields(e, "address")}
-                                 />
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </form>
+                  <Form
+                     form={form}
+                     name='info_form'
+                     {...formItemLayout}
+                     onFinish={onFinish}
+                     onFieldsChange={onFieldsChange}>
+                     <Form.Item
+                        name='name'
+                        label='Name'
+                        rules={[
+                           {
+                              required: true,
+                              message: "Please input your name"
+                           }
+                        ]}>
+                        <Input placeholder='' />
+                     </Form.Item>
+                     <Form.Item
+                        name='email'
+                        label='Email'
+                        rules={[
+                           {
+                              required: true,
+                              message: "Please input your E-mail"
+                           },
+                           {
+                              type: "email",
+                              message: "E-mail is not valid!"
+                           }
+                        ]}>
+                        <Input placeholder='' type='email' />
+                     </Form.Item>
+                     <Form.Item
+                        name='phone'
+                        label='Phone'
+                        rules={[
+                           {
+                              required: true,
+                              message: "Please input your phone"
+                           },
+                           {
+                              pattern: phoneRegex,
+                              message: "Phone is not valid!"
+                           }
+                        ]}>
+                        <Input placeholder='' type='phone' />
+                     </Form.Item>
+                     <Form.Item
+                        name='address'
+                        label='Address'
+                        rules={[
+                           {
+                              required: true,
+                              message: "Please input your address"
+                           }
+                        ]}>
+                        <Input placeholder='' />
+                     </Form.Item>
+                  </Form>
                </div>
             </div>
          </div>

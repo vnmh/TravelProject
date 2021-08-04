@@ -104,10 +104,10 @@ const TourTableListAdminPage = (props) => {
       },
       {
          title: "Ngày khởi hành",
-         dataIndex: "departureDay",
-         key: "departureDay",
-         render: (departureDay) => {
-            return UtilDate.toDateLocal(departureDay);
+         dataIndex: "departureDate",
+         key: "departureDate",
+         render: (departureDate) => {
+            return UtilDate.toDateLocal(departureDate);
          }
       },
       {

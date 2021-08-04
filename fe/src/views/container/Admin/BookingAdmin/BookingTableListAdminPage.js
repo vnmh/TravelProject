@@ -22,7 +22,12 @@ const BookingTableListAdminPage = (props) => {
    const onSubmit = () => {
       const bodyUpdate = {
          PIN: props.bookingDetail?.PIN,
-         status: props.bookingDetail?.status === ORDER_STATUS.New ? ORDER_STATUS.Waiting : props.bookingDetail?.status === ORDER_STATUS.Destroy ? ORDER_STATUS.Cancel : ORDER_STATUS.Done
+         status:
+            props.bookingDetail?.status === ORDER_STATUS.New
+               ? ORDER_STATUS.Waiting
+               : props.bookingDetail?.status === ORDER_STATUS.Destroy
+               ? ORDER_STATUS.Cancel
+               : ORDER_STATUS.Done
       };
       props
          .orderUpdateStatus(bodyUpdate)
@@ -55,10 +60,24 @@ const BookingTableListAdminPage = (props) => {
          });
    };
 
+   const onDelete = () => {
+      props
+         .deleteOrder(props.bookingDetail?.idOrder)
+         .then((res) => {
+            message.success("Đã xóa");
+            props.setNeedLoading(true);
+         })
+         .catch((err) => {
+            props.setNeedLoading(false);
+            message.error("Xóa thất bại");
+            console.log("maidev ~ file: BookingTableListAdminPage.js ~ line 26 ~ onFinsh ~ err", err);
+         });
+   };
+
    useEffect(() => {
       if (props.bookingDetail?.idTour > 0 && props.needLoading)
          props
-            .getTour(props.bookingDetail?.idTour)
+            .getTourAll(props.bookingDetail?.idTour)
             .then(({ res }) => {
                props.getAllImagesTour().then((resImg) => {
                   const tourWithImage = {
@@ -101,7 +120,9 @@ const BookingTableListAdminPage = (props) => {
                         </div>
                         <div className='card-body'>
                            <div className='d-flex align-items-center'>
-                              <h3 className='card-title'>{bookingDetail?.titleTour}</h3>
+                              <h3 className='card-title' style={{ maxWidth: "75%" }}>
+                                 {bookingDetail?.titleTour}
+                              </h3>
                            </div>
                            <ul className='list-items list-items-2 pt-2 pb-3'>
                               <li>
@@ -126,32 +147,52 @@ const BookingTableListAdminPage = (props) => {
                                  <span>Tên khách hàng:</span>
                                  {props.bookingDetail?.buyer}
                               </li>
-                              {props.bookingDetail?.destroyFee ? <li>
-                                 <span>Phí hủy:</span>
-                                 {currencyFormat(props.bookingDetail?.destroyFee)}
-                              </li> : ''}
+                              {props.bookingDetail?.destroyFee ? (
+                                 <li>
+                                    <span>Phí hủy:</span>
+                                    {currencyFormat(props.bookingDetail?.destroyFee)}
+                                 </li>
+                              ) : (
+                                 ""
+                              )}
                            </ul>
                         </div>
-                        {((props.bookingDetail?.status !== ORDER_STATUS.Done) && (props.bookingDetail?.status !== ORDER_STATUS.Cancel)) && (
-                           <div className='action-btns position-relative'>
-                              <button
-                                 className='d-flex justify-content-center align-items-center theme-btn theme-btn-small mr-4 position-absolute'
-                                 style={{ bottom: 47, right: props.bookingDetail?.status !== ORDER_STATUS.Destroy ? 124 : 24, width: 130 }}
-                                 onClick={onSubmit}>
-                                 <i className='la la-check-circle mr-1' />
-                                 {props.bookingDetail?.status === ORDER_STATUS.New ? "Phê duyệt" : props.bookingDetail?.status === ORDER_STATUS.Destroy ? "Xác nhận" : "Hoàn thành"}
-                              </button>
-                              {props.bookingDetail?.status !== ORDER_STATUS.Destroy &&
-                                 (<button
-                                    className='d-flex justify-content-center align-items-center theme-btn theme-btn-small position-absolute'
-                                    style={{ bottom: 47, right: 24, width: 120 }}
-                                    onClick={onCancel}>
-                                    <i className='la la-times mr-1' />
-                                    Hủy bỏ
-                                 </button>)
-                              }
-                           </div>
-                        )}
+                        <button
+                           className='d-flex justify-content-center align-items-center theme-btn theme-btn-small position-absolute'
+                           style={{ top: 30, right: 40, width: 120 }}
+                           onClick={onDelete}>
+                           <i className='la la-times mr-1' />
+                           Xóa
+                        </button>
+                        {props.bookingDetail?.status !== ORDER_STATUS.Done &&
+                           props.bookingDetail?.status !== ORDER_STATUS.Cancel && (
+                              <div className='action-btns position-relative'>
+                                 <button
+                                    className='d-flex justify-content-center align-items-center theme-btn theme-btn-small mr-4 position-absolute'
+                                    style={{
+                                       bottom: 47,
+                                       right: props.bookingDetail?.status !== ORDER_STATUS.Destroy ? 124 : 24,
+                                       width: 130
+                                    }}
+                                    onClick={onSubmit}>
+                                    <i className='la la-check-circle mr-1' />
+                                    {props.bookingDetail?.status === ORDER_STATUS.New
+                                       ? "Phê duyệt"
+                                       : props.bookingDetail?.status === ORDER_STATUS.Destroy
+                                       ? "Xác nhận"
+                                       : "Hoàn thành"}
+                                 </button>
+                                 {props.bookingDetail?.status !== ORDER_STATUS.Destroy && (
+                                    <button
+                                       className='d-flex justify-content-center align-items-center theme-btn theme-btn-small position-absolute'
+                                       style={{ bottom: 47, right: 24, width: 120 }}
+                                       onClick={onCancel}>
+                                       <i className='la la-times mr-1' />
+                                       Hủy bỏ
+                                    </button>
+                                 )}
+                              </div>
+                           )}
                      </div>
                      {/* end card-item */}
                   </div>
@@ -171,8 +212,10 @@ export default compose(
       {
          login: authActions.login,
          getTour: appApisActions.getTour,
+         getTourAll: appApisActions.getTourAll,
          getAllImagesTour: appApisActions.getAllImagesTour,
-         orderUpdateStatus: appApisActions.orderUpdateStatus
+         orderUpdateStatus: appApisActions.orderUpdateStatus,
+         deleteOrder: appApisActions.deleteOrder
       }
    ),
    withRouter
