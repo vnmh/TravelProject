@@ -11,11 +11,6 @@ const PaymentDetailStyled = styled.div``;
 
 function PaymentDetail(props) {
    const params = queryString.parse(window.location.search);
-   console.log(
-      `ithoangtan -  ~ file: PaymentDetail.js ~ line 49 ~ PaymentDetail ~ props.orderDetail`,
-      props.orderDetail
-   );
-
    return (
       <PaymentDetailStyled>
          <div className='row pt-3'>

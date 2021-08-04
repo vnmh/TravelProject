@@ -21,7 +21,7 @@ const Footer = (props) => {
                      <div className='col-lg-3 responsive-column'>
                         <div className='footer-item'>
                            <div className='footer-logo padding-bottom-30px'>
-                              <a href='index.html' className='foot__logo'>
+                              <a href='/' className='foot__logo'>
                                  <img src={logo} alt='logo' />
                               </a>
                            </div>

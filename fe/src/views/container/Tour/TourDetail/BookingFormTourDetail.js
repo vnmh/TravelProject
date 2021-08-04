@@ -100,7 +100,7 @@ function BookingFormTourDetail(props) {
                );
             });
       }
-   }, [UtilDate.toDateTimeUtc(departureDay)]);
+   }, [UtilDate.toDateTimeUtc(departureDay), props.tourDetail?.idTour]);
    //GET ORDER AND CONFIG FOR DEPARTURE DAY AND NUMBER PEOPLE
    //GET ORDER AND CONFIG FOR DEPARTURE DAY AND NUMBER PEOPLE
    return (
@@ -183,6 +183,7 @@ function BookingFormTourDetail(props) {
                            if (numberPeople <= 100) {
                               if (sumPeople + numberPeople + 1 > +props.tourDetail?.groupSize) {
                                  message.warning("Tour ngày này đã đủ người, vui lòng chọn ngày khác!");
+                                 setNumberPeople(numberPeople + 1);
                               } else setNumberPeople(numberPeople + 1);
                            }
                         }}>
@@ -192,15 +193,19 @@ function BookingFormTourDetail(props) {
                </div>
             </div>
             <div className='btn-box pt-2'>
-               <Link
-                  to={
-                     PATH.TOUR_BOOKING.replace(":id", props.tourDetail?.idTour) +
-                     parseObjToQuery({ numberPeople, departureDay: UtilDate.toDateTimeUtc(departureDay) })
-                  }
-                  className='theme-btn text-center w-100 mb-2'>
-                  <i className='la la-shopping-cart mr-2 font-size-18' />
-                  Đặt ngay
-               </Link>
+               {sumPeople + numberPeople <= +props.tourDetail?.groupSize ? (
+                  <Link
+                     to={
+                        PATH.TOUR_BOOKING.replace(":id", props.tourDetail?.idTour) +
+                        parseObjToQuery({ numberPeople, departureDay: UtilDate.toDateTimeUtc(departureDay) })
+                     }
+                     className='theme-btn text-center w-100 mb-2'>
+                     <i className='la la-shopping-cart mr-2 font-size-18' />
+                     Đặt ngay
+                  </Link>
+               ) : (
+                  <div className='text-center'>! Tour ngày này đã đủ người</div>
+               )}
                {/* <a href='#' className='theme-btn text-center w-100 theme-btn-transparent'>
                   <i className='la la-heart-o mr-2' />
                   Thêm vào yêu thích

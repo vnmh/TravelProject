@@ -68,14 +68,17 @@ function PaymentMethod(props) {
       props
          .createOrder(body)
          .then(({ res }) => {
-            console.log(`ithoangtan -  ~ file: PaymentMethod.js ~ line 209 ~ .then ~ res`, res)
+            console.log(`ithoangtan -  ~ file: PaymentMethod.js ~ line 209 ~ .then ~ res`, res);
 
             message.success(
                props.user?.email
                   ? "Tạo đơn hàng thành công"
                   : "Thông tin đơn hàng đã được gửi tới mail của bạn!" + props.info?.email
             );
-            res.insertId && history.push(PATH.ORDER_DETAIL + parseObjToQuery({ idOrder: res.insertId, idTour: props.payment?.idTour }));
+            res.insertId &&
+               history.push(
+                  PATH.ORDER_DETAIL + parseObjToQuery({ idOrder: res.insertId, idTour: props.payment?.idTour })
+               );
             setPIN(Date.now()); // Cần tạo mã PIN mới cho lần thanh toán tiếp theo
             setLoading(false);
          })
@@ -217,7 +220,8 @@ function PaymentMethod(props) {
                                  },
                                  tour: {
                                     price: props.payment?.price,
-                                    sale: props.payment?.sale
+                                    sale: props.payment?.sale,
+                                    idTour: props.payment?.idTour
                                  }
                               };
                               setLoading(true);

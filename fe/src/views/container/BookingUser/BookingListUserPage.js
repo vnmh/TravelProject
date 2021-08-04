@@ -17,48 +17,38 @@ const BookingListUserPage = (props) => {
 
    return (
       <BookingListUserPageStyled>
-         <div>
-            <div className='row'>
-               <div className='col-lg-12'>
-                  <div className='form-box'>
-                     <div className='form-title-wrap'>
-                        {/* <h3 className='title'>Danh sách tours đã đặt</h3> */}
-                        <div className='d-flex justify-content-between'>
-                           <p className='font-size-14'>
-                              {/* Hiển thị {pagination.page} trong tổng số {Math.ceil(pagination.total / pagination.size)}{" "}
+         <div className='row'>
+            <div className='col-lg-12 form-box'>
+               <div className='form-title-wrap'>
+                  {/* <h3 className='title'>Danh sách tours đã đặt</h3> */}
+                  <div className='d-flex justify-content-between'>
+                     <p className='font-size-14'>
+                        {/* Hiển thị {pagination.page} trong tổng số {Math.ceil(pagination.total / pagination.size)}{" "}
                               trang của {pagination.total} phần tử */}
-                           </p>
-                           <Select
-                              style={{ width: 200 }}
-                              placeholder='Trạng thái'
-                              allowClear
-                              onChange={props.setStatus}>
-                              {Object.keys(ORDER_STATUS).map((status) => {
-                                 return (
-                                    <Select.Option value={status}>{renderStatusOrder(status, "String")}</Select.Option>
-                                 );
-                              })}
-                           </Select>
-                        </div>
-                     </div>
-                     <div className='form-content'>
-                        {(props.tourBookingFilter ? props.tourBookingFilter : props.tourBooking)?.map((item, index) => {
-                           return (
-                              <BookingTableListUserPage
-                                 key={`booking_detail${index}`}
-                                 setIsSubmit={setIsSubmit}
-                                 isSubmit={isSubmit}
-                                 pagination={pagination}
-                                 setPagination={setPagination}
-                                 bookingDetail={item}
-                                 needLoading={props.needLoading}
-                                 setNeedLoading={props.setNeedLoading}
-                                 tourBookingFilter={props.tourBookingFilter}
-                              />
-                           );
+                     </p>
+                     <Select style={{ width: 200 }} placeholder='Trạng thái' allowClear onChange={props.setStatus}>
+                        {Object.keys(ORDER_STATUS).map((status) => {
+                           return <Select.Option value={status}>{renderStatusOrder(status, "String")}</Select.Option>;
                         })}
-                     </div>
+                     </Select>
                   </div>
+               </div>
+               <div className='form-content'>
+                  {(props.tourBookingFilter ? props.tourBookingFilter : props.tourBooking)?.map((item, index) => {
+                     return (
+                        <BookingTableListUserPage
+                           key={`booking_detail${index}`}
+                           setIsSubmit={setIsSubmit}
+                           isSubmit={isSubmit}
+                           pagination={pagination}
+                           setPagination={setPagination}
+                           bookingDetail={item}
+                           needLoading={props.needLoading}
+                           setNeedLoading={props.setNeedLoading}
+                           tourBookingFilter={props.tourBookingFilter}
+                        />
+                     );
+                  })}
                </div>
             </div>
          </div>

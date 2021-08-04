@@ -38,7 +38,7 @@ const BookingAdminPage = (props) => {
          props
             .getOrders()
             .then(({ res }) => {
-               setTourBooking(res);
+               setTourBooking(_.sortBy(res, "dateAdded"));
                if (status) {
                   filterAction(status, res);
                }

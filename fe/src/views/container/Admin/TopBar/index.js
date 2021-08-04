@@ -35,7 +35,7 @@ const TopBar = (props) => {
                   <div className='col-lg-12'>
                      <div className='menu-wrapper'>
                         <div className='logo mr-5'>
-                           <a href='index.html'>
+                           <a href='/'>
                               <img src='images/logo2.png' alt='logo' />
                            </a>
                            <div className='menu-toggler'>

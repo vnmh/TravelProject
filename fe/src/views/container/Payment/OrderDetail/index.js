@@ -15,17 +15,23 @@ import ScrollToTop from "~/ScrollToTop";
 import { Link, useHistory } from "react-router-dom";
 import Modal from "antd/lib/modal/Modal";
 import ModalDestroyTour from "./ModalDestroyTour";
-import { APP_DEFAULT_PATH, USER_BOOKING } from "~/configs/routesConfig";
+import { APP_DEFAULT_PATH, USER_BOOKING, TOUR_DETAIL } from "~/configs/routesConfig";
+import { parseObjToQuery } from "~/views/utilities/helpers";
 
 const OrderDetailStyled = styled.div``;
 
 function OrderDetail(props) {
    const [orderDetail, setOrderDetail] = useState();
    const params = queryString.parse(window.location.search);
-   const history = useHistory()
-   const [isDestroy, setIsDestroy] = useState(false)
+   const history = useHistory();
+   const [isDestroy, setIsDestroy] = useState(false);
 
    useEffect(() => {
+      if (params.errorCode) {
+         history.push(TOUR_DETAIL.replace(":id", params.extraData) + parseObjToQuery(params));
+         return;
+      }
+
       let tourDetail = {};
       if (params.orderId) {
          props
@@ -79,13 +85,10 @@ function OrderDetail(props) {
             });
    }, []);
 
-
-
-
    // --------------------
    // FOR ORDER DETAIL
    // --------------------
-   const [visibleModalDestroy, setVisibleModalDestroy] = useState(false)
+   const [visibleModalDestroy, setVisibleModalDestroy] = useState(false);
    // --------------------
    // FOR ORDER DETAIL
    // --------------------
@@ -108,18 +111,32 @@ function OrderDetail(props) {
                               </div>
                               <div className='section-block' />
                               <PaymentDetail orderDetail={orderDetail} />
-                              {!isDestroy && <div className='col-lg-12 d-flex justify-content-center align-items-center'>
-                                 <Button size="large" className="mr-4" type="dashed" onClick={() => setVisibleModalDestroy(true)}>Hủy tour</Button>
-                                 <Button type="primary" size="large" onClick={() => history.push(USER_BOOKING)}>
-                                    Hoàn tất
-                                 </Button>
-                              </div>}
-                              {isDestroy && <div className='col-lg-12 d-flex justify-content-center align-items-center'>
-                                 <span>Đã hủy</span>
-                                 <Button type="primary" className="ml-4" size="large" onClick={() => history.push(APP_DEFAULT_PATH)}>
-                                    Đặt tour khác
-                                 </Button>
-                              </div>}
+                              {!isDestroy && (
+                                 <div className='col-lg-12 d-flex justify-content-center align-items-center'>
+                                    <Button
+                                       size='large'
+                                       className='mr-4'
+                                       type='dashed'
+                                       onClick={() => setVisibleModalDestroy(true)}>
+                                       Hủy tour
+                                    </Button>
+                                    <Button type='primary' size='large' onClick={() => history.push(USER_BOOKING)}>
+                                       Hoàn tất
+                                    </Button>
+                                 </div>
+                              )}
+                              {isDestroy && (
+                                 <div className='col-lg-12 d-flex justify-content-center align-items-center'>
+                                    <span>Đã hủy</span>
+                                    <Button
+                                       type='primary'
+                                       className='ml-4'
+                                       size='large'
+                                       onClick={() => history.push(APP_DEFAULT_PATH)}>
+                                       Đặt tour khác
+                                    </Button>
+                                 </div>
+                              )}
                            </div>
                         </div>
                      </div>
@@ -127,8 +144,18 @@ function OrderDetail(props) {
                </div>
             </section>
          </OrderDetailStyled>
-         <Modal width="800px" title="Hủy tour" visible={visibleModalDestroy} onCancel={() => setVisibleModalDestroy(false)} footer={[]}>
-            <ModalDestroyTour setIsDestroy={setIsDestroy} visibleModalDestroy={visibleModalDestroy} setVisibleModalDestroy={setVisibleModalDestroy} orderDetail={orderDetail} />
+         <Modal
+            width='800px'
+            title='Hủy tour'
+            visible={visibleModalDestroy}
+            onCancel={() => setVisibleModalDestroy(false)}
+            footer={[]}>
+            <ModalDestroyTour
+               setIsDestroy={setIsDestroy}
+               visibleModalDestroy={visibleModalDestroy}
+               setVisibleModalDestroy={setVisibleModalDestroy}
+               orderDetail={orderDetail}
+            />
          </Modal>
       </ScrollToTop>
    );

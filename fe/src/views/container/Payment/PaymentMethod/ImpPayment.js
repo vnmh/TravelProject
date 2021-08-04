@@ -16,7 +16,7 @@ function ImpPayment(props) {
    const [info, setInfo] = useState();
    return (
       <ImpPaymentStyled>
-         <section className='booking-area padding-top-100px padding-bottom-70px'>
+         <section className='booking-area padding-bottom-70px'>
             <div className='container'>
                <div className='row'>
                   <div className='col-lg-8'>

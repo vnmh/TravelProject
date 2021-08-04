@@ -17,18 +17,19 @@ function YourInfo(props) {
       props.setInfo(props.user);
    }, [props.user?.email]);
 
-   const onFieldsChange = (changedFields, allFields) => {
+   const onFieldsChange = async (changedFields, allFields) => {
       const checkFields = allFields.map((f) => {
+         if (f.errors?.length > 0) return "";
          return f.value;
       });
-
+      const values = await form.getFieldsValue();
       if (_.compact(checkFields).length === allFields.length) {
          props.setInfoTrue(true);
          props.setInfo({
-            name: form.getFieldsValue("name"),
-            email: form.getFieldsValue("email"),
-            phone: form.getFieldsValue("phone"),
-            address: form.getFieldsValue("address")
+            name: values.name,
+            email: values.email,
+            phone: values.phone,
+            address: values.address
          });
       } else props.setInfoTrue(false);
    };

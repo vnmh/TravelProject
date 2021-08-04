@@ -33,31 +33,66 @@ export const renderStatusOrder = (status, type) => {
       switch (status) {
          case ORDER_STATUS.New:
             return (
-               <span style={{ color: "#ffffff", background: "#69c0ff", borderRadius: "10px", textAlign: "center" }}>
+               <span
+                  style={{
+                     color: "#ffffff",
+                     background: "#69c0ff",
+                     borderRadius: "10px",
+                     textAlign: "center",
+                     padding: "1px 8px 1px 8px"
+                  }}>
                   Mới
                </span>
             );
          case ORDER_STATUS.Waiting:
             return (
-               <span style={{ color: "#ffffff", background: "#fff566", borderRadius: "10px", textAlign: "center" }}>
+               <span
+                  style={{
+                     color: "#ffffff",
+                     background: "#fff566",
+                     borderRadius: "10px",
+                     textAlign: "center",
+                     padding: "1px 8px 1px 8px"
+                  }}>
                   Chờ thanh toán
                </span>
             );
          case ORDER_STATUS.Paid:
             return (
-               <span style={{ color: "#ffffff", background: "#5cdbd3", borderRadius: "10px", textAlign: "center" }}>
+               <span
+                  style={{
+                     color: "#ffffff",
+                     background: "#5cdbd3",
+                     borderRadius: "10px",
+                     textAlign: "center",
+                     padding: "1px 8px 1px 8px"
+                  }}>
                   Đã thanh toán
                </span>
             );
          case ORDER_STATUS.Cancel:
             return (
-               <span style={{ color: "#ffffff", background: "#bfbfbf", borderRadius: "10px", textAlign: "center" }}>
+               <span
+                  style={{
+                     color: "#ffffff",
+                     background: "#bfbfbf",
+                     borderRadius: "10px",
+                     textAlign: "center",
+                     padding: "1px 8px 1px 8px"
+                  }}>
                   Đã hủy
                </span>
             );
          case ORDER_STATUS.Destroy:
             return (
-               <span style={{ color: "#ffffff", background: "#fa541c", borderRadius: "10px", textAlign: "center" }}>
+               <span
+                  style={{
+                     color: "#ffffff",
+                     background: "#fa541c",
+                     borderRadius: "10px",
+                     textAlign: "center",
+                     padding: "1px 8px 1px 8px"
+                  }}>
                   Chờ xác nhận hủy
                </span>
             );
@@ -88,19 +123,40 @@ export const renderStatusReview = (status, type) => {
       switch (status) {
          case REVIEW_STATUS.New:
             return (
-               <span style={{ color: "#ffffff", background: "#69c0ff", borderRadius: "10px", textAlign: "center" }}>
+               <span
+                  style={{
+                     color: "#ffffff",
+                     background: "#69c0ff",
+                     borderRadius: "10px",
+                     textAlign: "center",
+                     padding: "1px 8px 1px 8px"
+                  }}>
                   Chờ duyệt
                </span>
             );
          case REVIEW_STATUS.Approve:
             return (
-               <span style={{ color: "#ffffff", background: "#95de64", borderRadius: "10px", textAlign: "center" }}>
+               <span
+                  style={{
+                     color: "#ffffff",
+                     background: "#95de64",
+                     borderRadius: "10px",
+                     textAlign: "center",
+                     padding: "1px 8px 1px 8px"
+                  }}>
                   Đã duyệt
                </span>
             );
          case REVIEW_STATUS.Cancel:
             return (
-               <span style={{ color: "#ffffff", background: "#bfbfbf", borderRadius: "10px", textAlign: "center" }}>
+               <span
+                  style={{
+                     color: "#ffffff",
+                     background: "#bfbfbf",
+                     borderRadius: "10px",
+                     textAlign: "center",
+                     padding: "1px 8px 1px 8px"
+                  }}>
                   Đã hủy
                </span>
             );
