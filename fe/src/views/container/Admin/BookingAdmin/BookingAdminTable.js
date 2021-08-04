@@ -217,6 +217,9 @@ const BookingAdminTable = (props) => {
                   if (row?.numberPeopleAll / row?.tour?.groupSize > 0.5) {
                      status = "success";
                      title = "Sẵn sàng khởi hành";
+                     if (moment().unix() - moment(row?.departureDay).unix() > 0) {
+                        title = "Đã hoàn thành"
+                     }
                   } else {
                      status = "warning";
                      title = "Không đủ điều kiện";
@@ -509,12 +512,12 @@ const BookingAdminTable = (props) => {
                         placement='right'
                         title={
                            <div>
-                              <p>+ Các đơn hàng trong 3 ngày kế tiếp sẽ có trạng thái:</p>
+                              <p>+ Các đơn hàng trong 3 ngày kế tiếp từ ngày hiện tại sẽ có trạng thái:</p>
                               <p>{`   - Sẵn sàng khởi hành: Số người > 50% và Tất cả đơn hàng đều Đã thanh toán.`} </p>
                               <p>{`   - Đã hủy: Toàn bộ đơn hàng ở trạng thái Hủy.`} </p>
                               <p>{`   - Không đủ điều kiện. `} </p>
                               <hr></hr>
-                              <p>+ Các đơn hàng quá 3 ngày ở trạng thái:</p>
+                              <p>+ Các đơn hàng quá 3 ngày từ ngày hiện tại sẽ có trạng thái:</p>
                               <p>{`   - Sẵn sàng khởi hành: Số người 100% và Tất cả đơn hàng đều đã thanh toán.`} </p>
                               <p>{`   - Chờ xử lý đơn hàng.`} </p>
                            </div>
