@@ -11,6 +11,7 @@ import ScrollToTop from "~/ScrollToTop";
 import { ORDER_STATUS } from "~/configs/status";
 import _ from "lodash";
 import Header from "../Header";
+import moment from "moment";
 
 const BookingUserPageStyled = styled.div``;
 
@@ -34,7 +35,11 @@ const BookingUserPage = (props) => {
       props
          .getOrdersWithEmail({ email: props.user?.email })
          .then(({ res }) => {
-            setTourBooking(res);
+            const arr = res.sort((a, b) => {
+               return moment(b.dateAdded).unix() - moment(a.dateAdded).unix()
+            })
+            // console.log('hiendev ~ file: index.js ~ line 46 ~ arr ~ arr', arr)
+            setTourBooking(arr)
          })
          .catch((err) => {
             message.error("Lỗi load dữ liệu tour rồi nha");
