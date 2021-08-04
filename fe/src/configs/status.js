@@ -9,7 +9,7 @@ export const ORDER_STATUS = {
    New: "New",
    Waiting: "Waiting",
    Paid: "Paid",
-   Done: "Done",
+   // Done: "Done",
    Cancel: "Cancel",
    Destroy: "Destroy"
 };

@@ -512,7 +512,7 @@ const BookingAdminTable = (props) => {
                               <p>+ Các đơn hàng trong 3 ngày kế tiếp sẽ có trạng thái:</p>
                               <p>{`   - Sẵn sàng khởi hành: Số người > 50% và Tất cả đơn hàng đều Đã thanh toán.`} </p>
                               <p>{`   - Đã hủy: Toàn bộ đơn hàng ở trạng thái Hủy.`} </p>
-                              <p>{`   - Không đủ điều kiền. `} </p>
+                              <p>{`   - Không đủ điều kiện. `} </p>
                               <hr></hr>
                               <p>+ Các đơn hàng quá 3 ngày ở trạng thái:</p>
                               <p>{`   - Sẵn sàng khởi hành: Số người 100% và Tất cả đơn hàng đều đã thanh toán.`} </p>

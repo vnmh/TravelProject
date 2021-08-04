@@ -125,7 +125,7 @@ function PaymentMethod(props) {
                   aria-labelledby='credit-card-tab'>
                   <div className='contact-form-action'>
                      <div className='row'>
-                        <div className='col-lg-12 responsive-column mb-4'>Bạn sẽ thanh toán tại với đại lý du lịch</div>
+                        <div className='col-lg-12 responsive-column mb-4'>Bạn sẽ thanh toán với đại lý du lịch</div>
                         <div className='col-lg-12'>
                            <div className='btn-box'>
                               <button disabled={loading} className='theme-btn' onClick={submitTransfer}>
