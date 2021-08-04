@@ -41,7 +41,7 @@ const BookingTableListUserPage = (props) => {
                props.setNeedLoading(false);
                console.log("maidev ~ file: BookingTableListUserPage.js ~ line 34 ~ useEffect ~ err", err);
             });
-   }, [props.bookingDetail?.idTour, props.needLoading]);
+   }, [props.bookingDetail?.idTour, props.bookingDetail?.status, props.needLoading]);
 
    useEffect(() => {
       props.setNeedLoading(true);
@@ -179,7 +179,6 @@ const BookingTableListUserPage = (props) => {
                </div>
             </div>
          </div>
-         f
       </BookingTableListUserPageStyled>
    );
 };

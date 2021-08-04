@@ -71,13 +71,13 @@ const BookingUserPage = (props) => {
                }))
             );
             break;
-         case ORDER_STATUS.Done:
-            setTourBookingFilter(
-               Array.from(_.filter(tourBooking, (o) => {
-                  return o.status === ORDER_STATUS.Done;
-               }))
-            );
-            break;
+         // case ORDER_STATUS.Done:
+         //    setTourBookingFilter(
+         //       Array.from(_.filter(tourBooking, (o) => {
+         //          return o.status === ORDER_STATUS.Done;
+         //       }))
+         //    );
+         //    break;
          case ORDER_STATUS.Cancel:
             setTourBookingFilter(
                Array.from(_.filter(tourBooking, (o) => {
@@ -96,7 +96,7 @@ const BookingUserPage = (props) => {
             setTourBookingFilter(undefined);
             break;
       }
-   }, [status,  tourBooking.length]);
+   }, [status, tourBooking.length]);
 
    return (
       <ScrollToTop>
