@@ -27,10 +27,10 @@ function OrderDetail(props) {
    const [isDestroy, setIsDestroy] = useState(false);
 
    useEffect(() => {
-      if (params.errorCode) {
-         history.push(TOUR_DETAIL.replace(":id", params.extraData) + parseObjToQuery(params));
-         return;
-      }
+      // if (params.errorCode) {
+      //    history.push(TOUR_DETAIL.replace(":id", params.extraData) + parseObjToQuery(params));
+      //    return;
+      // }
 
       let tourDetail = {};
       if (params.orderId) {

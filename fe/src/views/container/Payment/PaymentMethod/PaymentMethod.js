@@ -20,6 +20,7 @@ function PaymentMethod(props) {
    const history = useHistory();
    const [loading, setLoading] = useState(false);
    const [PIN, setPIN] = useState(Date.now());
+   
    useEffect(() => {
       if (props.user?.email && props.payment?.price > 0) {
          const body = {

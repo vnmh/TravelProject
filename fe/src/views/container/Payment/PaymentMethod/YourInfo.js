@@ -42,6 +42,7 @@ function YourInfo(props) {
       labelCol: { span: 6 },
       wrapperCol: { span: 14 }
    };
+   
    return (
       <YourInfoStyled>
          <div className='form-box'>
